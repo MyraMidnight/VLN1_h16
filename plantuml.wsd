@@ -1,0 +1,56 @@
+# PlantUML Editor
+
+1. select template
+2. write uml diagram
+
+@startuml
+left to right direction
+
+class Vinnuferð {
+  Flugferð út
+  Flugferð inn
+  áfangastaður
+  dags og tími brottfarar frá Íslandi
+  dags og tíma brottfarar til Íslands
+  amk. tvo flugmenn
+  einn flugstjóri
+  amk. einn flugþjón
+  yfirflugþjónn
+}
+
+class Flugferð {
+  upphafsstaður
+  upphafstími
+  áfangastaður
+  komutími
+}
+
+
+class Starfsmenn {
+  nafn
+  kennitala
+  heimilisfang
+  heimasími
+  gsmsími
+  netfang
+  listAllEmployees()
+  listAllPilots()
+  listAllFlightAttendants()
+  listSpecificEmployee()
+  changeEmployeeInfo()
+}
+
+
+class Áfangastaður {
+  land
+  flugvöllur
+  flugtími
+  fjarlægð
+  tengiliður
+  neyðarsímanúmer
+}
+
+Vinnuferð --> Flugferð
+Vinnuferð --> Áfangastaður
+Flugferð --> Starfsmenn
+@enduml
