@@ -1,0 +1,75 @@
+# PlantUML Editor
+
+@startuml Klasarit
+object UI {
+    Navigator() //works as main, calls Menu to navigate
+}
+
+class Menu {
+    //takes care of menus and knows when
+    //to contact lower level with input
+    ScreenPrinter()
+    input()
+}
+
+object Vinnslulag {
+    UISupplier() //works as main, returns printable string to UI
+    dataPipe() //depending on parameters either asks for all file data or writes over all files
+}
+
+class Writer {
+    //creating a voyage has 
+    //special rules, Voyager
+    // takes care of them
+    NewEmployee()
+    NewPilot()
+    NewAttendant()
+    NewDestination()
+    NewVoyage()
+}
+
+class Voyager {
+    //makes sure staff is only on this one voyage
+    //makes sure staff includes two pilots and an Attendant
+
+    CheckStaff() //gate for valid employees
+    UpdateVoyage() //if everything checks out
+}
+
+class Finder {
+    //simplest class, gets all his data from getDate in UISupplier
+    //and simply sorts through the data to return
+    //relevant info as a printable string
+    AllPilots()
+    AllAttend()
+    AllEmployees()
+    AllDestintions()
+    SpecificEmployee()
+    ListVoyages()
+    ListAllEmployeeNotWorkingSpecificDay()
+    ListAllEmployeeAreWorkingSpecificDayAndDestinations()
+    AllVoyagesOfEmployeeSpecificWeek()
+}
+
+class updater {
+    //finds data to update and overwrites
+    ifExists()
+    OverwriteEmployee()
+    updateVoyage()
+}
+
+object Gagnalag {
+    OpenFile(filename, readOrWrite) //main, opens filestream of relevant file, calls, closes file
+    Lister(filestream) //reads file, makes a list of lines
+    DictionMaker(fileinfo) //creates dictionary of list of lines
+    WriteToFile(fileinfo) //both for updates and appends, overwrites file
+}
+UI --- Vinnslulag
+UI --- Menu
+Vinnslulag --- Finder
+Vinnslulag --- Gagnalag
+Vinnslulag --- Writer
+Vinnslulag --- updater
+updater --- Voyager
+Writer  --- Voyager
+@enduml

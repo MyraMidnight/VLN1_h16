@@ -59,6 +59,7 @@ Bókari o-- Vinnuferð
 Bókari o-- Starfsmaður
 Bókari o-- Flugmaður
 Bókari o-- Flugþjónn
+Bókari --|> Starfsmaður
 Starfsmaður <|-- Flugmaður
 Starfsmaður <|-- Flugþjónn
 Vinnuferð --{ "2. Flugmenn" Flugmaður
