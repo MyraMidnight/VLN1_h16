@@ -14,7 +14,7 @@ class Menu {
 
 object Vinnslulag {
     UISupplier() //works as main, returns printable string to UI
-    dataPipe() //depending on parameters either asks for all file data or writes over all files
+    dataPipe() //params control fetching or returning file package
 }
 
 class Writer {
@@ -51,7 +51,7 @@ class Finder {
     AllVoyagesOfEmployeeSpecificWeek()
 }
 
-class updater {
+class Updater {
     //finds data to update and overwrites
     ifExists()
     OverwriteEmployee()
@@ -59,17 +59,29 @@ class updater {
 }
 
 object Gagnalag {
-    OpenFile(filename, readOrWrite) //main, opens filestream of relevant file, calls, closes file
+    //either sends file package to OverWriter or returns a file package from Opener
+    DataLayer() //main, params control fetch or replace
+}
+
+class Overwriter {
+    //takes file package and writes over all files with updated data
+    WriteToFile(fileinfo) //both for updates and appends, overwrites file
+}
+
+class Opener {
+    //fetches all data and bundles it into a dictionary with lists of lines
+    OpenFile(filename, readOrWrite) //main, opens filestream of relevant file
     Lister(filestream) //reads file, makes a list of lines
     DictionMaker(fileinfo) //creates dictionary of list of lines
-    WriteToFile(fileinfo) //both for updates and appends, overwrites file
 }
 UI --- Vinnslulag
 UI --- Menu
 Vinnslulag --- Finder
 Vinnslulag --- Gagnalag
 Vinnslulag --- Writer
-Vinnslulag --- updater
-updater --- Voyager
+Vinnslulag --- Updater
+Updater --- Voyager
 Writer  --- Voyager
+Gagnalag --- Opener
+Gagnalag --- Overwriter
 @enduml
