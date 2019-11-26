@@ -7,6 +7,8 @@
 left to right direction
 
 class Vinnuferð {
+  Flugstjóri
+  aðalflugþjónn
   Flugferð út
   Flugferð inn
   áfangastaður
@@ -17,72 +19,49 @@ class Vinnuferð {
   staffVoyage()
 }
 
-object Flugferð {
-  upphafsstaður
-  upphafstími
-  áfangastaður
-  komutími
-}
 
-
-class Starfsmenn {
-  listOfEmployees
-  addEmployee(info)
-  listSpecificEmployee(kennitala)
-  changeEmployeeInfo(kennitala,changeInfo)
-  listAllEmployees()
-  listAllPilots()
-  listAllAttend()
-}
-
-object Starfsmaður {
-  nafn
+class Starfsmaður {
+  nafn string [1]
   kennitala
   heimilisfang
   heimasími
   gsmsími
   netfang
+  addEmployee(info)
 }
 
-
-object Áfangastaður {
+class Áfangastaður {
   land
   flugvöllur
   flugtími
-  fjarlægð
-  tengiliður
-  neyðarsímanúmer
+  fjarlægð frá Íslandi
+  nafn tengiliðar
+  neyðarsímanúmer tengiliðar
 }
 
 
-class Bókhald {
-  vinnuferðir
-  schedule
-  starfsmenn
-  addVoyage()
+
+class Flugmaður {
+}
+
+class Flugþjónn {
+}
+
+class Bókari {
   recurringVoyage()
-  listAllEmployeeNotworkDay()
-  listAllEmployeeSpecificDay()
-  ListAllVoyagesOfEmployeeSpecificWeek()
+  addVoyage()
+  addDestination()
+  staffVoyage()
 }
 
-object Flugmaður {
-  flugmaður
-  isCaptain
-}
-
-object Flugþjónn {
-  flugþjónn
-  isManager
-}
-
-Vinnuferð -|| "1" Áfangastaður
-Vinnuferð "1" --{ "2" Flugferð
-Bókhald o-- Vinnuferð
-Starfsmaður --|> Flugmaður
-Starfsmaður --|> Flugþjónn
-Flugmaður --* Starfsmenn
-Flugþjónn --* Starfsmenn
-Vinnuferð --{ "2. Flugmenn" Starfsmenn
-Vinnuferð -|| "1. Flugþjón" Starfsmenn
+Vinnuferð }-- "1" Áfangastaður
+Bókari o-- Vinnuferð
+Bókari o-- Starfsmaður
+Bókari o-- Flugmaður
+Bókari o-- Flugþjónn
+Starfsmaður <|-- Flugmaður
+Starfsmaður <|-- Flugþjónn
+Vinnuferð --{ "2. Flugmenn" Flugmaður
+Vinnuferð -|| "1. Flugþjón" Flugþjónn
+Bókari --- Áfangastaður
 @enduml
