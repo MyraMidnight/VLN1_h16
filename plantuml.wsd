@@ -3,7 +3,7 @@
 1. select template
 2. write uml diagram
 
-@startuml
+@startuml Bókhald
 left to right direction
 
 class Vinnuferð {
@@ -12,13 +12,12 @@ class Vinnuferð {
   áfangastaður
   dags og tími brottfarar frá Íslandi
   dags og tíma brottfarar til Íslands
-  amk. tvo flugmenn
-  einn flugstjóri
-  amk. einn flugþjón
-  yfirflugþjónn
+  updateVoyage()
+  checkPilotsAndAtten()
+  staffVoyage()
 }
 
-class Flugferð {
+object Flugferð {
   upphafsstaður
   upphafstími
   áfangastaður
@@ -27,21 +26,26 @@ class Flugferð {
 
 
 class Starfsmenn {
+  listOfEmployees
+  addEmployee(info)
+  listSpecificEmployee(kennitala)
+  changeEmployeeInfo(kennitala,changeInfo)
+  listAllEmployees()
+  listAllPilots()
+  listAllAttend()
+}
+
+object Starfsmaður {
   nafn
   kennitala
   heimilisfang
   heimasími
   gsmsími
   netfang
-  listAllEmployees()
-  listAllPilots()
-  listAllFlightAttendants()
-  listSpecificEmployee()
-  changeEmployeeInfo()
 }
 
 
-class Áfangastaður {
+object Áfangastaður {
   land
   flugvöllur
   flugtími
@@ -50,7 +54,35 @@ class Áfangastaður {
   neyðarsímanúmer
 }
 
-Vinnuferð --> Flugferð
-Vinnuferð --> Áfangastaður
-Flugferð --> Starfsmenn
+
+class Bókhald {
+  vinnuferðir
+  schedule
+  starfsmenn
+  addVoyage()
+  recurringVoyage()
+  listAllEmployeeNotworkDay()
+  listAllEmployeeSpecificDay()
+  ListAllVoyagesOfEmployeeSpecificWeek()
+}
+
+object Flugmaður {
+  flugmaður
+  isCaptain
+}
+
+object Flugþjónn {
+  flugþjónn
+  isManager
+}
+
+Vinnuferð -|| "1" Áfangastaður
+Vinnuferð "1" --{ "2" Flugferð
+Bókhald o-- Vinnuferð
+Starfsmaður --|> Flugmaður
+Starfsmaður --|> Flugþjónn
+Flugmaður --* Starfsmenn
+Flugþjónn --* Starfsmenn
+Vinnuferð --{ "2. Flugmenn" Starfsmenn
+Vinnuferð -|| "1. Flugþjón" Starfsmenn
 @enduml
