@@ -1,0 +1,87 @@
+# PlantUML Editor
+
+@startuml Layeredrit
+
+
+
+class LLAPI {
+    ONE CLASS FOR LL
+    ALL LL FUNCTIONS
+}
+
+object CreateNewInFile {
+    filePackage //comes as a dictionary where key is the filename
+    //and the value is a list of lines from the file
+    //so that you can work with multiple files at the same time
+    newInfo
+    ------------------------------------
+    //function that creates a new line in a file
+    IOAPI.DataPipe(fetch,[filenames])
+    //code for adding a new line with correct fields
+    IOAPI.DataPipe(return,[filenames],filePackage)
+}
+
+object Voyager {
+    staff supposed to go on Voyage
+    employee schedule information
+    -----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //code for checking if staff is available(24 hour period)
+    //check for staff containing two pilots and one attendant
+    IOAPI.DataPipe(return,[filenames],filePackage)
+}
+
+object Viewer {
+    parameters(staff/voyages etc.)
+    relevant information from filePackage
+    filePackage
+    ----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //opens file based on input and prints out to screen
+    //used for the list ALL of x thing
+}
+
+object specificEmployee {
+    parameters(SSN)
+    employee SSN
+    filePackage
+    ----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //go through all employees to find the matching SSN
+}
+
+object WorkSpecificDay {
+    parameters(day, working/away, destFlag)
+    //can find either all employees not working on a day
+    //and find all employees working and their destinations
+    employee info
+    voyage info
+    filePackage
+    ----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //cross reference voyages with employees on specific day
+    //to find a list of all employees not working that day
+}
+
+object VoyOfEmpSpeWeek {
+    parameters(SSN, week)
+    //finds all voyages an employee has been on in a given week
+    employee info
+    voyage info
+    filePackage
+    ----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //first find all voyages in the given week
+    //then check the voyages for that employee
+}
+
+class IOAPI {
+    ONE CLASS FOR IO
+    ALL IO FUNCTIONS
+}
+
+
+LLAPI --- NewEmployee
+NewEmployee --- IOAPI
+
+@enduml
