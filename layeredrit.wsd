@@ -80,6 +80,32 @@ class IOAPI {
     ALL IO FUNCTIONS
 }
 
+object OverWriter {
+    //takes care of new and updating as both require overwrites
+    //finds the files and overwrites them with new info
+    parameters ([filenames], filePackage)
+    filenames
+    filePackage
+    ---------------------------------------------------
+    //opens all files from [filenames] and overwrites them
+    //with new info from the filePackage
+}
+
+object Opener {
+    //opens all files in  [filenames] and fetches all lines from file
+    //makes a list of lines and puts them in dict with key:filenames,value:list of lines
+    [filenames]
+}
+
+object DataPipe {
+    parameters(fetch/return, [filenames], filePackage = False)
+    //based on fetch or return this either calls for Opener to fetch the filePackage
+    //or it calls on overWriter to write the new data into files based on the filePackage
+    fetch/return
+    [filenames]
+    //needs filepackage for the return version
+    
+} 
 
 LLAPI --- NewEmployee
 NewEmployee --- IOAPI
