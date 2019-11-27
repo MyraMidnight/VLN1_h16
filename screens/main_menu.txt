@@ -1,0 +1,41 @@
+#################################################################
+Velkomin í Bókhaldskerfi NaN-air!
+
+[n] Skrá ný gögn 
+    starfsfólk, flugvélar, ferðir og áfangastaðir
+
+[p] Birta gögn   
+    starfsfólk, vinnuyfirlit, ferðir, flugvélar, áfangastaðir
+
+[u] Uppfæra gögn 
+    starfsfólk, ferðir, áfangastaðir
+
+#####################################################################
+Skrá ný gögn
+Veldu hvaða gögn þú ætlar að skrá:                              
+    1. Starfsmaður  
+    2. Flugvél      
+    3. Vinnuferð    
+    4. Áfangastaður 
+
+[p] fara í 'birta gögn'                     [u] fara í 'uppfæra gögn'
+
+#####################################################################
+Birta gögn
+Veltu hvaða gögn þú vilt birta:
+    1. Starfsfólk
+    2. Vinnuyfirlit (vaktir)
+    3. Flugvélar 
+    4. Vinnuferðir
+    5. Áfangastaðir
+
+[n] fara í 'skrá gögn'                      [u] fara í 'uppfæra gögn'
+
+#####################################################################
+Uppfæra gögn
+Veldu hvaða gögn þú ætlar að uppfæra:
+    1. Starfsfólk
+    2. Vinnuferðir
+    3. Áfangastaðir
+
+[n] fara í 'skrá gögn'                      [p] fara í 'birta gögn'

@@ -33,13 +33,13 @@ Halla kláraði virkni kröfulistann heima, Damian bætti við notkunartilvikum,
 > 10:00 - 
 
 Markmið dagsins:
-
 * Fannar ætlar að fínpússa klasaritið og klára það alveg
 * Damian ætlar að bæta við notkunartilvikum fyrir C-kröfur
 * Vinna saman í nytsemis- og notendaupplifunarkröfur
-* Skissa saman útlit/birtingu gagna
-* Vera komin með aðalmenu og nokkra menua í lok dags
+* Skissa saman útlit/birtingu gagna (crazy-8)
+* Vera komin með aðalmenu og nokkra menua í lok dags 
 * byrja og gera notendahópagreiningu
+* Stefanía ætlar að taka útfæra skissurnar.
 
 
 ## Fimmtudagurinn 28. nóvember 2019
