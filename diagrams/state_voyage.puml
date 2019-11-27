@@ -1,0 +1,14 @@
+@startuml
+
+
+state "Vinnuferð fullmönnuð" as tripReady
+  tripReady : "do/ starfsfólk er skráð á vakt"
+state "Vinnuferð ekki fullmönnuð" as tripStaff
+  tripStaff : "do/ flugvél er í notkun"
+
+[*] --> tripStaff : "ferð skráð í kerfið"
+tripStaff --> tripReady
+tripReady -right-> [*] : "ferð lokið"
+tripStaff --> [*] : "ferð aflýst"
+
+@enduml

@@ -1,7 +1,7 @@
 # Vika 1
 ## Mánudagurinn 25. nóvember 2019 
-Fyrsti dagur 3 vikna námskeiðs.
-9:00 - 14:00
+>Fyrsti dagur 3 vikna námskeiðs.
+>9:00 - 14:00
 
 * Gerðum vinnusamning
 * Stofnuðum github repository, discord server og google drive möppu fyrir verkefnið
@@ -17,22 +17,14 @@ Náðum markmiðum. Halla, Stefanía og Damian gerðum öll a.m.k. 3 notkunartil
 
 ## Þriðjudagurinn 26. nóvember 2019
 
-Byrjum kl. 10:00 en sum mætt kl. 9
+>10:00 - 15:15 (Halla og Stefanía mættu kl.9)
+>Fórum í fyrirlestur 11:30 - 12:00, 
 
-Förum í fyrirlestur 11:30
-
-Markmið: 
-* Halla og Fannar ætla að útfæra öll notkunartilvik út frá kröfulista og gera kröfulistann fallegan
-* Stefanía og Fannar ætla að klára klasaritið og svo fara í kröfulistann
-* gera use case diagram
-* byrja smá á state diagram
-
-
-
-
-
-
-
+Markmið dagsins: 
+* Halla ætlar að klára kröfulistann, brjóta niður kröfur eftir þörfum.
+* Damian ætla að útfæra notkunartilvik út frá kröfulista
+* Fannar ætla endurgera klasaritið 
+* Stefanía: Finna hvaða skjáir við þurfum að útfæra (gera state diagram)
 
 ## Miðvikudagurinn 27. nóvember 2019
 
