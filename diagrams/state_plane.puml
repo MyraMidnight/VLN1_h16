@@ -1,0 +1,16 @@
+@startuml
+
+state "Laus" as available
+  available : "do/ sýna nafn, tegund og sætafjölda"
+state "Í notkun (skráð í vinnuferð)" as inUse 
+  inUse : "do/ sýna hvenær hún er næst laus (dags. og tími)"
+  inUse : "do/ sýna nafn áfangastaðar"
+state "Í loftinu" as inFlight
+  inFlight: "do/ sýna flugnúmer"
+
+[*] --> available : "flugvél skráð í kerfið"
+available --> inUse
+inUse --> inFlight
+inFlight --> available
+
+@enduml

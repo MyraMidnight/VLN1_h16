@@ -1,0 +1,14 @@
+@startuml 
+
+state "í vinnuferð" as inFlight
+state "Skráð á vakt" as booked
+  booked : "/do ekki hægt að bóka í aðrar ferðir"
+state "Ekki á vakt" as available
+  available : "entry/ komin heim úr vinnuferð"
+
+
+[*] --> available : "Starfsmaður skráður í kerfi"
+available --> booked : "skráð á vakt"
+booked --> inFlight : "mætir í vinnuferð"
+inFlight --> available 
+@enduml

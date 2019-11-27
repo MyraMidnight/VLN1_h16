@@ -1,0 +1,54 @@
+@startuml
+
+state "Main Menu" as Main
+state "Sækja gögn" as Sækja
+state "Skrá gögn" as Skrá
+state "Breyta gögnum" as Breyta
+
+[*] --> Main
+
+Main --> Sækja
+Main --> Skrá
+Main --> Breyta
+
+state Sækja {
+  state "Starfsfólk" as getStaff
+    getStaff : "Leita eftir Kennitölu"
+    getStaff : "allt starfsfólk"
+    getStaff : "Ekki á vakt"
+    getStaff : "Vinnuyfirlit / Tímabil (vika/mánuður/ár)"
+    getStaff : "Flugmenn"
+    getStaff : "Flugþjónar"
+  state "Flugvélar" as getPlanes
+    getPlanes : "Lausar á tilteknum degi/tíma"
+    getPlanes : 
+  state "Vinnuferðir" as getTrips
+    getTrips : "tiltekinn dagur"
+    getTrips : "tiltekin vika"
+    getTrips : "Fullmannaðar"
+    getTrips : "Ekki fullmannaðar"
+  state "Áfangastaðir" as getPlaces
+  Sækja --> getStaff
+  Sækja --> getPlanes
+  Sækja --> getTrips
+  Sækja --> getPlaces
+}
+
+state Skrá{
+  state "Starfsfólk" as addStaff
+  state "Flugvélar" as addPlanes
+  state "Vinnuferðir" as addTrips
+  Skrá --> addStaff 
+  Skrá --> addPlanes
+  Skrá --> addTrips
+}
+
+state Breyta{
+  state "Starfsfólk" as updateStaff
+    updateStaff : "Leita að kennitölu"
+  state "Vinnuferðir" as updateTrips
+  Breyta --> updateStaff 
+  Breyta --> updateTrips
+}
+
+@enduml

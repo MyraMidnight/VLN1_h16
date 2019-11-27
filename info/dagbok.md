@@ -17,8 +17,8 @@ Náðum markmiðum. Halla, Stefanía og Damian gerðum öll a.m.k. 3 notkunartil
 
 ## Þriðjudagurinn 26. nóvember 2019
 
->Byrjum kl. 10:00 (en sum mætt kl. 9).
->Fórum í fyrirlestur 11:30 - 12:00
+>10:00 - 15:15 (Halla og Stefanía mættu kl.9)
+>Fórum í fyrirlestur 11:30 - 12:00, 
 
 Markmið dagsins: 
 * Halla ætlar að klára kröfulistann, brjóta niður kröfur eftir þörfum.
