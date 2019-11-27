@@ -10,7 +10,7 @@
 * Fannar byrjaði á klasaritinu
 * Við hin ætlum að gera a.m.k. 3 notkunartilvik hver af kröfulista fyrir morgundaginn.
 
-Náðum markmiðum. Halla, Stefanía og Damian gerðum öll a.m.k. 3 notkunartilvik og Fannar 
+Náðum markmiðum. Halla, Stefanía og Damian gerðum öll a.m.k. 3 notkunartilvik og Fannar gerði í klasaritinu
 
 
 
@@ -26,8 +26,20 @@ Markmið dagsins:
 * Fannar ætla endurgera klasaritið 
 * Stefanía: Finna hvaða skjáir við þurfum að útfæra (gera state diagram)
 
+Halla kláraði virkni kröfulistann heima, Damian bætti við notkunartilvikum, Stefanía gerði git dót og Fannar var sáttur með klasaritið
+
 ## Miðvikudagurinn 27. nóvember 2019
 
+> 10:00 - 
+
+Markmið dagsins:
+
+* Fannar ætlar að fínpússa klasaritið og klára það alveg
+* Damian ætlar að bæta við notkunartilvikum fyrir C-kröfur
+* Vinna saman í nytsemis- og notendaupplifunarkröfur
+* Skissa saman útlit/birtingu gagna
+* Vera komin með aðalmenu og nokkra menua í lok dags
+* byrja og gera notendahópagreiningu
 
 
 ## Fimmtudagurinn 28. nóvember 2019
