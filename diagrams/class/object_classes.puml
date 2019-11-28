@@ -1,0 +1,52 @@
+@startuml
+
+class Voyage {
+  captainId : string [1] /kennitala
+  copilots : array of strings [1] /kennitölur
+  headAttendantId: string[1] /kennitala
+  flightAttendants: array of strings [1..3]  /kennitölur
+  flightOut : string [1]
+  flightIn : string [1]
+  destination: int [1]  
+  dateOut : string [1]
+  dateIn : string [1]
+}
+
+class Staff {
+  name: string [1]
+  socialId (kennitala): string [1]
+  address (heimilisfang): string [1]
+  phoneHome: string [1]
+  phoneMobile: string [1]
+  email: string [1]
+}
+
+class Pilot {
+  planeType: array of strings [1..*]
+}
+
+class Flight {
+  flightId: string [1] = "NA"
+  flightStart: string[1]
+}
+
+class Destination {
+  id: int [1] /auto generated
+  country: string [1]
+  airport: string [1]
+  flightTime: string [1]
+  flightDistance: int [1]
+  contact: string [1]
+  contactPhone: string [1]
+}
+
+Staff <|-- Pilot
+Staff <|-- FlightAttendant
+Voyage "1" --o "2" Flight 
+Voyage "0..*" --* "1" Pilot : copilot
+Voyage "0..*" --* "1" Pilot : captain 
+Voyage "0..*" --* "1" FlightAttendant : Head
+Voyage "0..*" --* "1..3" FlightAttendant
+Voyage --o Destination
+
+@enduml
