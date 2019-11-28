@@ -1,0 +1,68 @@
+@startuml
+
+
+state update {
+  
+state update as "uppfæra gögn"
+  state update : exit/ 'til baka' fer í main menu
+  state uStaff {
+    state uStaff : entry/ leita að starfsmanni
+    state uStaff : exit/ til baka í 'uppfæra gögn'
+    state uStaff : exit/ 'menu' fer í main menu
+    state uStaff as "uppfæra starfsmann"
+
+    [*] --> uStaff1
+    uStaff1 --> uStaff2 : finnur starfsmann
+    uStaff2 --> [*] : vistar/ \n hættir við
+    uStaff1 --> [*] : hættir við/ \n finnur ekki starfsmann
+
+    state uStaff1 as "finna starfsmann"
+      uStaff1 : exit/ finnur ekki starfsmann eða hættir
+      uStaff1 : exit/ finnur starfsmann
+    state uStaff2 as "Uppfæra upplýsingar"
+  }
+
+  state uVoyage {
+    state uVoyage : entry/ finna vinnuferð
+    state uVoyage : exit/ 'til baka' í uppfæra gögn
+    state uVoyage : exit/ 'menu' fer í main menu
+    state uVoyage as "uppfæra vinnuferð"
+    state uVoyage1 as "finna vinnuferð"
+    state uVoyage2 as "Uppfæra upplýsingar"
+      state uVoyage2 : "do/ manna flugvélina og selja sæti"
+
+    [*] --> uVoyage1
+    uVoyage1 --> uVoyage2 : finnur vinnuferð
+    uVoyage1 --> [*] : hættir við/ \n finnur ekki vinnuferð
+    uVoyage2 --> [*] : vistar/ \n hættir við
+    
+
+    state uVoyage1 as "finna vinnuferð"
+  }
+
+  state uDestination {
+    state uDestination : entry/ finna áfangastað
+    state uDestination : exit/ til baka í uppfæra gögn
+    state uDestination : exit/ 'menu' fer í main menu
+    state uDestination as "uppfæra áfangastað"
+    state uDest1 as "finna áfangastað"
+    state uDest2 as "Uppfæra upplýsingar"
+
+    [*] --> uDest1
+    uDest1 --> uDest2 : finnur áfangastað
+    uDest1 --> [*] : hættir við/ \n finnur ekki áfangastað
+    uDest2 --> [*] : vistar/ \n hættir við
+
+  }
+
+  [*] --> uStaff
+  [*] --> uVoyage
+  [*] --> uDestination
+  uStaff --> [*]
+  uVoyage --> [*]
+  uDestination --> [*]
+}
+[*] --> update : kemur frá main menu
+update --> [*] : fer aftur á main menu
+
+@enduml
