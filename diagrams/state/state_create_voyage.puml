@@ -40,10 +40,40 @@ state create_voyage {
   state repeat_voyage {
     state repeat_voyage as "endurtaka vinnuferð"
     state repeat_pattern as "endurtaka mynstur"
-    state repeat_dates as "endurtaka á tilteknum dagsetn."
+      repeat_pattern : x margir dagar milli endurtakninga
+    state repeat_dates {
+      state repeat_dates as "endurtaka á tilteknum dagsetn."
+        repeat_dates : do/ while loop, biður um dagsetningar
+      ' state repeat_date_input as "slá inn dags."
+      '   repeat_date_input : entry/ 'true', tókst að bæta dags. á listann
+      '   repeat_date_input : entry/ 'false',  
+      ' state repeat_date_check as "athuga dags."
+      '   repeat_date_check : do/ athuga hvort flugvöllur og flugvél sé laus
+      '   repeat_date_check : exit/ tími hentar hentar fyrir vinnuferð, bæta dags á lista.
+      '   repeat_date_check : exit/ engin flugvél laus, gefur error skilaboð
+      ' state repeat_date_end as "birta lista af innslegnum dags."
 
+      ' [*] --> repeat_date_input 
+      ' repeat_date_input --> repeat_date_input : 'invalid input'
+      ' repeat_date_input --> repeat_date_check : valid date
+      ' repeat_date_check --> repeat_date_input : 'return false'
+      ' repeat_date_check --> repeat_date_input : 'return true'
+    }
+    state repeat_confirm as "staðfesta endurtekningar"
+      repeat_confirm : do/ prenta lista af endurteknum vinnuferðum
+      repeat_confirm : exit/ 'já', vistar nýju vinnuferðirnar í kerfið
+      repeat_confirm : exit/ 'nei', fær kost á að breyta tilfelfellum
+      repeat_confirm : exit/ 'hætta við', fer aftur á 'skrá ný gögn' án þess að vista 
+    state edit_repeats as "breyta endurtekningum"
     [*] --> repeat_pattern
     [*] --> repeat_dates
+    repeat_pattern --> repeat_confirm
+    repeat_dates --> repeat_confirm
+    repeat_confirm --> [*] : 'já'
+    repeat_confirm --> edit_repeats : 'nei'
+    repeat_confirm --> [*] : 'hætta við'
+    edit_repeats --> repeat_confirm
+    
     
   }
 
@@ -55,7 +85,7 @@ state create_voyage {
     input_date_in --> input_date_in : flugvel væri ekki búin að lenda úti/ \n"incorrect input"
   input_plane --> voyage_confirm : laus flugvél fannst fyrir ferðina
   voyage_confirm -right-> [*] : 'nei', hættir við skráningu
-  voyage_confirm --> repeat_voyage : 'já'
+  voyage_confirm -right-> repeat_voyage : 'já'
   repeat_voyage --> [*] : lýkur við ferlið
   
 }
