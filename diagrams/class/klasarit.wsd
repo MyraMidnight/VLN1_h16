@@ -26,6 +26,7 @@ class Writer {
     NewAttendant()
     NewDestination()
     NewVoyage()
+    NewPlane()
 }
 
 class Voyager {
@@ -73,6 +74,10 @@ class Opener {
     OpenFile(filename, readOrWrite) //main, opens filestream of relevant file
     Lister(filestream) //reads file, makes a list of lines
     DictionMaker(fileinfo) //creates dictionary of list of lines
+}
+
+object DataPipe {
+    
 }
 UI --- Vinnslulag
 UI --- Menu
