@@ -30,7 +30,7 @@ Halla kláraði virkni kröfulistann heima, Damian bætti við notkunartilvikum,
 
 ## Miðvikudagurinn 27. nóvember 2019
 
-> 10:00 - 15:20
+> 10:00 - 15:20 og svo um kvöldið á mismunandi tímum þegar allir voru heima hjá sér
 
 Markmið dagsins:
 * Fannar ætlar að fínpússa klasaritið og klára það alveg
@@ -44,7 +44,22 @@ Markmið dagsins:
 * Fannar ætlar að klára API klasaritið fyrir morgundaginn.
 * Halla ætlar að undirbúa notendaprófanir
 
+Allir fóru heim og gerðu allskonar:
+
+Fannar kláraði klasaritið 
+Stefanía gerði útfærslur af menu og möguleika á útlitinu
+Halla gerði spurningar fyrir notendaprófanir
+
+
 ## Fimmtudagurinn 28. nóvember 2019
+
+> Vorum öll mætt kl. 10
+
+* Notendaprófanir á menu-um
+* ATH state diagrams hvort fleiri eða hvort stærri
+* Happy path eftir notendaprófanir á menu-um þegar við erum búin að ákveða hönnunina á menu-um sem við ætlum að hafa
+* Færa allskonar inn í skýrslus
+
 
 
 
