@@ -1,16 +1,36 @@
 @startuml 
 
-
-state create as "skrá ný gögn"
-
 state create_voyage {
   state create_voyage as "skrá nýja vinnuferð"
     create_voyage : do/ byðja um upplýsingar frá input
+    create_voyage : exit/ ef notandi hættir við skráningu /staðfestir ekki gögnin
 
-  state input_destination as "áfangastaður"
+  state input_destination {
+    state input_destination as "áfangastaður"
+      input_destination : leita að áfangastað af lista eða slá inn nafn áfangastaðar
+    state destination_search as "leita að áfangastað"
+      destination_search : fall sem birtir áfangastaði til að velja
+    state destination_direct as "slá inn áfangastað"
+    [*] --> destination_direct
+    [*] --> destination_search
+    destination_direct --> destination_direct : áfangastaður ekki til/ \n"incorrect input"
+    destination_search --> [*]
+    destination_direct --> [*] : áfangastaður fannst
+  }
   state input_date_out as "dagur/tími brottfarar (út)"
   state input_date_in as "dagur/tími brottfarar (heim)"
-  state input_plane as "velja flugvél"
+  state input_plane {
+    state input_plane as "velja flugvél"
+    state plane_search as "leita að flugvél" 
+      plane_search : fall sem birtir lausar flugvélar til að velja
+    state plane_direct as "slá inn nafn flugvélar"
+
+    [*] --> plane_search
+    [*] --> plane_direct
+    plane_direct --> plane_direct : engin flugvél laus fyrir þessa ferð/ \n"incorrect input"
+    plane_direct --> [*]
+    plane_search --> [*]
+  }
   state voyage_confirm as "staðfesta upplýsingar / vista"
     voyage_confirm : do/ prenta innslegnar upplýsingar
     voyage_confirm : do/ spyrja notanda hvort upplýsingar séu réttar "já/nei"
@@ -27,25 +47,23 @@ state create_voyage {
     
   }
 
-  [*] -left-> input_destination
+  [*] -right-> input_destination
   input_destination --> input_date_out : áfangastaður fannst
-    input_destination --> input_destination : áfangastaður ekki til/ \n"incorrect input"
   input_date_out --> input_date_in : flugvöllur laus á þessum tíma
     input_date_out --> input_date_out : flugvöllur upptekinn á þessum tíma/ \n"incorrect input"
   input_date_in --> input_plane : tími/dags frá brottför út er ekki \nstyttri en flugtími til áfangastaðar
     input_date_in --> input_date_in : flugvel væri ekki búin að lenda úti/ \n"incorrect input"
   input_plane --> voyage_confirm : laus flugvél fannst fyrir ferðina
-    input_plane --> input_plane : engin flugvél laus fyrir þessa ferð/ \n"incorrect input"
   voyage_confirm -right-> [*] : 'nei', hættir við skráningu
   voyage_confirm --> repeat_voyage : 'já'
+  repeat_voyage --> [*] : lýkur við ferlið
   
 }
 
 
 
-[*] --> create : frá main menu
-create --> create_voyage : velur að skrá nýja vinnuferð
-create_voyage --> create : skráning vinnuferðar lokið eða hætt við 
+[*] --> create_voyage : velur að skrá nýja vinnuferð
+create_voyage --> [*] : fer aftur á "skrá ný gögn"
 
 
 @enduml
