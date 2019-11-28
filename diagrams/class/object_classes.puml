@@ -8,8 +8,8 @@ class Voyage {
   flightOut : string [1]
   flightIn : string [1]
   destination: int [1]  
-  dateOut (dags og tími brottfarar frá Íslandi): string [1]
-  dateIn (dags og tíma brottfarar til Íslands): string [1]
+  dateOut : string [1]
+  dateIn : string [1]
 }
 
 class Staff {

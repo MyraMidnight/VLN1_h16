@@ -30,7 +30,7 @@ Halla kláraði virkni kröfulistann heima, Damian bætti við notkunartilvikum,
 
 ## Miðvikudagurinn 27. nóvember 2019
 
-> 10:00 - 
+> 10:00 - 15:20
 
 Markmið dagsins:
 * Fannar ætlar að fínpússa klasaritið og klára það alveg
@@ -39,8 +39,10 @@ Markmið dagsins:
 * Skissa saman útlit/birtingu gagna (crazy-8)
 * Vera komin með aðalmenu og nokkra menua í lok dags 
 * byrja og gera notendahópagreiningu
-* Stefanía ætlar að taka útfæra skissurnar.
 
+* Stefanía ætlar að taka útfæra skissurnar (main menu og skjái til að bera saman í notendaprófun) fyrir morgundaginn.
+* Fannar ætlar að klára API klasaritið fyrir morgundaginn.
+* Halla ætlar að undirbúa notendaprófanir
 
 ## Fimmtudagurinn 28. nóvember 2019
 
