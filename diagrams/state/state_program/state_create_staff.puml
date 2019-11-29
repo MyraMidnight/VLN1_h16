@@ -7,10 +7,18 @@ state create_staff {
 
     state input_name as "Fullt nafn"
     state input_ssn as "Kennitala"
+      input_ssn : þarf að vera ákveðið format
     state address as "Heimilisfang"
     state phone_home as "Heimasími"
+      phone_home : þarf að vera ákveðið format
     state phone_mobile as "Farsími"
+      phone_mobile : þarf að vera ákveðið format
     state email as "Netfang"
+      email : þarf að vera ákveðið format (td.innihalda @)
+    state continue as "birta upplýsingar (continue)"
+      continue: do/ prenta núverandi stöðu skráningar 
+      continue: do/ spyrja: halda áfram eða hreinsa
+      continue: exit/ 'hreinsa', byrjar ferlið upp á nýtt
 
     [*] --> input_name
     input_name --> input_ssn
@@ -23,24 +31,50 @@ state create_staff {
       phone_home --> phone_home : incorrect input
     phone_mobile --> email
       phone_mobile --> phone_mobile : incorrect input
-    email --> [*]
+    email --> continue
       email --> email : incorrect input
-
+    continue --> [*] : halda áfram
+    continue --> input_name : hreinsa
   }
-
   state role_info {  
     state role_info as "Hlutverk"
 
     state pilot as "Flugmaður"
+    state licence as "Flug réttindi"
+      licence : getur einungis haft 1 réttindi
+    state captain as "Flugstjóri"
+      captain : do/ spyrja hvort flugmaður er flugstjóri
+      captain : exit/ 'já', skrá sem flugstjóra
+      captain : exit/ 'nei', skrá sem aðstoðar flugmann
     state flight_attendant as "Flugþjónn"
+    state head_attendant as "Yfir flugþjónn" 
+      head_attendant : do/ spyrja hvort þjónn er yfir flugþjónn
+      head_attendant : exit/ 'já', skrá sem yfirflugþjón
+      head_attendant : exit/ 'nei', skrá sem flugþjón
 
     [*] --> pilot
+    pilot --> licence 
+    licence --> captain
+    licence --> licence : incorrect input \nengin flugvél af þessari tegund
+    captain --> [*]
     [*] --> flight_attendant
+    flight_attendant --> head_attendant
+    head_attendant --> [*]
   }
 
-  [*] --> base_info
+  state confirm {
+    state confirm as "Staðfesta"
+      confirm : do/ spyrja hvort upplýsingar séu réttar
+      confirm : exit/ 'já', vistar gögn í kerfið
+      confirm : exit/ 'nei', endurgera hlutverk ferlið
+      confirm : exit/ 'hætta við skráningu', hættir án þess að vista
+  }
+
+  [*] -left-> base_info : kemur frá 'skrá ný gögn'
   base_info -->  role_info
-  role_info --> [*]
+  role_info -right-> confirm
+  confirm --> [*] : fer aftur í 'skrá ný gögn'
+  confirm -left-> role_info : nei
 }
 
 
