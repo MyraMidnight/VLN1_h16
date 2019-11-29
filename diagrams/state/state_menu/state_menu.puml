@@ -1,0 +1,28 @@
+@startuml
+
+
+state main {
+  
+  state main as "Main menu"
+  state print as "birta gögn"
+    print : "exit/ main menu"
+  state update as "uppfæra gögn"
+    update : "exit/ main menu"
+  state create as "Skrá ný gögn"
+    create : "exit/ main menu"
+
+  [*] --> print 
+  [*] --> create 
+  [*] --> update 
+
+  print --> [*]
+  update --> [*]
+  create --> [*]
+}
+
+[*] --> main : opnar forritið
+main --> [*] : lokar forritinu
+
+
+
+@enduml
