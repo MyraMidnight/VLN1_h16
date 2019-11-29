@@ -9,11 +9,28 @@ class LLAPI  #LightGreen{
     ALL LL FUNCTIONS
 }
 
-object MenuHandler #LightPink {
-    //needs to handle what to print to screen and takes input
-    //from user and knows when to send that input to other function
-    userInput
-    MenuDictionary //used to navigate menus, items: menu name, header, options etc.
+object inputHandler #LightPink {
+    //uses a menu dictionary with header, options,input line, functions available
+    menuDict
+    user_input
+    //needs to able to take input and control what to send to printscreen
+    //as well as send to execute functions in the LLAPI according to inputs
+}
+
+object printScreen #LightPink {
+    //needs to take data from inputHandler and print the correct menu to screen
+    //inputHandler should fetch the correct string from LLAPI functions to print for printScreen
+    print data
+}
+
+object dataPrinter #LightPink {
+    //takes lists from LLAPI functions to print to screen as scrolling
+}
+
+object functionProcessor #LightPink {
+    //asks LLAPI functions for their return strings to print
+    function to execute
+    return string/list
 }
 
 object CreateNewInFile  #LightGreen{
@@ -114,13 +131,16 @@ object DataPipe  #LightBlue{
     
 } 
 left to right direction
+LLAPI --- inputHandler
+LLAPI --- dataPrinter
+LLAPI --- printScreen
+LLAPI --- functionProcessor
 LLAPI --- CreateNewInFile
 LLAPI --- Voyager
 LLAPI --- Viewer
 LLAPI --- specificEmployee
 LLAPI --- WorkSpecificDay
 LLAPI --- VoyOfEmpSpeWeek
-LLAPI --- MenuHandler
 IOAPI --- Opener
 IOAPI --- OverWriter
 IOAPI --- DataPipe
