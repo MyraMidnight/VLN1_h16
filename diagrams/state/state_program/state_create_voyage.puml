@@ -91,9 +91,4 @@ state create_voyage {
 }
 
 
-
-[*] --> create_voyage : velur að skrá nýja vinnuferð
-create_voyage --> [*] : fer aftur á "skrá ný gögn"
-
-
 @enduml
