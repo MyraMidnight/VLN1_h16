@@ -1,0 +1,47 @@
+@startuml 
+
+state create_staff {
+  state create_staff as "Skrá nýjan starfsmann"
+  state base_info {
+    state base_info as "Grunn upplýsingar"
+
+    state input_name as "Fullt nafn"
+    state input_ssn as "Kennitala"
+    state address as "Heimilisfang"
+    state phone_home as "Heimasími"
+    state phone_mobile as "Farsími"
+    state email as "Netfang"
+
+    [*] --> input_name
+    input_name --> input_ssn
+      input_name --> input_name : incorrect input
+    input_ssn --> address
+      input_ssn --> input_ssn : incorrect input
+    address --> phone_home
+      address --> address : incorrect input
+    phone_home --> phone_mobile
+      phone_home --> phone_home : incorrect input
+    phone_mobile --> email
+      phone_mobile --> phone_mobile : incorrect input
+    email --> [*]
+      email --> email : incorrect input
+
+  }
+
+  state role_info {  
+    state role_info as "Hlutverk"
+
+    state pilot as "Flugmaður"
+    state flight_attendant as "Flugþjónn"
+
+    [*] --> pilot
+    [*] --> flight_attendant
+  }
+
+  [*] --> base_info
+  base_info -->  role_info
+  role_info --> [*]
+}
+
+
+@enduml 
