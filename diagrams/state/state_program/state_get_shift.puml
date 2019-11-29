@@ -1,0 +1,28 @@
+@startuml 
+  
+state get_shift {
+  state get_shift as "Sækja vinnuyfirlit"
+  state input_date as "Finna dagsetningu"
+  state staff_voyages as "bera saman starfsfólk við vinnuferðir"
+    staff_voyages : exit/ valkostur að birta 'ekki á vakt' eða 'á vakt'
+  state get_on_shift as "'á vakt'"
+    get_on_shift : býr til lista af starfsfólki a vakt
+  state get_off_shift as "'ekki á vakt'"
+    get_off_shift : býr til lista af starfsfólki ekki á vakt
+
+  [*] --> input_date
+  input_date --> staff_voyages
+  staff_voyages --> get_on_shift
+  staff_voyages --> get_off_shift
+  get_off_shift --> [*]
+  get_on_shift --> [*]
+}
+
+state print_shifts {
+  state print_shifts as "birta yfirlit"
+    print_shifts : do/ Prentar listann af starfsfólki
+}
+
+get_shift --> print_shifts
+
+@enduml
