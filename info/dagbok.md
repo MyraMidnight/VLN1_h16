@@ -53,20 +53,40 @@ Halla gerði spurningar fyrir notendaprófanir
 
 ## Fimmtudagurinn 28. nóvember 2019
 
-> Vorum öll mætt kl. 10:00 - 15:20
+> Vorum öll mætt kl. 10:00
+> Stefanía fór 15:20 og gerði state diagram svo heima og próf
+> Strákarnir fóru 18 
+> Halla fór 19
 
 * Notendaprófanir á menu-um
 * ATH state diagrams hvort fleiri eða hvort stærri
 * Happy path eftir notendaprófanir á menu-um þegar við erum búin að ákveða hönnunina á menu-um sem við ætlum að hafa
-* Færa allskonar inn í skýrslus
+* Færa allskonar inn í skýrsluna
 
 * ætlum að gera notendaprófanir fyrir morgundaginn
 * Damian og Fannar unnu saman að hönnun happypath
 * Stefanía ætlar að klára gera state diagram fyrir tvö stærstu ferlin: skrá vinnuferð og uppfæra vinnuferð.
 
+Náðum að gera notendaprófanir og stærri og fleiri state diagrams.
+Byrjuðum á happy path en ætlum að klára það á morgun föstudag. 
+
 
 ## Föstudagurinn 29. nóvember 2019
 Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal). 
+
+
+> Stefanía og Halla mættu kl. 9, > Fannar og Damian kl. 10 
+> munum vinna þar til við erum búin með skýrsluna og undirbúa allt :) 
+
+* Damian ætlar að fínpússa og gera a.m.k. 3 happy path 
+* Fannar ætlar að bæta við UI í klasariti
+* Halla ætlar að gera stöðurit fyrir nýskráning starfsmanns og sækja gögn, t.d. sjá starfsmenn á vakt eða eitthvað svoleiðis
+* Stefanía ætlar að rendera state diagram
+* Gera innganga fyrir alla kafla í skýrslunni
+* Fara yfir almennar kröfur
+
+* Klára og fínpússa skýrslu
+
 
 
 
