@@ -1,0 +1,17 @@
+@startuml
+
+
+state create as "Skrá ný gögn"
+
+state cStaff as "Nýr starfsmaður"
+  cStaff : ""
+state cVoyage as "Ný vinnuferð"
+state cDestination as "Nýr áfangastaður"
+state cPlane as "Ný flugvél"
+
+[*] --> create : kemur frá main menu
+create --> cStaff
+create --> cPlane
+create --> cDestination
+create --> cVoyage
+@enduml

@@ -1,0 +1,62 @@
+@startuml 
+
+state update_voyage {
+  state update_voyage as "Uppfæra vinnuferð (manna flugið)"
+
+  state voyage_number {
+    state search_voyage as "leita að vinnuferð" 
+      search_voyage : fall sem birtir lista af vinnuferðum og fleirra.
+    state direct_voyage as "slá inn númer vinnuferðar"
+    [*] --> search_voyage
+    [*] --> direct_voyage
+
+    direct_voyage --> [*] : vinnuferð fannst
+    direct_voyage --> direct_voyage : vinnuferð fannst ekki/ \n'incorrect input'
+    search_voyage --> [*] : vinnuferð fannst
+  }
+
+  state print_voyage {
+    state print_voyage as "prenta upplýsingar ferðar"
+      print_voyage : entry/ 'ekki fullmannað', birta aðvörun að vanti starfsfólk í stöður
+      print_voyage : do/ prentar núverandi upplýsingar ferðarinnar
+      print_voyage : do/ bjóða upp á að manna flugið eða hætta við
+  }
+  state pick_role {
+    state pick_role as "velja í stöður"
+      pick_role : do/ while loop, þar til notandi velur að vista/hætta
+    state role_captain as "flugstjóri"
+    state role_pilot as "aðstoðar flugmaður"
+    state role_head_attendant as "aðal flugþjónn"
+    state role_attendant as "flugþjónn"
+    state find_staff as "finna starfsmann"
+      find_staff : do/ birtir lista af starfsfólki sem getur fyllt stöðuna
+
+    [*] --> role_captain
+    [*] --> role_pilot
+    [*] --> role_attendant
+    [*] --> role_head_attendant
+    role_captain --> find_staff
+    role_pilot --> find_staff
+    role_attendant --> find_staff
+    role_head_attendant --> find_staff
+    find_staff --> [*]
+  }
+  state confirm_changes as "staðfesta breytingar"
+    confirm_changes : do/ prentar stöðu vinnuferðar með breytingum
+    confirm_changes : exit/ 'já', vistar breytingar
+    confirm_changes : exit/ 'nei', fer aftur í ferlið að velja í stöður
+  [*] --> voyage_number
+  voyage_number --> print_voyage : vinnuferð fundin
+  print_voyage --> pick_role
+  print_voyage --> [*] : hættir við
+  confirm_changes --> [*] : já
+  confirm_changes -left-> pick_role : nei
+  pick_role --> confirm_changes
+
+}
+
+
+[*] --> update_voyage : velur að 'uppfæra vinnuferð'
+update_voyage --> [*] : fer aftur í 'uppfæra gögn' 
+
+@enduml

@@ -53,14 +53,16 @@ Halla gerði spurningar fyrir notendaprófanir
 
 ## Fimmtudagurinn 28. nóvember 2019
 
-> Vorum öll mætt kl. 10
+> Vorum öll mætt kl. 10:00 - 15:20
 
 * Notendaprófanir á menu-um
 * ATH state diagrams hvort fleiri eða hvort stærri
 * Happy path eftir notendaprófanir á menu-um þegar við erum búin að ákveða hönnunina á menu-um sem við ætlum að hafa
 * Færa allskonar inn í skýrslus
 
-
+* ætlum að gera notendaprófanir fyrir morgundaginn
+* Damian og Fannar unnu saman að hönnun happypath
+* Stefanía ætlar að klára gera state diagram fyrir tvö stærstu ferlin: skrá vinnuferð og uppfæra vinnuferð.
 
 
 ## Föstudagurinn 29. nóvember 2019

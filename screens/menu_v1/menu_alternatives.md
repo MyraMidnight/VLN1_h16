@@ -11,6 +11,7 @@ Velkomin í Bókhaldskerfi NaN-air!
     [p] Birta gögn   
 
     [u] Uppfæra gögn 
+
 ```
 ### Með lýsingu
 ```
@@ -18,13 +19,13 @@ Velkomin í Bókhaldskerfi NaN-air!
 Velkomin í Bókhaldskerfi NaN-air!
 
     [n] Skrá ný gögn 
-        starfsfólk, flugvélar, ferðir og áfangastaðir
+        starfsfólk, vinnuferðir, áfangastaðir og flugvélar
 
     [p] Birta gögn   
-        starfsfólk, vinnuyfirlit, ferðir, flugvélar, áfangastaðir
+        starfsfólk, vinnuferðir, áfangastaðir, flugvélar og vaktir
 
     [u] Uppfæra gögn 
-        starfsfólk, ferðir, áfangastaðir
+        starfsfólk, vinnuferðir, áfangastaðir
 ```
 
 ## Shortcuts bar / Quickbar
@@ -57,6 +58,8 @@ Vinnuferð     [n2]    Vinnuferðir   [p2]    Vinnuferðir   [u2]
 Áfangastaður  [n3]    Áfangastaðir  [p3]    Áfangastaðir  [u3]
 Flugvél       [n4]    Flugvélar     [p4]  
                       Vinnuyfirlit  [p5]  
+
+Hvað viltu gera?:
 ```
 ```
 #################################################################
