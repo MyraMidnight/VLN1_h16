@@ -1,0 +1,266 @@
+                 |     |
+                 | ___ |
+              ----/___\----
+  x--------------(  .  )--------------x
+     x|x   |   |  \___/  |   |   x|x
+      x    x   |___| |___|   x    x  
+    _   __        _   __   ___     _      
+   / | / /____ _ / | / /  /   |   (_)_____
+  /  |/ // __ `//  |/ /  / /| |  / // ___/
+ / /|  // /_/ // /|  /  / ___ | / // /    
+/_/ |_/ \__,_//_/ |_/  /_/  |_|/_//_/  
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	            Main Menu		       █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	1 : Nýskráning		                ║
+║	2 : Sækja		                   ║
+║	3 : Uppfæra		                   ║
+║	4 : Manna			                ║
+║				                         ║
+╚════════════════════════════════════╝
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	            Main Menu		       █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	1 : Nýskráning		                ║
+║	2 : Sækja		                   ║
+║	3 : Manna og uppfæra		          ║
+║				                         ║
+╚════════════════════════════════════╝
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	        Manna og Uppfæra		    █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	1 : Starfsfólk		                ║
+║	2 : Manna vinnuferð               ║
+║	3 : Uppfæra vinnuferð		       ║
+║  4 : Flugvél		                   ║
+║	5 : Áfangastaður			          ║
+║				                         ║
+╚════════════════════════════════════╝
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	Manna og Uppfæra/ Manna vinnuferð █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	Velja vinnuferð eftir:			    ║
+║	1 : Flugnúmer	                   ║
+║	2 : Dagsetning                    ║
+║	3 : Lista			                ║
+║				                         ║
+╚════════════════════════════════════╝
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	Manna og Uppfæra/... Dagsetning   █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	Sláðu inn dagsetningu:            ║
+║				                         ║
+╚════════════════════════════════════╝
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	Manna og Uppfæra/... Flugnúmer    █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	Sláðu inn flugnúmer:              ║
+║				                         ║
+╚════════════════════════════════════╝
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	           Manna og Uppfæra/Manna vinnuferð/Listi                  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                                          ║
+║	Nr.   Dags.        Tími    Flugnúmer   Áfangastaðir   Staða        ║
+║	1.		29.11.2019	 00:30   NA020       Nuuk           Fullmannað   ║
+║	2.		29.11.2019	 09:45   NA030       Svalbarði      Í vinnslu    ║
+║	3.		30.11.2019 	 12:25   NA040       Nuuk           Ómannað      ║
+║				                                                          ║				                                                          ║
+╚═════════════════════════════════════════════════════════════════════╝
+Veldu númer vinnuferðar: 
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	           Manna og Uppfæra/Manna vinnuferð/29.11.2019             █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                                          ║
+║	Nr.   Dags.        Tími    Flugnúmer   Áfangastaðir   Staða        ║
+║	1.		29.11.2019	 00:30   NA020       Nuuk           Fullmannað   ║
+║	2.		29.11.2019	 09:45   NA030       Svalbarði      Í vinnslu    ║
+║				                                                          ║				                                                          ║
+╚═════════════════════════════════════════════════════════════════════╝
+Veldu númer vinnuferðar:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	      Manna og Uppfæra/.../NA020        █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Nr. Hlutverk:            Starfsmaður:	 ║
+║	1 : Flugstjóri: 	                      ║
+║	2 : Aðstoðarflugmaður:                  ║
+║	3 : Yfirflugþjón:			                ║
+║	4 : Flugþjón:			                   ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Veldu númer hlutverks til að manna:
+
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	    Manna og Uppfæra/.../Flugstjóri     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Velja flugstjóra eftir:			          ║
+║	1. Kennitala			                   ║
+║	2. Listi			                         ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Veldu númer aðgerðar:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	  Manna og Uppfæra/.../Listi flugstjóra █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Nr. Nafn:               Kennitala:	    ║
+║	1 : Jón Jónsson 	      123456-7890     ║
+║	2 : Chuck Norris        999999-9999     ║
+║	3 : Donald Trump			666666-6666     ║
+║	4 : Sylvester Stalone	111111-1111		 ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Sláðu inn númer flugstjóra:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	      Manna og Uppfæra/.../NA020        █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Nr. Hlutverk:            Starfsmaður:	 ║
+║	1 : Flugstjóri: 	       Chuck Norris   ║
+║	2 : Aðstoðarflugmaður:                  ║
+║	3 : Yfirflugþjón:			                ║
+║	4 : Flugþjón:			                   ║
+║				                               ║
+║	[b] Hætta við			        [v] Vista  ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Veldu númer hlutverks til að manna eða eyða:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	Manna og Uppfæra/.../Aðstoðarflugmenn   █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Velja aðstoðarflugstjóra eftir:			 ║
+║	1. Kennitala			                   ║
+║	2. Listi			                         ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Veldu númer aðgerðar:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█Manna og Uppfæra/.../Listi aðstoðarflugmanna █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                  ║
+║	Nr. Nafn:               Kennitala:	       ║
+║	1 : Jón Jónsson 	      123456-7890        ║
+║	2 : Donald Trump			666666-6666        ║
+║	3 : Sylvester Stalone	111111-1111		    ║
+║				                                  ║
+╚═════════════════════════════════════════════╝
+Sláðu inn númer aðstoðarflugstjóra:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	      Manna og Uppfæra/.../NA020          █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                 ║
+║	Nr. Hlutverk:            Starfsmaður:	   ║
+║	1 : Flugstjóri: 	       Chuck Norris     ║
+║	2 : Aðstoðarflugmaður:   Sylvester Stalone║
+║	3 : Yfirflugþjón:			                  ║
+║	4 : Flugþjón:			                     ║
+║				                                 ║
+║	[b] Hætta við			          [v] Vista  ║
+║				                                 ║
+╚════════════════════════════════════════════╝
+Veldu númer hlutverks til að manna eða eyða:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	Manna og Uppfæra/.../Yfirflugþjónar     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Velja yfirflugþjón eftir:			       ║
+║	1. Kennitala			                   ║
+║	2. Listi			                         ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Veldu númer aðgerðar:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	  Manna og Uppfæra/.../Listi yfirflugþjóna  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                   ║
+║	Nr. Nafn:               Kennitala:	        ║
+║	1 : Jón Jónsson 	      123456-7890         ║
+║	2 : Chuck Norris        999999-9999         ║
+║	3 : Donald Trump			666666-6666         ║
+║	4 : Sylvester Stalone	111111-1111		     ║
+║				                                   ║
+╚══════════════════════════════════════════════╝
+Sláðu inn númer yfirflugþjóns:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	      Manna og Uppfæra/.../NA020          █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                 ║
+║	Nr. Hlutverk:            Starfsmaður:	   ║
+║	1 : Flugstjóri: 	       Chuck Norris     ║
+║	2 : Aðstoðarflugmaður:   Sylvester Stalone║
+║	3 : Yfirflugþjón:			 Donald Trump     ║
+║	4 : Flugþjón:			                     ║
+║				                                 ║
+║	[b] Hætta við			          [v] Vista  ║
+║				                                 ║
+╚════════════════════════════════════════════╝
+Veldu númer hlutverks til að manna eða eyða:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	    Manna og Uppfæra/.../flugþjónar     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                               ║
+║	Velja flugþjón eftir:			          ║
+║	1. Kennitala			                   ║
+║	2. Listi			                         ║
+║				                               ║
+╚══════════════════════════════════════════╝
+Veldu númer aðgerðar:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	  Manna og Uppfæra/.../Listi flugþjóna      █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                   ║
+║	Nr. Nafn:               Kennitala:	        ║
+║	1 : Jón Jónsson 	      123456-7890         ║
+║	2 : Chuck Norris        999999-9999         ║
+║	3 : Donald Trump			666666-6666         ║
+║	4 : Sylvester Stalone	111111-1111		     ║
+║				                                   ║
+╚══════════════════════════════════════════════╝
+Sláðu inn númer flugþjóns:
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	      Manna og Uppfæra/.../NA020                █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                                       ║
+║	Nr.  Hlutverk:            Starfsmaður:	         ║
+║	1  : Flugstjóri: 	        Chuck Norris          ║
+║	2  : Aðstoðarflugmaður:   Sylvester Stalone     ║
+║	3  : Yfirflugþjón:		  Donald Trump          ║
+║	4  : Flugþjón:			                           ║
+║  4.1: 		                 Jón Jónsson           ║
+║				                                       ║
+║	[b] Hætta við			               [v] Vista   ║
+║				                                       ║
+╚══════════════════════════════════════════════════╝
+Veldu númer hlutverks til að manna eða eyða:
+
+
+
+
+
