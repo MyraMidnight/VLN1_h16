@@ -16,3 +16,6 @@ Markmiðin með þessu námskeiði eru margþætt en fyrst og fremst er verið a
 1. The group will be notified through discord whenever the master branch is updated
 
 > Skoðið hérna [Git glósur](info/GIT-notes.md) 
+
+## Dagbókin
+> [Dagbókin á git](info/dagbok.md)
