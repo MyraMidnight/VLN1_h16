@@ -88,9 +88,9 @@ Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal).
 * Klára og fínpússa skýrslu
 
 ## Mánudagur 2. desember 2019
->  Stefanía mætti 9:20, Fannar mætti 10:00
+>  Stefanía mætti 9:20, Fannar mætti 10:00, rest mættu eftir fyrirlestur
 >
-> Fyrirlestur var kl. 12:00
+> Fyrirlestur var kl. 12:00 
 
 
 * Fannar ætlar að útfæra menu-handler
