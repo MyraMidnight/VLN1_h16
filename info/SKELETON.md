@@ -57,13 +57,10 @@
 
 #### getEmployees()
 >get a list of all the employees
-#### getPilots()
->get a list of all the pilots
->
->optional list pilots by license
-
-#### getFlightAttendants()
->get a list of all the attendants
+* getPilots()
+>> get a list of all the pilots, optional list pilots by license
+* getFlightAttendants()
+>> get a list of all the attendants
 
 #### getPlanes()
 >Get a list of planes containing 
