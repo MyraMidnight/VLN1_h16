@@ -4,7 +4,7 @@ import csv
 class IOAPI:
 
     #opens all files in STUDENTDATA
-    def Opener(self):
+    def opener(self):
         #moves presence over to STUDENTDATA file
         os.chdir('main/data/STUDENTDATA')
         filePackage = {}
@@ -35,10 +35,38 @@ class IOAPI:
                 print(x)
             print('-----')
         '''
-        
 
         return filePackage
-    
+
+    #any edited filePackage will be sent here, whether it was updated or appended to
+    def overWriter(self,filePackage):
+        #go through all the file contents
+        for filename, contents in filePackage.items():
+            #checks the validTag
+            if contents[0] == False:
+                #fetches the column names for the csv file by getting the keys from the first dict
+                csv_columns = [key for key in contents[1]]
+                #opens the file with filename in write mode
+                with open(filename,'w',newline='') as file:
+                    #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
+                    #from there you can make it write a header based on the fieldnames and makte it write a row
+                    #into the file where it takes a dictionary and breaks it down to write to a line
+                    writer = csv.DictWriter(file, fieldnames=csv_columns)
+                    #writer writes the header where it puts the fieldnames like all csv files
+                    writer.writeheader()
+                    #go through the contents after validtag(as validtag is index 0) and write all the dicts into lines
+                    for x in range(1,len(contents)):
+                        writer.writerow(contents[x])
 
 
-IOAPI().Opener()
+#code example on how to use overWriter
+'''
+package = IOAPI().opener()
+package['Crew.csv'][0] = False
+package['Crew.csv'][1]['ssn'] = 'Testing overWriter'
+package['Crew.csv'][1]['name'] = 'feel free'
+package['Crew.csv'][1]['role'] = 'to delete'
+package['Crew.csv'][1]['rank'] = 'this line'
+package['Crew.csv'][1]['licence'] = 'if I forget to'
+IOAPI().overWriter(package)
+'''
