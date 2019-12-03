@@ -3,6 +3,17 @@ import csv
 
 class IOAPI:
 
+    #connection point of LLAPI and IOAPI
+    #filePackage defaults to None when you're fetching
+    def dataPipe(self,option,filePackage = None):
+        #sends to overWriter, no return
+        if option == "Return":
+            IOAPI().overWriter(filePackage)
+        #sends to opener and returns the new package
+        elif option == "Fetch":
+            filePackage = IOAPI().opener()
+            return filePackage
+
     #opens all files in STUDENTDATA
     def opener(self):
         #moves presence over to STUDENTDATA file
