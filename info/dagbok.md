@@ -87,10 +87,16 @@ Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal).
 
 * Klára og fínpússa skýrslu
 
-## Mánudagur 2. desember 2019
->  Stefanía mætti 9:20, Fannar mætti 10:00
+
+
+
+# Vika 2
+## Mánudagurinn 2. desember 2019
+Hefja má útfærslu hönnunar í kóða.
+
+>  Stefanía mætti 9:20, Fannar mætti 10:00, rest mættu eftir fyrirlestur
 >
-> Fyrirlestur var kl. 12:00
+> Fyrirlestur var kl. 12:00 
 
 
 * Fannar ætlar að útfæra menu-handler
@@ -100,31 +106,25 @@ Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal).
 
 * Stefanía ætlar að undirbúa git útfrá beinagrind á google docs fyrir að byrja á forritun á morgun (möppur, skrár, README.md)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Vika 2
-## Mánudagurinn 2. desember 2019
-Hefja má útfærslu hönnunar í kóða.
+Kláruðum að gera beinagrindina og kommenta föllin (methods)
+Vel sett fyrir morgundaginn :)
 
 
 
 ## Þriðjudagurinn 3. desember 2019
 Endurgjöf frá leiðb. varðandi hönnun.
+
+> Halla og Damian voru mætt fyrir 10. Höldum að Fannar hafi sofið aðeins lengur en hann kemur vonandi bráðum.
+> 
+> Stefanía er heima með veikt barn.
+
+Stefanía gerði góðar leiðbeiningar um git og lét gögnin inná github
+
+* Ætlum að byrja að forrita í dag
+* Höldum að Fannar ætli að gera UI klasann til að forritið geti prentast flott út og svona
+* Munum útfæra helstu og einföldustu föllin í dag
+
+Markmið dagsins er að vera komin ágætlega á veg með forritið og að við séum öll með sömu hugmynd hvernig það verður framkvæmt :)
 
 
 
