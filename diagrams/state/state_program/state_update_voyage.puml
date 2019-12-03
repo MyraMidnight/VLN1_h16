@@ -56,7 +56,4 @@ state update_voyage {
 }
 
 
-[*] --> update_voyage : velur að 'uppfæra vinnuferð'
-update_voyage --> [*] : fer aftur í 'uppfæra gögn' 
-
 @enduml

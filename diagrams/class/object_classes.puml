@@ -18,12 +18,14 @@ class Staff {
   address (heimilisfang): string [1]
   phoneHome: string [1]
   phoneMobile: string [1]
-  email: string [1]
+  email: string [1] 
 }
 
 class Pilot {
-  planeType: array of strings [1..*]
+  licence: string [1] = plane type
+  role: string [1] = "pilot"
 }
+  note right of Pilot : other role "captain"
 
 class Flight {
   flightId: string [1] = "NA"
@@ -40,11 +42,16 @@ class Destination {
   contactPhone: string [1]
 }
 
+class FlightAttendant {
+  role: string [1] = "attendant"
+}
+  note right of FlightAttendant : other role "lead_attendant"
+
 Staff <|-- Pilot
 Staff <|-- FlightAttendant
 Voyage "1" --o "2" Flight 
-Voyage "0..*" --* "1" Pilot : copilot
-Voyage "0..*" --* "1" Pilot : captain 
+Voyage "0..*" -left-* "1" Pilot : copilot
+Voyage "0..*" -left-* "1" Pilot : captain 
 Voyage "0..*" --* "1" FlightAttendant : Head
 Voyage "0..*" --* "1..3" FlightAttendant
 Voyage --o Destination

@@ -87,8 +87,18 @@ Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal).
 
 * Klára og fínpússa skýrslu
 
+## Mánudagur 2. desember 2019
+>  Stefanía mætti 9:20, Fannar mætti 10:00, rest mættu eftir fyrirlestur
+>
+> Fyrirlestur var kl. 12:00 
 
 
+* Fannar ætlar að útfæra menu-handler
+* ætlum við öll að taka að okkur einhverja klasa hver og útfæra beinagrindina þeirra í forritun
+
+* Við ætlum öll að vinna saman að beinagrind um hvaða föll við þurfum (í google docs) og comment hvað hvert fall gerir (google docs) og vera viss um að það nær yfir allt sem kröfulistinn ætlast til af okkur.
+
+* Stefanía ætlar að undirbúa git útfrá beinagrind á google docs fyrir að byrja á forritun á morgun (möppur, skrár, README.md)
 
 
 

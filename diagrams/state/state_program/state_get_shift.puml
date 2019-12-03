@@ -1,0 +1,64 @@
+@startuml 
+
+state get_shifts {
+  state get_shifts as "Ná í vinnuyfirlit fyrir X marga daga"
+    get_shifts : do/ skilar lista með listum (dagar > vinnuferðir > starfsfólk)
+    get_shifts : DAYS_LIMIT (hámarks fjöldi daga sem hægt er að sækja)
+  
+  state input_date as "innslá dags."
+    input_date : do/ fá dags. frá notanda, ekki tíma dags.
+  state how_many_days as "spyrja: hversu margir dagar?"
+    how_many_days : hversu marga samliggjandi daga á að sækja frá dags.
+    how_many_days : do/ fá fjölda daga sem á að sækja, 1 - DAYS_LIMIT
+  state find_voyages {
+    state find_voyages as "finna vinnuferðir"
+      find_voyages : do/ forLoop, skilar lista af vinnuferðum fyrir x marga daga
+      find_voyages : fær fjöldi daga og 'initial' dags. í parameters
+  
+    state list_dates as "gera lista af dags."
+      list_dates : do/ forLoop, gerir lista af dags. sem á að sækja
+    state get_voyages as "sækja vinnuferðir"
+      get_voyages : do/ forLoop, sækjir allar vinnuferðir fyrir hvern dag í listanum
+
+    [*] --> list_dates : fær 'initial' dags. sem parameter
+    list_dates --> get_voyages
+    get_voyages --> [*]
+  }
+
+  state on_off_shift {
+    state on_off_shift as "Á vakt / ekki á vakt"
+      on_off_shift : býr til þann lista sem á að birta (starfsfólk á vakt eða ekki)
+
+    state get_on_shift as "á vakt"
+      get_on_shift : do/ forLoop, birtir hverjir voru á vakt hvern dag
+      get_on_shift : do/ lista starfsfólk sem er skráð í vinnuferðirnar
+      get_on_shift : hópað saman eftir dögum
+    state get_off_shift as "ekki á vakt"
+      get_off_shift : do/ forLoop, athugar hverjir voru ekki á vakt hvern dagag
+      get_off_shift : do/ if 'employee' not in 'staff_on_voyage'
+      get_off_shift : hópað saman eftir hlutverkum
+
+    [*] --> get_on_shift
+    [*] --> get_off_shift
+    get_on_shift --> [*]
+    get_off_shift --> [*]
+  }
+
+  [*] --> input_date
+  input_date --> input_date : incorrect input/ \nekki rétt format á dags.
+  input_date --> how_many_days
+  how_many_days --> find_voyages : 0 < x <= DAYS_LIMIT
+    how_many_days --> how_many_days : not within range/ \n not a integer
+  find_voyages --> on_off_shift
+  on_off_shift --> [*] : skilar lista af gögnum
+
+}
+
+state display_shifts  {
+
+  state display_shifts as "birta vinnuyfirlit"
+    display_shifts : Gögnin eru meðhöndluð eins, sama hvort það sé 'á vakt' eða ekki
+
+}
+get_shifts -->  display_shifts
+@enduml

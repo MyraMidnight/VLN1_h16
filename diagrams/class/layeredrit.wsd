@@ -4,12 +4,36 @@
 
 
 
-class LLAPI {
+class LLAPI  #LightGreen{
     ONE CLASS FOR LL
     ALL LL FUNCTIONS
 }
 
-object CreateNewInFile {
+object inputHandler #LightPink {
+    //uses a menu dictionary with header, options,input line, functions available
+    menuDict
+    user_input
+    //needs to able to take input and control what to send to printscreen
+    //as well as send to execute functions in the LLAPI according to inputs
+}
+
+object printScreen #LightPink {
+    //needs to take data from inputHandler and print the correct menu to screen
+    //inputHandler should fetch the correct string from LLAPI functions to print for printScreen
+    print data
+}
+
+object dataPrinter #LightPink {
+    //takes lists from LLAPI functions to print to screen as scrolling
+}
+
+object functionProcessor #LightPink {
+    //asks LLAPI functions for their return strings to print
+    function to execute
+    return string/list
+}
+
+object CreateNewInFile  #LightGreen{
     filePackage //comes as a dictionary where key is the filename
     //and the value is a list of lines from the file
     //so that you can work with multiple files at the same time
@@ -21,7 +45,7 @@ object CreateNewInFile {
     IOAPI.DataPipe(return,[filenames],filePackage)
 }
 
-object Voyager {
+object Voyager  #LightGreen{
     staff supposed to go on Voyage
     employee schedule information
     -----------------------------------
@@ -31,7 +55,8 @@ object Voyager {
     IOAPI.DataPipe(return,[filenames],filePackage)
 }
 
-object Viewer {
+object Viewer  #LightGreen{
+    parameters(staff/voyages etc.)
     relevant information from filePackage
     filePackage
     ----------------------------------
@@ -40,7 +65,8 @@ object Viewer {
     //used for the list ALL of x thing
 }
 
-object specificEmployee {
+object specificEmployee  #LightGreen{
+    parameters(SSN)
     employee SSN
     filePackage
     ----------------------------------
@@ -48,13 +74,75 @@ object specificEmployee {
     //go through all employees to find the matching SSN
 }
 
-class IOAPI {
+object WorkSpecificDay  #LightGreen{
+    parameters(day, working/away, destFlag)
+    //can find either all employees not working on a day
+    //and find all employees working and their destinations
+    employee info
+    voyage info
+    filePackage
+    ----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //cross reference voyages with employees on specific day
+    //to find a list of all employees not working that day
+}
+
+object VoyOfEmpSpeWeek #LightGreen{
+    parameters(SSN, week)
+    //finds all voyages an employee has been on in a given week
+    employee info
+    voyage info
+    filePackage
+    ----------------------------------
+    IOAPI.DataPipe(fetch,[filenames])
+    //first find all voyages in the given week
+    //then check the voyages for that employee
+}
+
+class IOAPI #LightBlue{
     ONE CLASS FOR IO
     ALL IO FUNCTIONS
 }
 
+object OverWriter  #LightBlue{
+    //takes care of new and updating as both require overwrites
+    //finds the files and overwrites them with new info
+    parameters ([filenames], filePackage)
+    filenames
+    filePackage
+    ---------------------------------------------------
+    //opens all files from [filenames] and overwrites them
+    //with new info from the filePackage
+}
 
-LLAPI --- NewEmployee
-NewEmployee --- IOAPI
+object Opener  #LightBlue{
+    //opens all files in  [filenames] and fetches all lines from file
+    //makes a list of lines and puts them in dict with key:filenames,value:list of lines
+    [filenames]
+}
 
+object DataPipe  #LightBlue{
+    parameters(fetch/return, [filenames], filePackage = False)
+    //based on fetch or return this either calls for Opener to fetch the filePackage
+    //or it calls on overWriter to write the new data into files based on the filePackage
+    fetch/return
+    [filenames]
+    //needs filepackage for the return version
+    
+} 
+left to right direction
+LLAPI --- inputHandler
+LLAPI --- dataPrinter
+LLAPI --- printScreen
+LLAPI --- functionProcessor
+LLAPI --- CreateNewInFile
+LLAPI --- Voyager
+LLAPI --- Viewer
+LLAPI --- specificEmployee
+LLAPI --- WorkSpecificDay
+LLAPI --- VoyOfEmpSpeWeek
+IOAPI --- Opener
+IOAPI --- OverWriter
+IOAPI --- DataPipe
+LLAPI --- DataPipe
 @enduml
