@@ -5,6 +5,7 @@ from GET import Get
 from UPDATE import Update
 
 class LLAPI : 
+    """Logic layer API handler"""
     #------- CREATE
     def createDestination(self): 
         return Create().createDestination()
