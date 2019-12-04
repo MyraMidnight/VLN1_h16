@@ -225,7 +225,7 @@ package modelClasses {
     dateIn : string [1]
   }
 
-  class Staff {
+  class Employee {
     name: string [1]
     socialId (kennitala): string [1]
     address (heimilisfang): string [1]
@@ -256,6 +256,13 @@ package modelClasses {
   class FlightAttendant {
     role: string [1] = "attendant"
   }
+
+  class Menu {
+
+  }
+
+  Employee <|-- Pilot
+  Employee <|-- FlightAttendant
 }
 
 
