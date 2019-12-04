@@ -22,7 +22,7 @@ class IOAPI:
         #goes through every filename in current directory(now STUDENTDATA)
         for filename in os.listdir(os.getcwd()):
             #opens every file in read mode
-            with open(filename,'r') as file:
+            with open(filename,'r', encoding="utf-8") as file:
                 #uses csv.dictreader which is an inbuilt function that reads every line and converts them into OrderedDicts
                 #the function gets its keys from the first line of the file, an ordered dict is a tuple containing a list
                 #of tuples, those tuples being the key:value items
@@ -39,13 +39,11 @@ class IOAPI:
                 filePackage[filename] = temp_list
         
         #code example you can run to better understand the structure of filePackage 
-        '''
         for key, value in filePackage.items():
             print(key)
             for x in value:
                 print(x)
             print('-----')
-        '''
 
         return filePackage
 
@@ -71,8 +69,8 @@ class IOAPI:
 
 
 #code example on how to use overWriter
-'''
 package = IOAPI().opener()
+'''
 package['Crew.csv'][0] = False
 package['Crew.csv'][1]['ssn'] = 'Testing overWriter'
 package['Crew.csv'][1]['name'] = 'feel free'
