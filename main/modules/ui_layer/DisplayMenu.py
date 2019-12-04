@@ -1,4 +1,9 @@
-class MenuHandler:
+import sys
+sys.path.insert(1, '../') #to be able to get to siblingn directory
+
+from logic_layer.LLAPI import LLAPI
+
+class DisplayMenu:
     """Handles the menu (input and printing right menus)"""
     def __init__(self):
         #dictionary for menu
@@ -18,7 +23,7 @@ class MenuHandler:
             },
             "1.3" : {
                 "title": "Destinations",
-                "function": ""
+                "function": LLAPI().createDestination
             },
             "1.4" : {
                 "title": "Aircrafts",
@@ -74,6 +79,10 @@ class MenuHandler:
             "update": ["3.1", "3.2", "3.3", "3.4"]
         }
 
+    def runFunction(self,function):
+        """runs a function defined in the options"""
+        function()
+
 
     def printMenu(self,menu):
         """printMenu(menu), menus are: main, create, get, update"""
@@ -90,5 +99,7 @@ class MenuHandler:
                 #finds the chosen option in the menuOptions
                 chosenOption = self.menuOptions[currentMenu[int(choice)-1]]
                 print(chosenOption["title"]) #just a test to show it found the option
+                #then run the method connected to the chosen option
+                self.runFunction(chosenOption["function"])
 
-MenuHandler().printMenu("get")
+DisplayMenu().printMenu("get")
