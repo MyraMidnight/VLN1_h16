@@ -17,7 +17,6 @@
 ║	1 : Nýskráning		                ║
 ║	2 : Sækja		                   ║
 ║	3 : Uppfæra		                   ║
-║	4 : Manna			                ║
 ║				                         ║
 ╚════════════════════════════════════╝
 
@@ -32,7 +31,7 @@
 ╚════════════════════════════════════╝
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	        Manna og Uppfæra		    █
+█	            Uppfæra		          █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                         ║
 ║	1 : Starfsfólk		                ║
@@ -44,7 +43,7 @@
 ╚════════════════════════════════════╝
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	Manna og Uppfæra/ Manna vinnuferð █
+█  	Uppfæra/ Manna vinnuferð       █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                         ║
 ║	Velja vinnuferð eftir:			    ║
@@ -54,21 +53,21 @@
 ║				                         ║
 ╚════════════════════════════════════╝
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	Manna og Uppfæra/... Dagsetning   █
+█	      Uppfæra/... Dagsetning      █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                         ║
 ║	Sláðu inn dagsetningu:            ║
 ║				                         ║
 ╚════════════════════════════════════╝
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	Manna og Uppfæra/... Flugnúmer    █
+█	      Uppfæra/... Flugnúmer       █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                         ║
 ║	Sláðu inn flugnúmer:              ║
 ║				                         ║
 ╚════════════════════════════════════╝
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	           Manna og Uppfæra/Manna vinnuferð/Listi                  █
+█	                  Uppfæra/Manna vinnuferð/Listi                    █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                                          ║
 ║	Nr.   Dags.        Tími    Flugnúmer   Áfangastaðir   Staða        ║
@@ -80,7 +79,7 @@
 Veldu númer vinnuferðar: 
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	           Manna og Uppfæra/Manna vinnuferð/29.11.2019             █
+█	               Uppfæra/Manna vinnuferð/29.11.2019                  █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                                          ║
 ║	Nr.   Dags.        Tími    Flugnúmer   Áfangastaðir   Staða        ║
@@ -91,7 +90,7 @@ Veldu númer vinnuferðar:
 Veldu númer vinnuferðar:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	      Manna og Uppfæra/.../NA020        █
+█	            Uppfæra/.../NA020           █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Nr. Hlutverk:            Starfsmaður:	 ║
@@ -105,7 +104,7 @@ Veldu númer hlutverks til að manna:
 
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	    Manna og Uppfæra/.../Flugstjóri     █
+█	         Uppfæra/.../Flugstjóri         █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Velja flugstjóra eftir:			          ║
@@ -115,8 +114,16 @@ Veldu númer hlutverks til að manna:
 ╚══════════════════════════════════════════╝
 Veldu númer aðgerðar:
 
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	      Uppfæra/... Kennitala       █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                         ║
+║	Sláðu inn kennitölu:              ║
+║				                         ║
+╚════════════════════════════════════╝
+
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	  Manna og Uppfæra/.../Listi flugstjóra █
+█	      Uppfæra/.../Listi flugstjóra      █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Nr. Nafn:               Kennitala:	    ║
@@ -129,7 +136,7 @@ Veldu númer aðgerðar:
 Sláðu inn númer flugstjóra:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	      Manna og Uppfæra/.../NA020        █
+█	            Uppfæra/.../NA020           █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Nr. Hlutverk:            Starfsmaður:	 ║
@@ -144,7 +151,7 @@ Sláðu inn númer flugstjóra:
 Veldu númer hlutverks til að manna eða eyða:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	Manna og Uppfæra/.../Aðstoðarflugmenn   █
+█	      Uppfæra/.../Aðstoðarflugmenn      █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Velja aðstoðarflugstjóra eftir:			 ║
@@ -155,7 +162,7 @@ Veldu númer hlutverks til að manna eða eyða:
 Veldu númer aðgerðar:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█Manna og Uppfæra/.../Listi aðstoðarflugmanna █
+█     Uppfæra/.../Listi aðstoðarflugmanna     █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                  ║
 ║	Nr. Nafn:               Kennitala:	       ║
@@ -167,7 +174,7 @@ Veldu númer aðgerðar:
 Sláðu inn númer aðstoðarflugstjóra:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	      Manna og Uppfæra/.../NA020          █
+█	            Uppfæra/.../NA020             █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                 ║
 ║	Nr. Hlutverk:            Starfsmaður:	   ║
@@ -182,7 +189,7 @@ Sláðu inn númer aðstoðarflugstjóra:
 Veldu númer hlutverks til að manna eða eyða:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	Manna og Uppfæra/.../Yfirflugþjónar     █
+█	      Uppfæra/.../Yfirflugþjónar        █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Velja yfirflugþjón eftir:			       ║
@@ -193,7 +200,7 @@ Veldu númer hlutverks til að manna eða eyða:
 Veldu númer aðgerðar:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	  Manna og Uppfæra/.../Listi yfirflugþjóna  █
+█	       Uppfæra/.../Listi yfirflugþjóna      █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                   ║
 ║	Nr. Nafn:               Kennitala:	        ║
@@ -206,7 +213,7 @@ Veldu númer aðgerðar:
 Sláðu inn númer yfirflugþjóns:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	      Manna og Uppfæra/.../NA020          █
+█	            Uppfæra/.../NA020             █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                 ║
 ║	Nr. Hlutverk:            Starfsmaður:	   ║
@@ -221,7 +228,7 @@ Sláðu inn númer yfirflugþjóns:
 Veldu númer hlutverks til að manna eða eyða:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	    Manna og Uppfæra/.../flugþjónar     █
+█	         Uppfæra/.../flugþjónar         █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                               ║
 ║	Velja flugþjón eftir:			          ║
@@ -232,7 +239,7 @@ Veldu númer hlutverks til að manna eða eyða:
 Veldu númer aðgerðar:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	  Manna og Uppfæra/.../Listi flugþjóna      █
+█	         Uppfæra/.../Listi flugþjóna        █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                   ║
 ║	Nr. Nafn:               Kennitala:	        ║
@@ -245,7 +252,7 @@ Veldu númer aðgerðar:
 Sláðu inn númer flugþjóns:
 
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█	      Manna og Uppfæra/.../NA020                █
+█	               Uppfæra/.../NA020                █
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 ║				                                       ║
 ║	Nr.  Hlutverk:            Starfsmaður:	         ║
