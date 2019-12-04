@@ -1,0 +1,91 @@
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	            Main Menu	  	     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                     ║
+║	1 : Nýskráning		             ║
+║	2 : Sækja		                 ║
+║	3 : Manna   	                 ║
+║	4 : Uppfæra   	                 ║
+║	5 : Sýna shortcuts               ║
+║				                     ║
+╚════════════════════════════════════╝
+Sláðu inn aðgerðarnúmer: 2
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	           Sækja    	  	     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                     ║
+║	1 : Starfsfólk		             ║
+║	2 : Vinnuyfirlit                 ║
+║	3 : Flugvélar                    ║
+║	4 : Vinnuferðir	                 ║
+║	5 : Áfangastaðir                 ║
+║				                     ║
+║ [b]back              [m]main menu	 ║
+║				                     ║
+╚════════════════════════════════════╝
+Sláðu inn aðgerðarnúmer: 1
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	       Sækja/Starfsfólk	  	     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                     ║
+║	1 : Finna með kennitölu		     ║
+║	2 : Sjá allt starfsfólk          ║
+║	3 : Sjá alla flugmenn		     ║
+║	4 : Sjá alla flugþjóna           ║
+║	5 : Sjá allar Flugvélar          ║
+║	6 : Á vakt                       ║
+║	7 : Ekki á vakt                  ║
+║	8 : Vinnufer                     ║
+║				                     ║
+║ [b]back              [m]main menu	 ║
+║				                     ║
+╚════════════════════════════════════╝
+Sláðu inn aðgerðarnúmer: 2
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█   Sækja/Starfsfólk/allt starfsfólk █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                     ║
+║  Nr:  Nafn:        Kennitala:      ║
+║	1: Jón Jónsson	 010195-8939     ║
+║	2: John Johnson	 020296-4938	 ║
+║	3: Jason Bourne  040503-4543	 ║
+║	4: Chuck Norris	 010000-0000	 ║
+║				                     ║
+║ [b]back              [m]main menu	 ║
+║				                     ║
+╚════════════════════════════════════╝
+Sláðu inn Nr. fyrir nánar uppl.: 1
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  Sækja/Starfsfólk/Jón Jónsson	  	 █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                     ║
+║	Nafn: Jón Jónsson                ║
+║	Kennitala: 010195-8939           ║
+║	Heimilisfang: Strætisgötu 1      ║
+║	Heimasími: 123-4567              ║
+║	Gsm-sími: 123-4567               ║
+║	Netfang: jonjonson@jonjonson.is  ║
+║				                     ║
+║	1.Aftur í lista			         ║
+║				                     ║
+║ [b]back              [m]main menu	 ║
+║				                     ║
+╚════════════════════════════════════╝
+Sláðu inn aðgerðarnúmer: m
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█	            Main Menu	  	     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+║				                     ║
+║	1 : Nýskráning		             ║
+║	2 : Sækja		                 ║
+║	3 : Manna   	                 ║
+║	4 : Uppfæra   	                 ║
+║	5 : Sýna shortcuts               ║
+║				                     ║
+╚════════════════════════════════════╝
+Sláðu inn aðgerðarnúmer:
