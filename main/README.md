@@ -28,7 +28,7 @@ Til að koma í veg fyrir __merge conflicts__ þá ættu allir að vinna í mism
 * `git branch <new_branch_name>` býr til nýjan branch án þess að færa þig
 * `git checkout -b <new_branch_name>` býr till nýjan branch og fer í hann á sama tíma.  
 
-* `git checkout <branch_name>` færir þig á milli branches, það býr til nýjann branch ef nafnið er rangt.
+* `git checkout <branch_name>` færir þig á milli branches
 * Þegar þið gerið nýjan branch, þá er það einfaldlega afrit af þeim branch sem þið voruð stödd í á þeirri stundu.
 * Nöfnin á branches eru __case sensitive__ 
 
