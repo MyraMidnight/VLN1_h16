@@ -37,7 +37,7 @@ class IOAPI:
     def appender(self,fileName,filePackage):
         csv_columns = [key for key in filePackage]
         #opens the file with filename in write mode
-        with open(fileName,'a',newline='') as file:
+        with open(fileName,'a',newline='',encoding='utf-8') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row
             #into the file where it takes a dictionary and breaks it down to write to a line
