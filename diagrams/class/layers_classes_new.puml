@@ -1,0 +1,262 @@
+
+@startuml Layeredrit
+
+'left to right direction
+
+' ------------------------------------ UI layer
+package UI_layer <<Rectangle>> {
+
+  note as UI_note
+    All these UI classes connect directly to the LLAPI
+  end note
+
+  class inputHandler #LightPink {
+    //uses a menu dictionary with header, options,input line, functions available
+    menuDict
+    user_input
+    //needs to able to take input and control what to send to printscreen
+    //as well as send to execute functions in the LLAPI according to inputs
+  }
+
+  class printScreen #LightPink {
+    //needs to take data from inputHandler and print the correct menu to screen
+    //inputHandler should fetch the correct string from LLAPI functions to print for printScreen
+    print data
+
+    -- methods --
+    displayMenu()
+  }
+
+  class dataPrinter #LightPink {
+    //takes lists from LLAPI functions to print to screen as scrolling
+    -- methods --
+    displaySchedule()
+    displayAllPlanes()
+    displayPlane()
+    displayCrew()
+    displaySingleEmployee()
+    displayAllDestinations()
+    displayDestination()
+  }
+
+  ' I don't know what this does
+  class functionProcessor #LightPink {
+    //asks LLAPI functions for their return strings to print
+    function to execute
+    return string/list
+  }
+
+  'else the whole graph started looking weird
+  class llapi #LightGreen
+
+  llapi -- inputHandler
+  llapi -- dataPrinter
+  llapi -- printScreen
+  llapi -- functionProcessor
+}
+
+' ------------------------------------  The logic layer
+
+package LogicLayer_API <<Rectangle>> {
+  
+  note as LL_note
+    directories live in the LLAPI
+    All the LLAPI child classes connect to the IOAPI.
+    All should check if the data are in the LLAPI
+    if child classes are updating through IOAPI, then it also updates the LLAPI 
+    if there is no data in the LLAPI, then the class fetches from IOAPI and adds it to the LLAPI
+
+  end note
+
+class LLAPI  #LightGreen{
+  ONE CLASS FOR ALL LL FUNCTIONS
+  -- properties --
+  crew_dict: dictionary
+  aircrafts_dict : dictionary
+  voyages_dict : dictionary
+  destinations_dict : dictionary
+  flightsPast_dict : dictionary
+  flightsUpcoming_dict : dictionary
+  aircraftTypes_dict : dictionary
+}
+  class CreateNewInFile  #LightGreen{
+      filePackage //comes as a dictionary where key is the filename
+      //and the value is a list of lines from the file
+      //so that you can work with multiple files at the same time
+      newInfo
+      --
+      //function that creates a new line in a file
+      IOAPI.DataPipe(fetch,[filenames])
+      //code for adding a new line with correct fields
+      IOAPI.DataPipe(return,[filenames],filePackage)
+      --methods--
+      createEmployee()
+      createPlane()
+      createDestination()
+      createVoyage()
+  }
+
+  class Voyager  #LightGreen{
+      staff supposed to go on Voyage
+      employee schedule information
+      --
+      IOAPI.DataPipe(fetch,[filenames])
+      //code for checking if staff is available(24 hour period)
+      //check for staff containing two pilots and one attendant
+      IOAPI.DataPipe(return,[filenames],filePackage)
+      --methods--
+      updateVoyage()
+  }
+
+  class Viewer  #LightGreen{
+      parameters(staff/voyages etc.)
+      relevant information from filePackage
+      filePackage
+      -- datapipe --
+      IOAPI.DataPipe(fetch,[filenames])
+      //opens file based on input and prints out to screen
+      //used for the list ALL of x thing
+      -- methods --
+      getSingleEmployee()
+      getCrew()
+      getPilots()
+      getFlightAttendants()
+      getPlanes()
+      getVoyages()
+      getDestinations()
+      getSchedule()
+  }
+
+  class specificEmployee  #LightGreen{
+      parameters(SSN)
+      employee SSN
+      filePackage
+      --
+      IOAPI.DataPipe(fetch,[filenames])
+      //go through all employees to find the matching SSN
+  }
+
+  class WorkSpecificDay  #LightGreen{
+      parameters(day, working/away, destFlag)
+      //can find either all employees not working on a day
+      //and find all employees working and their destinations
+      employee info
+      voyage info
+      filePackage
+      -- datapipe --
+      IOAPI.DataPipe(fetch,[filenames])
+      //cross reference voyages with employees on specific day
+      //to find a list of all employees not working that day
+  }
+
+  class VoyOfEmpSpeWeek #LightGreen{
+      parameters(SSN, week)
+      //finds all voyages an employee has been on in a given week
+      employee info
+      voyage info
+      filePackage
+      -- datapipe --
+      IOAPI.DataPipe(fetch,[filenames])
+      //first find all voyages in the given week
+      //then check the voyages for that employee
+  }
+
+  LLAPI <|-- CreateNewInFile
+  LLAPI <|-- Voyager
+  LLAPI <|-- Viewer
+  LLAPI <|-- specificEmployee
+  LLAPI <|-- WorkSpecificDay
+  LLAPI <|-- VoyOfEmpSpeWeek
+
+}
+
+' ------------------------------------ The data layer
+
+left to right direction
+class IOAPI  #LightBlue{
+    ONE CLASS FOR IO
+    ALL IO FUNCTIONS
+    --
+    parameters(fetch/return, [filenames], filePackage = False)
+    //based on fetch or return this either calls for Opener to fetch the filePackage
+    //or it calls on overWriter to write the new data into files based on the filePackage
+    fetch/return
+    [filenames]
+    //needs filepackage for the return version
+    
+} 
+package DataLayer_API <<Rectangle>> {
+  class OverWriter  #LightBlue{
+      //takes care of new and updating as both require overwrites
+      //finds the files and overwrites them with new info
+      parameters ([filenames], filePackage)
+      filenames
+      filePackage
+      --
+      //opens all files from [filenames] and overwrites them
+      //with new info from the filePackage
+      --methods--
+      writeFile()
+      appendFile()
+  }
+
+  class Opener  #LightBlue{
+      //opens all files in  [filenames] and fetches all lines from file
+      //makes a list of lines and puts them in dict with key:filenames,value:list of lines
+      [filenames]
+  }
+
+  IOAPI -- Opener
+  IOAPI -- OverWriter
+
+}
+
+package modelClasses {
+
+  class Voyage {
+    captainId : string [1] /kennitala
+    copilots : array of strings [1] /kennitölur
+    headAttendantId: string[1] /kennitala
+    flightAttendants: array of strings [1..3]  /kennitölur
+    flightOut : string [1]
+    flightIn : string [1]
+    destination: int [1]  
+    dateOut : string [1]
+    dateIn : string [1]
+  }
+
+  class Staff {
+    name: string [1]
+    socialId (kennitala): string [1]
+    address (heimilisfang): string [1]
+    phoneHome: string [1]
+    phoneMobile: string [1]
+    email: string [1] 
+  }
+
+  class Pilot {
+    licence: string [1] = plane type
+    role: string [1] = "pilot"
+  }
+  class Flight {
+    flightId: string [1] = "NA"
+    flightStart: string[1]
+  }
+
+  class Destination {
+    id: int [1] /auto generated
+    country: string [1]
+    airport: string [1]
+    flightTime: string [1]
+    flightDistance: int [1]
+    contact: string [1]
+    contactPhone: string [1]
+  }
+
+  class FlightAttendant {
+    role: string [1] = "attendant"
+  }
+}
+
+
+@enduml
