@@ -120,8 +120,9 @@ Endurgjöf frá leiðb. varðandi hönnun.
 
 Stefanía gerði góðar leiðbeiningar um git og lét gögnin inná github
 
+* Stefanía ætlar að gera trello board fyrir okkur uppá skipulag og til að við vitum í hverju er verið að vinna og hvað er búið eða óhafið.
 * Ætlum að byrja að forrita í dag
-* Höldum að Fannar ætli að gera UI klasann til að forritið geti prentast flott út og svona
+* Fannar ætlar að gera UI klasann til að forritið geti prentast flott út og svona
 * Munum útfæra helstu og einföldustu föllin í dag
 
 Markmið dagsins er að vera komin ágætlega á veg með forritið og að við séum öll með sömu hugmynd hvernig það verður framkvæmt :)
