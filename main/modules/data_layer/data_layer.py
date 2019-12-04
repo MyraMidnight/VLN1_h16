@@ -24,7 +24,7 @@ class IOAPI:
                         filePackage.append(temp_dict)
                     #adds the current files list of dicts into the filePackage as a value of the key of its filename
                     file.close() 
-                    #code example you can run to better understand the structure of filePackage 
+                    #code example you can run to better understand the structure of filePackage
                     '''
                     for x in filePackage:
                         print(x)
@@ -35,10 +35,9 @@ class IOAPI:
 
     #any edited filePackage will be sent here, whether it was updated or appended to
     def appender(self,fileName,filePackage):
-        path = 'main/data/STUDENTDATA/' + fileName
         csv_columns = [key for key in filePackage]
         #opens the file with filename in write mode
-        with open(path,'a',newline='') as file:
+        with open(fileName,'a',newline='') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row
             #into the file where it takes a dictionary and breaks it down to write to a line
@@ -46,10 +45,10 @@ class IOAPI:
             writer.writerow(filePackage)
     
     def updater(self,fileName,filePackage):
-        path = 'main/data/STUDENTDATA/' + fileName
-        csv_columns = [key for key in filePackage]
+        csv_columns = [key for key in filePackage[0]]
+        print(csv_columns)
         #opens the file with filename in write mode
-        with open(path,'w',newline='') as file:
+        with open(fileName,'w',newline='',encoding='utf-8') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row
             #into the file where it takes a dictionary and breaks it down to write to a line
@@ -63,13 +62,10 @@ class IOAPI:
 
 
 #code example on how to use overWriter
-package = IOAPI().opener('Crew.csv')
-'''
-package['Crew.csv'][0] = False
-package['Crew.csv'][1]['ssn'] = 'Testing overWriter'
-package['Crew.csv'][1]['name'] = 'feel free'
-package['Crew.csv'][1]['role'] = 'to delete'
-package['Crew.csv'][1]['rank'] = 'this line'
-package['Crew.csv'][1]['licence'] = 'if I forget to'
-IOAPI().overWriter(package)
-'''
+#package = IOAPI().opener('Crew.csv')
+#for x in package:
+#    print(x)
+#package[5] = {'ssn': 'test', 'name': 'test test', 'role': 'test', 'rank': 'test test', 'licence': 'test/test', 'address': 'test 25', 'phonenumber': 'test'}
+#test_dict = {'ssn': 'test', 'name': 'test test', 'role': 'test', 'rank': 'test test', 'licence': 'test/test', 'address': 'test 25', 'phonenumber': 'test'}
+#IOAPI().updater('Crew.csv',package)
+#IOAPI().appender('Crew.csv',test_dict)
