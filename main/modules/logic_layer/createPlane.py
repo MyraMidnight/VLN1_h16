@@ -1,5 +1,5 @@
 def createPlane():
-    """Requests input for planeName, and  planeType."""
+    """Requests input for planeName, and  planeType. Returns the inputs as str"""
     
     planeInsignia_str = input("Input plane insignia: ")
     while len(planeInsignia_str) != 6 or planeInsignia_str[2] != "-" or not planeInsignia_str.replace("-","").isalpha() or not planeInsignia_str.replace("-","").isupper():
