@@ -39,13 +39,13 @@ class IOAPI:
                 filePackage[filename] = temp_list
         
         #code example you can run to better understand the structure of filePackage 
-        '''
+
         for key, value in filePackage.items():
             print(key)
             for x in value:
                 print(x)
             print('-----')
-        '''
+
 
         return filePackage
 
@@ -69,10 +69,9 @@ class IOAPI:
                     for x in range(1,len(contents)):
                         writer.writerow(contents[x])
 
-
+package = IOAPI().opener()
 #code example on how to use overWriter
 '''
-package = IOAPI().opener()
 package['Crew.csv'][0] = False
 package['Crew.csv'][1]['ssn'] = 'Testing overWriter'
 package['Crew.csv'][1]['name'] = 'feel free'
