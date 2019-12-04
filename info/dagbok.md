@@ -128,9 +128,25 @@ Stefanía gerði góðar leiðbeiningar um git og lét gögnin inná github
 Markmið dagsins er að vera komin ágætlega á veg með forritið og að við séum öll með sömu hugmynd hvernig það verður framkvæmt :)
 
 
+Stefanía sá um git og gerði layer diagram
+
+Damian gerðir create employee og create plane
+
+Halla gerði create destination
+
+Fannar gerði IO API og svoleiðis
+
 
 ## Miðvikudagurinn 4. desember 2019
+> Halla og Stefanía mættu 9:30 og strákarnir rúmlega 10
 
+fórum í stofu V309 og fengum góða hjálp með hvernig við ætlum að skipta forritinu niður þegar við erum að forrita og LLAPI og create, get og update inner classes inní LLAPI
+
+* Damian ætlar að debuga create employee og create plane
+* Stefanía er að sameina skrárnar okkar svo það samræmist við LLAPI útgáfuna sem við ætlum að útfæra eftir fundinn með dæmatímakennaranum (taka til í logic layer möppunni)
+* byrjum svo að forrita meira
+* Fannar sér um IO layer
+* Hver þar að forrita a.m.k. 2 method á dag
 
 
 ## Fimmtudagurinn 5. desember 2019
