@@ -23,10 +23,10 @@ class DisplayMenu:
             },
             "1.3" : {
                 "title": "Destinations",
-                "function": LLAPI().createDestination
+                "function" : LLAPI().createDestination
             },
             "1.4" : {
-                "title": "Aircrafts",
+                "title": "Aircrafts",  
                 "function": ""
             },
             #---------- Get --------------
@@ -79,10 +79,6 @@ class DisplayMenu:
             "update": ["3.1", "3.2", "3.3", "3.4"]
         }
 
-    def runFunction(self,function):
-        """runs a function defined in the options"""
-        function()
-
 
     def printMenu(self,menu):
         """printMenu(menu), menus are: main, create, get, update"""
@@ -100,6 +96,6 @@ class DisplayMenu:
                 chosenOption = self.menuOptions[currentMenu[int(choice)-1]]
                 print(chosenOption["title"]) #just a test to show it found the option
                 #then run the method connected to the chosen option
-                self.runFunction(chosenOption["function"])
+                chosenOption["function"]()
 
-DisplayMenu().printMenu("get")
+DisplayMenu().printMenu("create")
