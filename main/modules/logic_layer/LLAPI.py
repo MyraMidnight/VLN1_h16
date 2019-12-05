@@ -1,8 +1,8 @@
 
 #----- import the inner classes / methods
-from .CREATE import CreateLogic
-from .GET import GetLogic
-from .UPDATE import UpdateLogic
+from CREATE import CreateLogic
+# from GET import GetLogic
+# from UPDATE import UpdateLogic
 
 class LLAPI : 
     """Logic layer API handler"""
@@ -11,7 +11,7 @@ class LLAPI :
 
     #------- CREATE
     def createDestination(self): 
-        return CreateLogic().createDestination()
+        return (CreateLogic().createDestination())
 
     #------- GET
 
