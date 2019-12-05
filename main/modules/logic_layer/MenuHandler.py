@@ -8,21 +8,25 @@ from ui_layer.DisplayMenu import DisplayMenu
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
     def __init__(self):
-        #dictionary for menu
+        self.currentLocation = "0"
         self.currentMenu = {}
         self.menuOptions = { 
             #---------- Create --------------
+            "0": {
+                "title": "Main menu",
+                "function": "create" 
+            },
             "1": {
                 "title": "Create new data",
                 "function": "create" 
             },
             "1.1" : {
                 "title": "Employee",
-                "function": "create" # LLAPI().createEmployee
+                "function": "main" # LLAPI().createEmployee
             },
             "1.2" : {
                 "title": "Voyage",
-                "function": "create" # LLAPI().createVoyage
+                "function": "main" # LLAPI().createVoyage
             },
             "1.3" : {
                 "title": "Destinations",
@@ -30,7 +34,7 @@ class MenuHandler:
             },
             "1.4" : {
                 "title": "Aircrafts",  
-                "function": "create"
+                "function": "main"
             },
             #---------- Get --------------
             "2" : {
@@ -39,23 +43,23 @@ class MenuHandler:
             },
             "2.1" : {
                 "title": "Crew",
-                "function": "get"
+                "function": "main"
             },
             "2.2" : {
                 "title": "Voyages",
-                "function": "get"
+                "function": "main"
             },
             "2.3" : {
                 "title": "Destinations",
-                "function": "get"
+                "function": "main"
             },
             "2.4" : {
                 "title": "Aircrafts",
-                "function": "get"
+                "function": "main"
             },
             "2.4" : {
                 "title": "Schedule",
-                "function": "get"
+                "function": "main"
             },
             #---------- Update --------------
             "3" : {
@@ -64,39 +68,45 @@ class MenuHandler:
             },
             "3.1" : {
                 "title": "Crew",
-                "function": "update"
+                "function": "main"
             },
             "3.2" : {
                 "title": "Voyages",
-                "function": "update"
+                "function": "main"
             },
             "3.3" : {
                 "title": "Destinations",
-                "function": "update"
+                "function": "main"
             }
         }
         self.menuLayout = {
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4"],
-            "update": ["3.1", "3.2", "3.3", "3.4"]
+            "update": ["3.1", "3.2", "3.3"]
         }
 
-
-    def displayMenu(self,menu):
+    def displayMenu(self,menu:str = "main"):
         """printMenu(menu), menus are: main, create, get, update"""
-        #check
+        #if the menu
         if menu in self.menuLayout:
-            #find the correct menu from menuLayout and loop through the options
             self.currentMenu = self.menuLayout[menu]
-            #print the current menu
+            
+            #find the menu header title
+            if len(self.currentMenu[0]) == 1:
+                menuTitle = self.menuOptions["0"]["title"]
+            else: 
+                menuTitle = self.menuOptions[self.currentMenu[0][:1]]["title"]
+            #print the header and menu
+            DisplayMenu().printHeader(menuTitle)
             DisplayMenu().printMenu(self.menuOptions,self.currentMenu)
-            #get the choice via InputHandler
-            choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
 
+            #prompt user to input the number of chosen option
+            choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
             chosenOption = self.menuOptions[self.currentMenu[choice_int]]
-            chosenFunction = chosenOption["function"]
+
             #then run the method connected to the chosen option
+            chosenFunction = chosenOption["function"]
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
                 MenuHandler().displayMenu(chosenFunction)
@@ -106,4 +116,4 @@ class MenuHandler:
 
         
 
-MenuHandler().displayMenu("main")
+MenuHandler().displayMenu()
