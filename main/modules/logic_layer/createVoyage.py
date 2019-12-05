@@ -44,7 +44,17 @@ class Create():
         planetype_str = input("Enter the number of the plane you want to use in this voyage from the plane list: ")
 
         # Make a flightnumber for both flights, the flight numbers are different depending on the destination and how many other flights have gone to the destination on this same day
+         
+            # To make a flightnumber you need the list of all destination and get the number for our destination, then check if there is another flight
+            # on this day going to our destination. If there is another flight to our destination then the number is NA XX2 otherwise NAXX0
+
+
+
 
         # print all the info about the voyage for the user and ask if the info is correct, if not than edit info, else save to data
+
+        # check if the user wants to use this template of voyage at other days
+
+        print("Do you want to replicate this voyage? (y/n)")
 
 
