@@ -1,13 +1,13 @@
-import sys
-sys.path.insert(1, '../') #to be able to get to sibling directory
+import sys, os
+sys.path.append(os.path.abspath(os.path.join('..','VLN1_H16/main/modules/data_layer')))
 
-from data_layer.IOAPI import IOAPI
+from IOAPI import IOAPI
 
 class GetLogic :
     """Get methods for logic layer"""
 
     def getSingleEmployee(self):
         filePackage = IOAPI().opener('Crew.csv')
-        print(filePackage)
+        print(filePackage[0])
 
 GetLogic().getSingleEmployee()
