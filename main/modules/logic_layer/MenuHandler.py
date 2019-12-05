@@ -1,8 +1,8 @@
 import sys
 sys.path.insert(1, '../') #to be able to get to sibling directory
 
-from ui_layer.InputHandler import InputHandler
 from logic_layer.LLAPI import LLAPI
+from ui_layer.InputHandler import InputHandler
 from ui_layer.DisplayMenu import DisplayMenu
 
 class MenuHandler:
@@ -83,30 +83,27 @@ class MenuHandler:
         }
 
 
-    def printMenu(self,menu):
+    def displayMenu(self,menu):
         """printMenu(menu), menus are: main, create, get, update"""
         #check
         if menu in self.menuLayout:
             #find the correct menu from menuLayout and loop through the options
             self.currentMenu = self.menuLayout[menu]
-            for count, item in enumerate(self.currentMenu,1):
-                menuTitle = self.menuOptions[item]["title"]
-                print("{}) {}".format(count, menuTitle))
-
-            #get the selected option and function
+            #print the current menu
+            DisplayMenu().printMenu(self.menuOptions,self.currentMenu)
+            #get the choice via InputHandler
             choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
+
             chosenOption = self.menuOptions[self.currentMenu[choice_int]]
             chosenFunction = chosenOption["function"]
-            print(chosenOption["title"]) #just a test to show it found the option
             #then run the method connected to the chosen option
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
-                print()
-                DisplayMenu().printMenu(chosenFunction)
+                MenuHandler().displayMenu(chosenFunction)
             else:
                 #runs the desired function
                 chosenFunction()
 
         
 
-DisplayMenu().printMenu("main")
+MenuHandler().displayMenu("main")
