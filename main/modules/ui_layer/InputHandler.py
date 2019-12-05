@@ -5,7 +5,7 @@ class InputHandler:
         self.exitKey = "q"
 
     def __str__(self):
-        return "Handles user input, returns the value to caller as strings. \nmethods: numChoices"
+        return "Handles user input, returns the value to caller \nmethods: numChoices"
     #---------------------- 
     # Handles numbered input, for selecting from listed options
     #---------------------- 

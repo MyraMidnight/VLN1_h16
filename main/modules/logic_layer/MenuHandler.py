@@ -3,9 +3,10 @@ sys.path.insert(1, '../') #to be able to get to sibling directory
 
 from ui_layer.InputHandler import InputHandler
 from logic_layer.LLAPI import LLAPI
+from ui_layer.DisplayMenu import DisplayMenu
 
-class DisplayMenu:
-    """Displays the menu"""
+class MenuHandler:
+    """Handles the menu (input and printing right menus)"""
     def __init__(self):
         #dictionary for menu
         self.currentMenu = {}
@@ -106,4 +107,6 @@ class DisplayMenu:
                 #runs the desired function
                 chosenFunction()
 
-    
+        
+
+DisplayMenu().printMenu("main")
