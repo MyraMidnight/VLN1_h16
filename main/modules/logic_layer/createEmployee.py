@@ -85,4 +85,12 @@ def createEmployee():
         elif rank_str == "2":
             rank_str = RANK_FA
 
-    return ssn_str, name_str, role_str, rank_str, license_str, email_str
+    a_dict[ssn] = ssn_str
+    a_dict[name] = name_str
+    a_dict[role] = role_str
+    a_dict[rank] = rank_str
+    a_dict[phonenumber] = mobilePhone_str
+    a_dict[license] = license_str
+    a_dict[email] = email_str
+
+    return a_dict
