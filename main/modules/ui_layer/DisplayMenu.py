@@ -1,25 +1,27 @@
 import sys
 sys.path.insert(1, '../') #to be able to get to sibling directory
 
+from ui_layer.InputHandler import InputHandler
 from logic_layer.LLAPI import LLAPI
 
 class DisplayMenu:
     """Handles the menu (input and printing right menus)"""
     def __init__(self):
         #dictionary for menu
+        self.currentMenu = {}
         self.menuOptions = { 
             #---------- Create --------------
             "1": {
                 "title": "Create new data",
-                "function": None 
+                "function": "create" 
             },
             "1.1" : {
                 "title": "Employee",
-                "function": "" # LLAPI().createEmployee
+                "function": "create" # LLAPI().createEmployee
             },
             "1.2" : {
                 "title": "Voyage",
-                "function": "" # LLAPI().createVoyage
+                "function": "create" # LLAPI().createVoyage
             },
             "1.3" : {
                 "title": "Destinations",
@@ -27,49 +29,49 @@ class DisplayMenu:
             },
             "1.4" : {
                 "title": "Aircrafts",  
-                "function": ""
+                "function": "create"
             },
             #---------- Get --------------
             "2" : {
                 "title": "Get data",
-                "function": ""
+                "function": "get"
             },
             "2.1" : {
                 "title": "Crew",
-                "function": ""
+                "function": "get"
             },
             "2.2" : {
                 "title": "Voyages",
-                "function": ""
+                "function": "get"
             },
             "2.3" : {
                 "title": "Destinations",
-                "function": ""
+                "function": "get"
             },
             "2.4" : {
                 "title": "Aircrafts",
-                "function": ""
+                "function": "get"
             },
             "2.4" : {
                 "title": "Schedule",
-                "function": ""
+                "function": "get"
             },
             #---------- Update --------------
             "3" : {
                 "title": "Update data",
-                "function": ""
+                "function": "update"
             },
             "3.1" : {
                 "title": "Crew",
-                "function": ""
+                "function": "update"
             },
             "3.2" : {
                 "title": "Voyages",
-                "function": ""
+                "function": "update"
             },
             "3.3" : {
                 "title": "Destinations",
-                "function": ""
+                "function": "update"
             }
         }
         self.menuLayout = {
@@ -86,14 +88,25 @@ class DisplayMenu:
         if menu in self.menuLayout:
             #find the correct menu from menuLayout and loop through the options
 
-            currentMenu = self.menuLayout[menu]
-            for count, item in enumerate(currentMenu,1):
-                print("{}) {}".format(count, self.menuOptions[item]["title"]))
-            choice = input("What do you want to do? ").strip()
+            self.currentMenu = self.menuLayout[menu]
+            for count, item in enumerate(self.currentMenu,1):
+                menuTitle = self.menuOptions[item]["title"]
+                print("{}) {}".format(count, menuTitle))
+            #use InputHandler to get the numbered input
+            choice = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
             #compares choice to the last digit in the options
-            if choice in [item[-1:] for item in currentMenu]:
+            if choice in [item[-1:] for item in self.currentMenu]:
                 #finds the chosen option in the menuOptions
-                chosenOption = self.menuOptions[currentMenu[int(choice)-1]]
+                chosenOption = self.menuOptions[self.currentMenu[int(choice)-1]]
+                chosenFunction = chosenOption["function"]
                 print(chosenOption["title"]) #just a test to show it found the option
                 #then run the method connected to the chosen option
-                chosenOption["function"]()
+                if isinstance(chosenFunction, str) == True:
+                    #prints the desired menu
+                    print()
+                    DisplayMenu().printMenu(chosenFunction)
+                else:
+                    #runs the desired function
+                    chosenFunction()
+
+DisplayMenu().printMenu("main")
