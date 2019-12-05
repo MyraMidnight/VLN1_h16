@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1, '../') #to be able to get to siblingn directory
+sys.path.insert(1, '../') #to be able to get to sibling directory
 
 from logic_layer.LLAPI import LLAPI
 
@@ -11,15 +11,15 @@ class DisplayMenu:
             #---------- Create --------------
             "1": {
                 "title": "Create new data",
-                "function": ""
+                "function": None 
             },
             "1.1" : {
-                "title": "Crew",
-                "function": ""
+                "title": "Employee",
+                "function": "" # LLAPI().createEmployee
             },
             "1.2" : {
-                "title": "Voyages",
-                "function": ""
+                "title": "Voyage",
+                "function": "" # LLAPI().createVoyage
             },
             "1.3" : {
                 "title": "Destinations",
@@ -27,7 +27,7 @@ class DisplayMenu:
             },
             "1.4" : {
                 "title": "Aircrafts",
-                "function": ""
+                "function": "" # LLAPI().createAircraft
             },
             #---------- Get --------------
             "2" : {

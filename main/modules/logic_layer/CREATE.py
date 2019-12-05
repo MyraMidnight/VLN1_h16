@@ -3,4 +3,3 @@ class CreateLogic :
 
     def createDestination(self):
         """create destination"""
-        print("hello")
