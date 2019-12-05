@@ -21,12 +21,15 @@ class GetLogic :
             #checks the SSN of the employee
             if x['ssn'] == ssn_of_employee_str:
                 #contruct a string from the dict to return
-                returnString_str = 'SSN:' + str(x['ssn']) + "\n" + "Name:" + str(x['name']) + "\n" + "Role:" + str(x['role']) + "\n" + "rank:" + str(x['name'])
+                returnString_str = 'SSN:' + str(x['ssn']) + "\n" + "Name:" + str(x['name']) + "\n" + "Role:" + str(x['role']) + "\n" + "rank:" + str(x['rank'])
                 #if the employee is a pilot then they will have a licence but otherwise not
                 if x['licence'] != "N/A":
                     returnString_str += "\n" + "licence:" + str(x["licence"])
                 #add the rest of the info
                 returnString_str += "\n" + "address:" + str(x["address"]) + "\n" + "phonenumber:" + str(x["phonenumber"])
                 return returnString_str
+    
+    def getPilots(self):
+
 
 print(GetLogic().getSingleEmployee())
