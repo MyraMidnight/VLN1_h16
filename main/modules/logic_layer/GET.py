@@ -8,6 +8,11 @@ class GetLogic :
 
     def getSingleEmployee(self):
         filePackage = IOAPI().opener('Crew.csv')
-        print(filePackage[0])
+        ssn_of_employee = input('SSN: ')
+        for x in filePackage:
+            if x['ssn'] == ssn_of_employee:
+                print(x)
+                break
 
 GetLogic().getSingleEmployee()
+print('test')
