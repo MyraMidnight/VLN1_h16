@@ -1,4 +1,7 @@
 class InputHandler:
+  def __str__(self):
+    return "Handles user input, returns the value to caller. \nmethods: numChoices"
+
   #---------------------- Handles numbered input, for selecting from listed options
   def numChoices(self, numOfChoices: int, inputQuestion : str = "Pick a number: ", exitKey: str = "q" ):
     """Function that handles getting number input from set range, 
