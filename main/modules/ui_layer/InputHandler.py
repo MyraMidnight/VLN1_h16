@@ -1,6 +1,6 @@
 class InputHandler:
-  
-  def inputNumChoices(self, numOfChoices: int, inputQuestion : str = "Pick a number: ", exitKey: str = "q" ):
+  #---------------------- Handles numbered input, for selecting from listed options
+  def numChoices(self, numOfChoices: int, inputQuestion : str = "Pick a number: ", exitKey: str = "q" ):
     """Function that handles getting number input from set range, 
     Returns the input choice-1 (so it can be used as list index if needed)\n
     Required: numer for how many choices are available \n
@@ -23,6 +23,4 @@ class InputHandler:
       else:
         print("Input needs to be a number in range 1-{}: ".format(numOfChoices))
         #repeats the loop with previous parameters
-        self.inputNumChoices(numOfChoices,inputQuestion,exitKey)
-
-InputHandler().inputNumChoices(4)
+        self.numChoices(numOfChoices,inputQuestion,exitKey)
