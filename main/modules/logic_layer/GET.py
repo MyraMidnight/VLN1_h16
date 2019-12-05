@@ -21,15 +21,66 @@ class GetLogic :
             #checks the SSN of the employee
             if x['ssn'] == ssn_of_employee_str:
                 #contruct a string from the dict to return
-                returnString_str = 'SSN:' + str(x['ssn']) + "\n" + "Name:" + str(x['name']) + "\n" + "Role:" + str(x['role']) + "\n" + "rank:" + str(x['rank'])
+                returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank']
                 #if the employee is a pilot then they will have a licence but otherwise not
                 if x['licence'] != "N/A":
-                    returnString_str += "\n" + "licence:" + str(x["licence"])
+                    returnString_str += "\n" + "licence:" + x["licence"]
                 #add the rest of the info
-                returnString_str += "\n" + "address:" + str(x["address"]) + "\n" + "phonenumber:" + str(x["phonenumber"])
+                returnString_str += "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
                 return returnString_str
     
     def getPilots(self):
+        #fetches employee info
+        filePackage = IOAPI().opener('Crew.csv')
+        print("filepackage: ",filePackage)
+        #goes through all the lines in the employee info
+        for x in filePackage:
+            #checks the SSN of the employee
+            if x['role'] == "Pilot":
+                #contruct a string from the dict to return
+                returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank'] + "\n" + "licence:" + x["licence"] + "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
+                print(returnString_str)
+                print("---------")
+    
+    def getFlightAttendants(self):
+        #fetches employee info
+        filePackage = IOAPI().opener('Crew.csv')
+        #goes through all the lines in the employee info
+        for x in filePackage:
+            #checks the SSN of the employee
+            if x['role'] == "Cabincrew":
+                #contruct a string from the dict to return
+                returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank'] + "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
+                print(returnString_str)
+                print("---------")
+    
+    def getAllCrew(self):
+        GetLogic().getPilots()
+        GetLogic().getFlightAttendants()
 
+    def getPlanes(self):
+        #fetches aircraft info
+        filePackage = IOAPI().opener('Aircraft.csv')
+        #goes through all the lines in the employee info
+        for x in filePackage:
+            #checks the SSN of the employee
+            returnString_str = 'planeInsignia:' + x['planeInsignia'] + "\n" + "planeTypeId:" + x["planeTypeId"]
+            print(returnString_str)
+            print("----------")
+    
+    def getDestinations(self):
+        #fetches destination info
+        filePackage = IOAPI().opener('Destinations.csv')
+        #goes through all the lines in the employee info
+        for x in filePackage:
+            #checks the SSN of the employee
+            returnString_str = 'id:' + x['id'] + "\n" + "destination:" + x["destination"]
+            print(returnString_str)
+            print("----------")
 
-print(GetLogic().getSingleEmployee())
+#print(GetLogic().getSingleEmployee())
+#GetLogic().getPilots()
+#GetLogic().getFlightAttendants()
+#GetLogic().getAllCrew()
+#GetLogic().getPlanes()
+GetLogic().getDestinations()
