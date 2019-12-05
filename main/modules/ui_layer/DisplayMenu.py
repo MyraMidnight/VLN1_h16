@@ -1,6 +1,6 @@
 class DisplayMenu:
     """Displays the menu"""
-
+    
     def printHeader(self,menuHeader):
         """Prints the header"""
         print(menuHeader)
