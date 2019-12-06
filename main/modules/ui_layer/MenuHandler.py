@@ -1,7 +1,5 @@
-import sys
-sys.path.insert(1, '../../') #to be able to get to sibling directory
 
-from LLAPI import LLAPI
+from modules.logic_layer.LLAPI import LLAPI
 from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayMenu import DisplayMenu
 
@@ -105,6 +103,16 @@ class MenuHandler:
             
         }
 
+    def printHeader(self,menuHeader):
+        """Prints the header"""
+        print(menuHeader)
+
+    def printMenu(self,menuOptions,currentMenu):
+        """Takes in current menu as"""
+        for count, item in enumerate(currentMenu,1):
+            menuTitle = menuOptions[item]["title"]
+            print("{}) {}".format(count, menuTitle))
+
     def displayMenu(self,menu:str = "main"):
         """printMenu(menu), menus are: main, create, get, update"""
         #if the menu
@@ -117,8 +125,8 @@ class MenuHandler:
             else: 
                 menuTitle = self.menuOptions[self.currentMenu[0][:1]]["title"]
             #print the header and menu
-            DisplayMenu().printHeader(menuTitle)
-            DisplayMenu().printMenu(self.menuOptions,self.currentMenu)
+            self.printHeader(menuTitle)
+            self.printMenu(self.menuOptions,self.currentMenu)
 
             #prompt user to input the number of chosen option
             choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
