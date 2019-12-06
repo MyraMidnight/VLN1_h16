@@ -6,33 +6,36 @@ class IOAPI:
     #opens all files in STUDENTDATA
     def opener(self,askedFile):
         #moves presence over to STUDENTDATA file
+        '''
         currentFile = os.getcwd().split("\\")
         if currentFile[-1] != "STUDENTDATA":
             os.chdir('data/STUDENTDATA')
-        filePackage = []
         #goes through every filename in current directory(now STUDENTDATA)
         for filename in os.listdir(os.getcwd()):
             #opens every file in read mode
             if filename == askedFile:
-                with open(filename,'r', encoding="utf-8") as file:
+        '''
+        filePackage = []
+        filename = 'data/STUDENTDATA/' + askedFile 
+        with open(filename,'r', encoding="utf-8") as file:
                     #uses csv.dictreader which is an inbuilt function that reads every line and converts them into OrderedDicts
                     #the function gets its keys from the first line of the file, an ordered dict is a tuple containing a list
                     #of tuples, those tuples being the key:value items
-                    reader = csv.DictReader(file)
+            reader = csv.DictReader(file)
                     #collects everything together
-                    for row in reader:
+            for row in reader:
                         #change all the ordereddicts into normal dicts as tuples are immutable and we need to be able to edit them
-                        temp_dict = dict(row)
-                        filePackage.append(temp_dict)
+                temp_dict = dict(row)
+                filePackage.append(temp_dict)
                     #adds the current files list of dicts into the filePackage as a value of the key of its filename
-                    file.close() 
+            file.close() 
                     #code example you can run to better understand the structure of filePackage
-                    '''
-                    for x in filePackage:
-                        print(x)
-                        print('-----')
-                    '''
-                    return filePackage
+            '''
+            for x in filePackage:
+                print(x)
+                print('-----')
+            '''
+            return filePackage
     
 
     #any edited filePackage will be sent here, whether it was updated or appended to
