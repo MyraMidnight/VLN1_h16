@@ -9,7 +9,7 @@ ROLE_LEAD_ATTENDANT = "headFlightAttendant"
 MODEL_PLANE = "" #instance of plane
 MODEL_EMPLOYEE = "" #instance of employee
 
-data = IOAPI().opener("NewUpcomingFlights.csv")
+data = IOAPI().opener("Crew.csv")
 # for line in data:
 #   print(line)
-DisplayScreen().printList(data, 5, 15)
+DisplayScreen().printListFormat(data,rowLimit=3)
