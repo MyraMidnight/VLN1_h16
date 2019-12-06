@@ -2,7 +2,7 @@ from modules.data_layer.IOAPI import IOAPI
 class GetLogic :
     """Get methods for logic layer"""
 
-    def getSingleEmployee(self,filePackage):
+    def getSingleEmployee(self):
         #fetches employee info
         filePackage = IOAPI().opener('Crew.csv')
         #asks for the SSN of the employee
