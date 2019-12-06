@@ -6,7 +6,9 @@ class IOAPI:
     #opens all files in STUDENTDATA
     def opener(self,askedFile):
         #moves presence over to STUDENTDATA file
-        os.chdir('main/data/STUDENTDATA')
+        currentFile = os.getcwd().split("\\")
+        if currentFile[-1] != "STUDENTDATA":
+            os.chdir('data/STUDENTDATA')
         filePackage = []
         #goes through every filename in current directory(now STUDENTDATA)
         for filename in os.listdir(os.getcwd()):

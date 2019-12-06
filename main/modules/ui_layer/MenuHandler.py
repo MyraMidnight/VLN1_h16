@@ -1,14 +1,11 @@
-import sys
-sys.path.insert(1, '../') #to be able to get to sibling directory
 
-from logic_layer.LLAPI import LLAPI
-from ui_layer.InputHandler import InputHandler
-from ui_layer.DisplayMenu import DisplayMenu
+from modules.logic_layer.LLAPI import LLAPI
+from modules.ui_layer.InputHandler import InputHandler
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
     def __init__(self):
-        self.currentLocation = "0"
+        self.currentLocation = "main"
         self.currentMenu = {}
         self.menuOptions = { 
             #---------- Create --------------
@@ -43,7 +40,7 @@ class MenuHandler:
             },
             "2.1" : {
                 "title": "Crew",
-                "function": "main"
+                "function": "getcrew"
             },
             "2.2" : {
                 "title": "Voyages",
@@ -51,15 +48,32 @@ class MenuHandler:
             },
             "2.3" : {
                 "title": "Destinations",
-                "function": "main"
+                "function": LLAPI().getDestinations
             },
             "2.4" : {
                 "title": "Aircrafts",
-                "function": "main"
+                "function": LLAPI().getPlanes
             },
-            "2.4" : {
+            "2.5" : {
                 "title": "Schedule",
                 "function": "main"
+            },
+            #---------- Get submenu ---------
+            "2.1.1" : {
+                "title": "Employee",
+                "function": LLAPI().getSingleEmployee
+            },
+            "2.1.2" : {
+                "title": "Crew (all employees)",
+                "function": LLAPI().getAllCrew
+            },
+            "2.1.3" : {
+                "title": "Pilots",
+                "function": LLAPI().getPilots
+            },
+            "2.1.4" : {
+                "title": "Flight Attendants",
+                "function": LLAPI().getFlightAttendants
             },
             #---------- Update --------------
             "3" : {
@@ -68,7 +82,7 @@ class MenuHandler:
             },
             "3.1" : {
                 "title": "Crew",
-                "function": "main"
+                "function": "getcrew"
             },
             "3.2" : {
                 "title": "Voyages",
@@ -82,9 +96,21 @@ class MenuHandler:
         self.menuLayout = {
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
-            "get": ["2.1", "2.2", "2.3", "2.4"],
-            "update": ["3.1", "3.2", "3.3"]
+            "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
+            "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
+            "update": ["3.1", "3.2", "3.3"],
+            
         }
+
+    def printHeader(self,menuHeader):
+        """Prints the header"""
+        print(menuHeader)
+
+    def printMenu(self,menuOptions,currentMenu):
+        """Takes in current menu as"""
+        for count, item in enumerate(currentMenu,1):
+            menuTitle = menuOptions[item]["title"]
+            print("{}) {}".format(count, menuTitle))
 
     def displayMenu(self,menu:str = "main"):
         """printMenu(menu), menus are: main, create, get, update"""
@@ -98,8 +124,8 @@ class MenuHandler:
             else: 
                 menuTitle = self.menuOptions[self.currentMenu[0][:1]]["title"]
             #print the header and menu
-            DisplayMenu().printHeader(menuTitle)
-            DisplayMenu().printMenu(self.menuOptions,self.currentMenu)
+            self.printHeader(menuTitle)
+            self.printMenu(self.menuOptions,self.currentMenu)
 
             #prompt user to input the number of chosen option
             choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
@@ -109,7 +135,9 @@ class MenuHandler:
             chosenFunction = chosenOption["function"]
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
-                MenuHandler().displayMenu(chosenFunction)
+                self.currentLocation = chosenFunction
+                self.displayMenu(chosenFunction)
             else:
                 #runs the desired function
                 chosenFunction()
+                self.displayMenu(self.currentLocation)

@@ -89,6 +89,9 @@ class InputHandler:
     def names(self):
         """Input for names"""
 
+    def flightID(self):
+        """Input for flight ID, just checks if it's a valid format"""
+
 #InputHandler().numSetLength(7)
 #InputHandler().numChoices(4)
 #InputHandler().textSetLength(5)

@@ -1,8 +1,6 @@
 # Here we will create the main program
-import sys
-sys.path.insert(1, 'modules/') #all imports are found in modules/
 # ------------------------  Import classes  ------------------ 
-from logic_layer.MenuHandler import MenuHandler
+from modules.ui_layer.MenuHandler import MenuHandler
 # ------------------------  Global variables  ---------------- 
 ROLE_PILOT = "pilot"
 ROLE_CAPTAIN = "captain"
