@@ -1,7 +1,6 @@
 
 from modules.logic_layer.LLAPI import LLAPI
 from modules.ui_layer.InputHandler import InputHandler
-from modules.ui_layer.DisplayMenu import DisplayMenu
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
