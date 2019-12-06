@@ -3,8 +3,9 @@ sys.path.insert(1, '../') #to be able to get to siblingn directory
 
 from logic_layer.LLAPI import LLAPI
 
-class DisplayMenu:
+class DisplayMenu():
     """Handles the menu (input and printing right menus)"""
+
     def __init__(self):
         #dictionary for menu
         self.menuOptions = { 
@@ -15,6 +16,10 @@ class DisplayMenu:
             },
             "1.1" : {
                 "title": "Crew",
+                "function": ""
+            },
+            "1.1.1" : {
+                "title": "",
                 "function": ""
             },
             "1.2" : {
@@ -80,6 +85,8 @@ class DisplayMenu:
         }
 
 
+
+
     def printMenu(self,menu):
         """printMenu(menu), menus are: main, create, get, update"""
         #if the specified menu exists
@@ -98,4 +105,5 @@ class DisplayMenu:
                 #then run the method connected to the chosen option
                 chosenOption["function"]()
 
-DisplayMenu().printMenu("create")
+
+DisplayMenu().printMenu("main")
