@@ -64,11 +64,7 @@ class GetLogic :
             returnString_str = 'planeInsignia:' + x['planeInsignia'] + "\n" + "planeTypeId:" + x["planeTypeId"]
             print(returnString_str)
             print("----------")
-<<<<<<< HEAD
-=======
-
->>>>>>> master
-    
+            
     def getDestinations(self):
         #fetches destination info
         filePackage = IOAPI().opener('Destinations.csv')
