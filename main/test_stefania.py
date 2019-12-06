@@ -12,4 +12,4 @@ MODEL_EMPLOYEE = "" #instance of employee
 data = IOAPI().opener("Crew.csv")
 # for line in data:
 #   print(line)
-DisplayScreen().printList(data, "cabincrew")
+DisplayScreen().printList(data)
