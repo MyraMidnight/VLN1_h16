@@ -3,7 +3,9 @@ Currently the incomplete methods in the `InputHandler` class will return dummy d
 
 This only handles basic varification and returns the value when it meets the requirements, then the caller needs to handle further varification if it needs to be compared to existing data (such as employee exists)
 
-### Methods
+### Methods (ready)
+Some of the unfinished methods will just return dummy data so the caller can actually work with something.
+
 * `numOptions()` : menu/list index from input
 * `numSetLength()` : string of numbers of set length
 * `ssn()` : social security num
