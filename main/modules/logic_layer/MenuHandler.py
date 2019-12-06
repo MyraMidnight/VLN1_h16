@@ -8,7 +8,7 @@ from modules.ui_layer.DisplayMenu import DisplayMenu
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
     def __init__(self):
-        self.currentLocation = "0"
+        self.currentLocation = "main"
         self.currentMenu = {}
         self.menuOptions = { 
             #---------- Create --------------
@@ -109,7 +109,9 @@ class MenuHandler:
             chosenFunction = chosenOption["function"]
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
+                self.currentLocation = chosenFunction
                 MenuHandler().displayMenu(chosenFunction)
             else:
                 #runs the desired function
                 chosenFunction()
+                MenuHandler().displayMenu(self.currentLocation)
