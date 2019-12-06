@@ -8,7 +8,7 @@ class IOAPI:
         #moves presence over to STUDENTDATA file
         currentFile = os.getcwd().split("\\")
         if currentFile[-1] != "STUDENTDATA":
-            os.chdir('main/data/STUDENTDATA')
+            os.chdir('data/STUDENTDATA')
         filePackage = []
         #goes through every filename in current directory(now STUDENTDATA)
         for filename in os.listdir(os.getcwd()):
