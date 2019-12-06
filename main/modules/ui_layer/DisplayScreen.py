@@ -3,6 +3,7 @@ class DisplayScreen:
     def __init__(self):
         self.stringLimits = { #string length limit
             "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
+            "flights": {'flightNumber': 10}
         }
 
     def cutString(self, string, limit:int = 10):
@@ -13,28 +14,33 @@ class DisplayScreen:
             newString = cutString[:-3] + "..." #replace last 3 letters with dots to indicate it was cut short
             return newString
         else: 
+            #fill in the empty space
             newString = string.ljust(limit)
             return newString
-  
-# {'ssn': '1103647756', 'name': 'Wilma Horne', 'role': 'Cabincrew', 'rank': 'Flight Attendant', 'licence': 'N/A', 'address': 'Fellsmúli 25', 'phonenumber': '8998825'}
-# {'ssn': '2807755841', 'name': 'Bernard Carr', 'role': 'Cabincrew', 'rank': 'Flight Attendant', 'licence': 'N/A', 'address': 'Fellsmúli 26', 'phonenumber': '8998826'}
-    def printList(self, data:list, colLimit:int = 10):
+    
+
+
+    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10):
         #create the header row (print the keys)
         headerKeys = []
         print()
         for column in data[0]:
-            headerKeys.append(self.cutString(column,colLimit))
+            headerKeys.append(self.cutString(column,colWidth))
         headerRow = " | ".join(headerKeys)
         print(headerRow)
         print("-"*len(headerRow))
         #loop through each line of data
-        for line in data:
+
+        if rowLimit == 0:
+            rowLimit = len(data)
+
+        for line in data[:rowLimit]:
             row = []
             #prints the columns specified in the 'formats' dict
             for column in line:
                 #if value is longer than set limit width, then cut 
                 colValue = line[column]
-                row.append(self.cutString(colValue,colLimit))
+                row.append(self.cutString(colValue,colWidth))
             #joins the columns together with '|' seperator
             print(" | ".join(row)) 
 
