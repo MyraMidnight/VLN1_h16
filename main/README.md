@@ -1,12 +1,12 @@
 * [Leiðarvísar fyrir methods/classes](../info/manuals/man_main.md)
 ## Helstu Vinnureglur
-Forritið sjálft verður í `/main` möppunni, `/modules` heldur utanum klasana sem við ætlum að gera og prufu gögnin eru í `/main/data` (ekki breyta neinu í `STUDENTDATA`). __Stefanía sér alfarið um master__.
+Forritið sjálft verður í `/main` möppunni, `/modules` heldur utanum klasana sem við ætlum að gera og prufugögnin eru í `/main/data` (ekki breyta neinu í `STUDENTDATA`). __Stefanía sér alfarið um master__.
 
-Við munum vera nota TRELLO til að fylgjast með hvað er verið að vinna í og hvað er búið. Hver meðlimur mun merkja trello kortin sjálfum sér til að láta aðra vita hvað þau eru að vinna í að hverju sinni.
+Við munum nota TRELLO til að fylgjast með hvað er verið að vinna í og hvað er búið. Hver meðlimur mun merkja trello kortin sjálfum sér til að láta aðra vita hvað þau eru að vinna í að hverju sinni.
 
-1. `master branch` á að vera nýjasta útgáfan af heildar forritinu. Reynum að halda henni stöðugri (vera viss um að allt sé í lagi áður en merge við master).
+1. `master branch` á að vera nýjasta útgáfan af heildarforritinu. Reynum að halda henni stöðugri (vera viss um að allt sé í lagi áður en merge við master).
 1. __Vinnið á eigin branch__ en ekki beint á master
-1. Þegar þið teljið ykkar kóða vera tilbúinn til að vera sameinaður við master, þá láta Stefaníu vita og hún sér um það.
+1. Þegar þið teljið ykkar kóða vera tilbúinn til að vera sameinaður við master, þá láta Stefaníu vita og hún sér um að mergea.
 1. [Skoðið hérna hvenær þið gerðuð síðast `push` (og hvort það tókst)](https://github.com/MyraMidnight/VLN1_h16/branches), það sýnir líka hvort þið eruð á undan eða eftir _master branch_ til að vita hvort sé ekki tímabært að uppfæra ykkar branch eða merge.
 1. Farið varlega í að uppfæra ykkar branch, þ.e. vera viss um að sé búið að gera `git push` til að geta náð í gögnin aftur ef eitthvað klikkar locally.
 1. `git status` er besti vinur þinn til að meta stöðuna á git og minna þig á hvaða branch þú ert í og hvort síðasta `git commit` hafi virkað. 
@@ -16,13 +16,13 @@ Við munum vera nota TRELLO til að fylgjast með hvað er verið að vinna í o
 ## Ýmsar upplýsingar um GIT fyrir verkefnið
 >COMMENT YOUR CODE! Af því að við túlkum allt mismunandi (aldrei ættlast til þess að eitthvað sé _augljóst_, notði það til að útskýra hvað kóðinn er að gera á köflum en ekki línu fyrir línu)
 >
->Þessi skilaboð koma í veg fyrir rugling og vesen þegar forrið verður stærra, flýtir fyrir ef þörf er á að sameina kóða og hjálpar alveg rosalega ef það verður t.d. _merge conflict_.
+>Þessi skilaboð koma í veg fyrir rugling og vesen þegar forritið verður stærra, flýtir fyrir ef þörf er á að sameina kóða og hjálpar alveg rosalega ef það verður t.d. _merge conflict_.
 
 
 ### Vinnið á réttum _branch_
 Í forritunarhlutanum þurfum við að vera með á hreinu hverjir eru að vinna í hvaða klösum/kóða, til þess að koma í veg fyrir að fólk sé að vinna í sömu skránum. 
 
-Til að koma í veg fyrir __merge conflicts__ þá ættu allir að vinna í mismunandi pörtum forritsins að hverju sinni (conflicts gerast ef fleirri en einn hefur breytt sömu skrá, þá eru tvær útgáfur og git þarf hjálp í að leysa það)
+Til að koma í veg fyrir __merge conflicts__ þá ættu allir að vinna í mismunandi pörtum forritsins að hverju sinni (conflicts gerast ef fleiri en einn hefur breytt sömu skrá, þá eru tvær útgáfur og git þarf hjálp við að leysa það)
 
 * `git branch` birtir lista af öllum local branches og segjir þér hvar þú ert.
 * `git branch <new_branch_name>` býr til nýjan branch án þess að færa þig
@@ -99,5 +99,5 @@ Ef þið lendið í flækju og viljið bara hætta við þessa uppfærslu, einfa
 ### Leysa flækjur
 Ef þið treystið ykkur í að leysa _merge conflicts_, þá endilega gerið það, annars getið þið bara beðið Stefaníu að kíkja á þetta.
 
-1. Git segjir ykkur hvar flækjurnar eru, og sumir editors eins og t.d. Visual Studio Code þá er meðhöndlun á þessum fllækjum frekar einfalt. Það sýnir þér hver þín útgáfa er, útgáfan sem þú ert að ná í og spyr þig hvort þeirra þú vilt halda (eða hvort þú viljir halda báðum)
+1. Git segjir ykkur hvar flækjurnar eru, og sumir editors eins og t.d. Visual Studio Code þá er meðhöndlun á þessum fllækjum frekar einföld. Það sýnir þér hver þín útgáfa er, útgáfan sem þú ert að ná í og spyr þig hvort þeirra þú vilt halda (eða hvort þú viljir halda báðum)
 1. Þegar flækjan hefur verið leyst, þá gerið þið `commit`, en farið varlega í `push` þar til þið eruð alveg viss um að þið leystuð þessa flækju án þess að það valdi villum í kóðanum.
