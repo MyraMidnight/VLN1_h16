@@ -1,5 +1,5 @@
 
-# MenuHandler in Logic Layer
+# MenuHandler in UI Layer
 
 ## Printing a menu (`displayMenu` method)
 * The `displayMenu` handles both printing the desired menu, as well as prompting the user for input to select available options.
