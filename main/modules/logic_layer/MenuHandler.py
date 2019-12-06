@@ -51,7 +51,7 @@ class MenuHandler:
             },
             "2.3" : {
                 "title": "Destinations",
-                "function": "main"
+                "function": LLAPI().getDestinations
             },
             "2.4" : {
                 "title": "Aircrafts",
