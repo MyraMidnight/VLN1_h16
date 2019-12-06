@@ -1,2 +1,0 @@
-class UIapi :
-    """UI api"""

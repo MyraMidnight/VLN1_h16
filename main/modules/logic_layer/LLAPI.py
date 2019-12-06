@@ -1,9 +1,9 @@
 #
 #----- import the inner classes / methods
 # from data_layer.IOAPI import IOAPI
-from modules.logic_layer.CREATE import CreateLogic
-from modules.logic_layer.GET import GetLogic
-# from logic_layer.UPDATE import UpdateLogic
+from modules.logic_layer.CreateLogic import CreateLogic
+from modules.logic_layer.GetLogic import GetLogic
+from modules.logic_layer.UpdateLogic import UpdateLogic
 
 class LLAPI : 
     """Logic layer API handler"""
