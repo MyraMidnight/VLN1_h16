@@ -43,7 +43,7 @@ class MenuHandler:
             },
             "2.1" : {
                 "title": "Crew",
-                "function": "crew"
+                "function": "getcrew"
             },
             "2.2" : {
                 "title": "Voyages",
@@ -61,6 +61,23 @@ class MenuHandler:
                 "title": "Schedule",
                 "function": "main"
             },
+            #---------- Get submenu ---------
+            "2.1.1" : {
+                "title": "Employee",
+                "function": LLAPI().getSingleEmployee
+            },
+            "2.1.2" : {
+                "title": "Crew (all employees)",
+                "function": LLAPI().getAllCrew
+            },
+            "2.1.3" : {
+                "title": "Pilots",
+                "function": LLAPI().getPilots
+            },
+            "2.1.4" : {
+                "title": "Flight Attendants",
+                "function": LLAPI().getFlightAttendants
+            },
             #---------- Update --------------
             "3" : {
                 "title": "Update data",
@@ -68,7 +85,7 @@ class MenuHandler:
             },
             "3.1" : {
                 "title": "Crew",
-                "function": "main"
+                "function": "getcrew"
             },
             "3.2" : {
                 "title": "Voyages",
@@ -83,7 +100,9 @@ class MenuHandler:
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
-            "update": ["3.1", "3.2", "3.3"]
+            "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
+            "update": ["3.1", "3.2", "3.3"],
+            
         }
 
     def displayMenu(self,menu:str = "main"):
