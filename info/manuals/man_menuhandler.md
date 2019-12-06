@@ -16,6 +16,11 @@ MenuHandler().displayMenu()
 # prints specified menues
 MenuHandler().displayMenu("main")
 ```
+> ### Where to add the menus?
+> When the program is returning back to the menu after performing something, such as creating/updating/getting data.
+>
+> For example, if we would run 'createEmployee', then when it finishes running and gets ready to return, then it would print the specific menu that should appear at that point, in this case "create" submenu would be printed.
+
 
 ## The `self.menuOptions` 
 Any option that the user should be able to access through the menu need to be in the `menuOptions` dictionary before it can be displayed.

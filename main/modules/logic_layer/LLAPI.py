@@ -1,11 +1,12 @@
+#
 import sys
-sys.path.insert(1, '../') #to be able to get to sibling directory
+sys.path.insert(1, '../') 
 
-from data_layer.IOAPI import IOAPI
 #----- import the inner classes / methods
+from data_layer.IOAPI import IOAPI
 from logic_layer.CREATE import CreateLogic
-# from logic_layer.GET import GetLogic
-# from logic_layer.UPDATE import UpdateLogic
+from logic_layer.GET import GetLogic
+from logic_layer.UPDATE import UpdateLogic
 
 class LLAPI : 
     """Logic layer API handler"""

@@ -113,7 +113,3 @@ class MenuHandler:
             else:
                 #runs the desired function
                 chosenFunction()
-
-        
-
-MenuHandler().displayMenu()
