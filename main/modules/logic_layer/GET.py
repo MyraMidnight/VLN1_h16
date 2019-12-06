@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 from modules.data_layer.IOAPI import IOAPI
-=======
-import sys, os
-#sys.path.append(os.path.abspath(os.path.join('..','VLN1_H16/main/modules/data_layer')))
-#if visual studio underlines the from with red then just ignore it, it works anyways for me at least
-from modules.data_layer.IOAPI import IOAPI
-
->>>>>>> master
 class GetLogic :
     """Get methods for logic layer"""
 
