@@ -1,9 +1,9 @@
 import sys
-sys.path.insert(1, '../') #to be able to get to sibling directory
+sys.path.insert(1, '../../') #to be able to get to sibling directory
 
-from logic_layer.LLAPI import LLAPI
-from ui_layer.InputHandler import InputHandler
-from ui_layer.DisplayMenu import DisplayMenu
+from LLAPI import LLAPI
+from modules.ui_layer.InputHandler import InputHandler
+from modules.ui_layer.DisplayMenu import DisplayMenu
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
