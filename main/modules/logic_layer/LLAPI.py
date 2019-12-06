@@ -1,8 +1,12 @@
+#
+import sys
+sys.path.insert(1, '../') 
 
 #----- import the inner classes / methods
-from CREATE import CreateLogic
-# from GET import GetLogic
-# from UPDATE import UpdateLogic
+# from data_layer.IOAPI import IOAPI
+from logic_layer.CREATE import CreateLogic
+# from logic_layer.GET import GetLogic
+# from logic_layer.UPDATE import UpdateLogic
 
 class LLAPI : 
     """Logic layer API handler"""
@@ -11,7 +15,7 @@ class LLAPI :
 
     #------- CREATE
     def createDestination(self): 
-        return (CreateLogic().createDestination())
+        return CreateLogic().createDestination()
 
     #------- GET
 

@@ -1,4 +1,4 @@
-
+* [Leiðarvísar fyrir methods/classes](../info/manuals/man_main.md)
 ## Helstu Vinnureglur
 Forritið sjálft verður í `/main` möppunni, `/modules` heldur utanum klasana sem við ætlum að gera og prufu gögnin eru í `/main/data` (ekki breyta neinu í `STUDENTDATA`). __Stefanía sér alfarið um master__.
 
