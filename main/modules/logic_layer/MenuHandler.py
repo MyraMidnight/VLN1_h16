@@ -43,7 +43,7 @@ class MenuHandler:
             },
             "2.1" : {
                 "title": "Crew",
-                "function": "main"
+                "function": "crew"
             },
             "2.2" : {
                 "title": "Voyages",
@@ -51,13 +51,13 @@ class MenuHandler:
             },
             "2.3" : {
                 "title": "Destinations",
-                "function": "main"
+                "function": LLAPI().getDestinations
             },
             "2.4" : {
                 "title": "Aircrafts",
-                "function": "main"
+                "function": LLAPI().getPlanes
             },
-            "2.4" : {
+            "2.5" : {
                 "title": "Schedule",
                 "function": "main"
             },
@@ -82,7 +82,7 @@ class MenuHandler:
         self.menuLayout = {
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
-            "get": ["2.1", "2.2", "2.3", "2.4"],
+            "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "update": ["3.1", "3.2", "3.3"]
         }
 
@@ -110,8 +110,8 @@ class MenuHandler:
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
                 self.currentLocation = chosenFunction
-                MenuHandler().displayMenu(chosenFunction)
+                self.displayMenu(chosenFunction)
             else:
                 #runs the desired function
                 chosenFunction()
-                MenuHandler().displayMenu(self.currentLocation)
+                self.displayMenu(self.currentLocation)
