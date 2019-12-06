@@ -1,14 +1,8 @@
-import sys, os
-sys.path.insert(1, '../') 
-#sys.path.append(os.path.abspath(os.path.join('..','VLN1_H16/main/modules/data_layer')))
-#if visual studio underlines the from with red then just ignore it, it works anyways for me at least
-from data_layer.IOAPI import IOAPI
-from logic_layer.MenuHandler import MenuHandler
-
+from modules.data_layer.IOAPI import IOAPI
 class GetLogic :
     """Get methods for logic layer"""
 
-    def getSingleEmployee(self):
+    def getSingleEmployee(self,filePackage):
         #fetches employee info
         filePackage = IOAPI().opener('Crew.csv')
         #asks for the SSN of the employee
@@ -31,7 +25,6 @@ class GetLogic :
                 returnString_str += "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
                 print(returnString_str)
                 print("-----------")
-        MenuHandler().displayMenu("get")
     
     def getPilots(self):
         #fetches employee info
@@ -45,7 +38,6 @@ class GetLogic :
                 returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank'] + "\n" + "licence:" + x["licence"] + "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
                 print(returnString_str)
                 print("---------")
-        MenuHandler().displayMenu("get")
     
     def getFlightAttendants(self):
         #fetches employee info
@@ -58,12 +50,10 @@ class GetLogic :
                 returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank'] + "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
                 print(returnString_str)
                 print("---------")
-        MenuHandler().displayMenu("get")
     
     def getAllCrew(self):
         GetLogic().getPilots()
         GetLogic().getFlightAttendants()
-        MenuHandler().displayMenu("get")
 
     def getPlanes(self):
         #fetches aircraft info
@@ -74,8 +64,6 @@ class GetLogic :
             returnString_str = 'planeInsignia:' + x['planeInsignia'] + "\n" + "planeTypeId:" + x["planeTypeId"]
             print(returnString_str)
             print("----------")
-        MenuHandler().displayMenu("get")
-
     
     def getDestinations(self):
         #fetches destination info
@@ -86,5 +74,4 @@ class GetLogic :
             returnString_str = 'id:' + x['id'] + "\n" + "destination:" + x["destination"]
             print(returnString_str)
             print("----------")
-        MenuHandler().displayMenu("get")
         
