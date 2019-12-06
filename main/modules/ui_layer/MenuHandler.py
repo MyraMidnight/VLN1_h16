@@ -99,7 +99,6 @@ class MenuHandler:
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
             "update": ["3.1", "3.2", "3.3"],
-            
         }
 
     def printHeader(self,menuHeader):
@@ -122,7 +121,7 @@ class MenuHandler:
             if len(self.currentMenu[0]) == 1:
                 menuTitle = self.menuOptions["0"]["title"]
             else: 
-                menuTitle = self.menuOptions[self.currentMenu[0][:1]]["title"]
+                menuTitle = self.menuOptions[self.currentMenu[0][:-2]]["title"]
             #print the header and menu
             self.printHeader(menuTitle)
             self.printMenu(self.menuOptions,self.currentMenu)
