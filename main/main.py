@@ -1,8 +1,8 @@
 # Here we will create the main program
-# and import classes from the 'modules' subfolder
-
+import sys
+sys.path.insert(1, 'modules/') #all imports are found in modules/
 # ------------------------  Import classes  ------------------ 
-
+from logic_layer.MenuHandler import MenuHandler
 # ------------------------  Global variables  ---------------- 
 ROLE_PILOT = "pilot"
 ROLE_CAPTAIN = "captain"
@@ -16,6 +16,8 @@ MODEL_EMPLOYEE = "" #instance of employee
 
 def main():
   """The core program"""
+  #print the main menu
+  MenuHandler().displayMenu()
 
 # ------------------------  Run program  --------------------- 
 main()
