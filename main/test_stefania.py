@@ -16,10 +16,9 @@ from modules.ui_layer.DateUtil import DateUtil
 #   print(line)
 #DisplayScreen().printListFormat(data,rowLimit=3)
 
-date = InputHandler().dateOnly()
+date = InputHandler().dateTime()
 
-parsedDate = DateUtil()
-parsedDate.parse(date)
+parsedDate = DateUtil(date)
 
 print("day: ",parsedDate.day)
 print("month: ",parsedDate.month)
@@ -27,3 +26,4 @@ print("year: ",parsedDate.year)
 print("time: ",parsedDate.time)
 print("hour: ",parsedDate.hour)
 print("minute: ",parsedDate.minute)
+print("second: ",parsedDate.second)

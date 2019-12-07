@@ -1,5 +1,6 @@
 import datetime
 import re
+from modules.ui_layer.DateUtil import DateUtil
 
 class InputHandler:
     def __init__(self):
@@ -70,10 +71,10 @@ class InputHandler:
         time = self.timeOnly()
         if date and time:
             #create a datetime 
-            day,month,year = date.strftime("%d/%m/%Y").split("/")
+            year, month, day = map(int,DateUtil(date).date.split('-'))
             hour,minute,second = map(int,time.split(':'))
             newDate = datetime.datetime(year,month,day,hour,minute,second).isoformat()
-            return newDate
+            return str(newDate)
         else:
             #if either date or time returned false
             return False
