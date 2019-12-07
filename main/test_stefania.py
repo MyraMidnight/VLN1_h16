@@ -1,6 +1,8 @@
 #from modules.ui_layer.DisplayScreen import DisplayScreen
 #from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.InputHandler import InputHandler
+from modules.ui_layer.DateUtil import DateUtil
+import datetime
 
 ROLE_PILOT = "pilot"
 ROLE_CAPTAIN = "captain"
@@ -15,5 +17,8 @@ MODEL_EMPLOYEE = "" #instance of employee
 #   print(line)
 #DisplayScreen().printListFormat(data,rowLimit=3)
 
-date = InputHandler().name()
+date = InputHandler().dateOnly()
+
 print(date)
+dateOnly = DateUtil(date)
+print(dateOnly.date())
