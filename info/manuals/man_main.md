@@ -30,6 +30,7 @@ sys.path.insert(1, '../')
 from some_file import SomeClass
 ``` 
 ## Other manuals
-* [MenuHandler (UI layer)](man_menuhandler.md)
-* [InputHandler (UI layer)](man_inputhandler.md)
-* [DisplayScreen (UI layer)](man_displayscreen.md)
+* [MenuHandler (UI layer)](man_menuhandler.md) 
+* [InputHandler (UI layer)](man_inputhandler.md) varifies input
+* [DisplayScreen (UI layer)](man_displayscreen.md) displaying lists
+* [DateUtil (UI layer)](man_dateutil.md) for parsing datetime strings

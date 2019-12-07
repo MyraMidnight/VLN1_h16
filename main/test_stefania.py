@@ -27,3 +27,6 @@ print("time: ",parsedDate.time)
 print("hour: ",parsedDate.hour)
 print("minute: ",parsedDate.minute)
 print("second: ",parsedDate.second)
+
+customDate = DateUtil().month_parse("2019-11-06T10:39:00", "pretty")
+print(customDate)
