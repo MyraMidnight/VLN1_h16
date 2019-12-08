@@ -58,9 +58,9 @@ class InputHandler:
     #---------------------- 
     # Input social security number
     #----------------------     
-    def ssn(self):
+    def ssn(self, inputQuestion:str = ""):
         """Input for social security number (kennitala)"""  
-        return self.numSetLength(10)
+        return self.numSetLength(10, inputQuestion)
 
     #---------------------- 
     # Input date and time

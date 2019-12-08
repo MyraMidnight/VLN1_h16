@@ -2,7 +2,7 @@
 #from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DateUtil import DateUtil
-
+from modules.ui_layer.MenuHandler import MenuHandler
 # ROLE_PILOT = "pilot"
 # ROLE_CAPTAIN = "captain"
 # ROLE_COPILOT = "coPilot"
@@ -16,17 +16,19 @@ from modules.ui_layer.DateUtil import DateUtil
 #   print(line)
 #DisplayScreen().printListFormat(data,rowLimit=3)
 
-date = InputHandler().dateTime()
+# date = InputHandler().dateTime()
 
-parsedDate = DateUtil(date)
+# parsedDate = DateUtil(date)
 
-print("day: ",parsedDate.day)
-print("month: ",parsedDate.month)
-print("year: ",parsedDate.year)
-print("time: ",parsedDate.time)
-print("hour: ",parsedDate.hour)
-print("minute: ",parsedDate.minute)
-print("second: ",parsedDate.second)
+# print("day: ",parsedDate.day)
+# print("month: ",parsedDate.month)
+# print("year: ",parsedDate.year)
+# print("time: ",parsedDate.time)
+# print("hour: ",parsedDate.hour)
+# print("minute: ",parsedDate.minute)
+# print("second: ",parsedDate.second)
 
-customDate = DateUtil().month_parse("2019-11-06T10:39:00", "pretty")
-print(customDate)
+# customDate = DateUtil().month_parse("2019-11-06T10:39:00", "pretty")
+# print(customDate)
+
+MenuHandler('getCrew').displayMenu()
