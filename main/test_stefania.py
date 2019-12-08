@@ -13,3 +13,6 @@ DisplayScreen().printList(flightData, rowLimit=8)
 firstVoyage = [flightData[0], flightData[1]]
 voyageFromData = Voyage(firstVoyage)
 print(voyageFromData)
+
+newVoyage = Voyage()
+newVoyage.createVoyage

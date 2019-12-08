@@ -4,16 +4,15 @@ from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DateUtil import DateUtil
 
 FILE_DESTINATIONS = "Destinations.csv"
-FILE_FLIGHTS_UPCOMING = "UpcomingFlights.csv"
+FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
 
 class Voyage:
     def __init__(self, flights:list = []):
         self.__flightOut = ["", {}]
         self.__flightIn = ["", {}]
         # destination and airport
-        self.__destination = {}
+        self.__destination = None
         self.__departingFrom = "KEF"
-        self.__arrivingAt = None
         # times of departure and arrival
         self.__departure = None
         self.__return = None
@@ -28,9 +27,34 @@ class Voyage:
         #will run setVoyage if flight data is provided on init
         if len(flights) != 0:
             self.setVoyage(flights)
-
+    
     def __str__(self):
-        return "{}\n{}".format(self.__flightIn[0], self.__flightOut[0])
+        """Fancy print info"""
+        voyageInfo = [
+            self.__destination,
+            self.__departure,
+            self.__return,
+            self.__captain,
+            self.__copilot,
+            self.__fsm,
+            self.__fa1,
+            self.__fa2
+        ]
+        voyage_str = "Base info -----------------\n"
+        voyage_str += " Destination: {}\n"
+        voyage_str += " Departure: {}\n"
+        voyage_str += " Returning: {}\n"
+        voyage_str += "Crew ----------------------\n"
+        voyage_str += " Captain: {}\n"
+        voyage_str += " Copilot: {}\n"
+        voyage_str += " Flight Service Manager: {}\n"
+        voyage_str += " Flight attendant 1: {}\n"
+        voyage_str += " Flight attendant 2: {}\n"
+        return voyage_str.format(*voyageInfo)
+
+    def __repr__(self):
+        """String"""
+        return "flights"
 
     #===================================================================================
     #  Initialize a voyage from existing data
@@ -38,9 +62,25 @@ class Voyage:
     def setVoyage(self, data:list):
         """Takes list of 2 flights (first out, second in) and creates a voyage"""
         #The flights
-        self.__flightOut = self.processFlight(data[0])
-        self.__flightIn = self.processFlight(data[1])
+        outFlight = data[0]
+        inFlight = data[1]
+        self.__flightOut = self.processFlight(outFlight)
+        self.__flightIn = self.processFlight(inFlight)
 
+        #extract voyage data from outgoing flight
+
+        # destination and airport
+        self.__destination = outFlight["arrivingAt"]
+        # times of departure and arrival
+        self.__departure = outFlight["departure"]
+        self.__return = inFlight["departure"]
+        # other information
+        self.__aircraftID = outFlight["aircraftID"]
+        self.__captain = outFlight["captain"]
+        self.__copilot = outFlight["copilot"]
+        self.__fsm = outFlight["fsm"]
+        self.__fa1 = outFlight["fa1"]
+        self.__fa2 = outFlight["fa2"]
     #===================================================================================
     # Processing/creating data for use in methods
     #===================================================================================
@@ -152,7 +192,7 @@ class Voyage:
     #===================================================================================
     # Update Crew
     #===================================================================================
-    def updateInfo(self):
+    def updateCrew(self):
         '''Update and/or put staff in roles in upcoming Voyages'''
 
         #get list of voyages from data layer
@@ -182,6 +222,8 @@ class Voyage:
     #===================================================================================
     # Exporting data
     #===================================================================================
+    def getFlights(self):
+        self.createFlights()
     def createFlights(self):
         """Creates a pair of flights that make up the voyage, requires the last flightNumber created (for reference when creating new flightNumbers)"""
         #if voyage already has created flights with fightNumbers, then it returns those flights
@@ -214,7 +256,7 @@ class Voyage:
             flightOut["departure"] = self.__departure
             flightOut["arrival"] = self.__return #departure + flightTime
 
-            createFlights.append(flightOut)
+            createdFlights.append(flightOut)
 
             #create the flight home
             flightIn = flightInfo.copy()
@@ -224,9 +266,10 @@ class Voyage:
             flightOut["departure"] = self.__return
             flightOut["arrival"] = self.__return #departure + flightTime
 
-            createFlights.append(flightIn)
+            createdFlights.append(flightIn)
 
             #give the IOAPI the flight data to save
+            return createdFlights
             
 
 
