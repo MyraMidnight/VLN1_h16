@@ -128,7 +128,7 @@ class MenuHandler:
 
             #prompt user to input the number of chosen option
             choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
-            chosenOption = self.menuOptions[self.currentMenu[choice_int]]
+            chosenOption = self.menuOptions[self.currentMenu[int(choice_int)]]
 
             #then run the method connected to the chosen option
             chosenFunction = chosenOption["function"]
