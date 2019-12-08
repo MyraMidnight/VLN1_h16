@@ -28,7 +28,7 @@ class InputHandler:
                 while int(inputChoice)-1 not in range(numOfChoices):
                     inputChoice = input("Needs to be within range of 1-{} \n".format(numOfChoices) + inputQuestion)
                 #return the choice that can be used for list index
-                return int(inputChoice)-1
+                return inputChoice
             else: 
                 return False
 
@@ -65,10 +65,10 @@ class InputHandler:
     #---------------------- 
     # Input date and time
     #----------------------   
-    def dateTime(self):
+    def dateTime(self, questionDate:str = "Input a date (DD/MM/YYYY): ", questionTime:str ="Input time (HH:MM): "):
         """Input is date and time"""      
-        date = self.dateOnly()
-        time = self.timeOnly()
+        date = self.dateOnly(questionDate)
+        time = self.timeOnly(questionTime)
         if date and time:
             #create a datetime 
             year, month, day = map(int,DateUtil(date).date.split('-'))
@@ -82,7 +82,7 @@ class InputHandler:
     #---------------------- 
     # Input time
     #----------------------   
-    def timeOnly(self, inputQuestion:str = "Input time HH:MM : "):
+    def timeOnly(self, inputQuestion:str = "Input time (HH:MM): "):
         """Checks input for HH:MM time, returns string HH:MM:SS """
         try:
             time_str = input(inputQuestion)
@@ -104,7 +104,7 @@ class InputHandler:
     #---------------------- 
     # Input date only (returns full dateTime format)
     #----------------------   
-    def dateOnly(self, inputQuestion:str = "Input a date DD/MM/YYYY: "):
+    def dateOnly(self, inputQuestion:str = "Input a date (DD/MM/YYYY): "):
         """Checks input for date, DD/MM/YYYY, returns datetime object"""
         try:
             date_str = input(inputQuestion).strip()
