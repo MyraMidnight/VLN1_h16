@@ -103,7 +103,8 @@ class MenuHandler:
 
     def printHeader(self,menuHeader):
         """Prints the header"""
-        print(menuHeader)
+        #print("\n")
+        print("\n", menuHeader)
 
     def printMenu(self,menuOptions,currentMenu):
         """Takes in current menu as"""
