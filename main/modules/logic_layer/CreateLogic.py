@@ -7,5 +7,5 @@ class CreateLogic :
         """create destination"""
     
     def createVoyage(self):
-        newVoyage = Voyage()
-        newVoyage.createVoyage()
+        return Voyage().createVoyage()
+        
