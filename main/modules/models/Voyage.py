@@ -5,6 +5,7 @@ from modules.ui_layer.DateUtil import DateUtil
 
 FILE_DESTINATIONS = "Destinations.csv"
 FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
+FILE_AIRCRAFTS = "Aircraft.csv"
 
 class Voyage:
     def __init__(self, flights:list = []):
@@ -93,10 +94,6 @@ class Voyage:
         """Returns a list of dictionaries of only departing flights"""
         return []
 
-    def findAircrafts(self):
-        """Returns a list of available aircrafts"""
-        return []
-
     def createFlightNumber(self,destination:str,latestFlightNumber: str):
         """Creates a new flightNumber based on destination and latest flightNumber"""
         # We have been given permission to ignore any requirments of flightNumber format.
@@ -112,24 +109,17 @@ class Voyage:
     def selectAircraft(self):
         """Displays list of available aircrafts and selects one from input"""
         #Get and print list of available aircrafts
-        availableAircrafts_list = self.findAircrafts
-        DisplayScreen().printOptions(availableAircrafts_list)
+        aircrafts_list = IOAPI().opener(FILE_AIRCRAFTS)
+
+        #needs to check if plane is actually available at selected timeframe
+        available_planes = aircrafts_list
+
+        # print the available aircrafts
+        DisplayScreen().printOptions(available_planes,"planes")
 
         # Select a aircraft from list
         inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
-        self.__aircraftID = InputHandler().numChoices(len(availableAircrafts_list, inputAircraft_str))
-   
-    # --------- Destination --------------------------------------------------------------
-    def selectDestination(self):
-        """Displays list of available destinations and selects one from input"""
-
-        # Get and print list of available destinations
-        destination_list = IOAPI().opener(FILE_DESTINATIONS) 
-        DisplayScreen().printOptions(destination_list, "destinations")
-
-        # Seect a destination
-        destination_str =  InputHandler().numChoices(len(destination_list),"Select a destination for this voyage: ")
-        self.__destination = destination_list[int(destination_str)-1]
+        self.__aircraftID = InputHandler().numChoices(len(available_planes, inputAircraft_str))
 
     # --------- Departure Time ---------------------------------------------------------------
     def selectDepartureTime(self,questionDate:str, questionTime:str, errorMessage:str):
@@ -147,15 +137,6 @@ class Voyage:
         
         return selectedDateTime
 
-    def selectArrivalTime(self):
-        """Gets a valid arrival time for voyage"""
-
-        inputArrivalDate_str = "Enter the date for the flight from {} to Iceland".format(self.__destination)
-        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
-
-        #calculate a date that is departure + flightTime, 
-
-
     #===================================================================================
     # Create New Voyage
     #===================================================================================
@@ -163,19 +144,26 @@ class Voyage:
         '''Create a new voyage, voyage contains of two flights with different flight numbers.
             have to get destination that we already fly to, date that the voyage will occur and than when the flight back home to Iceland is '''
 
-        # get destination from input
-        self.selectDestination()
+        # Get and print list of available destinations
+        destination_list = IOAPI().opener(FILE_DESTINATIONS) 
+        DisplayScreen().printOptions(destination_list, "destinations")
+
+        # Seect a destination
+        destination_str =  InputHandler().numChoices(len(destination_list),"Select index of destination for this voyage: ")
+        self.__destination = destination_list[int(destination_str)-1]
+
         # Departure messages for inputHandler
-        inputDepartureDate_str = "Enter the date for the flight from Iceland to {}".format(self.__destination)
-        inputDepartureTime_str = "Enter departure time"
+        inputDepartureDate_str = "Enter departure date from Iceland to {}: ".format(self.__destination["destination"])
+        inputDepartureTime_str = "Enter departure time: "
         ErrorDepartureTime_str = "ERROR: Airport is occupied at selected time \nplease input a new departure time: "
 
         # get the departure time from inputHandler
         self.__departure = self.selectDepartureTime(inputDepartureDate_str, inputDepartureTime_str, ErrorDepartureTime_str)
 
         # Find a date and time for arrival
-        self.selectArrivalTime()
 
+        inputArrivalDate_str = "Enter return date to Iceland from {}: ".format(self.__destination["destination"])
+        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
         # Find available aircraft
         self.selectAircraft()
 
@@ -188,7 +176,7 @@ class Voyage:
 
         # check if the user wants to use this template of voyage at other days
 
-        print("Do you want to replicate this voyage? (y/n)")
+        print("Do you want to replicate this voyage? (y/n): ")
 
     #===================================================================================
     # Update Crew
