@@ -1,13 +1,15 @@
 import datetime
 import re
+from modules.ui_layer.DateUtil import DateUtil
 
 class InputHandler:
     def __init__(self):
         self.exitKey = "q"
+        self.isoFormat = "%Y-%m-%dT%H:%M:%S%z"
 
     def __str__(self):
         return "Handles user input, returns the value to caller \nmethods: numChoices"
-    #---------------------- 
+    #--------------------- - 
     # Handles numbered input, for selecting from listed options
     #---------------------- 
     def numChoices(self, numOfChoices: int, inputQuestion : str = "Pick a number: ", exitKey: str = "" ):
@@ -56,9 +58,9 @@ class InputHandler:
     #---------------------- 
     # Input social security number
     #----------------------     
-    def ssn(self):
+    def ssn(self, inputQuestion:str = ""):
         """Input for social security number (kennitala)"""  
-        return self.numSetLength(10)
+        return self.numSetLength(10, inputQuestion)
 
     #---------------------- 
     # Input date and time
@@ -69,10 +71,10 @@ class InputHandler:
         time = self.timeOnly()
         if date and time:
             #create a datetime 
-            day,month,year = date["datelist"]
+            year, month, day = map(int,DateUtil(date).date.split('-'))
             hour,minute,second = map(int,time.split(':'))
             newDate = datetime.datetime(year,month,day,hour,minute,second).isoformat()
-            return newDate
+            return str(newDate)
         else:
             #if either date or time returned false
             return False
@@ -103,7 +105,7 @@ class InputHandler:
     # Input date only (returns full dateTime format)
     #----------------------   
     def dateOnly(self, inputQuestion:str = "Input a date DD/MM/YYYY: "):
-        """Checks input for date, DD/MM/YYYY, returns dict with datetime and datelist [day,month,year]"""
+        """Checks input for date, DD/MM/YYYY, returns datetime object"""
         try:
             date_str = input(inputQuestion).strip()
             pattern = '\d{2}/\d{2}/\d{4}'
@@ -114,11 +116,8 @@ class InputHandler:
             else:
                 day,month,year = map(int,date_str.split('/'))
                 #check if valid date
-                date = datetime.date(day= day, month= month, year= year).isoformat
-                return {
-                    "datetime": date,
-                    "datelist": [day,month,year]
-                }
+                date = datetime.datetime(day= day, month= month, year= year).isoformat()
+                return str(date)
         except ValueError:
             #if datetime.date() was not valid
             print("Not a valid date, try again")

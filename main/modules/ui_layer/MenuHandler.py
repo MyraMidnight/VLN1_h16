@@ -4,8 +4,8 @@ from modules.ui_layer.InputHandler import InputHandler
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
-    def __init__(self):
-        self.currentLocation = "main"
+    def __init__(self, menu:str = "main"):
+        self.currentLocation = menu.lower()
         self.currentMenu = {}
         self.menuOptions = { 
             #---------- Create --------------
@@ -112,11 +112,11 @@ class MenuHandler:
             menuTitle = menuOptions[item]["title"]
             print("{}) {}".format(count, menuTitle))
 
-    def displayMenu(self,menu:str = "main"):
+    def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
         #if the menu
-        if menu in self.menuLayout:
-            self.currentMenu = self.menuLayout[menu]
+        if self.currentLocation in self.menuLayout:
+            self.currentMenu = self.menuLayout[self.currentLocation]
             
             #find the menu header title
             if len(self.currentMenu[0]) == 1:
@@ -141,3 +141,7 @@ class MenuHandler:
                 #runs the desired function
                 chosenFunction()
                 self.displayMenu(self.currentLocation)
+        else: 
+            # If the initial 'currentLocation' is not valid, then default to 'main'
+            self.currentLocation = "main"
+            self.displayMenu()
