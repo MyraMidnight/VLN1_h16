@@ -94,12 +94,12 @@ class Voyage:
         """Returns a list of dictionaries of only departing flights"""
         return []
 
-    def createFlightNumber(self,destination:str,latestFlightNumber: str):
+    def createFlightNumber(self,latestFlightNumber: str):
         """Creates a new flightNumber based on destination and latest flightNumber"""
         # We have been given permission to ignore any requirments of flightNumber format.
-        flightNumRef = int(latestFlightNumber[2:])
+        flightNum = int(latestFlightNumber[2:])+1
         #returns a number that is 1 higher
-        return "NA{}".format(str(flightNumRef+1))
+        return "NA{}".format(str(flightNum))
 
 
     #===================================================================================
@@ -119,7 +119,7 @@ class Voyage:
 
         # Select a aircraft from list
         inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
-        self.__aircraftID = InputHandler().numChoices(len(available_planes, inputAircraft_str))
+        self.__aircraftID = InputHandler().numChoices(len(available_planes), inputAircraft_str)
 
     # --------- Departure Time ---------------------------------------------------------------
     def selectDepartureTime(self,questionDate:str, questionTime:str, errorMessage:str):
@@ -213,6 +213,7 @@ class Voyage:
     #===================================================================================
     def getFlights(self):
         self.createFlights()
+
     def createFlights(self):
         """Creates a pair of flights that make up the voyage, requires the last flightNumber created (for reference when creating new flightNumbers)"""
         #if voyage already has created flights with fightNumbers, then it returns those flights
@@ -235,23 +236,23 @@ class Voyage:
 
             # get the latest flightNumber created, for reference
             allFlights_list = IOAPI().opener(FILE_FLIGHTS_UPCOMING)
-            latestFlight = allFlights_list[len(allFlights_list)]["flightNumber"]
+            latestFlight = allFlights_list[len(allFlights_list)-1]["flightNumber"]
 
             #create the flight out
             flightOut = flightInfo.copy()
             flightOut["flightNumber"] = self.createFlightNumber(latestFlight)
-            flightOut["destination"] = self.__departingFrom
-            flightOut["arrivingAt"] = self.__arrivingAt
+            flightOut["departingFrom"] = self.__departingFrom
+            flightOut["arrivingAt"] = self.__destination
             flightOut["departure"] = self.__departure
             flightOut["arrival"] = self.__return #departure + flightTime
 
             createdFlights.append(flightOut)
 
-            #create the flight home
+            #create the flight in
             flightIn = flightInfo.copy()
             flightOut["flightNumber"] = self.createFlightNumber(latestFlight)
-            flightOut["destination"] = self.__departingFrom
-            flightOut["arrivingAt"] = self.__arrivingAt
+            flightOut["departingFrom"] = self.__destination["id"]
+            flightOut["arrivingAt"] = self.__departingFrom
             flightOut["departure"] = self.__return
             flightOut["arrival"] = self.__return #departure + flightTime
 

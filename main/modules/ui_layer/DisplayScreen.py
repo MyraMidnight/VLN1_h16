@@ -5,8 +5,8 @@ class DisplayScreen:
             "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
             "flights": {'flightNumber': 10, "departingFrom": 10, "arrivingAt": 10 , "departure": 10, "arrival": 10, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
             "destinations": {"id": 5, "destination": 18},
-            "plane": {"planeInsignia":10, "planeTypeId": 10},
-            "planeType": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
+            "planes": {"planeInsignia":15, "planeTypeId": 20},
+            "planeTypes": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
             "voyages": {"fnDeparting": 10, "fnReturning": 10,"captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10}
 
         }
@@ -95,7 +95,9 @@ class DisplayScreen:
             headerKeys = []
             print()
             for column in template["columns"]:
-                headerKeys.append(self.cutString(column,self.stringLimits[template["dataType"]][column]))
+                stringLimit = self.stringLimits[template["dataType"]][column]
+                trimmedKey = self.cutString(column,stringLimit)
+                headerKeys.append(trimmedKey)
             headerRow = " | ".join(headerKeys)
             horizonalDiv = "-"*len(headerRow)
 
@@ -120,7 +122,7 @@ class DisplayScreen:
                 for column in template["columns"]:
                     #if value is longer than set limit width, then cut 
                     colValue = line[column]
-                    row.append(self.cutString(colValue,self.stringLimits[formatTemplate["dataType"]][column]))
+                    row.append(self.cutString(colValue,self.stringLimits[template["dataType"]][column]))
                 #joins the columns together with '|' seperator
                 print(" | ".join(row)) 
         else: 
