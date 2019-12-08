@@ -54,7 +54,7 @@ class DisplayScreen:
             newString = string.ljust(limit)
             return newString
 
-    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10):
+    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, colLimit:int = 0):
         #create the header row (print the keys)
         headerKeys = []
         print()
@@ -67,6 +67,8 @@ class DisplayScreen:
 
         if rowLimit == 0:
             rowLimit = len(data)
+        if colLimit == 0:
+            colLimit = len(data[0])
 
         for line in data[:rowLimit]:
             row = []
@@ -79,7 +81,7 @@ class DisplayScreen:
             print(" | ".join(row)) 
 
             
-    def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0):
+    def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0, enumerate:bool = False):
         """Prints data lists, takes in a list of dictionaries\n
             optional: can add 'type' parameter for specific format.\n
             Types: employees, cabincrew, pilots, flightattendants, planes, destinations
@@ -111,3 +113,7 @@ class DisplayScreen:
                 print(" | ".join(row)) 
         else: 
             self.printList(data,rowLimit=rowLimit)
+
+    def printOptions(self, data: list, rowLimit:int = 0):
+        """Prints a enumerated list that the user can choose from."""
+        self.printListFormat(data=data, formatTemplate, rowLimit=rowLimit, enumerate = True)
