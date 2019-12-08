@@ -82,11 +82,7 @@ class InputHandler:
     #---------------------- 
     # Input time
     #----------------------   
-<<<<<<< HEAD
-    def timeOnly(self, inputQuestion:str = "Input time HH:MM: "):
-=======
     def timeOnly(self, inputQuestion:str = "Input time (HH:MM): "):
->>>>>>> master
         """Checks input for HH:MM time, returns string HH:MM:SS """
         try:
             time_str = input(inputQuestion)
