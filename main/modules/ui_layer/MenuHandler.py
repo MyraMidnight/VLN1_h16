@@ -140,7 +140,7 @@ class MenuHandler:
             else:
                 #runs the desired function
                 chosenFunction()
-                self.displayMenu(self.currentLocation_str)
+                self.displayMenu()
         else: 
             # If the initial 'currentLocation' is not valid, then default to 'main'
             self.currentLocation_str = "main"
