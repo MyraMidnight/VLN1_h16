@@ -117,8 +117,9 @@ class Voyage:
 
         # Select a aircraft from list
         inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
-        self.__aircraftID = InputHandler().numOptions(inputAircraft_str)
-    # --------- Destination ---------------------------------------------------------------
+        self.__aircraftID = InputHandler().numChoices(len(availableAircrafts_list, inputAircraft_str))
+   
+    # --------- Destination --------------------------------------------------------------
     def selectDestination(self):
         """Displays list of available destinations and selects one from input"""
 
@@ -127,7 +128,7 @@ class Voyage:
         DisplayScreen().printOptions(destination_list, "destinations")
 
         # Seect a destination
-        destination_str =  InputHandler().numOptions("Select a destination for this voyage: ")
+        destination_str =  InputHandler().numChoices(len(destination_list),"Select a destination for this voyage: ")
         self.__destination = destination_list[int(destination_str)-1]
 
     # --------- Departure Time ---------------------------------------------------------------

@@ -6,6 +6,7 @@ from modules.ui_layer.DisplayScreen import DisplayScreen
 
 from modules.models.Voyage import Voyage
 from modules.data_layer.IOAPI import IOAPI
+from modules.logic_layer.CreateLogic import CreateLogic
 
 flightData = IOAPI().opener("NewUpcomingFlights.csv")
 DisplayScreen().printList(flightData, rowLimit=8)
@@ -14,5 +15,4 @@ firstVoyage = [flightData[0], flightData[1]]
 voyageFromData = Voyage(firstVoyage)
 print(voyageFromData)
 
-newVoyage = Voyage()
-newVoyage.createVoyage
+CreateLogic().createVoyage()
