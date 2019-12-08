@@ -2,9 +2,12 @@ from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DateUtil import DateUtil
+import datetime
 
-FILE_DESTINATIONS = "Destinations.csv"
+
+FILE_DESTINATIONS = "NewDestinations.csv"
 FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
+FILE_AIRCRAFTS = "Aircraft.csv"
 
 class Voyage:
     def __init__(self, flights:list = []):
@@ -54,11 +57,13 @@ class Voyage:
 
     def __repr__(self):
         """String"""
-        return "flights"
+        flightData = "{}\n{}".format(self.__flightOut[1], self.__flightIn[1])
+        return flightData
 
     #===================================================================================
     #  Initialize a voyage from existing data
     #===================================================================================
+
     def setVoyage(self, data:list):
         """Takes list of 2 flights (first out, second in) and creates a voyage"""
         #The flights
@@ -81,100 +86,35 @@ class Voyage:
         self.__fsm = outFlight["fsm"]
         self.__fa1 = outFlight["fa1"]
         self.__fa2 = outFlight["fa2"]
-    #===================================================================================
-    # Processing/creating data for use in methods
-    #===================================================================================
-    def processFlight(self, flight:dict):
-        """Returns a list with two values: flightnumber and data dictionary"""
-        flightData = [flight["flightNumber"], flight]
-        return flightData
-
-    def findDepartingFlights(self):
-        """Returns a list of dictionaries of only departing flights"""
-        return []
-
-    def findAircrafts(self):
-        """Returns a list of available aircrafts"""
-        return []
-
-    def createFlightNumber(self,destination:str,latestFlightNumber: str):
-        """Creates a new flightNumber based on destination and latest flightNumber"""
-        # We have been given permission to ignore any requirments of flightNumber format.
-        flightNumRef = int(latestFlightNumber[2:])
-        #returns a number that is 1 higher
-        return "NA{}".format(str(flightNumRef+1))
-
 
     #===================================================================================
-    # INPUT selection
+    # Create New Voyage
     #===================================================================================
-    # --------- Aircraft ---------------------------------------------------------------
-    def selectAircraft(self):
-        """Displays list of available aircrafts and selects one from input"""
-        #Get and print list of available aircrafts
-        availableAircrafts_list = self.findAircrafts
-        DisplayScreen().printOptions(availableAircrafts_list)
 
-        # Select a aircraft from list
-        inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
-        self.__aircraftID = InputHandler().numOptions(inputAircraft_str)
-    # --------- Destination ---------------------------------------------------------------
-    def selectDestination(self):
-        """Displays list of available destinations and selects one from input"""
+    def createVoyage(self):
+        '''Create a new voyage, voyage contains of two flights with different flight numbers.
+            have to get destination that we already fly to, date that the voyage will occur and than when the flight back home to Iceland is '''
 
         # Get and print list of available destinations
         destination_list = IOAPI().opener(FILE_DESTINATIONS) 
         DisplayScreen().printOptions(destination_list, "destinations")
 
         # Seect a destination
-        destination_str =  InputHandler().numOptions("Select a destination for this voyage: ")
+        destination_str =  InputHandler().numChoices(len(destination_list),"Select index of destination for this voyage: ")
         self.__destination = destination_list[int(destination_str)-1]
 
-    # --------- Departure Time ---------------------------------------------------------------
-    def selectDepartureTime(self,questionDate:str, questionTime:str, errorMessage:str):
-        """Prompts the user to input date and time"""
-        selectedDateTime = InputHandler().dateTime(questionDate,questionTime)
-
-        #ERROR Check if there is any departing from Iceland at this dateTime
-        departingFlights_list = self.findDepartingFlights() #list of upcoming flights departing from Iceland
-        while selectedDateTime in departingFlights_list:
-            newTime_str = InputHandler().timeOnly(errorMessage)
-
-            #update the time of departure
-            newDateTime_str = DateUtil().updateTime(selectedDateTime, newTime_str)
-            selectedDateTime = newDateTime_str
-        
-        return selectedDateTime
-
-    def selectArrivalTime(self):
-        """Gets a valid arrival time for voyage"""
-
-        inputArrivalDate_str = "Enter the date for the flight from {} to Iceland".format(self.__destination)
-        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
-
-        #calculate a date that is departure + flightTime, 
-
-
-    #===================================================================================
-    # Create New Voyage
-    #===================================================================================
-    def createVoyage(self):
-        '''Create a new voyage, voyage contains of two flights with different flight numbers.
-            have to get destination that we already fly to, date that the voyage will occur and than when the flight back home to Iceland is '''
-
-        # get destination from input
-        self.selectDestination()
         # Departure messages for inputHandler
-        inputDepartureDate_str = "Enter the date for the flight from Iceland to {}".format(self.__destination)
-        inputDepartureTime_str = "Enter departure time"
+        inputDepartureDate_str = "Enter departure date from Iceland to {}: ".format(self.__destination["destination"])
+        inputDepartureTime_str = "Enter departure time: "
         ErrorDepartureTime_str = "ERROR: Airport is occupied at selected time \nplease input a new departure time: "
 
         # get the departure time from inputHandler
         self.__departure = self.selectDepartureTime(inputDepartureDate_str, inputDepartureTime_str, ErrorDepartureTime_str)
 
         # Find a date and time for arrival
-        self.selectArrivalTime()
 
+        inputArrivalDate_str = "Enter return date to Iceland from {}: ".format(self.__destination["destination"])
+        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
         # Find available aircraft
         self.selectAircraft()
 
@@ -187,11 +127,12 @@ class Voyage:
 
         # check if the user wants to use this template of voyage at other days
 
-        print("Do you want to replicate this voyage? (y/n)")
+        print("Do you want to replicate this voyage? (y/n): ")
 
     #===================================================================================
     # Update Crew
     #===================================================================================
+
     def updateCrew(self):
         '''Update and/or put staff in roles in upcoming Voyages'''
 
@@ -220,56 +161,139 @@ class Voyage:
         # if the user wants to quit then no changes were made.
 
     #===================================================================================
+    # methods for local use
+    #===================================================================================
+
+    def processFlight(self, flight:dict):
+        """Returns a list with two values: flightnumber and data dictionary"""
+        flightData = [flight["flightNumber"], flight]
+        return flightData
+
+    def findDepartingFlights(self):
+        """Returns a list of dictionaries of only departing flights"""
+        return []
+
+    def createFlightNumber(self,latestFlightNumber: str):
+        """Creates a new flightNumber based on destination and latest flightNumber"""
+        # We have been given permission to ignore any requirments of flightNumber format.
+        flightNum = int(latestFlightNumber[2:])+1
+        #returns a number that is 1 higher
+        return "NA{}".format(str(flightNum))
+
+    def selectAircraft(self):
+        """Displays list of available aircrafts and selects one from input"""
+        #Get and print list of available aircrafts
+        aircrafts_list = IOAPI().opener(FILE_AIRCRAFTS)
+
+        #needs to check if plane is actually available at selected timeframe
+        available_planes = aircrafts_list
+
+        # print the available aircrafts
+        DisplayScreen().printOptions(available_planes,"planes")
+
+        # Select a aircraft from list
+        inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
+        self.__aircraftID = InputHandler().numChoices(len(available_planes), inputAircraft_str)
+
+    # --------- Departure Time ---------------------------------------------------------------
+    def selectDepartureTime(self,questionDate:str, questionTime:str, errorMessage:str):
+        """Prompts the user to input date and time"""
+        selectedDateTime = InputHandler().dateTime(questionDate,questionTime)
+
+        #ERROR Check if there is any departing from Iceland at this dateTime
+        departingFlights_list = self.findDepartingFlights() #list of upcoming flights departing from Iceland
+        while selectedDateTime in departingFlights_list:
+            newTime_str = InputHandler().timeOnly(errorMessage)
+
+            #update the time of departure
+            newDateTime_str = DateUtil().updateTime(selectedDateTime, newTime_str)
+            selectedDateTime = newDateTime_str
+        
+        return selectedDateTime
+
+    def calculateArrival(self, departure:str, flightTime:str):
+        """Calculates arrival time, requires the datetime of departure and the flightTime"""
+
+        departureTime = DateUtil(departure).createObject()
+
+        #split the flighttime into parts
+        hours,minutes,seconds = map(int,flightTime.split(':'))
+        
+        #get the arrivaltime
+        arrival = departureTime + datetime.timedelta(hours=hours, minutes=minutes)
+
+        return str(arrival.isoformat())
+
+    #===================================================================================
     # Exporting data
     #===================================================================================
+
     def getFlights(self):
-        self.createFlights()
-    def createFlights(self):
-        """Creates a pair of flights that make up the voyage, requires the last flightNumber created (for reference when creating new flightNumbers)"""
+        """returns list of flights related to this voyage, will create the flights if missing"""
+
         #if voyage already has created flights with fightNumbers, then it returns those flights
-        if len(self.__flightOut[0]) != 0:
+        flightData = self.__flightOut[0] 
+        
+        if len(flightData) != 0:
             #gets the flight objects and returns them in a list
             return [self.__flightOut[1], self.__flightIn[1]]
+
         #else it creates new flightNumbers
-        else: 
-            # create a dictionary with all info shared in both flights
-            flightInfo = {
-                "aircraftID": self.__aircraftID,
-                "captain": self.__captain,
-                "copilot": self.__copilot,
-                "fsm": self.__fsm,
-                "fa1": self.__fa1,
-                "fa2": self.__fa2
-            }
-            #the list of flights that will be given to IOAPI
-            createdFlights = []
+        else:         
+            self.createFlights()
 
-            # get the latest flightNumber created, for reference
-            allFlights_list = IOAPI().opener(FILE_FLIGHTS_UPCOMING)
-            latestFlight = allFlights_list[len(allFlights_list)]["flightNumber"]
+    def createFlights(self):
+        """Creates a pair of flights that make up the voyage, requires the last flightNumber 
+        created (for reference when creating new flightNumbers)"""
 
-            #create the flight out
-            flightOut = flightInfo.copy()
-            flightOut["flightNumber"] = self.createFlightNumber(latestFlight)
-            flightOut["destination"] = self.__departingFrom
-            flightOut["arrivingAt"] = self.__arrivingAt
-            flightOut["departure"] = self.__departure
-            flightOut["arrival"] = self.__return #departure + flightTime
+        # get the latest flightNumber created, for reference
+        allFlights_list = IOAPI().opener(FILE_FLIGHTS_UPCOMING)
+        self.latestFlight = allFlights_list[len(allFlights_list)-1]["flightNumber"]
 
-            createdFlights.append(flightOut)
+        def flightData(direction:str):
+            """Creates a data dictionary"""
+            startLocation = self.__departingFrom
+            endLocation = self.__destination["id"]
+            departure = self.__departure
+            duration = self.__destination["flightDuration"]
+            flightDict = {}
+            flightNumber = self.createFlightNumber(self.latestFlight)
 
-            #create the flight home
-            flightIn = flightInfo.copy()
-            flightOut["flightNumber"] = self.createFlightNumber(latestFlight)
-            flightOut["destination"] = self.__departingFrom
-            flightOut["arrivingAt"] = self.__arrivingAt
-            flightOut["departure"] = self.__return
-            flightOut["arrival"] = self.__return #departure + flightTime
+            # swap locations depending on direction of flight
+            if direction == "in":
+                startLocation, endLocation = endLocation, startLocation
+                departure = self.__return
 
-            createdFlights.append(flightIn)
+            flightDict["flightNumber"] = flightNumber
+            flightDict["departingFrom"] = startLocation
+            flightDict["arrivingAt"] = endLocation
+            flightDict["departure"] = departure
+            flightDict["arrival"] = self.calculateArrival(departure,duration)   #departure + flightTime
+            flightDict["aircraftID"] = self.__aircraftID
+            flightDict["captain"] = self.__captain
+            flightDict["copilot"] = self.__copilot
+            flightDict["fsm"] = self.__fsm
+            flightDict["fa1"] = self.__fa1
+            flightDict["fa2"] = self.__fa2
 
-            #give the IOAPI the flight data to save
-            return createdFlights
+            #update the latest flightnumber
+            self.latestFlight = flightNumber
             
+            return flightDict.copy()
+
+        #create the flight out
+        flightOut_dict = flightData("out")
+        self.__flightOut = [flightOut_dict["flightNumber"], flightOut_dict]
+
+        #create the flight in
+        flightIn_dict = flightData("in")
+        self.__flightIn = [flightIn_dict["flightNumber"], flightIn_dict]
+
+        #give the IOAPI the flight data to save
+        return [flightOut_dict, flightIn_dict]
+        
+    def voyageData(self):
+        """Creates data dictionary """
+
 
 
