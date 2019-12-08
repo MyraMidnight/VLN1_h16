@@ -79,7 +79,7 @@ class DisplayScreen:
             print(" | ".join(row)) 
 
             
-    def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0):
+    def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0, enumerate:bool = False):
         """Prints data lists, takes in a list of dictionaries\n
             optional: can add 'type' parameter for specific format.\n
             Types: employees, cabincrew, pilots, flightattendants, planes, destinations
@@ -111,3 +111,7 @@ class DisplayScreen:
                 print(" | ".join(row)) 
         else: 
             self.printList(data,rowLimit=rowLimit)
+
+    def printOptions(self, data: list, formatTemplate:str = ""):
+        """Prints a enumerated list that the user can choose from. \n Just provide the data and list of """
+        #self.printListFormat(data=data, rowLimit=rowLimit, enumerate = True)

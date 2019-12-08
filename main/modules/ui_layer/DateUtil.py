@@ -1,3 +1,5 @@
+import datetime
+
 class DateUtil:
     def __init__(self ,datetime:str = ""):
         """automatically parses the datetime.isoformat string when initiated"""
@@ -57,4 +59,11 @@ class DateUtil:
     def second_parse(self, datetime:str):
         """returns the minute"""
         return datetime[17:]
+    
+    def updateTime(self, date:str, time:str):
+        """Updates the time of a given datetime string"""
+        return date[:11] + time
 
+    def createObject(self):
+        """Creates and returns a datetime object"""
+        return datetime().datetime(self.year,self.month,self.day,self.hour,self.minute,self.second)
