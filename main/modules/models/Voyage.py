@@ -7,7 +7,7 @@ FILE_DESTINATIONS = "Destinations.csv"
 FILE_FLIGHTS_UPCOMING = "UpcomingFlights.csv"
 
 class Voyage:
-    def __init__(self):
+    def __init__(self, flights:list = []):
         self.__flightOut = ["", {}]
         self.__flightIn = ["", {}]
         # destination and airport
@@ -25,14 +25,21 @@ class Voyage:
         self.__fa1 = None
         self.__fa2 = None
 
+        #will run setVoyage if flight data is provided on init
+        if len(flights) != 0:
+            self.setVoyage(flights)
+
+    def __str__(self):
+        return "{}\n{}".format(self.__flightIn[0], self.__flightOut[0])
+
     #===================================================================================
     #  Initialize a voyage from existing data
     #===================================================================================
     def setVoyage(self, data:list):
         """Takes list of 2 flights (first out, second in) and creates a voyage"""
         #The flights
-        self.flightOut = self.processFlight(data[0])
-        self.flightIn = self.processFlight(data[1])
+        self.__flightOut = self.processFlight(data[0])
+        self.__flightIn = self.processFlight(data[1])
 
     #===================================================================================
     # Processing/creating data for use in methods
@@ -131,12 +138,12 @@ class Voyage:
         # Find available aircraft
         self.selectAircraft()
 
+        # print all the info about the voyage for the user and ask if the info is correct, if not than edit info, else save to data
+
         # Make a flightnumber for both flights, the flight numbers are different depending on the destination and how many other flights have gone to the destination on this same day
         self.createFlights()
             # To make a flightnumber you need the list of all destination and get the number for our destination, then check if there is another flight
             # on this day going to our destination. If there is another flight to our destination then the number is NA XX2 otherwise NAXX0
-
-        # print all the info about the voyage for the user and ask if the info is correct, if not than edit info, else save to data
 
         # check if the user wants to use this template of voyage at other days
 

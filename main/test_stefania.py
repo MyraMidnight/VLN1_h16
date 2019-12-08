@@ -1,34 +1,15 @@
-#from modules.ui_layer.DisplayScreen import DisplayScreen
+from modules.ui_layer.DisplayScreen import DisplayScreen
 #from modules.data_layer.IOAPI import IOAPI
-from modules.ui_layer.InputHandler import InputHandler
-from modules.ui_layer.DateUtil import DateUtil
-from modules.ui_layer.MenuHandler import MenuHandler
-# ROLE_PILOT = "pilot"
-# ROLE_CAPTAIN = "captain"
-# ROLE_COPILOT = "coPilot"
-# ROLE_ATTENDANT = "flightAttendant"
-# ROLE_LEAD_ATTENDANT = "headFlightAttendant"
-# MODEL_PLANE = "" #instance of plane
-# MODEL_EMPLOYEE = "" #instance of employee
+# from modules.ui_layer.InputHandler import InputHandler
+# from modules.ui_layer.DateUtil import DateUtil
+# from modules.ui_layer.MenuHandler import MenuHandler
 
-#ata = IOAPI().opener("Crew.csv")
-# for line in data:
-#   print(line)
-#DisplayScreen().printListFormat(data,rowLimit=3)
+from modules.models.Voyage import Voyage
+from modules.data_layer.IOAPI import IOAPI
 
-# date = InputHandler().dateTime()
+flightData = IOAPI().opener("NewUpcomingFlights.csv")
+DisplayScreen().printList(flightData, rowLimit=8)
 
-# parsedDate = DateUtil(date)
-
-# print("day: ",parsedDate.day)
-# print("month: ",parsedDate.month)
-# print("year: ",parsedDate.year)
-# print("time: ",parsedDate.time)
-# print("hour: ",parsedDate.hour)
-# print("minute: ",parsedDate.minute)
-# print("second: ",parsedDate.second)
-
-# customDate = DateUtil().month_parse("2019-11-06T10:39:00", "pretty")
-# print(customDate)
-
-MenuHandler('getCrew').displayMenu()
+firstVoyage = [flightData[0], flightData[1]]
+voyageFromData = Voyage(firstVoyage)
+print(voyageFromData)

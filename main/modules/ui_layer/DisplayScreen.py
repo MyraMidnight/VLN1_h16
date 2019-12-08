@@ -54,7 +54,7 @@ class DisplayScreen:
             newString = string.ljust(limit)
             return newString
 
-    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, colLimit:int = 0):
+    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10):
         #create the header row (print the keys)
         headerKeys = []
         print()
@@ -67,8 +67,6 @@ class DisplayScreen:
 
         if rowLimit == 0:
             rowLimit = len(data)
-        if colLimit == 0:
-            colLimit = len(data[0])
 
         for line in data[:rowLimit]:
             row = []
@@ -114,6 +112,6 @@ class DisplayScreen:
         else: 
             self.printList(data,rowLimit=rowLimit)
 
-    def printOptions(self, data: list, rowLimit:int = 0):
-        """Prints a enumerated list that the user can choose from."""
-        self.printListFormat(data=data, formatTemplate, rowLimit=rowLimit, enumerate = True)
+    def printOptions(self, data: list, formatTemplate:str = ""):
+        """Prints a enumerated list that the user can choose from. \n Just provide the data and list of """
+        #self.printListFormat(data=data, rowLimit=rowLimit, enumerate = True)
