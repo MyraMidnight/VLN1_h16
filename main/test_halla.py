@@ -1,6 +1,10 @@
 # Here we will create the main program
 # ------------------------  Import classes  ------------------ 
 from modules.ui_layer.MenuHandler import MenuHandler
+
+from modules.ui_layer.DisplayScreen import DisplayScreen
+from modules.data_layer.IOAPI import IOAPI
+
 # ------------------------  Global variables  ---------------- 
 ROLE_PILOT = "pilot"
 ROLE_CAPTAIN = "captain"
@@ -18,4 +22,8 @@ def main():
   MenuHandler().displayMenu()
 
 # ------------------------  Run program  --------------------- 
-main()
+# main()
+
+data = IOAPI().opener("NewPastFlights.csv")
+
+DisplayScreen().printList(data, 5, 10)

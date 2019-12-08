@@ -150,11 +150,31 @@ fórum í stofu V309 og fengum góða hjálp með hvernig við ætlum að skipta
 
 
 ## Fimmtudagurinn 5. desember 2019
+> Damian mætti 9:45, Stefanía mætti 9:30, Halla mætti 9, Fannar var veikur heima en gerði allskonar þaðan.
+
+Vorum að fá endurgjöf fyrir hönnunarskýrsluna. Þurfum að hugsa klasaritið uppá nýtt og það stóð í skýrslunni að við ættum að fá hjálp sem fyrst hjá leiðbeinanda vegna klasaritsins.
+
+
+* Fá hjálp með klasaritið
+* geta tengt layerin saman með menu og svona
+* útfæra klasa og method
+* þurfum að skipta þessu meira niður og segja hvaða method/klasa sem við ætlum/erum að gera
+
+
+> ákváðum að fá frekar hjálp með klasaritið þegar Fannar er þar sem hann var lang mest í klasaritinu. 
+> Damian náði að redda þannig að menuinn virkaði og náum að prenta hann út
+> gerðum allskonar method 
 
 
 
 ## Föstudagurinn 6. desember 2019
+> Stefanía og Halla mættu rúmlega 9:30. Damian rúmlega 10, Fannar er ennþá veikur en ætlar að koma í dag, mætir líklegast ca kl. 11:30
 
+Fannar ætlar að koma í skólann og sjá hvernig menuinn tengist og sýna okkur hvað hann gerði heima í gær.
+
+* tala við leiðbeinanda með klasaritið
+* gera fleiri methods
+* ná góðri virkni á milli layera
 
 
 
@@ -175,6 +195,10 @@ fórum í stofu V309 og fengum góða hjálp með hvernig við ætlum að skipta
 
 ## Fimmtudagurinn 12. desember 2019
 
+* Fínpússa og yfirferð.
+* Passa að allur kóði sé auðskilin og vel kommentaður.
+* Fara vel yfir skýrsluna og passa að hún sé í samræmi við forritið okkar.
+
 
 
 ## Föstudagurinn 13. desember 2019
@@ -182,3 +206,9 @@ Afurðum verkefnis skilað:
 – Uppfærð hönnunarskýrsla í pdf formi.
 – Kóða og öðrum viðeigandi gögnum verkefnis skilað sem skjalasafni (zip skrá).
 – Kennslumyndband (.avi eða .mov) sem sýnir A-kröfur og aðra helstu fídusa í kerfinu.
+
+
+
+* Fínpússa og yfirferð.
+* Passa að allur kóði sé auðskilin og vel kommentaður.
+* Fara vel yfir skýrsluna og passa að hún sé í samræmi við forritið okkar.
