@@ -156,24 +156,23 @@ class GetLogic :
             return False
         
         #ask for datetime from user
-        user_input = InputHandler().dateOnly("Input date of the start of the week: ")
-        check_date = DateUtil(user_input)
+        refDate_str = InputHandler().dateOnly()
+        refDate_obj = DateUtil(refDate_str).createObject()
+        #collect the days of a week
+        checkWeek_list = []
+        checkWeek_list.append(refDate_str)
+        for day in range(7):
+            refDate_obj = refDate_obj + datetime.timedelta(days=1)
+            checkWeek_list.append(refDate_obj.isoformat())
         schedule_list = []
-        counter = 1
-        while counter != 8:
-            for flight in voyagePackage:
-                departure = DateUtil(flight['departure']).date
-                if check_date.date == departure:
+        #find all the flights that are in the range of the week and check those flights for the employee ssn and add the flight to the schedule if so
+        for flight in voyagePackage:
+            departure = DateUtil(flight['departure']).date
+            for date in checkWeek_list:
+                if date[:10] == departure:
                     if user_ssn == flight['captain'] or user_ssn == flight['copilot'] or user_ssn == flight['fsm'] or user_ssn == flight['fa1'] or user_ssn == flight['fa2']:
                         schedule_list.append(flight)
-            #attempt to turn the DateUtil into datetime
-            check_date = DateUtil(check_date).createObject()
-            #add a day to the date
-            check_date = check_date + datetime.timedelta(days=1)
-            #attempt to turn it back into DateUtil so it can keep comparing
-            check_date = DateUtil(check_date)
-            counter += 1
         
-        return DisplayScreen().printList(schedule_list)
+        return DisplayScreen().printList(schedule_list,colWidth=13)
         
         
