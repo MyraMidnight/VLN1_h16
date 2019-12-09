@@ -112,7 +112,7 @@ class MenuHandler:
         for count, item in enumerate(currentMenu,1):
             menuTitle = menuOptions[item]["title"]
             print("{}) {}".format(count, menuTitle))
-        print("\t(You can also quit (q) or  cancel (c))")
+        print("(You can also quit (q) or  cancel (c))")
 
     def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
@@ -128,6 +128,10 @@ class MenuHandler:
             
             if menuTitle not in self.breadcrumbs:
                 self.breadcrumbs.append(menuTitle)
+
+            if menuTitle == "Main menu":
+                self.breadcrumbs = ["Main menu"]
+
 
             #print the header and menu
             self.printHeader(menuTitle)
