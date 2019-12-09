@@ -39,6 +39,7 @@ class IOAPI:
     
 
     def appender(self,fileName,filePackage):
+        filename = 'data/STUDENTDATA/' + fileName 
         csv_columns = [key for key in filePackage]
         #opens the file with filename in write mode
         filename = 'data/STUDENTDATA/' + fileName 

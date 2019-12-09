@@ -31,7 +31,8 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Pilot":
                 list_to_print.append(x)
-        return DisplayScreen().printList(list_to_print,colWidth=17)
+        print(list_to_print)
+        return DisplayScreen().printList(list_to_print, colWidth = 15)
                 
     
     def getFlightAttendants(self):

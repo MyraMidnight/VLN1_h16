@@ -4,6 +4,7 @@ from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DateUtil import DateUtil
 import datetime
 
+getInput = InputHandler()
 
 FILE_DESTINATIONS = "NewDestinations.csv"
 FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
@@ -100,12 +101,12 @@ class Voyage:
         DisplayScreen().printOptions(destination_list, "destinations")
 
         # Seect a destination
-        destination_str =  InputHandler().numChoices(len(destination_list),"Select index of destination for this voyage: ")
+        destination_str =  getInput.numChoices(len(destination_list),"Select index of destination for this voyage: ")
         self.__destination = destination_list[int(destination_str)-1]
 
         # Departure messages for inputHandler
-        inputDepartureDate_str = "Enter departure date from Iceland to {}: ".format(self.__destination["destination"])
-        inputDepartureTime_str = "Enter departure time: "
+        inputDepartureDate_str = "Enter departure date from Iceland to {} (DD/MM/YYYY): ".format(self.__destination["destination"])
+        inputDepartureTime_str = "Enter departure time (HH:MM): "
         ErrorDepartureTime_str = "ERROR: Airport is occupied at selected time \nplease input a new departure time: "
 
         # get the departure time from inputHandler
@@ -114,7 +115,7 @@ class Voyage:
         # Find a date and time for arrival
 
         inputArrivalDate_str = "Enter return date to Iceland from {}: ".format(self.__destination["destination"])
-        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
+        self.__return = getInput.dateOnly(inputArrivalDate_str)
         # Find available aircraft
         self.selectAircraft()
 
@@ -140,14 +141,14 @@ class Voyage:
         # the user can choose the voyage he/she wants to update from the list of voyages, the user enters the number of the voyage (flight)
 
         upcomingVoyage_list = []  #get list from data layer, this is just for now
-        numberOfVoyage_int = int(InputHandler().dateOnly("Enter the number of the voyage in the list you want to update/change: "))
+        numberOfVoyage_int = int(getInput.dateOnly("Enter the number of the voyage in the list you want to update/change: "))
         theVoyage = upcomingVoyage_list[numberOfVoyage_int]
 
         # print the info that are currently right for the voyage, if there are any staff members in some roles or if the roles are empty and there needs to fill all the roles
         print(theVoyage)
 
         # the user inputs the number of the role he/she wants to change/fill.
-        roleToChange_int = int(InputHandler().dateOnly("Enter the number of the role in the list you want to update/change: "))
+        roleToChange_int = int(getInput.dateOnly("Enter the number of the role in the list you want to update/change: "))
 
         # the user gets a list of all staff members who can play that role and who ara avilable during the voyage's time
 
@@ -155,7 +156,7 @@ class Voyage:
         rolelist_list = []   #just for now need to get from data layer
 
         # ask the user if he/she wants to save the changes or if he/she wants to change/fill some other roles
-        toChangeOrNotToChange_bool = InputHandler().dateOnly("Do you want to save the changes? (y/n) ")
+        toChangeOrNotToChange_bool = getInput.dateOnly("Do you want to save the changes? (y/n) ")
         
         # when he wants to save then save this voyage info in the data layer.
         # if the user wants to quit then no changes were made.
@@ -193,17 +194,17 @@ class Voyage:
 
         # Select a aircraft from list
         inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
-        self.__aircraftID = InputHandler().numChoices(len(available_planes), inputAircraft_str)
+        self.__aircraftID = getInput.numChoices(len(available_planes), inputAircraft_str)
 
     # --------- Departure Time ---------------------------------------------------------------
     def selectDepartureTime(self,questionDate:str, questionTime:str, errorMessage:str):
         """Prompts the user to input date and time"""
-        selectedDateTime = InputHandler().dateTime(questionDate,questionTime)
+        selectedDateTime = getInput.dateTime(questionDate,questionTime)
 
         #ERROR Check if there is any departing from Iceland at this dateTime
         departingFlights_list = self.findDepartingFlights() #list of upcoming flights departing from Iceland
         while selectedDateTime in departingFlights_list:
-            newTime_str = InputHandler().timeOnly(errorMessage)
+            newTime_str = getInput.timeOnly(errorMessage)
 
             #update the time of departure
             newDateTime_str = DateUtil().updateTime(selectedDateTime, newTime_str)
