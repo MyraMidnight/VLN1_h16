@@ -176,12 +176,26 @@ Fannar ætlar að koma í skólann og sjá hvernig menuinn tengist og sýna okku
 * gera fleiri methods
 * ná góðri virkni á milli layera
 
+Við töluðum við krullótta dæmatímakennarann og hann hjálpaði okkur með import og klasaritið 
 
+Löguðum menu handlerinn þannig hann virkar núna vel
+
+Náðum að fatta hvernig import virkar
 
 
 
 # Vika 3
 ## Mánudagurinn 9. desember 2019
+> Stefanía og Halla voru mættar 9:30, Damian rúmlega 10 og Fannar ca 10:17
+
+* Fannar ætlar að klára Get methods (allavega A-kröfur)
+* Damian er að klára createEmployee
+* Stefanía ætlar að klára inputHandler, láta q (quit) virka svo forritið klárar að keyra
+* Halla og Damian ætla svo að klára öll create methods
+
+Heilt yfir eru markmið dagsins að klára alveg Get og Create! Woohoo
+
+
 
 
 
