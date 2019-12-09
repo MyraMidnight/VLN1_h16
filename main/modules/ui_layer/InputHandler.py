@@ -1,3 +1,10 @@
+RANK_CAPTAIN = "Captain"
+RANK_COPILOT = "Co-Pilot"
+RANK_FSM = "Flight Service Manager"
+RANK_FA = "Flight Attendant"
+ROLE_PILOT = "Pilot"
+ROLE_CC = "Cabin Crew"
+
 import datetime
 import re
 from modules.ui_layer.DateUtil import DateUtil
@@ -43,6 +50,189 @@ class InputHandler:
     #===================================================================================
     
     # get date and time
+
+    #---------------------- 
+    # Input full name (createEmployee)
+    #---------------------- 
+    def fullName(self, inputQuestion : str = ""):
+        """Input has to only be alphabetical characters and has to have at least one space in str"""
+        
+        name_str = input(inputQuestion)
+
+        #Validity checks
+        # Checks whether or not the name  consists of only alphabetical characters
+        while not name_str.replace(" ","").isalpha():    
+            print("Please input alphabetical characters only")
+            name_str = input(inputQuestion)
+
+        #Checks whether or not user had input both the surname and lastname
+        while " " not in name_str:  
+            print("Please input both surname and lastname")
+            name_str = input(inputQuestion)
+
+        return name_str
+
+    #---------------------- 
+    # Input social security number
+    #----------------------     
+    def ssn(self, inputQuestion:str = ""):
+        """Input for social security number (kennitala)"""  
+        return self.numSetLength(10, inputQuestion)
+
+
+    #---------------------- 
+    # Input address (createEmployee)
+    #----------------------  
+
+    def address(self, inputQuestion: str = ""):
+        """Input for address"""
+        address_str = input(inputQuestion)
+
+        #Validity check, checks whether the address is in correct format
+        while " "  not in address_str:
+            print("Please input both the streetname and streenumber")
+            address_str = input(inputQuestion)
+        
+        #Separates the string into streetname and street number
+        streetName_str = (address_str.split())[0]
+        streetNumber_str = (address_str.split())[1]
+
+        while not streetName_str.isalpha() or not streetNumber_str.isdigit():
+            print("Invalid input")
+            while " "  not in address_str:
+                print("Please input both the streetname and streenumber")
+                address_str = input(inputQuestion)
+            streetName_str = (address_str.split())[0]
+            streetNumber_str = (address_str.split())[1]
+
+        return address_str
+
+
+    #---------------------- 
+    # Input phone number (createEmployee)
+    #----------------------  
+    def phoneNumber(self, inputQuestion: str = ""):
+        """Input for phone number. Returns a 7-digit phone number"""
+        return self.numSetLength(7, inputQuestion)
+
+
+    #---------------------- 
+    # Input e-mail (createEmployee)
+    #----------------------  
+    def email(self, inputQuestion: str = ""):
+        """Input for email"""
+
+        email_str = input(inputQuestion)
+        #Validity check, checks whether there is an "@" and "." and whether they are placed in correct order
+        while "@" not in email_str or "." not in email_str or email_str.find("@") > email_str.find("."):
+            print("Please input correct e-mail address")
+            email_str = input(inputQuestion)
+        
+        return email_str
+
+
+    #---------------------- 
+    # Input role (createEmployee)
+    #----------------------  
+    def role(self, inputQuestion: str = ""):
+        """Input for employee role"""
+        #Asks for a single digit input to choose between roles
+        role_str = self.numSetLength(1, inputQuestion)
+        valid_options_list = ["1","2"] #These are valid inputs
+        #Validity check for the input
+        while role_str not in valid_options_list:
+            print("Please choose a valid input")
+            role_str = self.numSetLength(1, inputQuestion)
+        
+        #Changes the numbers into coresponding strings
+        if role_str == "1":
+            role_str = ROLE_PILOT
+        else:
+            role_str = ROLE_CC
+
+        return role_str
+
+
+    #---------------------- 
+    # Input rank (createEmployee)
+    #----------------------  
+    def rank(self, role, inputQuestion: str = ""):
+        """Input for employee rank"""
+        #Calls for a single digit input
+        rank_str = self.numSetLength(1, inputQuestion)
+        valid_options_list = ["1","2"] #These are valid inputs
+        #Validity checks the input
+        while rank_str not in valid_options_list:
+            print("Please choose a valid input")
+            rank_str = self.numSetLength(1, inputQuestion)
+        
+        #Turns the input number into a string with rank name according to the role
+        if role == ROLE_PILOT:  #Ranks for the Pilots
+            if rank_str == "1":
+                rank_str = RANK_CAPTAIN
+            else:
+                rank_str = RANK_COPILOT
+            return rank_str
+        else:   #Ranks for the Cabin Crew
+            if rank_str == "1":
+                rank_str = RANK_FSM
+            else:
+                rank_str = RANK_FA
+        
+        return rank_str
+
+
+    #---------------------- 
+    # Input license (createEmployee)
+    #----------------------  
+    def license(self, aircraftType_list: list, inputQustion: str = ""):
+        """Input for pilots license. Returns a validated license"""
+        license_str = input(inputQustion)
+        #Validity check, checks if there are plane types in pur system corresponding to the input license
+        while license_str not in aircraftType_list:
+            print("Invalid input")
+            license_str = input(inputQustion)
+
+        return license_str
+
+
+    #---------------------- 
+    # Input confirmation (createEmployee)
+    #----------------------  
+    def yesOrNoConfirmation(self, inputQuestion: str = ""):
+        """Returns True if user confirms the input question. 
+        Returns False if user does not confirm the input question."""
+        confirmation_str = input(inputQuestion)
+        #Possible inputs
+        valid_input_list = ["y", "Y","n", "N"]
+        affirmative_list = ["y", "Y"]
+        negative_list = ["n", "N"]
+        #Validity check
+        while confirmation_str not in valid_input_list:
+            print("Invalid input")
+            confirmation_str = input(inputQuestion)
+
+        if confirmation_str in affirmative_list:
+            return True
+        elif confirmation_str in negative_list:
+            return False
+
+
+    #---------------------- 
+    # Choose input to edit (createEmployee) (C-krafa)
+    #----------------------   
+    # def edit(self, inputQuestion: str = ""):
+    #     choice_str = self.numSetLength(1, inputQuestion)
+    #     while int(choice_str) not in range(1,9):
+    #         print("Invalid input")
+    #         choice_str = self.numSetLength(1, inputQuestion)
+        
+    #     return choice_str
+
+
+    #---------------------- 
+    # Input date and time
+    #----------------------   
     def dateTime(self, questionDate:str = "Input a date (DD/MM/YYYY): ", questionTime:str ="Input time (HH:MM): "):
         """Input is date and time"""      
         print("")

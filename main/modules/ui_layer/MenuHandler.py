@@ -20,7 +20,7 @@ class MenuHandler:
             },
             "1.1" : {
                 "title": "Employee",
-                "function": "main" # LLAPI().createEmployee
+                "function": LLAPI().createEmployee
             },
             "1.2" : {
                 "title": "Voyage",
