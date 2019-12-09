@@ -25,13 +25,13 @@ def main():
   MenuHandler().displayMenu()
 
 # ------------------------  Run program  --------------------- 
-main()
+#main()
 
-#data = IOAPI().opener("NewPastFlights.csv")
+data = IOAPI().opener("NewUpcomingFlights.csv")
 #print("Þetta er datað", data)
 
-#DisplayScreen().printListFormat(data, 5, 10)
-#DisplayScreen().printList(data, 6, 12)
+DisplayScreen().printListFormat(data, "flights")
+#DisplayScreen().printList(data, 6, 16)
 
 #date = InputHandler().dateTime()
 #print(date)
