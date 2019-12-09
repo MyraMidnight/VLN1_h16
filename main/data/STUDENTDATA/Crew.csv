@@ -8,7 +8,7 @@ ssn,name,role,rank,licence,address,phonenumber,email
 2211658134,Charla Johnson,Pilot,Copilot,NABAE146,Fellsmúli 8,8998808,cj@na.is
 2504939263,Sam Preciado,Pilot,Copilot,NABAE146,Fellsmúli 9,8998809,sp@na.is
 1900769521,Jasmine Hagadone,Pilot,Copilot,NABAE146,Fellsmúli 10,8998810,jh@na.is
-2500812671,Anna Phillips,Pilot,Copilot,NAFokkerF28,Fellsmúli 11,8998811,ap@na.is,
+2500812671,Anna Phillips,Pilot,Copilot,NAFokkerF28,Fellsmúli 11,8998811,ap@na.is
 1309927223,Patricia Bates,Pilot,Copilot,NAFokkerF28,Fellsmúli 12,8998812,
 1600904199,Sherry Walker,Cabincrew,Flight Service Manager,N/A,Fellsmúli 13,8998813,
 0303758167,Margarita Fischer,Cabincrew,Flight Service Manager,N/A,Fellsmúli 14,8998814,
@@ -34,8 +34,12 @@ ssn,name,role,rank,licence,address,phonenumber,email
 2602806942,Teresa Thruman,Cabincrew,Flight Attendant,N/A,Fellsmúli 34,8998834,
 1107951952,Elizabeth Mcfadden,Cabincrew,Flight Attendant,N/A,Fellsmúli 35,8998835,
 Damian Motybel,2211983799,Alfaskeid 82,7796133,damian18@ru.is,Pilot,Captain,NABAE146,
+<<<<<<< HEAD
 2211983799,Damian Motybel,Pilot,Captain,NABAE146,Alfaskeid 82,7796133,damian18@ru.is,
 1208992356,John Anders,Pilot,Captain,NABAE146,Nassau 11,8554362,john@na.is,
 2312881324,John Anders,Pilot,Co-Pilot,NAFokkerF100,naussau 11,8665433,john@na.is,
 2311914363,Hanna Winner,Pilot,Captain,NAFokkerF28,Menntavegur 1,2341123,hanna@na.is
 2209923312,Beth Stella,Pilot,Captain,NAFokkerF28,Vesturgata 1,4311253,beth@na.is
+=======
+2211983799,Damian Motybel,Pilot,Captain,NABAE146,Alfaskeid 82,7796133,damian18@ru.is
+>>>>>>> master
