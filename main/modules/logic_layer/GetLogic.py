@@ -31,7 +31,6 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Pilot":
                 list_to_print.append(x)
-        print(list_to_print)
         return DisplayScreen().printList(list_to_print, colWidth = 15)
                 
     
@@ -137,14 +136,25 @@ class GetLogic :
                     working_list.append(temp_dict)
         
         return DisplayScreen().printList(working_list,colWidth=17)
-    '''
+    
     def getWeekWork(self):
         #fetch employee info
         employeePackage = IOAPI().opener('Crew.csv')
         #fetch Voyage info
         voyagePackage = IOAPI().opener('NewUpcomingFlights.csv')
+        #ask for SSN
+        user_ssn = InputHandler.ssn("Please input the SSN of the Employee you want a schedule of: ")
         #ask for datetime from user
         user_input = InputHandler().dateOnly()
-        starting_date = DateUtil(user_input).date
-    '''
+        check_date = DateUtil(user_input)
+        '''
+        for x in range(7):
+            for flight in voyagePackage:
+                departure = DateUtil(line['departure']).date
+                if check_date.date == departure:
+                    if user_ssn == flight['captain'] or user_ssn == flight['copilot'] and user_ssn == flight['fsm'] and user_ssn ==
+                    '''
+
+
+
         
