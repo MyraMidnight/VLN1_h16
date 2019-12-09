@@ -90,15 +90,17 @@ class InputHandler:
 
         #Validity check, checks whether the address is in correct format
         while " "  not in address_str:
-            print("Please input both the streetname and streenumber")
+            print("Please input both the streetname and streetnumber")
             address_str = input(inputQuestion)
         
         #Separates the string into streetname and street number
-        streetName_str = (address_str.split())[0]
-        streetNumber_str = (address_str.split())[1]
+        address_list = address_str.split()
+        streetName_str = address_list[0]
+        streetNumber_str = address_list[-1]
 
         while not streetName_str.isalpha() or not streetNumber_str.isdigit():
-            print("Invalid input")
+            print("Invalid input. Please input both the streetname and streetnumber")
+            address_str = input(inputQuestion)
             while " "  not in address_str:
                 print("Please input both the streetname and streenumber")
                 address_str = input(inputQuestion)
@@ -187,10 +189,12 @@ class InputHandler:
     #----------------------  
     def license(self, aircraftType_list: list, inputQustion: str = ""):
         """Input for pilots license. Returns a validated license"""
+        print("Possible Plane types: \n", aircraftType_list)
         license_str = input(inputQustion)
         #Validity check, checks if there are plane types in pur system corresponding to the input license
         while license_str not in aircraftType_list:
             print("Invalid input")
+            print("Possible Plane types: \n", aircraftType_list)
             license_str = input(inputQustion)
 
         return license_str

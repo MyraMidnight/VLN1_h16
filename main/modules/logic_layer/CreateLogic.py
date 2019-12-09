@@ -35,13 +35,13 @@ class CreateLogic :
         self.phonenumber = InputHandler().phoneNumber("Input a 7-digit phone number:")
         self.email = InputHandler().email("Input e-mail address: ")
         #Role
-        self.role = InputHandler().role("Choose role: \n 1) "+ ROLE_PILOT +" \n 2) "+ ROLE_CC +" \n")
+        self.role = InputHandler().role("Possible roles: \n 1) "+ ROLE_PILOT +" \n 2) "+ ROLE_CC +" \n" + "Choose role: ")
 
         #Rank
         if self.role == ROLE_PILOT:
-            self.rank = InputHandler().rank(self.role, "Choose rank: \n 1) "+ RANK_CAPTAIN +" \n 2) "+ RANK_COPILOT +" \n")
+            self.rank = InputHandler().rank(self.role, "Possible ranks: \n 1) "+ RANK_CAPTAIN +" \n 2) "+ RANK_COPILOT +" \n" + "Choose rank: ")
         else:
-            self.rank = InputHandler().rank(self.role, "Choose rank: \n 1) " + RANK_FSM + " \n 2) "+ RANK_FA + " \n")
+            self.rank = InputHandler().rank(self.role, "Possible ranks: \n 1) " + RANK_FSM + " \n 2) "+ RANK_FA + " \n" + "Choose rank: ")
 
         #License
         #Gets a list of dictionaries containing aircraft type specifications
