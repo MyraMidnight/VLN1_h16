@@ -2,11 +2,12 @@
 # ------------------------  Import classes  ------------------ 
 from modules.ui_layer.MenuHandler import MenuHandler
 # ------------------------  Global variables  ---------------- 
-ROLE_PILOT = "pilot"
-ROLE_CAPTAIN = "captain"
-ROLE_COPILOT = "coPilot"
-ROLE_ATTENDANT = "flightAttendant"
-ROLE_LEAD_ATTENDANT = "headFlightAttendant"
+RANK_CAPTAIN = "Captain"
+RANK_COPILOT = "Co-Pilot"
+RANK_FSM = "Flight Service Manager"
+RANK_FA = "Flight Attendant"
+ROLE_PILOT = "Pilot"
+ROLE_CC = "Cabin Crew"
 MODEL_PLANE = "" #instance of plane
 MODEL_EMPLOYEE = "" #instance of employee
 
