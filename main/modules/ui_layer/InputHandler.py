@@ -5,14 +5,16 @@ from modules.ui_layer.DateUtil import DateUtil
 class InputHandler:
     def __init__(self):
         self.exitKey = "q"
-        self.isoFormat = "%Y-%m-%dT%H:%M:%S%z"
 
     def __str__(self):
-        return "Handles user input, returns the value to caller \nmethods: numChoices"
-    #--------------------- - 
-    # Handles numbered input, for selecting from listed options
-    #---------------------- 
-    def numChoices(self, numOfChoices: int, inputQuestion : str = "Pick a number: ", exitKey: str = "" ):
+        """Fancy print, gives some basic info about instance of InputHandler"""
+        return "exitKey: {}".format(self.exitKey)
+ 
+    #===================================================================================
+    # Get index of chosen option (numChoices)
+    #===================================================================================
+
+    def numChoices(self, numOfChoices: int, inputQuestion : str = "Pick a number: " ):
         """Function that handles getting number input from set range, 
         Returns the input choice-1 (so it can be used as list index if needed)\n
         Required: numer for how many choices are available \n
@@ -37,34 +39,12 @@ class InputHandler:
             #repeats the loop with previous parameters
             self.numChoices(numOfChoices,inputQuestion,exitKey)
 
-    #---------------------- 
-    # Input string of numbers of set length
-    #---------------------- 
+
+    #===================================================================================
+    # Dates and Times!
+    #===================================================================================
     
-    def numSetLength(self,numLength:int, inputQuestion: str = ""):
-        """Input can only be numbers of a set length (numLength)"""
-        if len(inputQuestion) == 0:
-            inputQuestion = "Please insert {} numbers without spaces: ".format(str(numLength)) 
-        num_string = input(inputQuestion)
-        while len(num_string) != numLength or not num_string.isdigit():
-            if num_string == self.exitKey:
-                return False
-            else: 
-                num_string = input("Invalid input \n"+ inputQuestion)
-        else:
-            #once the input meets requirements
-            return num_string
-
-    #---------------------- 
-    # Input social security number
-    #----------------------     
-    def ssn(self, inputQuestion:str = ""):
-        """Input for social security number (kennitala)"""  
-        return self.numSetLength(10, inputQuestion)
-
-    #---------------------- 
-    # Input date and time
-    #----------------------   
+    # get date and time
     def dateTime(self, questionDate:str = "Input a date (DD/MM/YYYY): ", questionTime:str ="Input time (HH:MM): "):
         """Input is date and time"""      
         date = self.dateOnly(questionDate)
@@ -79,9 +59,7 @@ class InputHandler:
             #if either date or time returned false
             return False
 
-    #---------------------- 
-    # Input time
-    #----------------------   
+    # Get only the time (timeOnly)
     def timeOnly(self, inputQuestion:str = "Input time (HH:MM): "):
         """Checks input for HH:MM time, returns string HH:MM:SS """
         try:
@@ -101,9 +79,7 @@ class InputHandler:
             print("Not a valid time, try again")
             self.timeOnly()
 
-    #---------------------- 
-    # Input date only (returns full dateTime format)
-    #----------------------   
+    # Get only the date
     def dateOnly(self, inputQuestion:str = "Input a date (DD/MM/YYYY): "):
         """Checks input for date, DD/MM/YYYY, returns datetime object"""
         try:
@@ -123,7 +99,11 @@ class InputHandler:
             print("Not a valid date, try again")
             self.dateOnly()
             
-
+    #===================================================================================
+    # Get strings of specific length and format
+    #===================================================================================
+ 
+    # any text of X length
     def textSetLength(self, numLength:int, inputQuestion:str = ""):
         """Input is only a text string of set length"""
         if len(inputQuestion) == 0:
@@ -137,21 +117,44 @@ class InputHandler:
                 input_string = input("Invalid input\n" + inputQuestion)
 
 
+    # only numbers of x length
+    def numSetLength(self,numLength:int, inputQuestion: str = ""):
+        """Input can only be numbers of a set length (numLength)"""
+        if len(inputQuestion) == 0:
+            inputQuestion = "Please insert {} numbers without spaces: ".format(str(numLength)) 
+        num_string = input(inputQuestion)
+        while len(num_string) != numLength or not num_string.isdigit():
+            if num_string == self.exitKey:
+                return False
+            else: 
+                num_string = input("Invalid input \n"+ inputQuestion)
+        else:
+            #once the input meets requirements
+            return num_string
+
+    #===================================================================================
+    # Specific input (names, ssn, ID... )
+    #===================================================================================
+ 
+    # Name string, only allows alpha and spaces 
     def name(self, inputQuestion:str = "Input a name: "):
         """Input for names"""
         name = input(inputQuestion)
-        return "Jóhann Arnars"
+        name = "Jóhann Arnars"
+        return name
         # while all(letter.isalpha() or letter.isspace() for letter in name):
         #     print("not valid name (needs to be alphabet letter or space)")
         #     name = input(inputQuestion)
         # else:
         #     return name
 
+    # Get Social security number (ssn)
+    def ssn(self, inputQuestion:str = ""):
+        """Input for social security number (kennitala)"""  
+        return self.numSetLength(10, inputQuestion)
+
+    # flightNumber format
     def flightId(self):
         """Input for flight ID, just checks if it's a valid format"""
         input("test input: ")
         return "NA1234"
-
-#InputHandler().numSetLength(7)
-#InputHandler().numChoices(4)
-#InputHandler().textSetLength(5)

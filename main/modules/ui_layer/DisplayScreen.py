@@ -1,7 +1,7 @@
 
 class DisplayScreen:
     def __init__(self):
-        self.stringLimits = { #column widths for specific data
+        self.__stringLimits = { #column widths for specific data
             "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
             "flights": {'flightNumber': 10, "departingFrom": 10, "arrivingAt": 10 , "departure": 10, "arrival": 10, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
             "destinations": {"id": 5, "destination": 18},
@@ -11,7 +11,7 @@ class DisplayScreen:
 
         }
         #specifies what type of stringLimits and what columns to print
-        self.printTemplates = {
+        self.__printTemplates = {
             "crew": { 
                 "dataType": "crew", 
                 "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"]
@@ -88,14 +88,14 @@ class DisplayScreen:
         if rowLimit == 0:
             rowLimit = len(data)
             
-        if formatTemplate in self.printTemplates:
-            template = self.printTemplates[formatTemplate]
+        if formatTemplate in self.__printTemplates:
+            template = self.__printTemplates[formatTemplate]
             #set the row limit
             #create the header row (print the keys)
             headerKeys = []
             print()
             for column in template["columns"]:
-                stringLimit = self.stringLimits[template["dataType"]][column]
+                stringLimit = self.__stringLimits[template["dataType"]][column]
                 trimmedKey = self.cutString(column,stringLimit)
                 headerKeys.append(trimmedKey)
             headerRow = " | ".join(headerKeys)
@@ -122,7 +122,7 @@ class DisplayScreen:
                 for column in template["columns"]:
                     #if value is longer than set limit width, then cut 
                     colValue = line[column]
-                    row.append(self.cutString(colValue,self.stringLimits[template["dataType"]][column]))
+                    row.append(self.cutString(colValue,self.__stringLimits[template["dataType"]][column]))
                 #joins the columns together with '|' seperator
                 print(" | ".join(row)) 
         else: 
