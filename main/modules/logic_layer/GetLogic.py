@@ -121,7 +121,9 @@ class GetLogic :
                     combo_list.append((line['fa1'],line["arrivingAt"]))
                 if line['fa2'] != "" and line['fa2'] not in combo_list:
                     combo_list.append((line['fa2'],line["arrivingAt"]))
-        
+        if len(combo_list) == 0:
+            print("No employee is working on the specified day")
+            return False
         working_list = []
         #finds the employees who were on the flights and finds the destination name based on the 3 letter arrival
         for employee in employeePackage:
