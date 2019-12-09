@@ -2,6 +2,9 @@
 # ------------------------  Import classes  ------------------ 
 from modules.ui_layer.MenuHandler import MenuHandler
 
+from modules.ui_layer.InputHandler import InputHandler
+
+
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.data_layer.IOAPI import IOAPI
 
@@ -22,8 +25,11 @@ def main():
   MenuHandler().displayMenu()
 
 # ------------------------  Run program  --------------------- 
-# main()
+main()
 
-data = IOAPI().opener("NewPastFlights.csv")
+#data = IOAPI().opener("NewPastFlights.csv")
 
-DisplayScreen().printList(data, 5, 10)
+#DisplayScreen().printList(data, 5, 10)
+
+#date = InputHandler().dateTime()
+#print(date)

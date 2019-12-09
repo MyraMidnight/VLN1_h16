@@ -1,3 +1,5 @@
+from modules.models.Voyage import Voyage
+
 class CreateLogic :
     """Create methods for logic layer"""
 
@@ -15,22 +17,21 @@ class CreateLogic :
         a_dict = {}
 
         if action == "name" and inputHandler != "":
-            self.name == inputHandler
-            print("".format(self.name))
+            self.name = inputHandler
         elif action == "ssn" and inputHandler != "":
-            self.ssn == inputHandler
+            self.ssn = inputHandler
         elif action == "role"  and inputHandler != "":
-            self.role == inputHandler
+            self.role = inputHandler
         elif action == "rank" and inputHandler != "":
-            self.rank == inputHandler
+            self.rank = inputHandler
         elif action == "phonenumber" and inputHandler != "":
             self.phonenumber = inputHandler
         elif action == "license" and inputHandler != "":
-            self.license == inputHandler
+            self.license = inputHandler
         elif action == "email" and inputHandler != "":
-            self.email == inputHandler
+            self.email = inputHandler
         elif action == "address" and inputHandler != "":
-            self.address == inputHandler
+            self.address = inputHandler
         elif action == "confirmation":
             a_dict[ssn] = self.ssn
             a_dict[name] = self.name
@@ -45,3 +46,6 @@ class CreateLogic :
 
         return a_dict
 
+    def createVoyage(self):
+        return Voyage().createVoyage()
+        

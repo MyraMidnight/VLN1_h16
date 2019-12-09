@@ -8,10 +8,6 @@ from modules.ui_layer.InputHandler import InputHandler
 
 class LLAPI : 
     """Logic layer API handler"""
-    def __init__(self):
-        self.currentMenu = "main"
-
-
     #------- CREATE
     def createDestination(self): 
         """Create a new destination. Requests input for destinationLand, destinationAirport, 
@@ -32,7 +28,7 @@ class LLAPI :
     def createVoyage(self):
         """Creates a voyage by creating two flights and adding them to the registry. (flugin hafa sitthvort flugnúmerið)
             (áfangastaður, dagsetning, brottfaratími frá Íslandi og aftur til baka til Íslands)) """
-
+        return CreateLogic().createVoyage()
 
     #------- GET
     def getSingleEmployee(self):

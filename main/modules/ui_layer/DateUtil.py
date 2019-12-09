@@ -66,4 +66,5 @@ class DateUtil:
 
     def createObject(self):
         """Creates and returns a datetime object"""
-        return datetime().datetime(self.year,self.month,self.day,self.hour,self.minute,self.second)
+        datetimes = [int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second)]
+        return datetime.datetime(*datetimes)

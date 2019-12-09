@@ -29,7 +29,6 @@ class GetLogic :
     def getPilots(self):
         #fetches employee info
         filePackage = IOAPI().opener('Crew.csv')
-        print("filepackage: ",filePackage)
         #goes through all the lines in the employee info
         for x in filePackage:
             #checks the SSN of the employee

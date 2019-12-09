@@ -42,3 +42,19 @@ se the individual parsers to get a specific part of the datetime string.
 * `hour_parse(datetime)`
 * `minute_parse(datetime)`
 * `second_parse(datetime)`
+* `updateTime(datetime, time)`, overwrites the time part of datetime string with new time
+* `createObject()`, returns a datetime object with current attributes
+
+## Some tips and tricks
+### Using datetime object to add/subtract time 
+There is a neat method in datetime called `timedelta()` that lets you adjust the time.
+```python
+import datetime
+from modules.ui_layer.DateUtil import DateUtil
+
+#creates a datetime object
+dateObject = DateUtil("2020-11-03T10:20:00").createObject()
+
+# adding 4 hours to the dateObject with 'timedelta'
+newTime = dateObject + datetime.timedelta(hours=4) 
+```
