@@ -45,8 +45,11 @@ class InputHandler:
     # get date and time
     def dateTime(self, questionDate:str = "Input a date (DD/MM/YYYY): ", questionTime:str ="Input time (HH:MM): "):
         """Input is date and time"""      
+        print("")
         date = self.dateOnly(questionDate)
+        print("")
         time = self.timeOnly(questionTime)
+        print("")
         if date and time:
             #create a datetime 
             year, month, day = map(int,DateUtil(date).date.split('-'))
