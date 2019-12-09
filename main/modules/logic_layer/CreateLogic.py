@@ -1,4 +1,4 @@
-from modules.models.Voyage import Voyage
+from modules.logic_layer.VoyageHandler import VoyageHandler
 
 class CreateLogic :
     """Create methods for logic layer"""
@@ -7,5 +7,5 @@ class CreateLogic :
         """create destination"""
     
     def createVoyage(self):
-        return Voyage().createVoyage()
+        return VoyageHandler().createVoyage()
         

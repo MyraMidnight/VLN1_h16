@@ -10,7 +10,7 @@ FILE_DESTINATIONS = "NewDestinations.csv"
 FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
 FILE_AIRCRAFTS = "Aircraft.csv"
 
-class Voyage:
+class VoyageHandler:
     def __init__(self, flights:list = []):
         self.__flightOut = ["", {}]
         self.__flightIn = ["", {}]
