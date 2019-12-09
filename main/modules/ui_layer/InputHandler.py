@@ -19,7 +19,7 @@ class InputHandler:
         optional: string that will be printed for the input \n
         optional: set a key used for exiting the loop, will return false\n
         """
-        if len(exitKey) == 0:
+        if len(exitKey) == 1:
             exitKey = self.exitKey
         try:
             inputChoice = input(inputQuestion)
@@ -54,6 +54,29 @@ class InputHandler:
         else:
             #once the input meets requirements
             return num_string
+
+
+    #---------------------- 
+    # Input full name (createEmployee)
+    #---------------------- 
+    def fullName(self):
+        """Input has to only be alphabetical characters and has to have at least one space in str"""
+        
+        name_str = input("Input full name: ")
+
+        #Validity checks
+        # Checks whether or not the name  consists of only alphabetical characters
+        while not name_str.replace(" ","").isalpha():    
+            print("Please input alphabetical characters only")
+            name_str = input("Input full name: ")
+
+        #Checks whether or not user had input both the surname and lastname
+        while " " not in name_str:  
+            print("Please input both surname and lastname")
+            name_str = input("Input full name: ")
+
+        return name_str
+
 
     #---------------------- 
     # Input social security number

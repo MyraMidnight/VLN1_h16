@@ -4,6 +4,7 @@
 from modules.logic_layer.CreateLogic import CreateLogic
 from modules.logic_layer.GetLogic import GetLogic
 from modules.logic_layer.UpdateLogic import UpdateLogic
+from modules.ui_layer.InputHandler import InputHandler
 
 class LLAPI : 
     """Logic layer API handler"""
@@ -18,9 +19,10 @@ class LLAPI :
         return CreateLogic().createDestination()
     
 
-    def createEmployee(self):
-        """method that creates employee, requests input for name, ssn, address, homePhone, mobilePhone and email. 
+    def createEmployee(self, action, inputHandler):
+        """Method that creates employee, requests input for name, ssn, address, mobilePhone, email, role, rank and license,. 
         Adds the employee to the registry. """
+        return CreateLogic().createEmployee(action, inputHandler)
     
 
     def createPlane(self):

@@ -4,6 +4,7 @@ from modules.ui_layer.InputHandler import InputHandler
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
+
     def __init__(self, menu:str = "main"):
         self.currentLocation = menu.lower()
         self.currentMenu = {}
@@ -19,7 +20,8 @@ class MenuHandler:
             },
             "1.1" : {
                 "title": "Employee",
-                "function": "main" # LLAPI().createEmployee
+                "function": LLAPI().createEmployee,
+                "param": ["name", InputHandler().fullName]
             },
             "1.2" : {
                 "title": "Voyage",
@@ -96,6 +98,7 @@ class MenuHandler:
         self.menuLayout = {
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
+            "Employee Name": ["1.1.1"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
             "update": ["3.1", "3.2", "3.3"],
@@ -128,19 +131,26 @@ class MenuHandler:
 
             #prompt user to input the number of chosen option
             choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
-            chosenOption = self.menuOptions[self.currentMenu[int(choice_int)]]
+            chosenOption = self.menuOptions[self.currentMenu[int(choice_int)-1]]
 
             #then run the method connected to the chosen option
             chosenFunction = chosenOption["function"]
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
                 self.currentLocation = chosenFunction
-                self.displayMenu(chosenFunction)
+                self.displayMenu()
             else:
-                #runs the desired function
-                chosenFunction()
-                self.displayMenu(self.currentLocation)
+                if len(chosenOption) == 3:
+                    chosenFunction(chosenOption["param"][0], chosenOption["param"][1]())
+                    self.displayMenu()
+                else:
+                    #runs the desired function
+                    chosenFunction()
+                    self.displayMenu()
         else: 
             # If the initial 'currentLocation' is not valid, then default to 'main'
             self.currentLocation = "main"
             self.displayMenu()
+    
+
+
