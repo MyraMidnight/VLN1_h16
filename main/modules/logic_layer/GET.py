@@ -59,6 +59,8 @@ class GetLogic :
         filePackage = IOAPI().opener('Destinations.csv')
         return DisplayScreen().printList(filePackage)
     
-    #def getVoyages(self):
+    def getVoyages(self):
         #fetch voyage info
+        filePackage = IOAPI().opener('NewUpcomingFlights.csv')
+        return DisplayScreen().printList(filePackage)
         

@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+﻿ssn,name,role,rank,licence,address,phonenumber
+3009907461,William Carillo,Pilot,Captain,NAFokkerF100,Fellsmúli 1,8998801
+2910858778,Virginia Ho,Pilot,Captain,NABAE146,Fellsmúli 2,8998802
+2706838569,Gerard Nelson,Pilot,Captain,NAFokkerF100,Fellsmúli 3,8998803
+2209955782,Allen Ley,Pilot,Captain,NABAE146,Fellsmúli 4,8998804
+2907675667,Felecia Moye,Pilot,Captain,NABAE146,Fellsmúli 5,8998805
+2410876598,Nan Gage,Pilot,Copilot,NAFokkerF100,Fellsmúli 7,8998807
+2211658134,Charla Johnson,Pilot,Copilot,NABAE146,Fellsmúli 8,8998808
+2504939263,Sam Preciado,Pilot,Copilot,NABAE146,Fellsmúli 9,8998809
+1900769521,Jasmine Hagadone,Pilot,Copilot,NABAE146,Fellsmúli 10,8998810
+2500812671,Anna Phillips,Pilot,Copilot,NAFokkerF28,Fellsmúli 11,8998811
+=======
 ssn,name,role,rank,licence,address,phonenumber,email
 3009907461,William Carillo,Pilot,Captain,NAFokkerF100,Fellsmúli 1,8998801,wc@na.is
 2910858778,Virginia Ho,Pilot,Captain,NABAE146,Fellsmúli 2,8998802,vh@na.is
@@ -9,6 +22,7 @@ ssn,name,role,rank,licence,address,phonenumber,email
 2504939263,Sam Preciado,Pilot,Copilot,NABAE146,Fellsmúli 9,8998809,sp@na.is
 1900769521,Jasmine Hagadone,Pilot,Copilot,NABAE146,Fellsmúli 10,8998810,jh@na.is
 2500812671,Anna Phillips,Pilot,Copilot,NAFokkerF28,Fellsmúli 11,8998811,ap@na.is
+>>>>>>> Damian2.0
 1309927223,Patricia Bates,Pilot,Copilot,NAFokkerF28,Fellsmúli 12,8998812
 1600904199,Sherry Walker,Cabincrew,Flight Service Manager,N/A,Fellsmúli 13,8998813
 0303758167,Margarita Fischer,Cabincrew,Flight Service Manager,N/A,Fellsmúli 14,8998814

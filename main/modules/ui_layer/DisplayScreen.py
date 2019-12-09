@@ -1,44 +1,53 @@
 
 class DisplayScreen:
     def __init__(self):
-        self.stringLimits = { #column widths for specific data
+        self.__stringLimits = { #column widths for specific data
             "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
-            "flights": {'flightNumber': 10, "departingFrom": 10, "arrivingAt": 10 , "departure": 10, "arrival": 10, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
-            "destinations": {"id": 5, "destination": 18},
+            "flights": {'flightNumber': 13, "departingFrom": 13, "arrivingAt": 10 , "departure": 15, "arrival": 15, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
+            "destinations": {"id": 10, "destination": 18},
             "planes": {"planeInsignia":15, "planeTypeId": 20},
             "planeTypes": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
             "voyages": {"fnDeparting": 10, "fnReturning": 10,"captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10}
 
         }
         #specifies what type of stringLimits and what columns to print
-        self.printTemplates = {
+        self.__printTemplates = {
             "crew": { 
                 "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"]
+                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
+                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
+
             },
             "pilots": { 
                 "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "licence", "address", "phonenumber"]
+                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
+                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
+
             },
             "cabincrew": { 
                 "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "address", "phonenumber"]
+                "columns": ["name", "ssn", "rank", "address", "phonenumber"],
+                "titles": ["Name", "SSN" , "Rank" ,"Address" ,"Phone"]
             },
             "flights": {
                 "dataType": "flights",
-                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"]
+                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"],
+                "titles" : ["Flight Number", "Departing from", "Arriving at", "ETD", "ETA", "Aircraft ID", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
             },
             "destinations": {
                 "dataType": "destinations",
-                "columns" : ["id", "destination"]
+                "columns" : ["id", "destination"],
+                "titles" : ["Airport ID", "Destination"]
             },
             "planes": {
                 "dataType": "planes",
-                "columns" : ["planeInsignia", "planeTypeId"]
+                "columns" : ["planeInsignia", "planeTypeId"],
+                "titles" : ["Plane Insignia", "Plane Type ID"]
             },
             "voyages": {
                 "dataType": "voyages",
-                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"]
+                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"],
+                "titles" : ["Flight number (departing)", "Flight number (Returning)", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
             },
         }
 
@@ -58,8 +67,13 @@ class DisplayScreen:
         #create the header row (print the keys)
         headerKeys = []
         print()
+        #counter = 0
         for column in data[0]:
             headerKeys.append(self.cutString(column,colWidth))
+            #title = self.__printTemplates["titles"][counter]
+            #headerKeys.append(self.cutString(title, colWidth))
+            #counter += 1
+
         headerRow = " | ".join(headerKeys)
         print(headerRow)
         print("-"*len(headerRow))
@@ -88,16 +102,20 @@ class DisplayScreen:
         if rowLimit == 0:
             rowLimit = len(data)
             
-        if formatTemplate in self.printTemplates:
-            template = self.printTemplates[formatTemplate]
+        if formatTemplate in self.__printTemplates:
+            template = self.__printTemplates[formatTemplate]
             #set the row limit
             #create the header row (print the keys)
             headerKeys = []
             print()
+            counter = 0
             for column in template["columns"]:
-                stringLimit = self.stringLimits[template["dataType"]][column]
-                trimmedKey = self.cutString(column,stringLimit)
+                title = template["titles"][counter]
+                stringLimit = self.__stringLimits[template["dataType"]][column]
+
+                trimmedKey = self.cutString(title,stringLimit)
                 headerKeys.append(trimmedKey)
+                counter += 1 
             headerRow = " | ".join(headerKeys)
             horizonalDiv = "-"*len(headerRow)
 
@@ -122,7 +140,7 @@ class DisplayScreen:
                 for column in template["columns"]:
                     #if value is longer than set limit width, then cut 
                     colValue = line[column]
-                    row.append(self.cutString(colValue,self.stringLimits[template["dataType"]][column]))
+                    row.append(self.cutString(colValue,self.__stringLimits[template["dataType"]][column]))
                 #joins the columns together with '|' seperator
                 print(" | ".join(row)) 
         else: 

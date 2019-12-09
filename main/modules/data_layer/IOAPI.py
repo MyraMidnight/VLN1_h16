@@ -18,18 +18,18 @@ class IOAPI:
         filePackage = []
         filename = 'data/STUDENTDATA/' + askedFile 
         with open(filename,'r', encoding="utf-8") as file:
-                    #uses csv.dictreader which is an inbuilt function that reads every line and converts them into OrderedDicts
-                    #the function gets its keys from the first line of the file, an ordered dict is a tuple containing a list
-                    #of tuples, those tuples being the key:value items
+            #uses csv.dictreader which is an inbuilt function that reads every line and converts them into OrderedDicts
+            #the function gets its keys from the first line of the file, an ordered dict is a tuple containing a list
+            #of tuples, those tuples being the key:value items
             reader = csv.DictReader(file)
-                    #collects everything together
+            #collects everything together
             for row in reader:
-                        #change all the ordereddicts into normal dicts as tuples are immutable and we need to be able to edit them
+            #change all the ordereddicts into normal dicts as tuples are immutable and we need to be able to edit them
                 temp_dict = dict(row)
+                #adds the current files list of dicts into the filePackage as a value of the key of its filename
                 filePackage.append(temp_dict)
-                    #adds the current files list of dicts into the filePackage as a value of the key of its filename
             file.close() 
-                    #code example you can run to better understand the structure of filePackage
+            #code example you can run to better understand the structure of filePackage
             '''
             for x in filePackage:
                 print(x)
@@ -38,7 +38,6 @@ class IOAPI:
             return filePackage
     
 
-    #any edited filePackage will be sent here, whether it was updated or appended to
     def appender(self,fileName,filePackage):
         filename = 'data/STUDENTDATA/' + fileName 
         csv_columns = [key for key in filePackage]

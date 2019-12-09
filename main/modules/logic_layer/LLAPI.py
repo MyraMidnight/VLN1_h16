@@ -48,6 +48,9 @@ class LLAPI :
     
     def getDestinations(self):
         return GetLogic().getDestinations()
+    
+    def getVoyages(self):
+        return GetLogic().getVoyages()
 
 
     #------- UPDATE
