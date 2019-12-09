@@ -3,7 +3,7 @@ class DisplayScreen:
     def __init__(self):
         self.stringLimits = { #column widths for specific data
             "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
-            "flights": {'flightNumber': 10, "departingFrom": 10, "arrivingAt": 10 , "departure": 10, "arrival": 10, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
+            "flights": {'flightNumber': 13, "departingFrom": 13, "arrivingAt": 10 , "departure": 15, "arrival": 15, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
             "destinations": {"id": 5, "destination": 18},
             "planes": {"planeInsignia":15, "planeTypeId": 20},
             "planeTypes": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
@@ -14,31 +14,40 @@ class DisplayScreen:
         self.printTemplates = {
             "crew": { 
                 "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"]
+                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
+                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
+
             },
             "pilots": { 
                 "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "licence", "address", "phonenumber"]
+                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
+                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
+
             },
             "cabincrew": { 
                 "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "address", "phonenumber"]
+                "columns": ["name", "ssn", "rank", "address", "phonenumber"],
+                "titles": ["Name", "SSN" , "Rank" ,"Address" ,"Phone"]
             },
             "flights": {
                 "dataType": "flights",
-                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"]
+                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"],
+                "titles" : ["Flight Number", "Departing from", "Arriving at", "ETD", "ETA", "Aircraft ID", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
             },
             "destinations": {
                 "dataType": "destinations",
-                "columns" : ["id", "destination"]
+                "columns" : ["id", "destination"],
+                "titles" : ["ID", "Destination"]
             },
             "planes": {
                 "dataType": "planes",
-                "columns" : ["planeInsignia", "planeTypeId"]
+                "columns" : ["planeInsignia", "planeTypeId"],
+                "titles" : ["Insignia", "Type ID"]
             },
             "voyages": {
                 "dataType": "voyages",
-                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"]
+                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"],
+                "titles" : ["Flight number (departing)", "Flight number (Returning)", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
             },
         }
 
@@ -94,10 +103,14 @@ class DisplayScreen:
             #create the header row (print the keys)
             headerKeys = []
             print()
+            counter = 0
             for column in template["columns"]:
+                title = template["titles"][counter]
                 stringLimit = self.stringLimits[template["dataType"]][column]
-                trimmedKey = self.cutString(column,stringLimit)
+
+                trimmedKey = self.cutString(title,stringLimit)
                 headerKeys.append(trimmedKey)
+                counter += 1 
             headerRow = " | ".join(headerKeys)
             horizonalDiv = "-"*len(headerRow)
 

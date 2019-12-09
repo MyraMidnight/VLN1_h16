@@ -104,8 +104,8 @@ class Voyage:
         self.__destination = destination_list[int(destination_str)-1]
 
         # Departure messages for inputHandler
-        inputDepartureDate_str = "Enter departure date from Iceland to {}: ".format(self.__destination["destination"])
-        inputDepartureTime_str = "Enter departure time: "
+        inputDepartureDate_str = "Enter departure date from Iceland to {} (DD/MM/YYYY): ".format(self.__destination["destination"])
+        inputDepartureTime_str = "Enter departure time (HH:MM): "
         ErrorDepartureTime_str = "ERROR: Airport is occupied at selected time \nplease input a new departure time: "
 
         # get the departure time from inputHandler

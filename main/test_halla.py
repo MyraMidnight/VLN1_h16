@@ -27,9 +27,11 @@ def main():
 # ------------------------  Run program  --------------------- 
 main()
 
-#data = IOAPI().opener("NewPastFlights.csv")
+#data = IOAPI().opener("NewUpcomingFlights.csv")
+#print("Þetta er datað", data)
 
-#DisplayScreen().printList(data, 5, 10)
+#DisplayScreen().printListFormat(data, "flights")
+#DisplayScreen().printList(data, 6, 16)
 
 #date = InputHandler().dateTime()
 #print(date)

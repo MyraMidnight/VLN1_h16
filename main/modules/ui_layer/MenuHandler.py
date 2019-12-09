@@ -6,6 +6,7 @@ class MenuHandler:
     """Handles the menu (input and printing right menus)"""
     def __init__(self, menu:str = "main"):
         self.currentLocation_str = menu.lower()
+        self.breadcrumbs = []
         self.currentMenu_list = {}
         self.menuOptions = { 
             #---------- Create --------------
@@ -104,13 +105,14 @@ class MenuHandler:
     def printHeader(self,menuHeader):
         """Prints the header"""
         #print("\n")
-        print("\n", menuHeader)
+        print("\n", " / ".join(self.breadcrumbs))
 
     def printMenu(self,menuOptions,currentMenu):
         """Takes in current menu as"""
         for count, item in enumerate(currentMenu,1):
             menuTitle = menuOptions[item]["title"]
             print("{}) {}".format(count, menuTitle))
+        print("\t(You can also quit (q) or  cancel (c))")
 
     def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
@@ -123,6 +125,10 @@ class MenuHandler:
                 menuTitle = self.menuOptions["0"]["title"]
             else: 
                 menuTitle = self.menuOptions[self.currentMenu_list[0][:-2]]["title"]
+            
+            if menuTitle not in self.breadcrumbs:
+                self.breadcrumbs.append(menuTitle)
+
             #print the header and menu
             self.printHeader(menuTitle)
             self.printMenu(self.menuOptions,self.currentMenu_list)
