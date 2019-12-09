@@ -1,10 +1,9 @@
-ssn,name,role,rank,licence,address,phonenumber
+﻿ssn,name,role,rank,licence,address,phonenumber
 3009907461,William Carillo,Pilot,Captain,NAFokkerF100,Fellsmúli 1,8998801
 2910858778,Virginia Ho,Pilot,Captain,NABAE146,Fellsmúli 2,8998802
 2706838569,Gerard Nelson,Pilot,Captain,NAFokkerF100,Fellsmúli 3,8998803
 2209955782,Allen Ley,Pilot,Captain,NABAE146,Fellsmúli 4,8998804
 2907675667,Felecia Moye,Pilot,Captain,NABAE146,Fellsmúli 5,8998805
-test,test test,test,test test,test/test,test 25,test
 2410876598,Nan Gage,Pilot,Copilot,NAFokkerF100,Fellsmúli 7,8998807
 2211658134,Charla Johnson,Pilot,Copilot,NABAE146,Fellsmúli 8,8998808
 2504939263,Sam Preciado,Pilot,Copilot,NABAE146,Fellsmúli 9,8998809
