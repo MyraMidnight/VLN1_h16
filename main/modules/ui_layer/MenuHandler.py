@@ -20,7 +20,7 @@ class MenuHandler:
             },
             "1.1" : {
                 "title": "Employee",
-                "function": "main" # LLAPI().createEmployee
+                "function": LLAPI().createEmployee
             },
             "1.2" : {
                 "title": "Voyage",
@@ -112,7 +112,7 @@ class MenuHandler:
         for count, item in enumerate(currentMenu,1):
             menuTitle = menuOptions[item]["title"]
             print("{}) {}".format(count, menuTitle))
-        print("\t(You can also quit (q) or  cancel (c))")
+        print("(Press (q) to quit)")
 
     def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
@@ -129,6 +129,10 @@ class MenuHandler:
             if menuTitle not in self.breadcrumbs:
                 self.breadcrumbs.append(menuTitle)
 
+            if menuTitle == "Main menu":
+                self.breadcrumbs = ["Main menu"]
+
+
             #print the header and menu
             self.printHeader(menuTitle)
             self.printMenu(self.menuOptions,self.currentMenu_list)
@@ -141,7 +145,11 @@ class MenuHandler:
             if choice_str == False:
                 #exit program if on main menu, else print main menu
                 if self.currentLocation_str == "main":
-                    quit()
+                    if input("Are you sure you want to quit (y/n)? ").lower() == "y":
+                        quit()
+                    else:
+                        self.currentLocation_str = "main"
+                        self.displayMenu()
                 else:
                     self.currentLocation_str = "main"
                     self.displayMenu()

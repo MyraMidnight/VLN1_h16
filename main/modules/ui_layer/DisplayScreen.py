@@ -4,7 +4,7 @@ class DisplayScreen:
         self.__stringLimits = { #column widths for specific data
             "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
             "flights": {'flightNumber': 13, "departingFrom": 13, "arrivingAt": 10 , "departure": 15, "arrival": 15, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
-            "destinations": {"id": 5, "destination": 18},
+            "destinations": {"id": 10, "destination": 18},
             "planes": {"planeInsignia":15, "planeTypeId": 20},
             "planeTypes": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
             "voyages": {"fnDeparting": 10, "fnReturning": 10,"captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10}
@@ -37,12 +37,12 @@ class DisplayScreen:
             "destinations": {
                 "dataType": "destinations",
                 "columns" : ["id", "destination"],
-                "titles" : ["ID", "Destination"]
+                "titles" : ["Airport ID", "Destination"]
             },
             "planes": {
                 "dataType": "planes",
                 "columns" : ["planeInsignia", "planeTypeId"],
-                "titles" : ["Insignia", "Type ID"]
+                "titles" : ["Plane Insignia", "Plane Type ID"]
             },
             "voyages": {
                 "dataType": "voyages",
@@ -67,8 +67,13 @@ class DisplayScreen:
         #create the header row (print the keys)
         headerKeys = []
         print()
+        #counter = 0
         for column in data[0]:
             headerKeys.append(self.cutString(column,colWidth))
+            #title = self.__printTemplates["titles"][counter]
+            #headerKeys.append(self.cutString(title, colWidth))
+            #counter += 1
+
         headerRow = " | ".join(headerKeys)
         print(headerRow)
         print("-"*len(headerRow))
@@ -106,7 +111,7 @@ class DisplayScreen:
             counter = 0
             for column in template["columns"]:
                 title = template["titles"][counter]
-                stringLimit = self.stringLimits[template["dataType"]][column]
+                stringLimit = self.__stringLimits[template["dataType"]][column]
 
                 trimmedKey = self.cutString(title,stringLimit)
                 headerKeys.append(trimmedKey)
