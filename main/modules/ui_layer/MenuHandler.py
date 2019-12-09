@@ -44,7 +44,7 @@ class MenuHandler:
             },
             "2.2" : {
                 "title": "Voyages",
-                "function": "main"
+                "function": LLAPI().getVoyages
             },
             "2.3" : {
                 "title": "Destinations",
