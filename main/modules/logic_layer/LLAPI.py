@@ -15,10 +15,10 @@ class LLAPI :
         return CreateLogic().createDestination()
     
 
-    def createEmployee(self, action, inputHandler):
+    def createEmployee(self):
         """Method that creates employee, requests input for name, ssn, address, mobilePhone, email, role, rank and license,. 
         Adds the employee to the registry. """
-        return CreateLogic().createEmployee(action, inputHandler)
+        return CreateLogic().createEmployee()
     
 
     def createPlane(self):
