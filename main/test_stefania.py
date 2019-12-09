@@ -34,4 +34,16 @@ from modules.logic_layer.CreateLogic import CreateLogic
 # print(newTime)
 # #print(dateObject.timedelta(hours=3))
 
-MenuHandler("create").displayMenu()
+menu = MenuHandler("create")
+methods = dir(MenuHandler)
+
+def printMethods(menu:object):
+  classMethods = []
+  for method in dir(menu):
+    if method[:2] != "__":
+      classMethods.append(method)
+
+  for method in classMethods:
+    print(method)
+
+printMethods(menu)

@@ -137,6 +137,15 @@ class MenuHandler:
             choice_str = InputHandler().numChoices(len(self.currentMenu_list), "What do you want to do? ")
             chosenOption = self.menuOptions[self.currentMenu_list[int(choice_str)-1]]
 
+            #if exitKey was used
+            if choice_str == False:
+                #exit program if on main menu, else print main menu
+                if self.currentLocation_str == "main":
+                    quit()
+                else:
+                    self.currentLocation_str = "main"
+                    self.displayMenu()
+
             #then run the method connected to the chosen option
             chosenFunction = chosenOption["function"]
             if isinstance(chosenFunction, str) == True:
@@ -148,6 +157,7 @@ class MenuHandler:
                 #runs the desired function
                 chosenFunction()
                 self.displayMenu()
+
         else: 
             # If the initial 'currentLocation' is not valid, then default to 'main'
             self.currentLocation_str = "main"
