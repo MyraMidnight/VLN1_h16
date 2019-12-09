@@ -57,7 +57,7 @@ class MenuHandler:
             },
             "2.5" : {
                 "title": "Schedule",
-                "function": "main"
+                "function": "schedule"
             },
             #---------- Get submenu ---------
             "2.1.1" : {
@@ -75,6 +75,14 @@ class MenuHandler:
             "2.1.4" : {
                 "title": "Flight Attendants",
                 "function": LLAPI().getFlightAttendants
+            },
+            "2.5.1" : {
+                "title": "Employees not working",
+                "function": LLAPI().getAway
+            },
+            "2.5.2" : {
+                "title": "Employees working and destination",
+                "function": LLAPI().getWorking
             },
             #---------- Update --------------
             "3" : {
@@ -99,6 +107,7 @@ class MenuHandler:
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
+            "schedule" : ["2.5.1","2.5.2"],
             "update": ["3.1", "3.2", "3.3"],
         }
 

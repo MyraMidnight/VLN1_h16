@@ -17,7 +17,7 @@ class IOAPI:
         '''
         filePackage = []
         filename = 'data/STUDENTDATA/' + askedFile 
-        with open(filename,'r', encoding="utf-8") as file:
+        with open(filename,'r', encoding="utf-8-sig") as file:
             #uses csv.dictreader which is an inbuilt function that reads every line and converts them into OrderedDicts
             #the function gets its keys from the first line of the file, an ordered dict is a tuple containing a list
             #of tuples, those tuples being the key:value items
@@ -42,6 +42,7 @@ class IOAPI:
         filename = 'data/STUDENTDATA/' + fileName 
         csv_columns = [key for key in filePackage]
         #opens the file with filename in write mode
+        filename = 'data/STUDENTDATA/' + fileName 
         with open(filename,'a',newline='',encoding='utf-8') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row
@@ -51,7 +52,6 @@ class IOAPI:
     
     def updater(self,fileName,filePackage):
         csv_columns = [key for key in filePackage[0]]
-        print(csv_columns)
         #opens the file with filename in write mode
         filename = 'data/STUDENTDATA/' + fileName 
         with open(filename,'w',newline='',encoding='utf-8') as file:

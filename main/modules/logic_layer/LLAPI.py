@@ -52,6 +52,11 @@ class LLAPI :
     def getVoyages(self):
         return GetLogic().getVoyages()
 
+    def getAway(self):
+        return GetLogic().getAway()
+
+    def getWorking(self):
+        return GetLogic().getWorking()
 
     #------- UPDATE
     def updateVoyage(self):
