@@ -1,4 +1,4 @@
-from modules.data_layer.IOAPI import IOAPI
+from modules.data_layer.IOAPI import IOAPI     #need this to be able to fetch info
 from modules.ui_layer.InputHandler import InputHandler
 class GetLogic :
     """Get methods for logic layer"""
