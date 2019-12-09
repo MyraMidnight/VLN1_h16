@@ -57,6 +57,9 @@ class LLAPI :
 
     def getWorking(self):
         return GetLogic().getWorking()
+    
+    def getWeekWork(self):
+        return GetLogic().getWeekWork()
 
     #------- UPDATE
     def updateVoyage(self):

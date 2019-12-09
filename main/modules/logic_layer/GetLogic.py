@@ -2,6 +2,7 @@ from modules.data_layer.IOAPI import IOAPI     #need this to be able to fetch in
 from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.ui_layer.DateUtil import DateUtil
+import datetime
 
 class GetLogic :
     """Get methods for logic layer"""
@@ -143,18 +144,36 @@ class GetLogic :
         #fetch Voyage info
         voyagePackage = IOAPI().opener('NewUpcomingFlights.csv')
         #ask for SSN
-        user_ssn = InputHandler.ssn("Please input the SSN of the Employee you want a schedule of: ")
+        user_ssn = InputHandler().ssn("Please input the SSN of the Employee you want a schedule of: ")
+        for employee in employeePackage:
+            if user_ssn == employee['ssn']:
+                ssn_exists = True
+        
+        if ssn_exists:
+            pass
+        else:
+            print("An employee with that SSN does not exist")
+            return False
+        
         #ask for datetime from user
-        user_input = InputHandler().dateOnly()
+        user_input = InputHandler().dateOnly("Input date of the start of the week: ")
         check_date = DateUtil(user_input)
-        '''
-        for x in range(7):
+        schedule_list = []
+        counter = 1
+        while counter != 8:
             for flight in voyagePackage:
-                departure = DateUtil(line['departure']).date
+                departure = DateUtil(flight['departure']).date
                 if check_date.date == departure:
-                    if user_ssn == flight['captain'] or user_ssn == flight['copilot'] and user_ssn == flight['fsm'] and user_ssn ==
-                    '''
-
-
-
+                    if user_ssn == flight['captain'] or user_ssn == flight['copilot'] or user_ssn == flight['fsm'] or user_ssn == flight['fa1'] or user_ssn == flight['fa2']:
+                        schedule_list.append(flight)
+            #attempt to turn the DateUtil into datetime
+            check_date = DateUtil(check_date).createObject()
+            #add a day to the date
+            check_date = check_date + datetime.timedelta(days=1)
+            #attempt to turn it back into DateUtil so it can keep comparing
+            check_date = DateUtil(check_date)
+            counter += 1
+        
+        return DisplayScreen().printList(schedule_list)
+        
         
