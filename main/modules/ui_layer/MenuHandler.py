@@ -32,7 +32,7 @@ class MenuHandler:
             },
             "1.4" : {
                 "title": "Aircrafts",  
-                "function": "main"
+                "function": LLAPI().createPlane
             },
             #---------- Get --------------
             "2" : {

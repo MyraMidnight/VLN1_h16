@@ -6,6 +6,7 @@ RANK_COPILOT = "Co-Pilot"
 RANK_FSM = "Flight Service Manager"
 RANK_FA = "Flight Attendant"
 
+AIRCRAFT_FILE = "Aircraft.csv"
 AIRCRAFT_TYPE_FILE = "AircraftType.csv"
 CREW_FILE = "Crew.csv"
 
@@ -96,7 +97,31 @@ class CreateLogic :
             # editFunctionDict_list[choiceNum_str][0]
         
 
+    def createPlane(self):
+        """Method that creates new plane, requests input for planeName, and planeType. 
+        Adds the plane to the registry"""
 
+        plane_dict = {}
+        #Takes in input for plane insignia and puts it under "planeInsignia" key in plane_dict
+        plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia: ")
+        
+        #Creates a list of plane types
+        airplane_data_list = IOAPI().opener(AIRCRAFT_TYPE_FILE)
+
+        airplaneType_list = []
+        for a_line_dict in airplane_data_list:
+            airplaneType_list.append(a_line_dict["planeTypeId"])
+
+        #Input for plane Type ID which is then put in plane_dict
+        plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, "Input plane type ID: ")
+
+        #Input confirmation
+        DisplayScreen().printList([plane_dict], colWidth = 14)
+        confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
+        if confirmation_bool:
+        #Appending the input info to aircraft file
+            IOAPI().appender(AIRCRAFT_FILE, plane_dict)
+        
 
 
     def createVoyage(self):

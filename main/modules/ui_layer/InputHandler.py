@@ -236,16 +236,26 @@ class InputHandler:
     def planeInsignia(self, inputQuestion: str = ""):
         """Input and validity check for plane insignia"""
         insignia_str = input(inputQuestion)
-        while insignia_str[2] != "-" or insignia_str[0]
-        return
+        #Validity checks the input
+        while insignia_str[2] != "-" or insignia_str[:2] != "TF" or len(insignia_str) != 6:
+            print(insignia_str[3] + "   " + insignia_str[:2])
+            print("Invalid input")
+            insignia_str = input(inputQuestion)
+        
+        return insignia_str
 
 
     #---------------------- 
     # Input Plane Type ID
     #---------------------- 
-    def planeTypeId(self, inputQuestion: str = ""):
+    def planeTypeId(self,aircraftType_list, inputQuestion: str = ""):
+        planeTypeId_str = input(inputQuestion)
+        #Validity checks the input
+        while planeTypeId_str not in aircraftType_list:
+            print("Invalid input")
+            planeTypeId_str = input(inputQuestion)
 
-        return
+        return planeTypeId_str
 
 
     #---------------------- 
