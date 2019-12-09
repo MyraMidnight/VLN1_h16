@@ -21,14 +21,12 @@ class InputHandler:
         optional: string that will be printed for the input \n
         optional: set a key used for exiting the loop, will return false\n
         """
-        if len(exitKey) == 0:
-            exitKey = self.exitKey
         try:
             inputChoice = input(inputQuestion)
             #loop for input while it is not a valid option from range
-            while inputChoice != exitKey:
+            while inputChoice != self.exitKey:
                 while int(inputChoice)-1 not in range(numOfChoices):
-                    inputChoice = input("Needs to be within range of 1-{} \n".format(numOfChoices) + inputQuestion)
+                    raise Exception
                 #return the choice that can be used for list index
                 return inputChoice
             else: 
@@ -37,7 +35,7 @@ class InputHandler:
         except Exception:
             print("Input needs to be a number in range 1-{}".format(numOfChoices))
             #repeats the loop with previous parameters
-            self.numChoices(numOfChoices,inputQuestion,exitKey)
+            self.numChoices(numOfChoices,inputQuestion)
 
 
     #===================================================================================
