@@ -1,18 +1,16 @@
 #
 #----- import the inner classes / methods
 # from data_layer.IOAPI import IOAPI
-from modules.logic_layer.CREATE import CreateLogic
-from modules.logic_layer.GET import GetLogic
-# from logic_layer.UPDATE import UpdateLogic
+from modules.logic_layer.CreateLogic import CreateLogic
+from modules.logic_layer.GetLogic import GetLogic
+from modules.logic_layer.UpdateLogic import UpdateLogic
 
 class LLAPI : 
     """Logic layer API handler"""
-    def __init__(self):
-        self.currentMenu = "main"
-
-
     #------- CREATE
     def createDestination(self): 
+        """Create a new destination. Requests input for destinationLand, destinationAirport, 
+        destinationFlightTime, destinationDistance, destinationContactPerson and destinationEmergencyPhone."""
         return CreateLogic().createDestination()
     
 
@@ -26,8 +24,9 @@ class LLAPI :
 
 
     def createVoyage(self):
-        """ """
-
+        """Creates a voyage by creating two flights and adding them to the registry. (flugin hafa sitthvort flugnúmerið)
+            (áfangastaður, dagsetning, brottfaratími frá Íslandi og aftur til baka til Íslands)) """
+        return CreateLogic().createVoyage()
 
     #------- GET
     def getSingleEmployee(self):
@@ -51,13 +50,14 @@ class LLAPI :
 
     #------- UPDATE
     def updateVoyage(self):
-        """ """
+        """see the info about the voyage (see the staff that are working on that voyage). Then you can add or update the role you want to change """
     
 
-    def updateVoyage(self):
-        """ """
+    def updateEmployee(self):
+        """choose a employee (get a list and choose from the list). Get the info about the chosen employee and then choose what info you want to change. 
+        Then the user will be asked if he wants to save the changes. Save the new information about the employee to the list about all employees """
     
     
-    def updateVoyage(self):
-        """ """
+    def updateDestination(self):
+        """get the info about the chosen destination. The user can change the contact person and the emergency phone number """
     

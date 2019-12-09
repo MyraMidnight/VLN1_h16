@@ -4,9 +4,9 @@ from modules.ui_layer.InputHandler import InputHandler
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
-    def __init__(self):
-        self.currentLocation = "main"
-        self.currentMenu = {}
+    def __init__(self, menu:str = "main"):
+        self.currentLocation_str = menu.lower()
+        self.currentMenu_list = {}
         self.menuOptions = { 
             #---------- Create --------------
             "0": {
@@ -23,7 +23,7 @@ class MenuHandler:
             },
             "1.2" : {
                 "title": "Voyage",
-                "function": "main" # LLAPI().createVoyage
+                "function": LLAPI().createVoyage
             },
             "1.3" : {
                 "title": "Destinations",
@@ -99,12 +99,12 @@ class MenuHandler:
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
             "update": ["3.1", "3.2", "3.3"],
-            
         }
 
     def printHeader(self,menuHeader):
         """Prints the header"""
-        print(menuHeader)
+        #print("\n")
+        print("\n", menuHeader)
 
     def printMenu(self,menuOptions,currentMenu):
         """Takes in current menu as"""
@@ -112,32 +112,37 @@ class MenuHandler:
             menuTitle = menuOptions[item]["title"]
             print("{}) {}".format(count, menuTitle))
 
-    def displayMenu(self,menu:str = "main"):
+    def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
         #if the menu
-        if menu in self.menuLayout:
-            self.currentMenu = self.menuLayout[menu]
+        if self.currentLocation_str in self.menuLayout:
+            self.currentMenu_list = self.menuLayout[self.currentLocation_str]
             
             #find the menu header title
-            if len(self.currentMenu[0]) == 1:
+            if len(self.currentMenu_list[0]) == 1:
                 menuTitle = self.menuOptions["0"]["title"]
             else: 
-                menuTitle = self.menuOptions[self.currentMenu[0][:1]]["title"]
+                menuTitle = self.menuOptions[self.currentMenu_list[0][:-2]]["title"]
             #print the header and menu
             self.printHeader(menuTitle)
-            self.printMenu(self.menuOptions,self.currentMenu)
+            self.printMenu(self.menuOptions,self.currentMenu_list)
 
             #prompt user to input the number of chosen option
-            choice_int = InputHandler().numChoices(len(self.currentMenu), "What do you want to do? ")
-            chosenOption = self.menuOptions[self.currentMenu[choice_int]]
+            choice_str = InputHandler().numChoices(len(self.currentMenu_list), "What do you want to do? ")
+            chosenOption = self.menuOptions[self.currentMenu_list[int(choice_str)-1]]
 
             #then run the method connected to the chosen option
             chosenFunction = chosenOption["function"]
             if isinstance(chosenFunction, str) == True:
                 #prints the desired menu
-                self.currentLocation = chosenFunction
-                self.displayMenu(chosenFunction)
+                subMenu = chosenFunction
+                self.currentLocation_str = subMenu
+                self.displayMenu()
             else:
                 #runs the desired function
                 chosenFunction()
-                self.displayMenu(self.currentLocation)
+                self.displayMenu()
+        else: 
+            # If the initial 'currentLocation' is not valid, then default to 'main'
+            self.currentLocation_str = "main"
+            self.displayMenu()

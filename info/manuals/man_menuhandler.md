@@ -1,5 +1,5 @@
 
-# MenuHandler in Logic Layer
+# MenuHandler in UI Layer
 
 ## Printing a menu (`displayMenu` method)
 * The `displayMenu` handles both printing the desired menu, as well as prompting the user for input to select available options.
@@ -9,13 +9,24 @@
 * All available menu options are kept in the `self.menuOptions`
 * The `self.menuLayout` dictionary contains the menu names and list of options that will be available which are just references to the keys in `self.menuOptions`
 
+## Initializing the menu
+By default it is set to use `main` menu layout, but you can tell it to start at a different location/menu.
+If a incorrect menu is stated, then it will also default to `main`.
 ```python
 # prints the 'main menu' 
 MenuHandler().displayMenu()
 
-# prints specified menues
-MenuHandler().displayMenu("main")
+# initialize the menu at specific menu
+MenuHandler(menu).displayMenu()
 ```
+#### Currently defined menus 
+> You can always just check out the `MenuHandler` code to see the actual available layouts, in case this list is outdated.
+* `main`
+* `create`
+* `get`
+* `getcrew`
+* `update`
+
 > ### Where to add the menus?
 > When the program is returning back to the menu after performing something, such as creating/updating/getting data.
 >
