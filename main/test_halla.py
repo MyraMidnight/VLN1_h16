@@ -28,8 +28,10 @@ def main():
 main()
 
 #data = IOAPI().opener("NewPastFlights.csv")
+#print("Þetta er datað", data)
 
-#DisplayScreen().printList(data, 5, 10)
+#DisplayScreen().printListFormat(data, 5, 10)
+#DisplayScreen().printList(data, 6, 12)
 
 #date = InputHandler().dateTime()
 #print(date)

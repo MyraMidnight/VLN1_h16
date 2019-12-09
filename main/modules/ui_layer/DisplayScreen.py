@@ -14,31 +14,31 @@ class DisplayScreen:
         self.printTemplates = {
             "crew": { 
                 "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"]
+                "columns": [ "Name", "SSN", "Rank", "Licence", "Address", "Phonenumber"]
             },
             "pilots": { 
                 "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "licence", "address", "phonenumber"]
+                "columns": [ "Name", "SSN", "Rank", "Licence", "Address", "Phonenumber"]
             },
             "cabincrew": { 
                 "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "address", "phonenumber"]
+                "columns": ["Name", "SSN", "Rank", "Address", "Phonenumber"]
             },
             "flights": {
                 "dataType": "flights",
-                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"]
+                "columns" : ["FlightNumber", "DepartingFrom", "ArrivingAt", "Departure", "Arrival", "AircraftID", "Captain", "Co-pilot", "Fsm", "Fa1", "Fa2"]
             },
             "destinations": {
                 "dataType": "destinations",
-                "columns" : ["id", "destination"]
+                "columns" : ["ID", "Destination"]
             },
             "planes": {
                 "dataType": "planes",
-                "columns" : ["planeInsignia", "planeTypeId"]
+                "columns" : ["PlaneInsignia", "PlaneTypeId"]
             },
             "voyages": {
                 "dataType": "voyages",
-                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"]
+                "columns" : ["FnDeparting","FnReturning","Captain", "Co-pilot", "Fsm", "Fa1", "Fa2"]
             },
         }
 

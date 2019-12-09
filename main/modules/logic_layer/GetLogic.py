@@ -22,7 +22,7 @@ class GetLogic :
                 if x['licence'] != "N/A":
                     returnString_str += "\n" + "licence:" + x["licence"]
                 #add the rest of the info
-                returnString_str += "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
+                returnString_str += "\n" + "address: " + x["address"] + "\n" + "phonenumber: " + x["phonenumber"]
                 print(returnString_str)
                 print("-----------")
     
@@ -34,7 +34,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Pilot":
                 #contruct a string from the dict to return
-                returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank'] + "\n" + "licence:" + x["licence"] + "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
+                returnString_str = 'SSN: ' + x['ssn'] + "\n" + "Name: " + x['name'] + "\n" + "Role: " + x['role'] + "\n" + "rank: " + x['rank'] + "\n" + "licence: " + x["licence"] + "\n" + "address: " + x["address"] + "\n" + "phonenumber: " + x["phonenumber"]
                 print(returnString_str)
                 print("---------")
     
@@ -46,7 +46,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Cabincrew":
                 #contruct a string from the dict to return
-                returnString_str = 'SSN:' + x['ssn'] + "\n" + "Name:" + x['name'] + "\n" + "Role:" + x['role'] + "\n" + "rank:" + x['rank'] + "\n" + "address:" + x["address"] + "\n" + "phonenumber:" + x["phonenumber"]
+                returnString_str = 'SSN: ' + x['ssn'] + "\n" + "Name: " + x['name'] + "\n" + "Role: " + x['role'] + "\n" + "rank: " + x['rank'] + "\n" + "address: " + x["address"] + "\n" + "phonenumber: " + x["phonenumber"]
                 print(returnString_str)
                 print("---------")
     
@@ -60,7 +60,7 @@ class GetLogic :
         #goes through all the lines in the employee info
         for x in filePackage:
             #checks the SSN of the employee
-            returnString_str = 'planeInsignia:' + x['planeInsignia'] + "\n" + "planeTypeId:" + x["planeTypeId"]
+            returnString_str = 'planeInsignia: ' + x['planeInsignia'] + "\n" + "planeTypeId: " + x["planeTypeId"]
             print(returnString_str)
             print("----------")
             
