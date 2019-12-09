@@ -1,55 +1,109 @@
 
 class DisplayScreen:
     def __init__(self):
-        self.__stringLimits = { #column widths for specific data
-            "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
-            "flights": {'flightNumber': 13, "departingFrom": 13, "arrivingAt": 10 , "departure": 15, "arrival": 15, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
-            "destinations": {"id": 10, "destination": 18},
-            "planes": {"planeInsignia":15, "planeTypeId": 20},
-            "planeTypes": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
-            "voyages": {"fnDeparting": 10, "fnReturning": 10,"captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10}
-
-        }
-        #specifies what type of stringLimits and what columns to print
-        self.__printTemplates = {
-            "crew": { 
-                "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
-                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
-
+        self.__dataTypes = { #column widths for specific data
+        #===================================================================================
+        # A dictionary that contains custom column widths and titles for each key
+        #
+        # The 'templates' are optional layouts available, containing lists of which 
+        # columns it should skip printing (perhaps you want the list short and simple)
+        # 
+        #===================================================================================
+            # crew ---------------------------------------
+            "crew": { #dataType
+                "columns": { #column specifications
+                    'ssn': {"colWidth": 10, "title": "SSN"},
+                    'name': {"colWidth": 20, "title": "Name"},
+                    'role': {"colWidth": 10, "title": "Role"},
+                    'rank': {"colWidth": 15, "title": "Rank"},
+                    'licence': {"colWidth": 8, "title": "Licence"},
+                    'address': {"colWidth": 20, "title": "Address"},
+                    'phonenumber': {"colWidth": 14, "title": "Phone"}
+                },                
+                "templates": { #contain lists of keys of columns to ignore for each template
+                    "crew": [], "pilots": [], "cabincrew": []
+                }
             },
-            "pilots": { 
-                "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
-                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
-
-            },
-            "cabincrew": { 
-                "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "address", "phonenumber"],
-                "titles": ["Name", "SSN" , "Rank" ,"Address" ,"Phone"]
-            },
+            # flights ---------------------------------------
             "flights": {
-                "dataType": "flights",
-                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"],
-                "titles" : ["Flight Number", "Departing from", "Arriving at", "ETD", "ETA", "Aircraft ID", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
+                "columns": {
+                    'flightNumber': {"colWidth": 13, "title": "Flight Number"},
+                    "departingFrom": {"colWidth": 13, "title": "From"},
+                    "arrivingAt": {"colWidth": 10, "title": "To"},
+                    "departure": {"colWidth": 15, "title": "Departure"},
+                    "arrival": {"colWidth": 15, "title": "Arrival"},
+                    "aircraftID": {"colWidth": 10, "title": "Aircraft ID"},
+                    "captain": {"colWidth": 10, "title": "Captain"},
+                    "copilot": {"colWidth": 10, "title": "Co-pilot"},
+                    "fsm": {"colWidth": 10, "title": "Service Manager"},
+                    "fa1": {"colWidth": 10, "title": "Flight attendant 1"},
+                    "fa2": {"colWidth": 10, "title": "Flight attendant 2"}
+                },                
+                "templates": {
+                    "flights": []
+                }
             },
+            # destinations ---------------------------------------
             "destinations": {
-                "dataType": "destinations",
-                "columns" : ["id", "destination"],
-                "titles" : ["Airport ID", "Destination"]
+                "columns": {
+                    "id": {"colWidth": 10, "title": "Airport"},
+                    "destination": {"colWidth": 18, "title": "Destination"},
+                },                
+                "templates": {
+                    "destinations":[]
+                }
             },
+            # planes  ---------------------------------------
             "planes": {
-                "dataType": "planes",
-                "columns" : ["planeInsignia", "planeTypeId"],
-                "titles" : ["Plane Insignia", "Plane Type ID"]
+                "columns": {
+                    "planeInsignia": {"colWidth": 15, "title": "Insignia"},
+                    "planeTypeId":  {"colWidth": 20, "title": "Type"}
+                },
+                "templates": {
+                    "planes":[]
+                }
             },
+            # plane types ---------------------------------------
+            "planeTypes": { 
+                "columns": {
+                    "planeTypeId":  {"colWidth": 10, "title": "Type"},
+                    "manufacturer":  {"colWidth": 10, "title": "Manufacturer"},
+                    "model":  {"colWidth": 10, "title": "Model"},
+                    "capacity":  {"colWidth": 10, "title": "Capacity"},
+                    "emptyWeight":  {"colWidth": 10, "title": "Weight (empty)"},
+                    "maxTakeoffWeight":  {"colWidth": 10, "title": "Weight limit"},
+                    "unitThrust":  {"colWidth": 10, "title": "Thrust"},
+                    "serviceCeiling":  {"colWidth": 10, "title": "Serv.Ceiling"},
+                    "length":  {"colWidth": 10, "title": "Length"},
+                    "height":  {"colWidth": 10, "title": "Height"},
+                    "wingspan": {"colWidth": 10, "title": "Wingspan"}
+                },
+                "templates": {
+                    "planeTypes":[]
+                }
+            },
+            # voyages ---------------------------------------
             "voyages": {
-                "dataType": "voyages",
-                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"],
-                "titles" : ["Flight number (departing)", "Flight number (Returning)", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
-            },
+                "columns": {
+                    "fnDeparting":  {"colWidth": 10, "title": "Departing"},
+                    "fnReturning":  {"colWidth": 10, "title": "Returning"},
+                    "captain":  {"colWidth": 10, "title": "Captain"},
+                    "copilot":  {"colWidth": 10, "title": "Co-pilot"},
+                    "fsm":  {"colWidth": 10, "title": "Service Manager"},
+                    "fa1":  {"colWidth": 10, "title": "Flight attendant 1"},
+                    "fa2":  {"colWidth": 10, "title": "Flight attendant 2"}
+                },                
+                "templates": {
+                    "voyages":[]
+                }
+            }
         }
+ 
+    def __detectDataType(self):
+        """Figures out what type of data is being provided"""
+        #get dataType references as a dictionary
+        
+
 
     def cutString(self, string, limit:int = 10):
         """Creates a string that is of set length, if string was cut short then it adds dots, else it fills with spaces""" 

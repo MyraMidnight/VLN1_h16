@@ -293,8 +293,6 @@ class VoyageHandler:
         #give the IOAPI the flight data to save
         return [flightOut_dict, flightIn_dict]
         
-    def voyageData(self):
-        """Creates data dictionary """
 
 
 
