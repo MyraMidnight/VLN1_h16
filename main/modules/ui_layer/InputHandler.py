@@ -243,6 +243,24 @@ class InputHandler:
 
 
     #---------------------- 
+    # Input Plane Insignia
+    #---------------------- 
+    def planeInsignia(self, inputQuestion: str = ""):
+        """Input and validity check for plane insignia"""
+        insignia_str = input(inputQuestion)
+        while insignia_str[2] != "-" or insignia_str[0]
+        return
+
+
+    #---------------------- 
+    # Input Plane Type ID
+    #---------------------- 
+    def planeTypeId(self, inputQuestion: str = ""):
+
+        return
+
+
+    #---------------------- 
     # Input date and time
     #----------------------   
     def dateTime(self, questionDate:str = "Input a date (DD/MM/YYYY): ", questionTime:str ="Input time (HH:MM): "):

@@ -23,7 +23,7 @@ class LLAPI :
 
     def createPlane(self):
         """Method that creates new plane, requests input for planeName, and planeType. Adds the plane to the registry"""
-
+        return CreateLogic().createPlane()
 
     def createVoyage(self):
         """Creates a voyage by creating two flights and adding them to the registry. (flugin hafa sitthvort flugnúmerið)
