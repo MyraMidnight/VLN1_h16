@@ -102,6 +102,7 @@ class CreateLogic :
         Adds the plane to the registry"""
 
         plane_dict = {}
+
         #Takes in input for plane insignia and puts it under "planeInsignia" key in plane_dict
         plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia: ")
         
@@ -110,10 +111,13 @@ class CreateLogic :
 
         airplaneType_list = []
         for a_line_dict in airplane_data_list:
-            airplaneType_list.append(a_line_dict["planeTypeId"])
+            temp_dict = {"Valid Id": a_line_dict["planeTypeId"]}
+            airplaneType_list.append(temp_dict)
 
         #Input for plane Type ID which is then put in plane_dict
-        plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, "Input plane type ID: ")
+        
+        DisplayScreen().printListFormat(airplane_data_list, "planeTypes", enumerate = True)
+        # plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, "Input plane type ID: ")
 
         #Input confirmation
         DisplayScreen().printList([plane_dict], colWidth = 14)

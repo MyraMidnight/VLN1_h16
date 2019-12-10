@@ -44,6 +44,11 @@ class DisplayScreen:
                 "columns" : ["planeInsignia", "planeTypeId"],
                 "titles" : ["Plane Insignia", "Plane Type ID"]
             },
+            "planeTypes": {
+                "dataType": "planeTypes",
+                "columns" : ["planeTypeId"],
+                "titles" : ["Plane Type ID"]
+            },
             "voyages": {
                 "dataType": "voyages",
                 "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"],
