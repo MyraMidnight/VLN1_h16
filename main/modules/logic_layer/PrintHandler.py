@@ -158,14 +158,12 @@ class PrintHandler:
             return newString
 
     #===================================================================================
-    # Sections for printFrame, 
-    #
-    # 
+    # Sections for printFrame
     #===================================================================================
 
     def __sectionHeader(self, data:list):
         """Prints the header section"""
-        print(data[0])
+        self.__currentSections.append(data)
 
     def __sectionList(self, data:list, numList:bool = False):
         """Prints the list section """
@@ -245,16 +243,16 @@ class PrintHandler:
         self.__sectionList(data, numList=True)
 
     #===================================================================================
-    # the screen printer
+    # the section handler (compiles the sections)
     #===================================================================================
 
-    def printScreen(self, screenData:list):
+    def sectionHandler(self, sectionData:list):
         # Types of sections: header, list, text, shortcuts
-        # screenData is list of sections, which are dictionaries of section key and data
+        # sectionData is list of sections, which are dictionaries of section key and data
         # the data are lists of strings usually, or dictionaries if it is a table
         
-        #the actual screenData given in parameters
-        screenData_list = screenData
+        #the actual sectionData given in parameters
+        sectionData_list = sectionData
 
         #print handler
         screenSections_dict = {
@@ -265,31 +263,17 @@ class PrintHandler:
             "options": self.__sectionOptions
         }
 
-        #print the screenData
-        frameTop_str = "#"*self.__terminalSize["width"]
-        frameBottom_str = frameTop_str
-        frame_str = "|{}|"
 
-        #print the top
-        print(frameTop_str)
 
         #print the body of frame
         #Each section will return a list of strings, each being a line for print
-        for section in screenData_list:
+        for section in sectionData_list:
             for sectionKey, sectionData_list in section.items():
                 #the parameters that will go into the screenSelections_dict methods 
                 sectionParameters = [sectionData_list]
                 #run the method with parameters
                 listForPrint = screenSections_dict[sectionKey.lower()](*sectionParameters)
             
-        #goes through the compiled sections and prints them.
-        for section in self.__currentSections:
-            print("\n".join(section))
-            print()
 
         #print the bottom
-        print(frameBottom_str)
-    
-    #===================================================================================
-    # Processing methods
-    #===================================================================================
+        return self.__currentSections
