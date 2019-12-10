@@ -154,7 +154,9 @@ class DisplayScreen:
             return newString
 
     #===================================================================================
-    # Sections for printFrame
+    # Sections for printFrame, 
+    #
+    # 
     #===================================================================================
 
     def __sectionHeader(self, data:list):
