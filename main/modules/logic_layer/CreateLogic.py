@@ -1,3 +1,5 @@
+from modules.logic_layer.VoyageHandler import VoyageHandler
+
 ROLE_PILOT = "Pilot"
 ROLE_CC = "Cabin Crew"
 
@@ -10,7 +12,6 @@ AIRCRAFT_FILE = "Aircraft.csv"
 AIRCRAFT_TYPE_FILE = "AircraftType.csv"
 CREW_FILE = "Crew.csv"
 
-from modules.models.Voyage import Voyage
 from modules.ui_layer.InputHandler import InputHandler
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
@@ -114,12 +115,13 @@ class CreateLogic :
             temp_dict = {"Valid Id": a_line_dict["planeTypeId"]}
             airplaneType_list.append(temp_dict)
 
+
         #Input for plane Type ID
-        DisplayScreen().printListFormat(airplane_data_list, "planeTypes", enumerate = True)
-        plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, ": ")
+        DisplayScreen().printList(airplaneType_list, formatTemplate = "planes",numList = True)
+        plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, "Please enter a number representing a plane type ID: ")
 
         #Input confirmation
-        DisplayScreen().printList([plane_dict], colWidth = 14)
+        DisplayScreen().printList([plane_dict], formatTemplate = "planes")
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
         #Appending the input info to aircraft file
@@ -128,5 +130,5 @@ class CreateLogic :
 
 
     def createVoyage(self):
-        return Voyage().createVoyage()
+        return VoyageHandler().createVoyage()
         

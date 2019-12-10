@@ -1,61 +1,146 @@
 
 class DisplayScreen:
     def __init__(self):
-        self.__stringLimits = { #column widths for specific data
-            "crew": {'ssn': 10, 'name': 20, 'role': 10, 'rank': 15, 'licence': 8, 'address': 20, 'phonenumber': 14},
-            "flights": {'flightNumber': 13, "departingFrom": 13, "arrivingAt": 10 , "departure": 15, "arrival": 15, "aircraftID": 10, "captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10},
-            "destinations": {"id": 10, "destination": 18},
-            "planes": {"planeInsignia":15, "planeTypeId": 20},
-            "planeTypes": {"planeTypeId": 10,"manufacturer": 10,"model": 10,"capacity": 10,"emptyWeight": 10,"maxTakeoffWeight": 10,"unitThrust": 10,"serviceCeiling": 10,"length": 10,"height": 10,"wingspan":10},
-            "voyages": {"fnDeparting": 10, "fnReturning": 10,"captain": 10, "copilot": 10, "fsm": 10, "fa1": 10, "fa2": 10}
-
-        }
-        #specifies what type of stringLimits and what columns to print
-        self.__printTemplates = {
-            "crew": { 
-                "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
-                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
-
+        #===================================================================================
+        # A dictionary that contains custom column widths and titles for each key
+        #
+        # the order of the columns in dictionary decides the order they appear in
+        #
+        # The 'templates' are optional layouts available, lists the columns to hide
+        # 
+        #===================================================================================
+        self.__dataTypes = { #column widths for specific data
+            # crew ---------------------------------------
+            "crew": { #dataType
+                "columns": { #column specifications
+                    'ssn': {"colWidth": 10, "title": "SSN"},
+                    'name': {"colWidth": 20, "title": "Name"},
+                    'role': {"colWidth": 10, "title": "Role"},
+                    'rank': {"colWidth": 15, "title": "Rank"},
+                    'licence': {"colWidth": 8, "title": "Licence"},
+                    'address': {"colWidth": 20, "title": "Address"},
+                    'phonenumber': {"colWidth": 14, "title": "Phone"}
+                },                
+                "templates": { #contain lists of keys of columns to ignore for each template
+                    "crew": [], "pilots": [], "cabincrew": []
+                }
             },
-            "pilots": { 
-                "dataType": "crew", 
-                "columns": [ "name", "ssn", "rank", "licence", "address", "phonenumber"],
-                "titles": ["Name", "SSN" , "Rank" ,"Licence" ,"Address" ,"Phone"]
-
-            },
-            "cabincrew": { 
-                "dataType": "crew", 
-                "columns": ["name", "ssn", "rank", "address", "phonenumber"],
-                "titles": ["Name", "SSN" , "Rank" ,"Address" ,"Phone"]
-            },
+            # flights ---------------------------------------
             "flights": {
-                "dataType": "flights",
-                "columns" : ["flightNumber", "departingFrom", "arrivingAt", "departure", "arrival", "aircraftID", "captain", "copilot", "fsm", "fa1", "fa2"],
-                "titles" : ["Flight Number", "Departing from", "Arriving at", "ETD", "ETA", "Aircraft ID", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
+                "columns": {
+                    'flightNumber': {"colWidth": 13, "title": "Flight nr."},
+                    "departingFrom": {"colWidth": 5, "title": "From"},
+                    "arrivingAt": {"colWidth": 5, "title": "To"},
+                    "departure": {"colWidth": 15, "title": "Departure"},
+                    "arrival": {"colWidth": 15, "title": "Arrival"},
+                    "aircraftID": {"colWidth": 10, "title": "Aircraft ID"},
+                    "captain": {"colWidth": 10, "title": "Captain"},
+                    "copilot": {"colWidth": 10, "title": "Co-pilot"},
+                    "fsm": {"colWidth": 10, "title": "Service Manager"},
+                    "fa1": {"colWidth": 10, "title": "Flight attendant 1"},
+                    "fa2": {"colWidth": 10, "title": "Flight attendant 2"}
+                },                
+                "templates": {
+                    "flights": []
+                }
             },
+            # destinations ---------------------------------------
             "destinations": {
-                "dataType": "destinations",
-                "columns" : ["id", "destination"],
-                "titles" : ["Airport ID", "Destination"]
+                "columns": {
+                    "id": {"colWidth": 10, "title": "Airport"},
+                    "destination": {"colWidth": 18, "title": "Destination"},
+                },                
+                "templates": {
+                    "destinations":[]
+                }
             },
+            # planes  ---------------------------------------
             "planes": {
-                "dataType": "planes",
-                "columns" : ["planeInsignia", "planeTypeId"],
-                "titles" : ["Plane Insignia", "Plane Type ID"]
+                "columns": {
+                    "planeInsignia": {"colWidth": 15, "title": "Insignia"},
+                    "planeTypeId":  {"colWidth": 20, "title": "Type"}
+                },
+                "templates": {
+                    "planes":[]
+                }
             },
-            "planeTypes": {
-                "dataType": "planeTypes",
-                "columns" : ["planeTypeId"],
-                "titles" : ["Plane Type ID"]
+            # plane types ---------------------------------------
+            "planeTypes": { 
+                "columns": {
+                    "planeTypeId":  {"colWidth": 10, "title": "Type"},
+                    "manufacturer":  {"colWidth": 10, "title": "Manufacturer"},
+                    "model":  {"colWidth": 10, "title": "Model"},
+                    "capacity":  {"colWidth": 10, "title": "Capacity"},
+                    "emptyWeight":  {"colWidth": 10, "title": "Weight (empty)"},
+                    "maxTakeoffWeight":  {"colWidth": 10, "title": "Weight limit"},
+                    "unitThrust":  {"colWidth": 10, "title": "Thrust"},
+                    "serviceCeiling":  {"colWidth": 10, "title": "Serv.Ceiling"},
+                    "length":  {"colWidth": 10, "title": "Length"},
+                    "height":  {"colWidth": 10, "title": "Height"},
+                    "wingspan": {"colWidth": 10, "title": "Wingspan"}
+                },
+                "templates": {
+                    "planeTypes":[]
+                }
             },
+            # voyages ---------------------------------------
             "voyages": {
-                "dataType": "voyages",
-                "columns" : ["fnDeparting","fnReturning","captain", "copilot", "fsm", "fa1", "fa2"],
-                "titles" : ["Flight number (departing)", "Flight number (Returning)", "Captain", "Co-pilot", "Service manager", "Flight attendent1", "Flight attendent2"]
-            },
+                "columns": {
+                    "fnDeparting":  {"colWidth": 10, "title": "Departing"},
+                    "fnReturning":  {"colWidth": 10, "title": "Returning"},
+                    "captain":  {"colWidth": 10, "title": "Captain"},
+                    "copilot":  {"colWidth": 10, "title": "Co-pilot"},
+                    "fsm":  {"colWidth": 10, "title": "Service Manager"},
+                    "fa1":  {"colWidth": 10, "title": "Flight attendant 1"},
+                    "fa2":  {"colWidth": 10, "title": "Flight attendant 2"}
+                },                
+                "templates": {
+                    "voyages":[]
+                }
+            }
+        }
+        self.__allTemplates = self.__listAllTemplates()
+        self.__currentSections = []
+        self.__settings = {}
+        self.__screenWidth = 100 #the default screenWidth setting
+    
+    def __listAllTemplates(self):
+        """Just creates a dictionary of all available templates that references it's dataType"""
+        allTemplates_list = {}
+        for dataType, value in self.__dataTypes.items():
+            for template in value["templates"].keys():
+                allTemplates_list[template] = dataType
+
+        return allTemplates_list
+
+    def detectDataType(self, data:dict, colWidth:int = 10):
+        """Figures out what type of data is being provided"""
+
+        #Create list of keys for each dataType from self.__dataTypes
+        refDataTypes_dict = {}
+        for dataType, value in self.__dataTypes.items():
+            refDataTypes_dict[dataType] = value["columns"]
+        
+        #Compare the keys of given data with refDataTypes
+        for dataType, columns in refDataTypes_dict.items():
+            #if match is found, return the results
+            if set(data[0]) == set(columns):
+                return {dataType: self.__dataTypes[dataType]}
+
+            else:
+                #continue checking through the data types
+                continue
+        #if no matches are found, return a custom dataType dict
+        return { 
+            dataType: {
+                "columns": {
+                    key:{"colWidth":colWidth, "title":key} for key in data[0].keys()
+                },
+                "templates": {dataType: []}
+            }
         }
 
+    #trims the strings to be specific length
     def cutString(self, string, limit:int = 10):
         """Creates a string that is of set length, if string was cut short then it adds dots, else it fills with spaces""" 
         if len(string) > limit:
@@ -68,34 +153,163 @@ class DisplayScreen:
             newString = string.ljust(limit)
             return newString
 
-    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10):
-        #create the header row (print the keys)
-        headerKeys = []
-        print()
-        #counter = 0
-        for column in data[0]:
-            headerKeys.append(self.cutString(column,colWidth))
-            #title = self.__printTemplates["titles"][counter]
-            #headerKeys.append(self.cutString(title, colWidth))
-            #counter += 1
+    #===================================================================================
+    # Sections for printFrame, 
+    #
+    # 
+    #===================================================================================
 
-        headerRow = " | ".join(headerKeys)
-        print(headerRow)
-        print("-"*len(headerRow))
-        #loop through each line of data
+    def __sectionHeader(self, data:list):
+        """Prints the header section"""
+        print(data[0])
+
+    def __sectionList(self, data:list):
+        """Prints the list section """
+        #get the dataType
+        dataType_dict = self.detectDataType(data)
+        dataType_str = list(dataType_dict.keys())[0]
+        ignoredColumns = dataType_dict[dataType_str]["templates"][dataType_str]
+        columnData_dict = dataType_dict[dataType_str]["columns"]
+        
+        #the dividers when joining the columns
+        divider_str = " | "
+        horizontalDiv_str = "-|-"
+
+        #create the row strings
+        listForPrint = []
+        for row in data:
+            firstRow = row == data[0]
+            compiledRow = []
+            titleRow = []
+            dividerRow = []
+            for column, value in row.items():
+                #checki if column should be ignored
+
+                if column not in ignoredColumns:
+                    colWidth = columnData_dict[column]["colWidth"]
+                    value_str = self.cutString(value,colWidth)
+
+                    #create the title row if this is the first round
+                    if firstRow:
+                        title_str = columnData_dict[column]["title"]
+                        title_str = self.cutString(title_str, colWidth)
+                        titleRow.append(title_str) #titles
+                        dividerRow.append("-"*colWidth) #horizontal divider
+
+                    #add each column to the compiledRow
+                    compiledRow.append(value_str)
+
+            if firstRow:
+                #add the titlerow before any other row
+                titleRow_str = divider_str.join(titleRow)
+                listForPrint.append(titleRow_str)
+                listForPrint.append(horizontalDiv_str.join(dividerRow))
+                
+            row_str = divider_str.join(compiledRow)
+            listForPrint.append(row_str)
+
+        #----------------------------------------------
+        #Enumerated lists
+
+        if self.__settings["lists"]["numList"]:
+            enumeratedList = []
+            rowCounter_int = 0
+            choiceColWidth = 5
+
+            #add the space or number to the line
+            for line in listForPrint[:2]:
+                #first two lines are not counted
+                line = " "*choiceColWidth + line
+                enumeratedList.append(line)
+            for num, line in enumerate(listForPrint[2:],1):
+                choiceIndex = "{})".format(str(num))
+                line = choiceIndex.ljust(5) + line
+                enumeratedList.append(line)
+
+            self.__currentSections.append(enumeratedList)
+        else:           
+            self.__currentSections.append(listForPrint)
+
+    def __sectionText(self, data:list):
+        """Prints the list section """
+
+    def __sectionShortCuts(self, data:list):
+        """Prints the list section """
+
+    #===================================================================================
+    # the screen printer
+    #===================================================================================
+
+    def __printScreen(self, screenData:list):
+        # Types of sections: header, list, text, shortcuts
+        # screenData is list of sections, which are dictionaries of section key and data
+        # the data are lists of strings usually, or dictionaries if it is a table
+        
+        #the actual screenData given in parameters
+        screenData_list = screenData
+
+        #print handler
+        screenSections_dict = {
+            "header": self.__sectionHeader,
+            "list": self.__sectionList,
+            "text": self.__sectionText,
+            "shortcuts": self.__sectionShortCuts
+        }
+
+        #print the screenData
+        frameTop_str = "#"*self.__screenWidth
+        frameBottom_str = frameTop_str
+        frame_str = "|{}|"
+
+        #print the top
+        print(frameTop_str)
+
+        #print the body of frame
+        #Each section will return a list of strings, each being a line for print
+        for section in screenData_list:
+            for sectionKey, sectionData_list in section.items():
+                #the parameters that will go into the screenSelections_dict methods 
+                sectionParameters = [sectionData_list]
+                #run the method with parameters
+                listForPrint = screenSections_dict[sectionKey.lower()](*sectionParameters)
+            
+        #goes through the compiled sections and prints them.
+        for section in self.__currentSections:
+            print("\n".join(section))
+            print()
+
+        #print the bottom
+        print(frameBottom_str)
+    
+    #===================================================================================
+    # Processing methods
+    #===================================================================================
+
+
+
+
+
+    #===================================================================================
+    # Methods that compile the screens for print
+    #===================================================================================
+
+    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, formatTemplate: str = "", keys: bool = False, numList:bool = False):
+        """Prints a given list, can optionally print the key as column title, else it uses the given titles"""
+
+        #set the parameters
+        self.__settings["lists"] = {"colWidth": colWidth, "formatTemplate": formatTemplate, "keys": keys,
+        "numList": numList }
+        
+        #get the dataType for 
+        screenData = [
+            {"header": ["Header of screen"]},
+            {"list": data}
+        ]
 
         if rowLimit == 0:
             rowLimit = len(data)
 
-        for line in data[:rowLimit]:
-            row = []
-            #prints the columns specified in the 'formats' dict
-            for column in line:
-                #if value is longer than set limit width, then cut 
-                colValue = line[column]
-                row.append(self.cutString(colValue,colWidth))
-            #joins the columns together with '|' seperator
-            print(" | ".join(row)) 
+        self.__printScreen(screenData[:rowLimit])
 
             
     def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0, enumerate:bool = False):
@@ -106,51 +320,11 @@ class DisplayScreen:
 
         if rowLimit == 0:
             rowLimit = len(data)
-            
-        if formatTemplate in self.__printTemplates:
-            template = self.__printTemplates[formatTemplate]
-            #set the row limit
-            #create the header row (print the keys)
-            headerKeys = []
-            print()
-            counter = 0
-            for column in template["columns"]:
-                title = template["titles"][counter]
-                stringLimit = self.__stringLimits[template["dataType"]][column]
+    
+        self.printList(data[:rowLimit])
 
-                trimmedKey = self.cutString(title,stringLimit)
-                headerKeys.append(trimmedKey)
-                counter += 1 
-            headerRow = " | ".join(headerKeys)
-            horizonalDiv = "-"*len(headerRow)
-
-            # add space before table if enumerated list
-            if enumerate == True:
-                enumSpace = "".ljust(5)
-                headerRow = enumSpace + headerRow
-                horizonalDiv = enumSpace + horizonalDiv
-            print(headerRow)
-            print(horizonalDiv)
-
-            #loop through each line of data
-            rowCounter_int = 0
-            for line in data[:rowLimit]:
-                row = []
-                if enumerate == True:
-                    rowCounter_int += 1
-                    choiceIndex = "{})".format(str(rowCounter_int))
-                    print(choiceIndex.ljust(5), end="")
-
-                #prints the columns specified in the 'formats' dict
-                for column in template["columns"]:
-                    #if value is longer than set limit width, then cut 
-                    colValue = line[column]
-                    row.append(self.cutString(colValue,self.__stringLimits[template["dataType"]][column]))
-                #joins the columns together with '|' seperator
-                print(" | ".join(row)) 
-        else: 
-            self.printList(data,rowLimit=rowLimit)
-
-    def printOptions(self, data:list, formatTemplate: str):
+    def printOptions(self, data:list, formatTemplate: str = ""):
+        #The 'formatTemplate' parameter is obsolete, left it in because some might be using it
         """Makes printing enumerated tables easy"""
-        self.printListFormat(data, formatTemplate=formatTemplate, enumerate= True)
+        self.printList(data, numList=True)
+        #self.printListFormat(data, formatTemplate=formatTemplate, enumerate= True)
