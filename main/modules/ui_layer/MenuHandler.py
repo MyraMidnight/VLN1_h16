@@ -76,6 +76,10 @@ class MenuHandler:
                 "title": "Flight Attendants",
                 "function": LLAPI().getFlightAttendants
             },
+            "2.1.5" : {
+                "title": "Pilots by licence",
+                "function": LLAPI().getPilotsByLicence
+            },
             "2.5.1" : {
                 "title": "Employees not working",
                 "function": LLAPI().getAway
@@ -110,7 +114,7 @@ class MenuHandler:
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
-            "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4"],
+            "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4", "2.1.5"],
             "schedule" : ["2.5.1","2.5.2","2.5.3"],
             "update": ["3.1", "3.2", "3.3"],
         }

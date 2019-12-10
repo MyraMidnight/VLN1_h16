@@ -174,5 +174,29 @@ class GetLogic :
                         schedule_list.append(flight)
         
         return DisplayScreen().printList(schedule_list,colWidth=13)
-        
+
+    def getPilotsByLicence(self):
+        #fetch employee info
+        employeePackage = IOAPI().opener('Crew.csv')
+        #fetch plane info
+        planePackage = IOAPI().opener('Aircraft.csv')
+        pilotPackage = []
+        for employee in employeePackage:
+            if employee['role'] == "Pilot":
+                pilotPackage.append(employee)
+        #show the planes to user
+        DisplayScreen().printList(planePackage,colWidth=15)
+        user_input = InputHandler().planetype()
+        anyone_found_flag = False
+        licence_pilots = []
+        for pilot in pilotPackage:
+            if pilot['licence'] == user_input:
+                anyone_found_flag = True
+                licence_pilots.append(pilot)
+        if anyone_found_flag:
+            return DisplayScreen().printList(licence_pilots,colWidth=16)
+        else:
+            print("No pilots were found with that licence")
+            return False
+
         

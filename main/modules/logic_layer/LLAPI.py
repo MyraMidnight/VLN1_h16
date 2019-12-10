@@ -60,6 +60,9 @@ class LLAPI :
     
     def getWeekWork(self):
         return GetLogic().getWeekWork()
+    
+    def getPilotsByLicence(self):
+        return GetLogic().getPilotsByLicence()
 
     #------- UPDATE
     def updateVoyage(self):

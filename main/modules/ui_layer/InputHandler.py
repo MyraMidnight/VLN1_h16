@@ -339,11 +339,13 @@ class InputHandler:
         # else:
         #     return name
 
-    # Get Social security number (ssn)
-    def ssn(self, inputQuestion:str = ""):
-        """Input for social security number (kennitala)"""  
-        return self.numSetLength(10, inputQuestion)
-
+    def planetype(self, inputQuestion:str = "Input a type of plane: "):
+        planetype = input(inputQuestion)
+        while planetype[:2] != "NA":
+            print("Please input a valid planetype")
+            planetype = input(inputQuestion)
+        return planetype
+    
     # flightNumber format
     def flightId(self):
         """Input for flight ID, just checks if it's a valid format"""
