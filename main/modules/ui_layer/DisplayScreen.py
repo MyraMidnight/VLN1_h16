@@ -100,7 +100,9 @@ class DisplayScreen:
             }
         }
         self.__allTemplates = self.__listAllTemplates()
-        self.__currentTemplate = ""
+        self.__currentSections = []
+        self.__settings = {}
+        self.__screenWidth = 100 #the default screenWidth setting
     
     def __listAllTemplates(self):
         """Just creates a dictionary of all available templates that references it's dataType"""
@@ -155,11 +157,11 @@ class DisplayScreen:
     # Sections for printFrame
     #===================================================================================
 
-    def __sectionHeader(self, data:list, screenWidth:int, frame:str):
+    def __sectionHeader(self, data:list):
         """Prints the header section"""
         print(data[0])
 
-    def __sectionList(self, data:list, screenWidth:int, frame:str):
+    def __sectionList(self, data:list):
         """Prints the list section """
         #get the dataType
         dataType_dict = self.detectDataType(data)
@@ -203,70 +205,40 @@ class DisplayScreen:
                 
             row_str = divider_str.join(compiledRow)
             listForPrint.append(row_str)
-        print("\n".join(listForPrint))
-        return listForPrint
 
-        
-        #create the lines
+        #----------------------------------------------
+        #Enumerated lists
 
-        #return the list of lines
-        
-        # _------------------------------------------------------
-        # def processTable():
-        #     """Cuts/fills the strings for each column""", 
+        if self.__settings["lists"]["numList"]:
+            enumeratedList = []
+            rowCounter_int = 0
+            choiceColWidth = 5
 
-        #     #creates a list of column keys in order
-        #     columnOrder =dataType["columns"].keys()
-        #     print(columnOrder)
+            #add the space or number to the line
+            for line in listForPrint[:2]:
+                #first two lines are not counted
+                line = " "*choiceColWidth + line
+                enumeratedList.append(line)
+            for num, line in enumerate(listForPrint[2:],1):
+                choiceIndex = "{})".format(str(num))
+                line = choiceIndex.ljust(5) + line
+                enumeratedList.append(line)
 
+            self.__currentSections.append(enumeratedList)
+        else:           
+            self.__currentSections.append(listForPrint)
 
-        #     #process each column value to fit the colWidth
-        #     formattedList = []
-
-        #     #add the title row:
-        #     titleRow = self.__formatRow([data[0]], titles=dataType)
-        #     formattedList.append(titleRow.copy())
-        #     #process the table
-        #     for row in data: 
-        #         trimmedRow_dict = self.__formatRow(row)
-        #         #append a copy of the row in formatedList
-        #         formattedList.append(trimmedRow_dict.copy())
-
-        #     #if enumerated, add
-
-        #     return formattedList
-
-        # def formatRow(rowData):
-        #     """Processes the strings per column"""
-
-        #     formattedRow_dict = {}
-        #     for column,value in rowData.items():
-        #         #if the row is header/title row, then use titles
-        #         # if len(titles) != 0:
-        #         #     value = titles["titles"][column]
-
-        #         #if value length is longer than colWith limit, then trim
-        #         if len(value) > colWidth:
-        #             value_str = value[:colWidth]
-
-        #         #else it fills in the empth space
-        #         else:
-        #             value_str = self.cutString(value,colWidth)
-        #         formattedRow_dict[column] = value_str
-
-
-    def __sectionText(self, data:list, screenWidth:int, frame:str):
+    def __sectionText(self, data:list):
         """Prints the list section """
 
-    def __sectionShortCuts(self, data:list, screenWidth:int, frame:str):
+    def __sectionShortCuts(self, data:list):
         """Prints the list section """
 
     #===================================================================================
     # the screen printer
     #===================================================================================
 
-    def __printScreen(self, screenData:list, screenWidth: int):
-        
+    def __printScreen(self, screenData:list):
         # Types of sections: header, list, text, shortcuts
         # screenData is list of sections, which are dictionaries of section key and data
         # the data are lists of strings usually, or dictionaries if it is a table
@@ -283,7 +255,7 @@ class DisplayScreen:
         }
 
         #print the screenData
-        frameTop_str = "#"*screenWidth
+        frameTop_str = "#"*self.__screenWidth
         frameBottom_str = frameTop_str
         frame_str = "|{}|"
 
@@ -295,9 +267,14 @@ class DisplayScreen:
         for section in screenData_list:
             for sectionKey, sectionData_list in section.items():
                 #the parameters that will go into the screenSelections_dict methods 
-                sectionParameters = [sectionData_list, screenWidth, frame_str]
+                sectionParameters = [sectionData_list]
                 #run the method with parameters
-                screenSections_dict[sectionKey.lower()](*sectionParameters)
+                listForPrint = screenSections_dict[sectionKey.lower()](*sectionParameters)
+            
+        #goes through the compiled sections and prints them.
+        for section in self.__currentSections:
+            print("\n".join(section))
+            print()
 
         #print the bottom
         print(frameBottom_str)
@@ -314,29 +291,23 @@ class DisplayScreen:
     # Methods that compile the screens for print
     #===================================================================================
 
-    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, formatTemplate: str = "", keys: bool = False):
+    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, formatTemplate: str = "", keys: bool = False, numList:bool = False):
         """Prints a given list, can optionally print the key as column title, else it uses the given titles"""
-        #get the dataType for 
 
+        #set the parameters
+        self.__settings["lists"] = {"colWidth": colWidth, "formatTemplate": formatTemplate, "keys": keys,
+        "numList": numList }
+        
+        #get the dataType for 
         screenData = [
             {"header": ["Header of screen"]},
             {"list": data}
         ]
 
-        self.__printScreen(screenData,100)
+        if rowLimit == 0:
+            rowLimit = len(data)
 
-        # if rowLimit == 0:
-        #     rowLimit = len(data)
-
-        # for line in data[:rowLimit]:
-        #     row = []
-        #     #prints the columns specified in the 'formats' dict
-        #     for column in line:
-        #         #if value is longer than set limit width, then cut 
-        #         colValue = line[column]
-        #         row.append(self.cutString(colValue,colWidth))
-        #     #joins the columns together with '|' seperator
-        #     print(" | ".join(row)) 
+        self.__printScreen(screenData[:rowLimit])
 
             
     def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0, enumerate:bool = False):
@@ -347,55 +318,11 @@ class DisplayScreen:
 
         if rowLimit == 0:
             rowLimit = len(data)
-            
-        if formatTemplate in self.__allTemplates:
-            #find the correct template and info for reference
-            dataType_str = self.__allTemplates[formatTemplate]
-            template_list = self.__dataTypes["templates"][formatTemplate]
-            columnInfo_dict = self.__dataTypes[dataType_str]["columns"]
+    
+        self.printList(data[:rowLimit])
 
-            #set the row limit
-            #create the header row (print the keys)
-            columnTitles = []
-            print()
-            for column in data:
-                if column not in template_list:
-                    title = columnInfo_dict["titles"][column]
-                    colWidth = columnInfo_dict[column]
-
-                    trimmedKey = self.cutString(title,colWidth)
-                    columnTitles.append(trimmedKey)
-                    counter += 1 
-            headerRow = " | ".join(columnTitles)
-            horizonalDiv = "-"*len(headerRow)
-
-            # add space before table if enumerated list
-            if enumerate == True:
-                enumSpace = "".ljust(5)
-                headerRow = enumSpace + headerRow
-                horizonalDiv = enumSpace + horizonalDiv
-            print(headerRow)
-            print(horizonalDiv)
-
-            #loop through each line of data
-            rowCounter_int = 0
-            for line in data[:rowLimit]:
-                row = []
-                if enumerate == True:
-                    rowCounter_int += 1
-                    choiceIndex = "{})".format(str(rowCounter_int))
-                    print(choiceIndex.ljust(5), end="")
-
-                #prints the columns specified in the 'formats' dict
-                for column in template["columns"]:
-                    #if value is longer than set limit width, then cut 
-                    colValue = line[column]
-                    row.append(self.cutString(colValue,self.__colWidths[template["dataType"]][column]))
-                #joins the columns together with '|' seperator
-                print(" | ".join(row)) 
-        else: 
-            self.printList(data,rowLimit=rowLimit)
-
-    def printOptions(self, data:list, formatTemplate: str):
+    def printOptions(self, data:list, formatTemplate: str = ""):
+        #The 'formatTemplate' parameter is obsolete, left it in because some might be using it
         """Makes printing enumerated tables easy"""
-        self.printListFormat(data, formatTemplate=formatTemplate, enumerate= True)
+        self.printList(data, numList=True)
+        #self.printListFormat(data, formatTemplate=formatTemplate, enumerate= True)
