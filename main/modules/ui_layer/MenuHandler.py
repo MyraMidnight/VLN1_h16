@@ -91,7 +91,7 @@ class MenuHandler:
             },
             "3.1" : {
                 "title": "Crew",
-                "function": "getcrew"
+                "function": LLAPI().updateEmployee
             },
             "3.2" : {
                 "title": "Voyages",

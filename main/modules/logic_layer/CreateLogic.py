@@ -121,7 +121,7 @@ class CreateLogic :
         plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, "Please enter a number representing a plane type ID: ")
 
         #Input confirmation
-        DisplayScreen().printList([plane_dict], formatTemplate = "planes")
+        DisplayScreen().printList([plane_dict])
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
         #Appending the input info to aircraft file
