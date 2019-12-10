@@ -180,21 +180,27 @@ class GetLogic :
         employeePackage = IOAPI().opener('Crew.csv')
         #fetch plane info
         planePackage = IOAPI().opener('Aircraft.csv')
+        #get all the pilots in one list
         pilotPackage = []
         for employee in employeePackage:
             if employee['role'] == "Pilot":
                 pilotPackage.append(employee)
         #show the planes to user
         DisplayScreen().printList(planePackage,colWidth=15)
+        #ask user for a plane type
         user_input = InputHandler().planetype()
+        #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
+        #if no such pilots are found then the flag is never set to true
         anyone_found_flag = False
         licence_pilots = []
         for pilot in pilotPackage:
             if pilot['licence'] == user_input:
                 anyone_found_flag = True
                 licence_pilots.append(pilot)
+        #if anyone is found it returns the relevant info
         if anyone_found_flag:
             return DisplayScreen().printList(licence_pilots,colWidth=16)
+        #else it alerts the user and returns false
         else:
             print("No pilots were found with that licence")
             return False
@@ -202,20 +208,25 @@ class GetLogic :
     def printPilotsByLicence(self):
         #fetch employee info
         employeePackage = IOAPI().opener('Crew.csv')
+        #get all the pilots in one list
         pilotPackage = []
         for employee in employeePackage:
             if employee['role'] == "Pilot":
                 pilotPackage.append(employee)
         #fetch plane info
         planePackage = IOAPI().opener('Aircraft.csv')
+        #gets a list of unique plane types from the planePackage
         planetypeList = []
         for plane in planePackage:
             if plane['planeTypeId'] not in planetypeList:
                 planetypeList.append(plane['planeTypeId'])
         planetypeList.sort()
+        #goes through all the plane types and finds all the pilots with a licence for that plane type
+        #and compiles them in a list
         pilotPlaneList = []
         for planeType in planetypeList:
             for pilot in pilotPackage:
                 if pilot['licence'] == planeType and pilot not in pilotPlaneList:
                     pilotPlaneList.append(pilot)
+        #returns relevant info
         return DisplayScreen().printList(pilotPlaneList,colWidth=17)
