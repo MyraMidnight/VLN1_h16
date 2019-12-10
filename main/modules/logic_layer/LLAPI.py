@@ -63,6 +63,9 @@ class LLAPI :
     
     def getPilotsByLicence(self):
         return GetLogic().getPilotsByLicence()
+    
+    def printPilotsByLicence(self):
+        return GetLogic().printPilotsByLicence()
 
     #------- UPDATE
     def updateVoyage(self):

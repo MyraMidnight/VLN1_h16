@@ -199,4 +199,23 @@ class GetLogic :
             print("No pilots were found with that licence")
             return False
 
-        
+    def printPilotsByLicence(self):
+        #fetch employee info
+        employeePackage = IOAPI().opener('Crew.csv')
+        pilotPackage = []
+        for employee in employeePackage:
+            if employee['role'] == "Pilot":
+                pilotPackage.append(employee)
+        #fetch plane info
+        planePackage = IOAPI().opener('Aircraft.csv')
+        planetypeList = []
+        for plane in planePackage:
+            if plane['planeTypeId'] not in planetypeList:
+                planetypeList.append(plane['planeTypeId'])
+        planetypeList.sort()
+        pilotPlaneList = []
+        for planeType in planetypeList:
+            for pilot in pilotPackage:
+                if pilot['licence'] == planeType and pilot not in pilotPlaneList:
+                    pilotPlaneList.append(pilot)
+        return DisplayScreen().printList(pilotPlaneList,colWidth=17)
