@@ -50,5 +50,5 @@ screenData = [
   {"header": ["Header of screen"]},
   {"list": flightData}
 ]
-dataType = DisplayScreen().printFrame(screenData, 100)
+dataType = DisplayScreen().printList(flightData)
 print(dataType)

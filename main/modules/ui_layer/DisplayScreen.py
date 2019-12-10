@@ -28,9 +28,9 @@ class DisplayScreen:
             # flights ---------------------------------------
             "flights": {
                 "columns": {
-                    'flightNumber': {"colWidth": 13, "title": "Flight Number"},
-                    "departingFrom": {"colWidth": 13, "title": "From"},
-                    "arrivingAt": {"colWidth": 10, "title": "To"},
+                    'flightNumber': {"colWidth": 13, "title": "Flight nr."},
+                    "departingFrom": {"colWidth": 5, "title": "From"},
+                    "arrivingAt": {"colWidth": 5, "title": "To"},
                     "departure": {"colWidth": 15, "title": "Departure"},
                     "arrival": {"colWidth": 15, "title": "Arrival"},
                     "aircraftID": {"colWidth": 10, "title": "Aircraft ID"},
@@ -100,6 +100,7 @@ class DisplayScreen:
             }
         }
         self.__allTemplates = self.__listAllTemplates()
+        self.__currentTemplate = ""
     
     def __listAllTemplates(self):
         """Just creates a dictionary of all available templates that references it's dataType"""
@@ -120,16 +121,24 @@ class DisplayScreen:
         
         #Compare the keys of given data with refDataTypes
         for dataType, columns in refDataTypes_dict.items():
-
             #if match is found, return the results
-            if data[0].keys() == columns.keys():
-                return self.__dataTypes[dataType]
+            if set(data[0]) == set(columns):
+                return {dataType: self.__dataTypes[dataType]}
 
-            #else create a dictionary from the given data
             else:
-                return {{key:{"colWidth":colWidth, "title":key}} for key in data[0].keys()}
+                #continue checking through the data types
+                continue
+        #if no matches are found, return a custom dataType dict
+        return { 
+            dataType: {
+                "columns": {
+                    key:{"colWidth":colWidth, "title":key} for key in data[0].keys()
+                },
+                "templates": {dataType: []}
+            }
+        }
 
-
+    #trims the strings to be specific length
     def cutString(self, string, limit:int = 10):
         """Creates a string that is of set length, if string was cut short then it adds dots, else it fills with spaces""" 
         if len(string) > limit:
@@ -148,14 +157,102 @@ class DisplayScreen:
 
     def __sectionHeader(self, data:list, screenWidth:int, frame:str):
         """Prints the header section"""
+        print(data[0])
 
     def __sectionList(self, data:list, screenWidth:int, frame:str):
         """Prints the list section """
+        #get the dataType
+        dataType_dict = self.detectDataType(data)
+        dataType_str = list(dataType_dict.keys())[0]
+        ignoredColumns = dataType_dict[dataType_str]["templates"][dataType_str]
+        columnData_dict = dataType_dict[dataType_str]["columns"]
+        
+        #the dividers when joining the columns
+        divider_str = " | "
+        horizontalDiv_str = "-|-"
+
+        #create the row strings
+        listForPrint = []
         for row in data:
-            #if titleRow
-            if row == data[0]:
-                for title in data[0].values():
-                    print(" | ".join(title))
+            firstRow = row == data[0]
+            compiledRow = []
+            titleRow = []
+            dividerRow = []
+            for column, value in row.items():
+                #checki if column should be ignored
+
+                if column not in ignoredColumns:
+                    colWidth = columnData_dict[column]["colWidth"]
+                    value_str = self.cutString(value,colWidth)
+
+                    #create the title row if this is the first round
+                    if firstRow:
+                        title_str = columnData_dict[column]["title"]
+                        title_str = self.cutString(title_str, colWidth)
+                        titleRow.append(title_str) #titles
+                        dividerRow.append("-"*colWidth) #horizontal divider
+
+                    #add each column to the compiledRow
+                    compiledRow.append(value_str)
+
+            if firstRow:
+                #add the titlerow before any other row
+                titleRow_str = divider_str.join(titleRow)
+                listForPrint.append(titleRow_str)
+                listForPrint.append(horizontalDiv_str.join(dividerRow))
+                
+            row_str = divider_str.join(compiledRow)
+            listForPrint.append(row_str)
+        print("\n".join(listForPrint))
+        return listForPrint
+
+        
+        #create the lines
+
+        #return the list of lines
+        
+        # _------------------------------------------------------
+        # def processTable():
+        #     """Cuts/fills the strings for each column""", 
+
+        #     #creates a list of column keys in order
+        #     columnOrder =dataType["columns"].keys()
+        #     print(columnOrder)
+
+
+        #     #process each column value to fit the colWidth
+        #     formattedList = []
+
+        #     #add the title row:
+        #     titleRow = self.__formatRow([data[0]], titles=dataType)
+        #     formattedList.append(titleRow.copy())
+        #     #process the table
+        #     for row in data: 
+        #         trimmedRow_dict = self.__formatRow(row)
+        #         #append a copy of the row in formatedList
+        #         formattedList.append(trimmedRow_dict.copy())
+
+        #     #if enumerated, add
+
+        #     return formattedList
+
+        # def formatRow(rowData):
+        #     """Processes the strings per column"""
+
+        #     formattedRow_dict = {}
+        #     for column,value in rowData.items():
+        #         #if the row is header/title row, then use titles
+        #         # if len(titles) != 0:
+        #         #     value = titles["titles"][column]
+
+        #         #if value length is longer than colWith limit, then trim
+        #         if len(value) > colWidth:
+        #             value_str = value[:colWidth]
+
+        #         #else it fills in the empth space
+        #         else:
+        #             value_str = self.cutString(value,colWidth)
+        #         formattedRow_dict[column] = value_str
 
 
     def __sectionText(self, data:list, screenWidth:int, frame:str):
@@ -168,15 +265,12 @@ class DisplayScreen:
     # the screen printer
     #===================================================================================
 
-    def printFrame(self, screenData:list, screenWidth: int):
-        #example of screen data types, the order can be decided by the caller
-        screenData_list = [
-            {"header": [""]}, #a string that will be printed as header
-            {"list": [{},{}]}, #first line is titleRow
-            {"text": ["",""]}, #lines seperated into a list
-            {"shortcuts": ["",""]} #list of strings for each shortcut
-        ]
-
+    def __printScreen(self, screenData:list, screenWidth: int):
+        
+        # Types of sections: header, list, text, shortcuts
+        # screenData is list of sections, which are dictionaries of section key and data
+        # the data are lists of strings usually, or dictionaries if it is a table
+        
         #the actual screenData given in parameters
         screenData_list = screenData
 
@@ -197,10 +291,14 @@ class DisplayScreen:
         print(frameTop_str)
 
         #print the body of frame
+        #Each section will return a list of strings, each being a line for print
         for section in screenData_list:
-            for sectionType_str, sectionData_list in section.items():
-                #run the section method with given data
-                screenSections_dict[sectionType_str.lower()](sectionData_list, screenWidth, frame_str)
+            for sectionKey, sectionData_list in section.items():
+                #the parameters that will go into the screenSelections_dict methods 
+                sectionParameters = [sectionData_list, screenWidth, frame_str]
+                #run the method with parameters
+                screenSections_dict[sectionKey.lower()](*sectionParameters)
+
         #print the bottom
         print(frameBottom_str)
     
@@ -208,86 +306,37 @@ class DisplayScreen:
     # Processing methods
     #===================================================================================
 
-    def __formatRow(self, rowData:dict, colWidth, titles:bool = False):
-        """Processes the strings per column"""
-
-        formattedRow_dict = {}
-        for column,value in rowData.items():
-
-            #if the row is header/title row, then use titles
-            if titles == True:
-                value = dataType["titles"][column]
-
-            #if value length is longer than colWith limit, then trim
-            if len(value) > colWidth:
-                value_str = value[:colWidth]
-
-            #else it fills in the empth space
-            else:
-                value_str = self.cutString(value,colWidth)
-            formattedRow_dict[column] = value_str
-
-    def processTable(self, data:list, colWidth:int):
-        """Cuts/fills the strings for each column""", 
-        dataType = self.detectDataType(data)
-
-        #creates a list of column keys in order
-        columnOrder = [column for dataType["columns"].keys()]
 
 
-        #process each column value to fit the colWidth
-        formattedList = []
-        #create the title row
-        formattedList.append(self.__formatRow(data[0], colWidth, True))
-
-        #process the table
-        for row in data: 
-            trimmedRow_dict = self.__formatRow(row)
-            #append a copy of the row in formatedList
-            formattedList.append(trimmedRow_dict.copy())
-
-        return formattedList
 
 
     #===================================================================================
     # Methods that compile the screens for print
     #===================================================================================
-    
+
     def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, formatTemplate: str = "", keys: bool = False):
         """Prints a given list, can optionally print the key as column title, else it uses the given titles"""
         #get the dataType for 
-        dataType_dict = self.detectDataType(data)
 
-        #create the header row (print the keys)
-        columnTitles = []
-        
-        for colKey, info in dataType_dict.items():
-            if len(colKey) > colWidth:
-                colTitle = colKey[:colWidth]
-            else:
-                colTitle = self.cutString(colKey,colWidth)
-            columnTitles.append()
-            #title = self.__printTemplates["titles"][counter]
-            #columnTitles.append(self.cutString(title, colWidth))
-            #counter += 1
+        screenData = [
+            {"header": ["Header of screen"]},
+            {"list": data}
+        ]
 
-        headerRow = " | ".join(columnTitles)
-        print(headerRow)
-        print("-"*len(headerRow))
-        #loop through each line of data
+        self.__printScreen(screenData,100)
 
-        if rowLimit == 0:
-            rowLimit = len(data)
+        # if rowLimit == 0:
+        #     rowLimit = len(data)
 
-        for line in data[:rowLimit]:
-            row = []
-            #prints the columns specified in the 'formats' dict
-            for column in line:
-                #if value is longer than set limit width, then cut 
-                colValue = line[column]
-                row.append(self.cutString(colValue,colWidth))
-            #joins the columns together with '|' seperator
-            print(" | ".join(row)) 
+        # for line in data[:rowLimit]:
+        #     row = []
+        #     #prints the columns specified in the 'formats' dict
+        #     for column in line:
+        #         #if value is longer than set limit width, then cut 
+        #         colValue = line[column]
+        #         row.append(self.cutString(colValue,colWidth))
+        #     #joins the columns together with '|' seperator
+        #     print(" | ".join(row)) 
 
             
     def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0, enumerate:bool = False):
