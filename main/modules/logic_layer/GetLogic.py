@@ -230,3 +230,32 @@ class GetLogic :
                     pilotPlaneList.append(pilot)
         #returns relevant info
         return DisplayScreen().printList(pilotPlaneList,colWidth=17)
+    
+    def licenceByCount(self):
+        #fetch employee info
+        employeePackage = IOAPI().opener('Crew.csv')
+        #get all the pilots in one list
+        pilotPackage = []
+        for employee in employeePackage:
+            if employee['role'] == "Pilot":
+                pilotPackage.append(employee)
+        #fetch plane info
+        planePackage = IOAPI().opener('Aircraft.csv')
+        #gets a list of unique plane types from the planePackage
+        planetypeList = []
+        for plane in planePackage:
+            if plane['planeTypeId'] not in planetypeList:
+                planetypeList.append(plane['planeTypeId'])
+        planetypeList.sort()
+
+        licenceCountList = [{"planeTypeId":planetype, "count":0} for planetype in planetypeList]
+
+        for combo in licenceCountList:
+            for pilot in pilotPackage:
+                if pilot['licence'] == combo["planeTypeId"]:
+                    combo["count"] += 1
+        
+        for combo in licenceCountList:
+            combo['count'] = str(combo['count'])
+
+        return DisplayScreen().printList(licenceCountList,colWidth=15)

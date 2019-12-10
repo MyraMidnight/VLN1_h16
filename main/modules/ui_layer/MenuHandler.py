@@ -30,10 +30,6 @@ class MenuHandler:
                 "title": "Destinations",
                 "function" : LLAPI().createDestination
             },
-            "1.4" : {
-                "title": "Aircrafts",  
-                "function": "main"
-            },
             #---------- Get --------------
             "2" : {
                 "title": "Get data",
@@ -53,7 +49,7 @@ class MenuHandler:
             },
             "2.4" : {
                 "title": "Aircrafts",
-                "function": LLAPI().getPlanes
+                "function": "aircraft"
             },
             "2.5" : {
                 "title": "Schedule",
@@ -96,6 +92,14 @@ class MenuHandler:
                 "title": "Single employee week work schedule",
                 "function": LLAPI().getWeekWork
             },
+            "2.4.1" : {
+                "title": "All planes",
+                "function": LLAPI().getPlanes
+            },
+            "2.4.2" : {
+                "title": "Licences by plane type",
+                "function": LLAPI().licenceByCount
+            },
             #---------- Update --------------
             "3" : {
                 "title": "Update data",
@@ -119,6 +123,7 @@ class MenuHandler:
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4", "2.1.5", "2.1.6"],
+            "aircraft": ["2.4.1","2.4.2"],
             "schedule" : ["2.5.1","2.5.2","2.5.3"],
             "update": ["3.1", "3.2", "3.3"],
         }
