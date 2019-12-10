@@ -49,6 +49,7 @@ class PrintHandler:
                 "columns": {
                     "id": {"colWidth": 10, "title": "Airport"},
                     "destination": {"colWidth": 18, "title": "Destination"},
+                    "flightDuration": {"colWidth": 20, "title": "traveltime"}
                 },                
                 "templates": {
                     "destinations":[]
@@ -127,8 +128,10 @@ class PrintHandler:
         
         #Compare the keys of given data with refDataTypes
         for dataType, columns in refDataTypes_dict.items():
-            #if match is found, return the results
-            if set(data[0]) == set(columns):
+
+            #checks if all the keys in data are in existing DataType
+            # it can contain less keys (for cases of old data with missing columns)
+            if all(column in data[0] for column in columns):
                 return {dataType: self.__dataTypes[dataType]}
 
             else:
