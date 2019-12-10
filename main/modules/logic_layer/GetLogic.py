@@ -247,14 +247,14 @@ class GetLogic :
             if plane['planeTypeId'] not in planetypeList:
                 planetypeList.append(plane['planeTypeId'])
         planetypeList.sort()
-
+        #list comprehension to make a list of dicts with the planetype and the count as the dict
         licenceCountList = [{"planeTypeId":planetype, "count":0} for planetype in planetypeList]
-
+        #count how many licences of each planetype the pilots have
         for combo in licenceCountList:
             for pilot in pilotPackage:
                 if pilot['licence'] == combo["planeTypeId"]:
                     combo["count"] += 1
-        
+        #need to change it to string cause otherwise Displayscreen will Error
         for combo in licenceCountList:
             combo['count'] = str(combo['count'])
 
