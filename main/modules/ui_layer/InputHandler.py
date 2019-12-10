@@ -249,13 +249,11 @@ class InputHandler:
     # Input Plane Type ID
     #---------------------- 
     def planeTypeId(self,aircraftType_list, inputQuestion: str = ""):
-        planeTypeId_str = input(inputQuestion)
-        #Validity checks the input
-        while planeTypeId_str not in aircraftType_list:
-            print("Invalid input")
-            planeTypeId_str = input(inputQuestion)
 
-        return planeTypeId_str
+        planeTypeNum_str = self.numChoices(3, inputQuestion)
+        planeNum_dict = {"1": aircraftType_list[0], "2": aircraftType_list[1], "3": aircraftType_list[2]}
+
+        return planeNum_dict[planeTypeNum_str]
 
 
     #---------------------- 

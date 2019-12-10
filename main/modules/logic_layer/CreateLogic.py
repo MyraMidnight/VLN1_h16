@@ -114,10 +114,9 @@ class CreateLogic :
             temp_dict = {"Valid Id": a_line_dict["planeTypeId"]}
             airplaneType_list.append(temp_dict)
 
-        #Input for plane Type ID which is then put in plane_dict
-        
+        #Input for plane Type ID
         DisplayScreen().printListFormat(airplane_data_list, "planeTypes", enumerate = True)
-        # plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, "Input plane type ID: ")
+        plane_dict["planeTypeId"] = InputHandler().planeTypeId(airplaneType_list, ": ")
 
         #Input confirmation
         DisplayScreen().printList([plane_dict], colWidth = 14)
