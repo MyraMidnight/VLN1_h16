@@ -32,7 +32,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Pilot":
                 list_to_print.append(x)
-        return DisplayScreen().printList(list_to_print)
+        return DisplayScreen().printList(list_to_print,header="All pilots:",frame=True)
                 
     
     def getFlightAttendants(self):
@@ -44,43 +44,28 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
-<<<<<<< HEAD
-        return DisplayScreen().printList(list_to_print,colWidth = 17)
-=======
-        return DisplayScreen().printList(list_to_print)
->>>>>>> FannarHrafn
+        return DisplayScreen().printList(list_to_print,header="All Flight Attendants:",frame=True)
                 
     
     def getAllCrew(self):
-        GetLogic().getPilots()
-        GetLogic().getFlightAttendants()
+        #fetches employee info
+        filePackage = IOAPI().opener('Crew.csv')
+        return DisplayScreen().printList(filePackage,header="All crew:",frame=True)
 
     def getPlanes(self):
         #fetches aircraft info
         filePackage = IOAPI().opener('Aircraft.csv')
-<<<<<<< HEAD
-        return DisplayScreen().printList(filePackage,colWidth = 17)
-=======
-        return DisplayScreen().printList(filePackage)
->>>>>>> FannarHrafn
+        return DisplayScreen().printList(filePackage,header="Planes:",frame=True)
 
     def getDestinations(self):
         #fetches destination info
         filePackage = IOAPI().opener('Destinations.csv')
-<<<<<<< HEAD
-        return DisplayScreen().printList(filePackage,colWidth = 17)
-=======
-        return DisplayScreen().printList(filePackage)
->>>>>>> FannarHrafn
+        return DisplayScreen().printList(filePackage,header="Destinations:",frame=True)
     
     def getVoyages(self):
         #fetch voyage info
         filePackage = IOAPI().opener('NewUpcomingFlights.csv')
-<<<<<<< HEAD
-        return DisplayScreen().printList(filePackage,colWidth = 17)
-=======
-        return DisplayScreen().printList(filePackage)
->>>>>>> FannarHrafn
+        return DisplayScreen().printList(filePackage,header="Voyages:",frame=True)
     
     def getAway(self):
         #fetch employee info
@@ -111,11 +96,7 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
-<<<<<<< HEAD
-        return DisplayScreen().printList(away_list,colWidth = 17)
-=======
-        return DisplayScreen().printList(away_list)
->>>>>>> FannarHrafn
+        return DisplayScreen().printList(away_list,header="Employees not working:",frame=True)
     
     def getWorking(self):
         #fetch employee info
@@ -156,7 +137,7 @@ class GetLogic :
                     temp_dict["destination"] = dest_dict["destination"]
                     working_list.append(temp_dict)
         
-        return DisplayScreen().printList(working_list)
+        return DisplayScreen().printList(working_list,header="employees working and their destination:",frame=True)
     
     def getWeekWork(self):
         #fetch employee info
@@ -193,7 +174,7 @@ class GetLogic :
                     if user_ssn == flight['captain'] or user_ssn == flight['copilot'] or user_ssn == flight['fsm'] or user_ssn == flight['fa1'] or user_ssn == flight['fa2']:
                         schedule_list.append(flight)
         
-        return DisplayScreen().printList(schedule_list)
+        return DisplayScreen().printList(schedule_list,header="Chosen employee work schedule:",frame=True)
 
     def getPilotsByLicence(self):
         #fetch employee info
@@ -219,7 +200,7 @@ class GetLogic :
                 licence_pilots.append(pilot)
         #if anyone is found it returns the relevant info
         if anyone_found_flag:
-            return DisplayScreen().printList(licence_pilots)
+            return DisplayScreen().printList(licence_pilots,header="Pilots with chosen licence:",frame=True)
         #else it alerts the user and returns false
         else:
             print("No pilots were found with that licence")
@@ -249,7 +230,7 @@ class GetLogic :
                 if pilot['licence'] == planeType and pilot not in pilotPlaneList:
                     pilotPlaneList.append(pilot)
         #returns relevant info
-        return DisplayScreen().printList(pilotPlaneList)
+        return DisplayScreen().printList(pilotPlaneList,header="Pilots sorted by licence:",frame=True)
     
     def licenceByCount(self):
         #fetch employee info
@@ -278,4 +259,4 @@ class GetLogic :
         for combo in licenceCountList:
             combo['count'] = str(combo['count'])
 
-        return DisplayScreen().printList(licenceCountList)
+        return DisplayScreen().printList(licenceCountList,header="Licences by count:",frame=True)
