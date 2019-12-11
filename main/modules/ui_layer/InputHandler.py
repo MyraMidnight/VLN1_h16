@@ -90,15 +90,17 @@ class InputHandler:
 
         #Validity check, checks whether the address is in correct format
         while " "  not in address_str:
-            print("Please input both the streetname and streenumber")
+            print("Please input both the streetname and streetnumber")
             address_str = input(inputQuestion)
         
         #Separates the string into streetname and street number
-        streetName_str = (address_str.split())[0]
-        streetNumber_str = (address_str.split())[1]
+        address_list = address_str.split()
+        streetName_str = address_list[0]
+        streetNumber_str = address_list[-1]
 
         while not streetName_str.isalpha() or not streetNumber_str.isdigit():
-            print("Invalid input")
+            print("Invalid input. Please input both the streetname and streetnumber")
+            address_str = input(inputQuestion)
             while " "  not in address_str:
                 print("Please input both the streetname and streenumber")
                 address_str = input(inputQuestion)
@@ -187,10 +189,12 @@ class InputHandler:
     #----------------------  
     def license(self, aircraftType_list: list, inputQustion: str = ""):
         """Input for pilots license. Returns a validated license"""
+        print("Possible Plane types: \n", aircraftType_list)
         license_str = input(inputQustion)
         #Validity check, checks if there are plane types in pur system corresponding to the input license
         while license_str not in aircraftType_list:
             print("Invalid input")
+            print("Possible Plane types: \n", aircraftType_list)
             license_str = input(inputQustion)
 
         return license_str
@@ -228,6 +232,65 @@ class InputHandler:
     #         choice_str = self.numSetLength(1, inputQuestion)
         
     #     return choice_str
+
+
+
+    #---------------------- 
+    # Get country name (create destination)
+    #----------------------   
+
+    def country(self, inputQuestion : str = "Input the new destination: "):
+        """Input has to only be alphabetical characters"""
+        country_str = input(inputQuestion)
+
+        #Validity checks
+        # Checks whether or not the country consists of only alphabetical characters
+        while not country_str.replace(" ","").isalpha():    
+            print("Please input alphabetical characters only.")
+            country_str = input(inputQuestion)
+        return country_str
+    
+    #---------------------- 
+    # Get new airport  (create destination)
+    #----------------------   
+
+
+    def airport(self, airport_list: list, inputQustion: str = ""):
+        """Input for new destination airport. Returns a validated airport"""
+        print("\nNaN Air already flyes to these airports: \n", airport_list)
+        airport_str = input(inputQustion)
+
+        # Checks whether or not the airport consists of only alphabetical characters
+        while not airport_str.isalpha() or len(airport_str) != 3:
+            print("Please input 3 alphabetical characters only.")
+            airport_str = input(inputQustion)
+
+
+        #Validity check, checks if there are plane types in pur system corresponding to the input license
+        while airport_str in airport_list:
+            print("This is not a new destination. \n")
+            print("NaN Air already flyes to these airports: \n", airport_list)
+            airport_str = input(inputQustion)
+
+        return airport_str.upper()
+
+
+    def distance(self, inputQuestion : str = ""):
+        """Input has to only be digits """
+        
+        distance_str = input(inputQuestion)
+
+        while not distance_str.isdigit():
+            print("Invalid input, try again. The input must be digits, the length of the distance in km.")
+            distance_str = input(inputQuestion)
+        
+        #while km_str.lower() != "km" or km_str.lower() != "":
+        #    print("Invalid input, try again. The input must be digits, the length of the distance in km.")
+        #    distance_str = input(inputQuestion)
+        
+        return distance_str
+
+
 
 
     #---------------------- 

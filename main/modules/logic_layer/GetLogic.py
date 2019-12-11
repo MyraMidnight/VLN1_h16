@@ -10,7 +10,7 @@ class GetLogic :
         #fetches employee info
         filePackage = IOAPI().opener('Crew.csv')
         #asks for the SSN of the employee
-        ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for:")
+        ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
         if ssn_of_employee_str == False:
             return False
         
@@ -19,7 +19,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['ssn'] == ssn_of_employee_str:
                 list_to_print = [x]
-                return DisplayScreen().printList(list_to_print,colWidth=20)
+                return DisplayScreen().printList(list_to_print,colWidth = 20)
                 
     
     def getPilots(self):
@@ -43,7 +43,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
-        return DisplayScreen().printList(list_to_print,colWidth=17)
+        return DisplayScreen().printList(list_to_print,colWidth = 17)
                 
     
     def getAllCrew(self):
@@ -53,17 +53,17 @@ class GetLogic :
     def getPlanes(self):
         #fetches aircraft info
         filePackage = IOAPI().opener('Aircraft.csv')
-        return DisplayScreen().printList(filePackage,colWidth=17)
+        return DisplayScreen().printList(filePackage,colWidth = 17)
 
     def getDestinations(self):
         #fetches destination info
         filePackage = IOAPI().opener('Destinations.csv')
-        return DisplayScreen().printList(filePackage,colWidth=17)
+        return DisplayScreen().printList(filePackage,colWidth = 17)
     
     def getVoyages(self):
         #fetch voyage info
         filePackage = IOAPI().opener('NewUpcomingFlights.csv')
-        return DisplayScreen().printList(filePackage,colWidth=17)
+        return DisplayScreen().printList(filePackage,colWidth = 17)
     
     def getAway(self):
         #fetch employee info
@@ -94,7 +94,7 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
-        return DisplayScreen().printList(away_list,colWidth=17)
+        return DisplayScreen().printList(away_list,colWidth = 17)
     
     def getWorking(self):
         #fetch employee info
