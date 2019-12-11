@@ -28,22 +28,26 @@ class InputHandler:
         optional: string that will be printed for the input \n
         optional: set a key used for exiting the loop, will return false\n
         """
-        try:
-            inputChoice = input(inputQuestion)
-            #loop for input while it is not a valid option from range
-            while inputChoice != self.exitKey:
-                while int(inputChoice)-1 not in range(numOfChoices):
-                    raise Exception
+
+        while True:
+            inputChoice = ""
+            try:
+                inputChoice = input(inputQuestion).strip()
+
+                #check if input was exit key
+                if inputChoice.lower() == self.exitKey:
+                    return False
+                    
+                #check if number is in range
+                if int(inputChoice) - 1  in range(numOfChoices):
+                    return str(inputChoice)
                 #return the choice that can be used for list index
-                return inputChoice
-            else: 
-                return False
+                else:
+                    raise ValueError
 
-        except Exception:
-            print("Input needs to be a number in range 1-{}".format(numOfChoices))
-            #repeats the loop with previous parameters
-            self.numChoices(numOfChoices,inputQuestion)
-
+            except (ValueError, TypeError): 
+                print("Input needs to be a number in range 1-{}".format(numOfChoices))
+                pass
 
     #===================================================================================
     # Dates and Times!
