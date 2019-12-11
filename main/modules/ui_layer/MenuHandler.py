@@ -31,8 +31,8 @@ class MenuHandler:
                 "function" : LLAPI().createDestination
             },
             "1.4" : {
-                "title": "Aircrafts",
-                "function" : "main"
+                "title": "Aircrafts",  
+                "function": LLAPI().createPlane
             },
             #---------- Get --------------
             "2" : {
@@ -111,7 +111,7 @@ class MenuHandler:
             },
             "3.1" : {
                 "title": "Crew",
-                "function": "getcrew"
+                "function": LLAPI().updateEmployee
             },
             "3.2" : {
                 "title": "Voyages",

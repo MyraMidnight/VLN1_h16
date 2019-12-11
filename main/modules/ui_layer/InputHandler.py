@@ -291,6 +291,36 @@ class InputHandler:
         return distance_str
 
 
+    def planeInsignia(self, inputQuestion: str = ""):
+        """Input and validity check for plane insignia"""
+        insignia_str = input(inputQuestion)
+        #Validity checks the input
+        while insignia_str[2] != "-" or insignia_str[:2] != "TF" or len(insignia_str) != 6:
+            print("Invalid input")
+            insignia_str = input(inputQuestion)
+        
+        return insignia_str
+
+
+    def strNoCheck(self, inputQuestion: str = ""):
+        return input(inputQuestion)
+
+
+    def digit(self, inputQuestion:str = ""):
+        num_str = input(inputQuestion)
+        while not num_str.isdigit():
+            print("Invalid input")
+            num_str = input(inputQuestion)
+        
+        return num_str
+
+
+    #---------------------- 
+    # Multiple Num Choice 
+    #---------------------- 
+        # def multipleNumChoices(self, choiceAmount : int, data: list, inputText : str = ""):
+
+
 
 
     #---------------------- 
