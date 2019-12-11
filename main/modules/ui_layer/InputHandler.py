@@ -8,6 +8,7 @@ ROLE_CC = "Cabin Crew"
 import datetime
 import re
 from modules.ui_layer.DateUtil import DateUtil
+from modules.ui_layer.DisplayScreen import DisplayScreen
 
 class InputHandler:
     def __init__(self):
@@ -162,30 +163,18 @@ class InputHandler:
     #---------------------- 
     # Input rank (createEmployee)
     #----------------------  
-    def rank(self, role, inputQuestion: str = ""):
+    def rank(self, role: str, inputQuestion: str = ""):
         """Input for employee rank"""
-        #Calls for a single digit input
-        rank_str = self.numSetLength(1, inputQuestion)
-        valid_options_list = ["1","2"] #These are valid inputs
-        #Validity checks the input
-        while rank_str not in valid_options_list:
-            print("Please choose a valid input")
-            rank_str = self.numSetLength(1, inputQuestion)
-        
-        #Turns the input number into a string with rank name according to the role
+
+        pilotRanks_list = [{"Pilot ranks": RANK_CAPTAIN}, {"Pilot ranks": RANK_COPILOT}]
+        cabinRanks_list = [{"Cabin crew ranks": RANK_FSM}, {"Cabin crew ranks": RANK_FA}]
+
         if role == ROLE_PILOT:  #Ranks for the Pilots
-            if rank_str == "1":
-                rank_str = RANK_CAPTAIN
-            else:
-                rank_str = RANK_COPILOT
-            return rank_str
+            DisplayScreen().printOptions(pilotRanks_list)
+            return InputHandler().multipleNumChoices(pilotRanks_list,inputQuestion)
         else:   #Ranks for the Cabin Crew
-            if rank_str == "1":
-                rank_str = RANK_FSM
-            else:
-                rank_str = RANK_FA
-        
-        return rank_str
+            DisplayScreen().printOptions(cabinRanks_list)
+            return InputHandler().multipleNumChoices(cabinRanks_list,inputQuestion)
 
 
     #---------------------- 
@@ -299,7 +288,7 @@ class InputHandler:
         """Input and validity check for plane insignia"""
         insignia_str = input(inputQuestion)
         #Validity checks the input
-        while insignia_str[2] != "-" or insignia_str[:2] != "TF" or len(insignia_str) != 6:
+        while len(insignia_str) != 6 or insignia_str[2] != "-" or insignia_str[:2] != "TF":
             print("Invalid input")
             insignia_str = input(inputQuestion)
         
@@ -322,10 +311,15 @@ class InputHandler:
     #---------------------- 
     # Multiple Num Choice 
     #---------------------- 
-        # def multipleNumChoices(self, choiceAmount : int, data: list, inputText : str = ""):
+    def multipleNumChoices(self, data_list:list, inputQuestion : str = ""):
+        """Takes in """
+        choiceAmount = len(data_list)
+        chosenNum_str = input(inputQuestion)
+        while len(chosenNum_str) != 1 or not chosenNum_str.isdigit():
+            print("Invalid input")
+            chosenNum_str = input(inputQuestion)
 
-
-
+        return data_list[int(chosenNum_str)]
 
     #---------------------- 
     # Input date and time
@@ -437,11 +431,11 @@ class InputHandler:
         #     return name
 
     def planetype(self, inputQuestion:str = "Input a type of plane: "):
-        planetype = input(inputQuestion)
-        while planetype[:2] != "NA":
+        planetype_str = input(inputQuestion)
+        while len(planetype_str) > 2 or planetype_str[:2] != "NA":
             print("Please input a valid planetype")
-            planetype = input(inputQuestion)
-        return planetype
+            planetype_str = input(inputQuestion)
+        return planetype_str
     
     # flightNumber format
     def flightId(self):
