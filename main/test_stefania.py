@@ -50,4 +50,4 @@ screenData = [
   {"header": ["Header of screen"]},
   {"list": flightData}
 ]
-dataType = DisplayScreen().printOptions(flightData, "hey")
+DisplayScreen().printList(flightData[:5], "Boyaa", frame=True)
