@@ -119,7 +119,7 @@ class MenuHandler:
             },
             "3.3" : {
                 "title": "Destinations",
-                "function": "main"
+                "function": LLAPI().updateDestination
             }
         }
         self.menuLayout = {

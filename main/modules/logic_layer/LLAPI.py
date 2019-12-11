@@ -81,5 +81,9 @@ class LLAPI :
         return UpdateLogic().updateEmployee()
     
     def updateDestination(self):
-        """get the info about the chosen destination. The user can change the contact person and the emergency phone number """
+        """get the info about the chosen destination (get a list of all destinations and choose from the list). Get the info about the destinationand
+        let the user choose wether he/she wants to change the contact person or the emergency phone number. Then the user will be asked if he wants to save
+        the changes. Save the new info about the destination to the list of destinations.
+        The user can change the contact person and the emergency phone number """
+        return UpdateLogic().updateDestination()
     
