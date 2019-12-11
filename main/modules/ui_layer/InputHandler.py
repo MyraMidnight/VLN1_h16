@@ -234,6 +234,65 @@ class InputHandler:
     #     return choice_str
 
 
+
+    #---------------------- 
+    # Get country name (create destination)
+    #----------------------   
+
+    def country(self, inputQuestion : str = "Input the new destination: "):
+        """Input has to only be alphabetical characters"""
+        country_str = input(inputQuestion)
+
+        #Validity checks
+        # Checks whether or not the country consists of only alphabetical characters
+        while not country_str.replace(" ","").isalpha():    
+            print("Please input alphabetical characters only.")
+            country_str = input(inputQuestion)
+        return country_str
+    
+    #---------------------- 
+    # Get new airport  (create destination)
+    #----------------------   
+
+
+    def airport(self, airport_list: list, inputQustion: str = ""):
+        """Input for new destination airport. Returns a validated airport"""
+        print("\nNaN Air already flyes to these airports: \n", airport_list)
+        airport_str = input(inputQustion)
+
+        # Checks whether or not the airport consists of only alphabetical characters
+        while not airport_str.isalpha() or len(airport_str) != 3:
+            print("Please input 3 alphabetical characters only.")
+            airport_str = input(inputQustion)
+
+
+        #Validity check, checks if there are plane types in pur system corresponding to the input license
+        while airport_str in airport_list:
+            print("This is not a new destination. \n")
+            print("NaN Air already flyes to these airports: \n", airport_list)
+            airport_str = input(inputQustion)
+
+        return airport_str.upper()
+
+
+    def distance(self, inputQuestion : str = ""):
+        """Input has to only be digits """
+        
+        distance_str = input(inputQuestion)
+
+        while not distance_str.isdigit():
+            print("Invalid input, try again. The input must be digits, the length of the distance in km.")
+            distance_str = input(inputQuestion)
+        
+        #while km_str.lower() != "km" or km_str.lower() != "":
+        #    print("Invalid input, try again. The input must be digits, the length of the distance in km.")
+        #    distance_str = input(inputQuestion)
+        
+        return distance_str
+
+
+
+
     #---------------------- 
     # Input date and time
     #----------------------   
