@@ -15,8 +15,8 @@ class DisplayScreen:
     # the PrintScreen method (optional 'frame' bool parameter)
     #===================================================================================
     def __printScreen(self, frame:bool = False):
-        
-        thickBar = "#"*self.__terminalSize["width"]
+        terminalWidth = self.__terminalSize["width"]
+        thickBar = "#" * terminalWidth
         frame_str = "|{}|"
 
         #------------ Print with frame------------------
@@ -38,59 +38,53 @@ class DisplayScreen:
             for section in self.__compiledSections:
                 print("\n".join(section))
                 print()
+        
+        #clears the compiledSections after each print, to prevent misprint
+        self.__compiledSections = []
 
     #===================================================================================
     # Methods that can be called to display data
     #===================================================================================
 
-    def printList(self, data:list, rowLimit:int = 0,colWidth:int = 10, formatTemplate: str = "", keys: bool = False, numList:bool = False):
+    def printList(self, data:list, header:str = "Table of data",numList:bool = False, frame:bool = False):
         """Prints a given list, can optionally print the key as column title, else it uses the given titles"""
 
-        #set the parameters
-        # self.__settings["lists"] = {"colWidth": colWidth, "formatTemplate": formatTemplate, "keys": keys,
-        # "numList": numList }
-        
         #get the dataType for 
         sectionData_list = [
-            {"header": ["Header of screen"]},
+            {"header": [header]},
             {"list": data}
         ]
 
-        if rowLimit == 0:
-            rowLimit = len(data)
-
         self.__compiledSections =  PrintHandler().sectionHandler(sectionData_list)
         #prints the compiled sections
-        self.__printScreen()
+        self.__printScreen(frame)
 
-            
-    def printListFormat(self, data: list, formatTemplate: str = "", rowLimit:int = 0, enumerate:bool = False):
-        """Prints data lists, takes in a list of dictionaries\n
-            optional: can add 'type' parameter for specific format.\n
-            Types: employees, cabincrew, pilots, flightattendants, planes, destinations
-        """
-
-        if rowLimit == 0:
-            rowLimit = len(data)
-    
-        self.printList(data[:rowLimit])
-
-    def printOptions(self, data:list, formatTemplate: str = ""):
-        #The 'formatTemplate' parameter is obsolete, left it in because some might be using it
+    def printOptions(self, data:list, header:str = "List of choices", frame:bool = False):
         """Makes printing enumerated tables easy"""
-
+        # compile the sections
         sectionData_list = [
-            {"header": ["Header of screen"]},
+            {"header": [header]},
             {"options": data}
         ]        
         self.__compiledSections = PrintHandler().sectionHandler(sectionData_list)
         #prints the compiled sections
-        self.__printScreen()
-        #self.printListFormat(data, formatTemplate=formatTemplate, enumerate= True)
+        self.__printScreen(frame)
+
+    def printText(self, data:list, header:str = "Information", frame:bool = False):
+        """Prints a list of paragraphs"""
+        # compile the sections
+        sectionData_list = [
+            {"header": [header]},
+            {"text": data}
+        ]        
+        self.__compiledSections = PrintHandler().sectionHandler(sectionData_list)
+        #prints the compiled sections
+        self.__printScreen(frame)
+
 
     def printCustom(self, sectionData:list, frame:bool = True):
         """Lets you customize how the screen appears by providing sectionData, is framed by default"""
         
         self.__compiledSections = PrintHandler().sectionHandler(sectionData)
         #prints the compiled sections
-        self.__printScreen()
+        self.__printScreen(frame)

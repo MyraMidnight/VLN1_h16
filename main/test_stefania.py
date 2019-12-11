@@ -50,4 +50,5 @@ screenData = [
   {"header": ["Header of screen"]},
   {"list": flightData}
 ]
-DisplayScreen().printOptions(flightData, "hey")
+DisplayScreen().printOptions(flightData, "Boyaa")
+DisplayScreen().printText(["This is a paragraph", "And another"])

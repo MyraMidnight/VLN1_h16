@@ -237,12 +237,23 @@ class PrintHandler:
 
     def __sectionText(self, data:list):
         """Prints the list section """
+        compiledParagraphs = []
+        for paragraph in data:
+            compiledParagraphs.append(paragraph)
+            compiledParagraphs.append("")
+            
+        self.__currentSections.append(compiledParagraphs)
 
     def __sectionShortCuts(self, data:list):
         """Prints the list section """
+        shortCuts = " - ".join(data)
+
+        self.__currentSections.append([shortCuts])
+
 
     def __sectionOptions(self, data:list):
         """Prints a enumerated list"""
+        #just uses the sectionList method, with added enumeration
         self.__sectionList(data, numList=True)
 
     #===================================================================================
