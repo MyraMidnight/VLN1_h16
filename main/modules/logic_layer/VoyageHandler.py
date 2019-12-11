@@ -277,7 +277,7 @@ class VoyageHandler:
 
             #update the latest flightnumber
             self.latestFlight = flightNumber
-            
+            IOAPI().appender(self.dataFiles["UPCOMING_FLIGHTS_FILE"],flightDict.copy())
             return flightDict.copy()
 
         #create the flight out
