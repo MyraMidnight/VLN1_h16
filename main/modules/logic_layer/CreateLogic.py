@@ -72,7 +72,8 @@ class CreateLogic :
         self.phonenumber = InputHandler().phoneNumber("Input a 7-digit phone number:")
         self.email = InputHandler().email("Input e-mail address: ")
         #Role
-        self.role = InputHandler().role("Possible roles: \n 1) "+ ROLE_PILOT +" \n 2) "+ ROLE_CC +" \n" + "Choose role: ")
+
+        self.role = InputHandler().role("Choose role: ")
 
         #Rank
 
@@ -88,10 +89,7 @@ class CreateLogic :
             airplaneType_list.append(a_line_dict["planeTypeId"])
 
         #Gets input for license if relevant, sets to "N/A" if role = Cabin Crew
-        if self.role == ROLE_PILOT:
-            self.license = InputHandler().license(airplaneType_list,"Input license: ")
-        else:
-            self.license = "N/A"
+        self.license = InputHandler().license(self.role, airplaneType_list,"Choose license: ")
 
         #Turns the inputs into a dict
         employee_dict["ssn"] = self.ssn
@@ -104,7 +102,6 @@ class CreateLogic :
         employee_dict["email"] = self.email
 
         #Displays the input information
-        print([employee_dict])
         DisplayScreen().printList([employee_dict])
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
