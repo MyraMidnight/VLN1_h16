@@ -38,6 +38,8 @@ class UpdateLogic :
         choice_str = InputHandler().multipleNumChoices(options_list, "Enter the number of data you want to update: ")
         
         #Change some shit or fuck off
+
+
         editFunctionDict_list = {
                 "Address":{ InputHandler().address("Input address: ")
                 },
@@ -47,19 +49,17 @@ class UpdateLogic :
                 },
                 "Role":{ InputHandler().role("Choose role: \n 1) "+ ROLE_PILOT +" \n 2) "+ ROLE_CC +" \n")
                 },
-                "Rank":{
+                "Rank":{ InputHandler().rank(employee_info_dict["role"],"Choose rank: ")
                 },
                 "License":{ InputHandler().license(airplaneType_list,"Input license: ")
                 }}
         #Rank
-        if self.role == x["role"]:
-            self.rank = InputHandler().rank(self.role, "Possible ranks: \n 1) "+ RANK_CAPTAIN +" \n 2) "+ RANK_COPILOT +" \n" + "Choose rank: ")
-        else:
-            self.rank = InputHandler().rank(self.role, "Possible ranks: \n 1) " + RANK_FSM + " \n 2) "+ RANK_FA + " \n" + "Choose rank: ")
+        self.rank = InputHandler().rank(employee_info_dict["role"], "Possible ranks: \n 1) "+ RANK_CAPTAIN +" \n 2) "+ RANK_COPILOT +" \n" + "Choose rank: ")
+
+        self.rank = InputHandler().rank(employee_info_dict["role"], "Possible ranks: \n 1) " + RANK_FSM + " \n 2) "+ RANK_FA + " \n" + "Choose rank: ")
 
 
 
-        employee_info_dict[choice_str]
 
         #Confirm whether the fucker is co ntent with the fucking changes
         #fuck the fuck off

@@ -158,6 +158,14 @@ class InputHandler:
             role_str = ROLE_CC
 
         return role_str
+    
+
+    def roleUpdate(self):
+        """Input for role and corresponding rank. Returns new_role and rank"""
+        new_role = InputHandler().role("")
+        rank = InputHandler().rank(new_role, "")
+        
+        return new_role, rank
 
 
     #---------------------- 
@@ -175,7 +183,6 @@ class InputHandler:
         else:   #Ranks for the Cabin Crew
             DisplayScreen().printOptions(cabinRanks_list)
             return InputHandler().multipleNumChoices(cabinRanks_list,inputQuestion)
-
 
     #---------------------- 
     # Input license (createEmployee)
@@ -318,8 +325,9 @@ class InputHandler:
         while len(chosenNum_str) != 1 or not chosenNum_str.isdigit():
             print("Invalid input")
             chosenNum_str = input(inputQuestion)
-
-        return data_list[int(chosenNum_str)]
+        for key,val in data_list[int(chosenNum_str)-1].items():
+            resultValue = val
+        return resultValue
 
     #---------------------- 
     # Input date and time
