@@ -257,6 +257,14 @@ class InputHandler:
 
 
     #---------------------- 
+    # Multiple Num Choice 
+    #---------------------- 
+        def multipleNumChoices(self, choiceAmount : int, data: list, inputText : str = ""):
+
+
+
+
+    #---------------------- 
     # Input date and time
     #----------------------   
     def dateTime(self, questionDate:str = "Input a date (DD/MM/YYYY): ", questionTime:str ="Input time (HH:MM): "):
