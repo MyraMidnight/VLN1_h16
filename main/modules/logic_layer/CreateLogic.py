@@ -43,7 +43,7 @@ class CreateLogic :
         self.emergencyPhone = InputHandler().phoneNumber("\nInput the emergency phone number (7 digits) for the new destination, {}: ".format(self.airport))
 
         destination_dict["id"] = self.airport
-        destination_dict["destination"] = self.airport
+        destination_dict["destination"] = self.destination
         destination_dict["flightDuration"] = self.flightTime
         destination_dict["distance"] = self.distanceFromIceland
         destination_dict["contactPerson"] = self.contactPerson
