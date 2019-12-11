@@ -17,8 +17,6 @@ class CreateLogic :
     """Create methods for logic layer"""
     def __init__(self, dataFiles):
         self.dataFiles = dataFiles
-        print("Data files ready!")
-
 
     def createDestination(self):
         """Create destination. Get destinationLand, destinationAirport, destinationFlightTime, 
