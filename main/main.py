@@ -12,6 +12,12 @@ MODEL_PLANE = "" #instance of plane
 MODEL_EMPLOYEE = "" #instance of employee
 
 # ------------------------  Main program  -------------------- 
+import os
+
+print(os.name)
+os.system('mode con: cols=300 lines=50')  # works on M$ Windows
+os.system("printf '\e[8;50;300t'")        # works on MacOS
+pause = input("Press any key to continue...")
 
 def main():
   """The core program"""

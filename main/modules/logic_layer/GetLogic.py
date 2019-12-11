@@ -162,6 +162,7 @@ class GetLogic :
         #collect the days of a week
         checkWeek_list = []
         checkWeek_list.append(refDate_str)
+        #@ts-ignore
         for day in range(7):
             refDate_obj = refDate_obj + datetime.timedelta(days=1)
             checkWeek_list.append(refDate_obj.isoformat())
