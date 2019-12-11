@@ -19,6 +19,7 @@ class LLAPI :
     def __init__(self):
         self.createLogic = CreateLogic(DATA_FILES)
         self.getLogic = GetLogic(DATA_FILES)
+        self.updateLogic = UpdateLogic(DATA_FILES)
     
     #------- CREATE
     def createDestination(self): 
@@ -85,13 +86,14 @@ class LLAPI :
     #------- UPDATE
     def updateVoyage(self):
         """see the info about the voyage (see the staff that are working on that voyage). Then you can add or update the role you want to change """
-    
+        return self.updateLogic.updateVoyage()
 
     def updateEmployee(self):
         """choose a employee (get a list and choose from the list). Get the info about the chosen employee and then choose what info you want to change. 
         Then the user will be asked if he wants to save the changes. Save the new information about the employee to the list about all employees """
-        return UpdateLogic().updateEmployee()
+        return self.updateLogic.updateEmployee()
     
     def updateDestination(self):
         """get the info about the chosen destination. The user can change the contact person and the emergency phone number """
     
+        # return self.updateLogic.updateDestination()

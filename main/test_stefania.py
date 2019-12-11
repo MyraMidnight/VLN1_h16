@@ -1,7 +1,7 @@
 from modules.ui_layer.DisplayScreen import DisplayScreen
 # # from modules.ui_layer.InputHandler import InputHandler
 # from modules.ui_layer.DateUtil import DateUtil
-# from modules.ui_layer.MenuHandler import MenuHandler
+from modules.ui_layer.MenuHandler import MenuHandler
 
 # from modules.models.Voyage import Voyage
 from modules.data_layer.IOAPI import IOAPI
@@ -33,7 +33,7 @@ flightData = IOAPI().opener("NewUpcomingFlights.csv")
 
 
 # #--------------- creating a function that can print list of methods
-# menu = MenuHandler("create")
+MenuHandler().displayMenu()
 # methods = dir(MenuHandler)
 
 # def printMethods(menu:object):
@@ -46,8 +46,4 @@ flightData = IOAPI().opener("NewUpcomingFlights.csv")
 #     print(method)
 
 # printMethods(menu)
-screenData = [
-  {"header": ["Header of screen"]},
-  {"list": flightData}
-]
-DisplayScreen().printList(flightData[:5], "Boyaa", frame=True)
+

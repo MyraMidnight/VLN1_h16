@@ -115,7 +115,7 @@ class MenuHandler:
             },
             "3.2" : {
                 "title": "Voyages",
-                "function": "main"
+                "function": LLAPI().updateVoyage
             },
             "3.3" : {
                 "title": "Destinations",
