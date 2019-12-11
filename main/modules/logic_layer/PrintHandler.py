@@ -20,7 +20,7 @@ class PrintHandler:
                     'licence': {"colWidth": 15, "title": "Licence"},
                     'address': {"colWidth": 20, "title": "Address"},
                     'phonenumber': {"colWidth": 14, "title": "Phone"},
-                    'email': {"colWidth": 8, "title": "email"}
+                    'email': {"colWidth": 14, "title": "email"}
                 },                
                 "templates": { #contain lists of keys of columns to ignore for each template
                     "crew": [], "pilots": [], "cabincrew": []
@@ -32,14 +32,14 @@ class PrintHandler:
                     'flightNumber': {"colWidth": 13, "title": "Flight nr."},
                     "departingFrom": {"colWidth": 5, "title": "From"},
                     "arrivingAt": {"colWidth": 5, "title": "To"},
-                    "departure": {"colWidth": 15, "title": "Departure"},
-                    "arrival": {"colWidth": 15, "title": "Arrival"},
-                    "aircraftID": {"colWidth": 10, "title": "Aircraft ID"},
+                    "departure": {"colWidth": 20, "title": "Departure"},
+                    "arrival": {"colWidth": 20, "title": "Arrival"},
+                    "aircraftID": {"colWidth": 14, "title": "Aircraft ID"},
                     "captain": {"colWidth": 10, "title": "Captain"},
                     "copilot": {"colWidth": 10, "title": "Co-pilot"},
-                    "fsm": {"colWidth": 10, "title": "Service Manager"},
-                    "fa1": {"colWidth": 10, "title": "Flight attendant 1"},
-                    "fa2": {"colWidth": 10, "title": "Flight attendant 2"}
+                    "fsm": {"colWidth": 10, "title": "FSM"},
+                    "fa1": {"colWidth": 10, "title": "FA"},
+                    "fa2": {"colWidth": 10, "title": "FA"}
                 },                
                 "templates": {
                     "flights": []
