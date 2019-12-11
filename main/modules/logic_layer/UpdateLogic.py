@@ -100,4 +100,5 @@ class UpdateLogic :
             #Updates the Crew file with the edited employee info
             filePackage[employee_index] = employee_info_dict
             IOAPI().updater(CREW_FILE, filePackage)
+            print("Data has been updated")
         

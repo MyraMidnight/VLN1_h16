@@ -12,15 +12,29 @@ class GetLogic :
         filePackage = IOAPI().opener('Crew.csv')
         #asks for the SSN of the employee
         ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
-        if ssn_of_employee_str == False:
-            return False
-        
-        #goes through all the lines in the employee info
-        for x in filePackage:
-            #checks the SSN of the employee
-            if x['ssn'] == ssn_of_employee_str:
-                list_to_print = [x]
-                return DisplayScreen().printList(list_to_print,"Chosen employee:")
+        #Validity check for SSN
+        while ssn_of_employee_str == False:
+            print("Invalid input")
+            ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
+
+        #Check for if the SSN is in crew file
+        ssn_in_file_bool = True
+        list_to_print = []
+        while ssn_in_file_bool:
+            #goes through all the lines in the employee info
+            for x in filePackage:
+                #checks the SSN of the employee
+                if x['ssn'] == ssn_of_employee_str:
+                    list_to_print = [x]
+            if list_to_print != []:
+                ssn_in_file_bool = False
+            else:
+                print("No employee found with this SSN")
+                ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
+
+
+
+        return DisplayScreen().printList(list_to_print,"Chosen employee:")
                 
     
     def getPilots(self):
