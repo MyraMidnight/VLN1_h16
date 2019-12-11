@@ -51,6 +51,7 @@ class PrintHandler:
                     "id": {"colWidth": 10, "title": "Airport"},
                     "destination": {"colWidth": 18, "title": "Destination"},
                     "flightDuration": {"colWidth": 20, "title": "traveltime"}
+
                 },                
                 "templates": {
                     "destinations":[]
@@ -133,7 +134,18 @@ class PrintHandler:
             #checks if all the keys in data are in existing DataType
             # it can contain less keys (for cases of old data with missing columns)
             if all(column in data[0] for column in columns):
-                return {dataType: self.__dataTypes[dataType]}
+                dataForReturn = {dataType: self.__dataTypes[dataType].copy()}
+                dataTypeColumns = dataForReturn[dataType]["columns"]
+                print(dataForReturn)
+
+                #check if any extra columns in the given data
+                for key in data[0].keys():
+                    #create the column for the dataType dict
+                    if key not in dataTypeColumns.keys():
+                        dataTypeColumns[key] = {"colWidth":colWidth, "title":key}
+
+                # return the DataType 
+                return dataForReturn
 
             else:
                 #continue checking through the data types
