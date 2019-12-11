@@ -57,6 +57,18 @@ class LLAPI :
 
     def getWorking(self):
         return GetLogic().getWorking()
+    
+    def getWeekWork(self):
+        return GetLogic().getWeekWork()
+    
+    def getPilotsByLicence(self):
+        return GetLogic().getPilotsByLicence()
+    
+    def printPilotsByLicence(self):
+        return GetLogic().printPilotsByLicence()
+    
+    def licenceByCount(self):
+        return GetLogic().licenceByCount()
 
     #------- UPDATE
     def updateVoyage(self):

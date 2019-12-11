@@ -2,6 +2,7 @@ from modules.data_layer.IOAPI import IOAPI     #need this to be able to fetch in
 from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.ui_layer.DateUtil import DateUtil
+import datetime
 
 class GetLogic :
     """Get methods for logic layer"""
@@ -19,7 +20,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['ssn'] == ssn_of_employee_str:
                 list_to_print = [x]
-                return DisplayScreen().printList(list_to_print,colWidth = 20)
+                return DisplayScreen().printList(list_to_print,"Chosen employee:",frame=True)
                 
     
     def getPilots(self):
@@ -31,7 +32,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Pilot":
                 list_to_print.append(x)
-        return DisplayScreen().printList(list_to_print, colWidth = 15)
+        return DisplayScreen().printList(list_to_print)
                 
     
     def getFlightAttendants(self):
@@ -43,7 +44,11 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
+<<<<<<< HEAD
         return DisplayScreen().printList(list_to_print,colWidth = 17)
+=======
+        return DisplayScreen().printList(list_to_print)
+>>>>>>> FannarHrafn
                 
     
     def getAllCrew(self):
@@ -53,17 +58,29 @@ class GetLogic :
     def getPlanes(self):
         #fetches aircraft info
         filePackage = IOAPI().opener('Aircraft.csv')
+<<<<<<< HEAD
         return DisplayScreen().printList(filePackage,colWidth = 17)
+=======
+        return DisplayScreen().printList(filePackage)
+>>>>>>> FannarHrafn
 
     def getDestinations(self):
         #fetches destination info
         filePackage = IOAPI().opener('Destinations.csv')
+<<<<<<< HEAD
         return DisplayScreen().printList(filePackage,colWidth = 17)
+=======
+        return DisplayScreen().printList(filePackage)
+>>>>>>> FannarHrafn
     
     def getVoyages(self):
         #fetch voyage info
         filePackage = IOAPI().opener('NewUpcomingFlights.csv')
+<<<<<<< HEAD
         return DisplayScreen().printList(filePackage,colWidth = 17)
+=======
+        return DisplayScreen().printList(filePackage)
+>>>>>>> FannarHrafn
     
     def getAway(self):
         #fetch employee info
@@ -94,7 +111,11 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
+<<<<<<< HEAD
         return DisplayScreen().printList(away_list,colWidth = 17)
+=======
+        return DisplayScreen().printList(away_list)
+>>>>>>> FannarHrafn
     
     def getWorking(self):
         #fetch employee info
@@ -135,7 +156,7 @@ class GetLogic :
                     temp_dict["destination"] = dest_dict["destination"]
                     working_list.append(temp_dict)
         
-        return DisplayScreen().printList(working_list,colWidth=17)
+        return DisplayScreen().printList(working_list)
     
     def getWeekWork(self):
         #fetch employee info
@@ -143,18 +164,118 @@ class GetLogic :
         #fetch Voyage info
         voyagePackage = IOAPI().opener('NewUpcomingFlights.csv')
         #ask for SSN
-        user_ssn = InputHandler.ssn("Please input the SSN of the Employee you want a schedule of: ")
-        #ask for datetime from user
-        user_input = InputHandler().dateOnly()
-        check_date = DateUtil(user_input)
-        '''
-        for x in range(7):
-            for flight in voyagePackage:
-                departure = DateUtil(line['departure']).date
-                if check_date.date == departure:
-                    if user_ssn == flight['captain'] or user_ssn == flight['copilot'] and user_ssn == flight['fsm'] and user_ssn ==
-                    '''
-
-
-
+        user_ssn = InputHandler().ssn("Please input the SSN of the Employee you want a schedule of: ")
+        for employee in employeePackage:
+            if user_ssn == employee['ssn']:
+                ssn_exists = True
         
+        if ssn_exists:
+            pass
+        else:
+            print("An employee with that SSN does not exist")
+            return False
+        
+        #ask for datetime from user
+        refDate_str = InputHandler().dateOnly()
+        refDate_obj = DateUtil(refDate_str).createObject()
+        #collect the days of a week
+        checkWeek_list = []
+        checkWeek_list.append(refDate_str)
+        for day in range(7):
+            refDate_obj = refDate_obj + datetime.timedelta(days=1)
+            checkWeek_list.append(refDate_obj.isoformat())
+        schedule_list = []
+        #find all the flights that are in the range of the week and check those flights for the employee ssn and add the flight to the schedule if so
+        for flight in voyagePackage:
+            departure = DateUtil(flight['departure']).date
+            for date in checkWeek_list:
+                if date[:10] == departure:
+                    if user_ssn == flight['captain'] or user_ssn == flight['copilot'] or user_ssn == flight['fsm'] or user_ssn == flight['fa1'] or user_ssn == flight['fa2']:
+                        schedule_list.append(flight)
+        
+        return DisplayScreen().printList(schedule_list)
+
+    def getPilotsByLicence(self):
+        #fetch employee info
+        employeePackage = IOAPI().opener('Crew.csv')
+        #fetch plane info
+        planePackage = IOAPI().opener('Aircraft.csv')
+        #get all the pilots in one list
+        pilotPackage = []
+        for employee in employeePackage:
+            if employee['role'] == "Pilot":
+                pilotPackage.append(employee)
+        #show the planes to user
+        DisplayScreen().printList(planePackage)
+        #ask user for a plane type
+        user_input = InputHandler().planetype()
+        #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
+        #if no such pilots are found then the flag is never set to true
+        anyone_found_flag = False
+        licence_pilots = []
+        for pilot in pilotPackage:
+            if pilot['licence'] == user_input:
+                anyone_found_flag = True
+                licence_pilots.append(pilot)
+        #if anyone is found it returns the relevant info
+        if anyone_found_flag:
+            return DisplayScreen().printList(licence_pilots)
+        #else it alerts the user and returns false
+        else:
+            print("No pilots were found with that licence")
+            return False
+
+    def printPilotsByLicence(self):
+        #fetch employee info
+        employeePackage = IOAPI().opener('Crew.csv')
+        #get all the pilots in one list
+        pilotPackage = []
+        for employee in employeePackage:
+            if employee['role'] == "Pilot":
+                pilotPackage.append(employee)
+        #fetch plane info
+        planePackage = IOAPI().opener('Aircraft.csv')
+        #gets a list of unique plane types from the planePackage
+        planetypeList = []
+        for plane in planePackage:
+            if plane['planeTypeId'] not in planetypeList:
+                planetypeList.append(plane['planeTypeId'])
+        planetypeList.sort()
+        #goes through all the plane types and finds all the pilots with a licence for that plane type
+        #and compiles them in a list
+        pilotPlaneList = []
+        for planeType in planetypeList:
+            for pilot in pilotPackage:
+                if pilot['licence'] == planeType and pilot not in pilotPlaneList:
+                    pilotPlaneList.append(pilot)
+        #returns relevant info
+        return DisplayScreen().printList(pilotPlaneList)
+    
+    def licenceByCount(self):
+        #fetch employee info
+        employeePackage = IOAPI().opener('Crew.csv')
+        #get all the pilots in one list
+        pilotPackage = []
+        for employee in employeePackage:
+            if employee['role'] == "Pilot":
+                pilotPackage.append(employee)
+        #fetch plane info
+        planePackage = IOAPI().opener('Aircraft.csv')
+        #gets a list of unique plane types from the planePackage
+        planetypeList = []
+        for plane in planePackage:
+            if plane['planeTypeId'] not in planetypeList:
+                planetypeList.append(plane['planeTypeId'])
+        planetypeList.sort()
+        #list comprehension to make a list of dicts with the planetype and the count as the dict
+        licenceCountList = [{"planeTypeId":planetype, "count":0} for planetype in planetypeList]
+        #count how many licences of each planetype the pilots have
+        for combo in licenceCountList:
+            for pilot in pilotPackage:
+                if pilot['licence'] == combo["planeTypeId"]:
+                    combo["count"] += 1
+        #need to change it to string cause otherwise Displayscreen will Error
+        for combo in licenceCountList:
+            combo['count'] = str(combo['count'])
+
+        return DisplayScreen().printList(licenceCountList)

@@ -104,7 +104,7 @@ class CreateLogic :
         employee_dict["email"] = self.email
 
         #Displays the input information
-        DisplayScreen().printList([employee_dict], colWidth = 14)
+        DisplayScreen().printList([employee_dict])
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
             IOAPI().appender(CREW_FILE, employee_dict)
