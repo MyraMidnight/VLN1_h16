@@ -6,12 +6,10 @@ import datetime
 
 getInput = InputHandler()
 
-FILE_DESTINATIONS = "NewDestinations.csv"
-FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
-FILE_AIRCRAFTS = "Aircraft.csv"
-
 class VoyageHandler:
-    def __init__(self, flights:list = []):
+    def __init__(self, flights:list = [], dataFiles:dict = {}):
+        self.dataFiles = dataFiles
+
         self.__flightOut = ["", {}]
         self.__flightIn = ["", {}]
         # destination and airport
@@ -97,7 +95,7 @@ class VoyageHandler:
             have to get destination that we already fly to, date that the voyage will occur and than when the flight back home to Iceland is '''
 
         # Get and print list of available destinations
-        destination_list = IOAPI().opener(FILE_DESTINATIONS) 
+        destination_list = IOAPI().opener(self.dataFiles["DESTINATIONS_FILE"]) 
         DisplayScreen().printOptions(destination_list, "destinations")
 
         # Seect a destination
@@ -184,7 +182,7 @@ class VoyageHandler:
     def selectAircraft(self):
         """Displays list of available aircrafts and selects one from input"""
         #Get and print list of available aircrafts
-        aircrafts_list = IOAPI().opener(FILE_AIRCRAFTS)
+        aircrafts_list = IOAPI().opener(self.dataFiles["AIRCRAFT_FILE"])
 
         #needs to check if plane is actually available at selected timeframe
         available_planes = aircrafts_list
@@ -248,7 +246,7 @@ class VoyageHandler:
         created (for reference when creating new flightNumbers)"""
 
         # get the latest flightNumber created, for reference
-        allFlights_list = IOAPI().opener(FILE_FLIGHTS_UPCOMING)
+        allFlights_list = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
         self.latestFlight = allFlights_list[len(allFlights_list)-1]["flightNumber"]
 
         def flightData(direction:str):
