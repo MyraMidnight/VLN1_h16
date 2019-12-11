@@ -29,32 +29,31 @@ class UpdateLogic :
     def updateVoyage(self):
         """ Updates the crew on a voyage """
 
-        # Let user select a destination from list
-        availableDestinations_dict = IOAPI().opener(self.dataFiles["DESTINATIONS_FILE"])
-
-        # prints the destinations on screen
-        DisplayScreen().printOptions(availableDestinations_dict, header="List of available destinations")
-
-        # select a destination
-        inputDestination_str = "Select a destination by index: "
-        destSelection = InputHandler().numChoices(len(availableDestinations_dict), inputDestination_str)
-        destination_str = availableDestinations_dict[int(destSelection)-1]["id"]
-        
-        # list the flights that are departing to selected destination
         departingFlights_dict = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
 
-        #go through the list and check flights with selected destination
-        flightsToDestination_list = []
+        #get the list 
+        departingFlights_list = []
         for flight in departingFlights_dict:
-            if flight['arrivingAt'] == destination_str:
-                flightsToDestination_list.append(flight)
-                
-        #sort the list by departure time
-        sortedDepartures_list = sorted(flightsToDestination_list, key=itemgetter('departure'), reverse=True)
+            if flight['departingFrom'] == 'KEF':
+                departingFlights_list.append(flight)
         
+        #give user option to choose how the list is sorted:
+        sortOptions = [
+            {"sortBy": "departure"}, 
+            {"sortBy": "arrivingAt"}, 
+            {"sortBy": "flightNumber"}
+        ]
+        DisplayScreen().printOptions(sortOptions, header="Voyages can be sorted in the following ways")
+        sortedChoice_int = int(InputHandler().numChoices(len(sortOptions), "How would you like the voyages to be sorted? :"))
+        sortedBy_str = sortOptions[sortedChoice_int-1]["sortBy"]
 
+        #sort the list by departure time
+        sortedDepartures_list = sorted(departingFlights_list, key=itemgetter(sortedBy_str), reverse=True)
+
+        #print the upcoming voyages
+        DisplayScreen().printOptions(sortedDepartures_list)
         # ask user to select a flight from the list representing the voyage
-        DisplayScreen().printOptions(flightsToDestination_list, "Select a departing flight from the list")
+        selectedFlight_int = int(InputHandler().numChoices(len(departingFlights_list), "Select a voyage from the list: "))
         # create instance of VoyageHandler using the two connected flights
         # Print the crew in selected flight
         # let user pick what role to update
