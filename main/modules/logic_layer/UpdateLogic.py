@@ -1,4 +1,5 @@
 from modules.logic_layer.GetLogic import GetLogic
+from modules.ui_layer.DisplayScreen import DisplayScreen
 
 class UpdateLogic :
     """Update methods for logic layer"""
@@ -11,9 +12,11 @@ class UpdateLogic :
         #Show list
         GetLogic().getAllCrew()
         #Choose Employee
-        GetLogic().getSingleEmployee()
         #Show employee info
+        GetLogic().getSingleEmployee()
         #Ask what the motherfucker wants to change for fucks sake
+        options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone number"}, {"Edit choices:": "E-mail"}]
+        DisplayScreen().printOptions(options_list)
         #Change some shit or fuck off
         #Confirm whether the fucker is co ntent with the fucking changes
         #fuck the fuck off
