@@ -62,8 +62,10 @@ class PrintHandler:
             # planes  ---------------------------------------
             "planes": {
                 "columns": {
-                    "planeInsignia": {"colWidth": 15, "title": "Insignia"},
-                    "planeTypeId":  {"colWidth": 20, "title": "Type"}
+                    "planeInsignia": {"colWidth": 10, "title": "Insignia"},
+                    "planeTypeId":  {"colWidth": 10, "title": "Type"},
+                    "manufacturer": {"colWidth": 12, "title": "Manufacturer"},
+                    "capacity": {"colWidth": 15, "title": "Seat Capacity"}
                 },
                 "templates": {
                     "planes":[]

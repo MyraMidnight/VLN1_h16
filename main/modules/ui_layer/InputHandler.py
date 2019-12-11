@@ -28,22 +28,26 @@ class InputHandler:
         optional: string that will be printed for the input \n
         optional: set a key used for exiting the loop, will return false\n
         """
-        try:
-            inputChoice = input(inputQuestion)
-            #loop for input while it is not a valid option from range
-            while inputChoice != self.exitKey:
-                while int(inputChoice)-1 not in range(numOfChoices):
-                    raise Exception
+
+        while True:
+            inputChoice = ""
+            try:
+                inputChoice = input(inputQuestion).strip()
+
+                #check if input was exit key
+                if inputChoice.lower() == self.exitKey:
+                    return False
+                    
+                #check if number is in range
+                if int(inputChoice) - 1  in range(numOfChoices):
+                    return str(inputChoice)
                 #return the choice that can be used for list index
-                return inputChoice
-            else: 
-                return False
+                else:
+                    raise ValueError
 
-        except Exception:
-            print("Input needs to be a number in range 1-{}".format(numOfChoices))
-            #repeats the loop with previous parameters
-            self.numChoices(numOfChoices,inputQuestion)
-
+            except (ValueError, TypeError): 
+                print("Input needs to be a number in range 1-{}".format(numOfChoices))
+                pass
 
     #===================================================================================
     # Dates and Times!
@@ -289,6 +293,36 @@ class InputHandler:
         #    distance_str = input(inputQuestion)
         
         return distance_str
+
+
+    def planeInsignia(self, inputQuestion: str = ""):
+        """Input and validity check for plane insignia"""
+        insignia_str = input(inputQuestion)
+        #Validity checks the input
+        while insignia_str[2] != "-" or insignia_str[:2] != "TF" or len(insignia_str) != 6:
+            print("Invalid input")
+            insignia_str = input(inputQuestion)
+        
+        return insignia_str
+
+
+    def strNoCheck(self, inputQuestion: str = ""):
+        return input(inputQuestion)
+
+
+    def digit(self, inputQuestion:str = ""):
+        num_str = input(inputQuestion)
+        while not num_str.isdigit():
+            print("Invalid input")
+            num_str = input(inputQuestion)
+        
+        return num_str
+
+
+    #---------------------- 
+    # Multiple Num Choice 
+    #---------------------- 
+        # def multipleNumChoices(self, choiceAmount : int, data: list, inputText : str = ""):
 
 
 
