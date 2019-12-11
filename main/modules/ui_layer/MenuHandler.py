@@ -175,7 +175,7 @@ class MenuHandler:
             if choice_str == False:
                 #exit program if on main menu, else print main menu
                 if self.currentLocation_str == "main":
-                    if input("Are you sure you want to quit (y/n)? ").lower() == "y":
+                    if input("\nAre you sure you want to quit (y/n)? ").lower() == "y":
                         quit()
                     else:
                         self.currentLocation_str = "main"

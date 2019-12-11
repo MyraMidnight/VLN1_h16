@@ -8,6 +8,13 @@ from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.data_layer.IOAPI import IOAPI
 
+import os
+
+print(os.name)
+os.system('mode con: cols=100 lines=40')  # works on M$ Windows
+os.system("printf '\e[8;50;300t'")        # works on MacOS
+pause = input("Press any key to continue...")
+
 # ------------------------  Global variables  ---------------- 
 ROLE_PILOT = "pilot"
 ROLE_CAPTAIN = "captain"

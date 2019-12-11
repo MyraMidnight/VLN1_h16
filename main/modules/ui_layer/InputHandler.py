@@ -261,7 +261,13 @@ class InputHandler:
 
     def airport(self, airport_list: list, inputQustion: str = ""):
         """Input for new destination airport. Returns a validated airport"""
-        print("\nNaN Air already flyes to these airports: \n", airport_list)
+        #print("\nNaN Air already flyes to these airports: \n", airport_list)
+        print("\nNaN Air already flies to these airports: ")
+        for airport in airport_list:
+            if airport != airport_list[-1]:
+                print(airport, end = ", ")
+            elif airport == airport_list[-1]:
+                print(airport, end = "\n")
         airport_str = input(inputQustion)
 
         # Checks whether or not the airport consists of only alphabetical characters

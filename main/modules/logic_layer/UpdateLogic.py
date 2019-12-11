@@ -17,3 +17,5 @@ class UpdateLogic :
         #Change some shit or fuck off
         #Confirm whether the fucker is co ntent with the fucking changes
         #fuck the fuck off
+    
+    #def 
