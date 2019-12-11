@@ -48,9 +48,12 @@ class PrintHandler:
             # destinations ---------------------------------------
             "destinations": {
                 "columns": {
-                    "id": {"colWidth": 10, "title": "Airport"},
+                    "id": {"colWidth": 8, "title": "Airport"},
                     "destination": {"colWidth": 18, "title": "Destination"},
-                    "flightDuration": {"colWidth": 20, "title": "traveltime"}
+                    "flightDuration": {"colWidth": 10, "title": "Traveltime"},
+                    "distance": {"colWidth": 10, "title": "Distance"},
+                    "contactPerson": {"colWidth" : 20, "title": "Contact Person"},
+                    "emergencyPhone": {"colWidth": 14, "title": "Emergency Nr"}
                 },                
                 "templates": {
                     "destinations":[]

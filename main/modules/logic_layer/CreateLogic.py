@@ -51,7 +51,7 @@ class CreateLogic :
     
 
         #Displays the input information and check if the user is happy with the info
-        DisplayScreen().printList([destination_dict], colWidth = 14)
+        DisplayScreen().printList([destination_dict], header = "Creating new destination, check if info correct", frame = True)
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct (y/n)? ")
         if confirmation_bool:
             IOAPI().appender(DESTINATIONS_FILE, destination_dict)
