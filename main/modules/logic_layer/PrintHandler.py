@@ -18,9 +18,9 @@ class PrintHandler:
                     'role': {"colWidth": 10, "title": "Role"},
                     'rank': {"colWidth": 15, "title": "Rank"},
                     'licence': {"colWidth": 15, "title": "Licence"},
-                    'address': {"colWidth": 15, "title": "Address"},
-                    'phonenumber': {"colWidth": 10, "title": "Phone"},
-                    'email': {"colWidth": 14, "title": "email"}
+                    'address': {"colWidth": 20, "title": "Address"},
+                    'phonenumber': {"colWidth": 7, "title": "Phone"},
+                    'email': {"colWidth": 12, "title": "email"}
                 },                
                 "templates": { #contain lists of keys of columns to ignore for each template
                     "crew": [], "pilots": [], "cabincrew": []
@@ -63,7 +63,7 @@ class PrintHandler:
             "planes": {
                 "columns": {
                     "planeInsignia": {"colWidth": 10, "title": "Insignia"},
-                    "planeTypeId":  {"colWidth": 10, "title": "Type"},
+                    "planeTypeId":  {"colWidth": 14, "title": "Type"},
                     "manufacturer": {"colWidth": 12, "title": "Manufacturer"},
                     "capacity": {"colWidth": 15, "title": "Seat Capacity"}
                 },

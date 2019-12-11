@@ -13,6 +13,7 @@ MODEL_EMPLOYEE = "" #instance of employee
 
 # ------------------------  Main program  -------------------- 
 
+
 def main():
   """The core program"""
   #print the main menu
