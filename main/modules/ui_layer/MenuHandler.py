@@ -30,6 +30,10 @@ class MenuHandler:
                 "title": "Destinations",
                 "function" : LLAPI().createDestination
             },
+            "1.4" : {
+                "title": "Aircrafts",
+                "function" : "main"
+            },
             #---------- Get --------------
             "2" : {
                 "title": "Get data",

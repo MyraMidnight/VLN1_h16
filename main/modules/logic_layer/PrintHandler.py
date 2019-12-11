@@ -17,9 +17,10 @@ class PrintHandler:
                     'name': {"colWidth": 20, "title": "Name"},
                     'role': {"colWidth": 10, "title": "Role"},
                     'rank': {"colWidth": 15, "title": "Rank"},
-                    'licence': {"colWidth": 8, "title": "Licence"},
+                    'licence': {"colWidth": 15, "title": "Licence"},
                     'address': {"colWidth": 20, "title": "Address"},
-                    'phonenumber': {"colWidth": 14, "title": "Phone"}
+                    'phonenumber': {"colWidth": 14, "title": "Phone"},
+                    'email': {"colWidth": 8, "title": "email"}
                 },                
                 "templates": { #contain lists of keys of columns to ignore for each template
                     "crew": [], "pilots": [], "cabincrew": []
