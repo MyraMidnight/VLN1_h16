@@ -2,6 +2,7 @@ from modules.logic_layer.GetLogic import GetLogic
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.ui_layer.InputHandler import InputHandler
+#from modules.models.Voyage import Voyage #model class
 
 from operator import itemgetter #for sorting list of dictionaries by key
 class UpdateLogic :
@@ -54,8 +55,17 @@ class UpdateLogic :
         DisplayScreen().printOptions(sortedDepartures_list)
         # ask user to select a flight from the list representing the voyage
         selectedFlight_int = int(InputHandler().numChoices(len(departingFlights_list), "Select a voyage from the list: "))
+        selectedFlight_dict = sortedDepartures_list[selectedFlight_int-1]
+    
+        # find the two connecting flights, by finding the index of selected flight
+        flightIndex = departingFlights_list.index(selectedFlight_dict)
+        voyageFlightPair = [departingFlights_list[flightIndex], departingFlights_list[flightIndex+1]]
+
         # create instance of VoyageHandler using the two connected flights
+        #currentVoyage_obj = Voyage(voyageFlightPair)
+
         # Print the crew in selected flight
+        #currentVoyage_obj.getFlights
         # let user pick what role to update
         # print list of employees available for this voyage for this role
         # loop through asking if they want to update staff
