@@ -10,7 +10,7 @@ FILE_DESTINATIONS = "NewDestinations.csv"
 FILE_FLIGHTS_UPCOMING = "NewPastFlights.csv"
 FILE_AIRCRAFTS = "Aircraft.csv"
 
-class Voyage:
+class VoyageHandler:
     def __init__(self, flights:list = []):
         self.__flightOut = ["", {}]
         self.__flightIn = ["", {}]
@@ -293,8 +293,6 @@ class Voyage:
         #give the IOAPI the flight data to save
         return [flightOut_dict, flightIn_dict]
         
-    def voyageData(self):
-        """Creates data dictionary """
 
 
 

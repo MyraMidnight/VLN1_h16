@@ -1,3 +1,5 @@
+from modules.logic_layer.VoyageHandler import VoyageHandler
+
 ROLE_PILOT = "Pilot"
 ROLE_CC = "Cabin Crew"
 
@@ -9,7 +11,6 @@ RANK_FA = "Flight Attendant"
 AIRCRAFT_TYPE_FILE = "AircraftType.csv"
 CREW_FILE = "Crew.csv"
 
-from modules.models.Voyage import Voyage
 from modules.ui_layer.InputHandler import InputHandler
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
@@ -95,10 +96,6 @@ class CreateLogic :
             #     }}
             # editFunctionDict_list[choiceNum_str][0]
         
-
-
-
-
     def createVoyage(self):
-        return Voyage().createVoyage()
+        return VoyageHandler().createVoyage()
         
