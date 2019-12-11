@@ -16,21 +16,36 @@ class DisplayScreen:
     #===================================================================================
     def __printScreen(self, frame:bool = False):
         terminalWidth = self.__terminalSize["width"]
-        thickBar = "#" * terminalWidth
-        frame_str = "|{}|"
+        lineWidth_int = 0
 
         #------------ Print with frame------------------
         if frame:
+
+            #find the widest line in any section
+            for section in self.__compiledSections:
+                longestString = len(max(section, key=len))
+                if longestString > lineWidth_int:
+                    lineWidth_int = longestString
+
+            frameTop_str = "╔{}╗"
+            frameBody_str = "║    {}    ║"
+            frameBottom_str = "╚{}╝"
+            horizontalBar = "═" * (lineWidth_int +len(frameBody_str) - len(frameBottom_str))
+
             #print the top
-            print(thickBar)
+            print(frameTop_str.format(horizontalBar))
 
             #print the body of frame
             for section in self.__compiledSections:
-                print("\n".join(section))
-                print()
+                for line in section:
+                    line = line.ljust(lineWidth_int)
+                    line = frameBody_str.format(line)
+                    print(line)
+                # print("\n".join(section))
+                # print()
 
             #print the bottom
-            print(thickBar)
+            print(frameBottom_str.format(horizontalBar))
 
         #------------ Without Frame------------------
         else:
