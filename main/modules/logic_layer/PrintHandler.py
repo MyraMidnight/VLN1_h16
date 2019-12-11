@@ -136,7 +136,6 @@ class PrintHandler:
             if all(column in data[0] for column in columns):
                 dataForReturn = {dataType: self.__dataTypes[dataType].copy()}
                 dataTypeColumns = dataForReturn[dataType]["columns"]
-                print(dataForReturn)
 
                 #check if any extra columns in the given data
                 for key in data[0].keys():
