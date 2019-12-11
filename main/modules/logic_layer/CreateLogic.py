@@ -44,7 +44,7 @@ class CreateLogic :
         self.emergencyPhone = InputHandler().phoneNumber("\nInput the emergency phone number (7 digits) for the new destination, {}: ".format(self.airport))
 
         destination_dict["id"] = self.airport
-        destination_dict["destination"] = self.airport
+        destination_dict["destination"] = self.destination
         destination_dict["flightDuration"] = self.flightTime
         destination_dict["distance"] = self.distanceFromIceland
         destination_dict["contactPerson"] = self.contactPerson
@@ -52,7 +52,7 @@ class CreateLogic :
     
 
         #Displays the input information and check if the user is happy with the info
-        DisplayScreen().printList([destination_dict], colWidth = 14)
+        DisplayScreen().printList([destination_dict], header = "Creating new destination, check if info correct", frame = True)
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct (y/n)? ")
         if confirmation_bool:
             IOAPI().appender(DESTINATIONS_FILE, destination_dict)
