@@ -44,11 +44,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
-<<<<<<< HEAD
-        return DisplayScreen().printList(list_to_print,colWidth = 17)
-=======
         return DisplayScreen().printList(list_to_print)
->>>>>>> FannarHrafn
                 
     
     def getAllCrew(self):
@@ -58,29 +54,17 @@ class GetLogic :
     def getPlanes(self):
         #fetches aircraft info
         filePackage = IOAPI().opener('Aircraft.csv')
-<<<<<<< HEAD
-        return DisplayScreen().printList(filePackage,colWidth = 17)
-=======
         return DisplayScreen().printList(filePackage)
->>>>>>> FannarHrafn
 
     def getDestinations(self):
         #fetches destination info
         filePackage = IOAPI().opener('Destinations.csv')
-<<<<<<< HEAD
-        return DisplayScreen().printList(filePackage,colWidth = 17)
-=======
         return DisplayScreen().printList(filePackage)
->>>>>>> FannarHrafn
     
     def getVoyages(self):
         #fetch voyage info
         filePackage = IOAPI().opener('NewUpcomingFlights.csv')
-<<<<<<< HEAD
-        return DisplayScreen().printList(filePackage,colWidth = 17)
-=======
         return DisplayScreen().printList(filePackage)
->>>>>>> FannarHrafn
     
     def getAway(self):
         #fetch employee info
@@ -111,11 +95,7 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
-<<<<<<< HEAD
-        return DisplayScreen().printList(away_list,colWidth = 17)
-=======
         return DisplayScreen().printList(away_list)
->>>>>>> FannarHrafn
     
     def getWorking(self):
         #fetch employee info
