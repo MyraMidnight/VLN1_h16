@@ -188,7 +188,11 @@ class GetLogic :
             if employee['role'] == "Pilot":
                 pilotPackage.append(employee)
         #show the planes to user
-        DisplayScreen().printList(planePackage)
+        planeList = []
+        for plane in planePackage:
+            if plane["planeTypeId"] not in planeList:
+                planeList.append(plane["planeTypeId"])
+        print(planeList)
         #ask user for a plane type
         user_input = InputHandler().planetype()
         #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
