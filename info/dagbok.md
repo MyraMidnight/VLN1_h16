@@ -218,6 +218,11 @@ Get komið og eitt create eftir
 
 * Klára allar A-kröfur og B-kröfur
 * Stefanía gerði printcostum og fullt af UI föllum
+* Stefanía er að gera og græja create voyage og ætlar að gera update voyage
+* Damian ætlar að gera update Employee
+* Halla ætlar að gera update destination
+
+Kláruðum allar get methods og create methods erum að vinna í update, ætlum að klára update destination
 
 
 
