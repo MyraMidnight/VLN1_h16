@@ -196,14 +196,30 @@ Náðum að fatta hvernig import virkar
 Heilt yfir eru markmið dagsins að klára alveg Get og Create! Woohoo
 
 
+Get komið og eitt create eftir
 
 
 
 ## Þriðjudagurinn 10. desember 2019
+> Crazy veður svo allir voru heima að gera í sínu
 
+* Stefanía breytti displayScreen og printlist og fullt
+* Halla kláraði create Destination og gerði útlit
+* Damian gerði create Plane og held hann hafi gert eitt update fall
+* Fannar kláraði öll get og gerði nokkrar B-kröfur og eina C-kröfu
 
 
 ## Miðvikudagurinn 11. desember 2019
+> Stefanía verður heima hjá sér og vinnur þaðan, er heima með veikt barn. 
+>
+> Damian svaf yfir sig, kemur líklega um 12:30.
+>
+> Halla kom 9:55 og Fannar kom 10:50
+
+* Klára allar A-kröfur og B-kröfur
+* Stefanía gerði printcostum og fullt af UI föllum
+
+
 
 
 
