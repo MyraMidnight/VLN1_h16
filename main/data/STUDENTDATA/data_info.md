@@ -1,0 +1,1 @@
+# Hvaða data erum við að fyljgast með?
