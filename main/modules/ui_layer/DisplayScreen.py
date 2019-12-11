@@ -61,7 +61,7 @@ class DisplayScreen:
     # Methods that can be called to display data
     #===================================================================================
 
-    def printList(self, data:list, header:str = "Table of data",numList:bool = False, frame:bool = False):
+    def printList(self, data:list, header:str = "Table of data",numList:bool = False, frame:bool = True):
         """Prints a given list, can optionally print the key as column title, else it uses the given titles"""
 
         #get the dataType for 
@@ -74,7 +74,7 @@ class DisplayScreen:
         #prints the compiled sections
         self.__printScreen(frame)
 
-    def printOptions(self, data:list, header:str = "List of choices", frame:bool = False):
+    def printOptions(self, data:list, header:str = "List of choices", frame:bool = True):
         """Makes printing enumerated tables easy"""
         # compile the sections
         sectionData_list = [
@@ -85,7 +85,7 @@ class DisplayScreen:
         #prints the compiled sections
         self.__printScreen(frame)
 
-    def printText(self, data:list, header:str = "Information", frame:bool = False):
+    def printText(self, data:list, header:str = "Information", frame:bool = True):
         """Prints a list of paragraphs"""
         # compile the sections
         sectionData_list = [
