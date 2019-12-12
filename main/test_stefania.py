@@ -9,41 +9,12 @@ from modules.data_layer.IOAPI import IOAPI
 
 #--------------- Testing voyage
 flightData = IOAPI().opener("NewUpcomingFlights.csv")
-# DisplayScreen().printList(flightData, rowLimit=8)
 
-# firstVoyage = [flightData[0], flightData[1]]
-# voyageFromData = Voyage(firstVoyage)
-# print(voyageFromData)
+from modules.models.Voyage import Voyage
 
-# newVoyage = Voyage()
-# newVoyage.createVoyage()
-# print(repr(newVoyage))
+newVoyage = Voyage(flightData[:2])
+for flight in flightData[:2]:
+  print(flight)
 
-#--------------- Testing DateUtil
-# import datetime
-
-# dateObject = DateUtil("2020-11-03T10:20:00").createObject()
-
-# print(dateObject)
-# newTime = dateObject + datetime.timedelta(hours=4)
-# print(newTime)
-# newTime = newTime - datetime.timedelta(hours=9)
-# print(newTime)
-# #print(dateObject.timedelta(hours=3))
-
-
-# #--------------- creating a function that can print list of methods
-MenuHandler().displayMenu()
-# methods = dir(MenuHandler)
-
-# def printMethods(menu:object):
-#   classMethods = []
-#   for method in dir(menu):
-#     if method[:2] != "__":
-#       classMethods.append(method)
-
-#   for method in classMethods:
-#     print(method)
-
-# printMethods(menu)
-
+print(newVoyage)
+print(newVoyage.getFlights())

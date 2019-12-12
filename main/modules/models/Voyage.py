@@ -1,13 +1,5 @@
-from modules.ui_layer.InputHandler import InputHandler
-from modules.ui_layer.DisplayScreen import DisplayScreen
-from modules.data_layer.IOAPI import IOAPI
-from modules.ui_layer.DateUtil import DateUtil
-import datetime
-
-
 class Voyage:
-    def __init__(self, flights:list = [], dataFiles:dict = {}):
-        self.dataFiles = dataFiles
+    def __init__(self, flights:list = []):
 
         self.__flightOut = ["", {}]
         self.__flightIn = ["", {}]
@@ -69,6 +61,9 @@ class Voyage:
         self.__flightIn = self.processFlight(inFlight)
 
         #extract voyage data from outgoing flight
+        for key, value in outFlight.items():
+            if key in self.__attributes:
+                self.__attributes[key] = value
 
         # destination and airport
         self.__destination = outFlight["arrivingAt"]
@@ -82,6 +77,19 @@ class Voyage:
         self.__fsm = outFlight["fsm"]
         self.__fa1 = outFlight["fa1"]
         self.__fa2 = outFlight["fa2"]
+
+    def addCrew(self, crew:dict = {}):
+        """Takes a dictionary with crew roles as keys and updates the crew of instance"""
+        if len(crew.keys()) != 0:
+            #go through the given crew and assign to the Voyage
+            for role, employee in crew.items():
+                self.__attributes[role] = employee
+        else:
+            #compile the current crew and return it
+            roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
+            for role in roles:
+                crew[role] = str(self.__attributes[role])
+        return crew #returns the updated crew
 
     #===================================================================================
     # methods for local use
@@ -99,25 +107,12 @@ class Voyage:
         #returns a number that is 1 higher
         return "NA{}".format(str(flightNum))                
             
-
-    def addCrew(self, crew:dict = {}):
-        """Takes a dictionary with crew roles as keys and updates the crew of instance"""
-        if len(crew.keys()) != 0:
-            #go through the given crew and assign to the Voyage
-            for role, employee in crew.items():
-                self.__attributes[role] = employee
-        else:
-            #compile the current crew and return it
-            roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
-            for role in roles:
-                crew[role] = str(self.__attributes[role])
-        return crew #returns the updated crew
         
     #===================================================================================
     # Exporting data
     #===================================================================================
 
-    def getFlights(self, refFlightNumber:str):
+    def getFlights(self):
         """returns list of flights related to this voyage, will create the flights if missing"""
 
         #if voyage already has created flights with fightNumbers, then it returns those flights
@@ -128,46 +123,6 @@ class Voyage:
             return [self.__flightOut[1], self.__flightIn[1]]
 
         #else it creates new flightNumbers
-        else:         
-            self.createFlights(refFlightNumber)
-
-    def createFlights(self, refFlightNumber:str):
-        """Creates a pair of flights that make up the voyage, requires the last flightNumber 
-        created (for reference when creating new flightNumbers)"""
-
-        # get the latest flightNumber created, for reference
-        self.latestFlight = refFlightNumber
-
-        def flightData(direction:str):
-            """Creates a data dictionary"""
-            startLocation = self.__departingFrom
-            endLocation = self.__destination["id"]
-            departure = self.__departure
-            duration = self.__destination["flightDuration"]
-            flightDict = {}
-            flightNumber = self.createFlightNumber(self.latestFlight)
-
-            # swap locations depending on direction of flight
-            if direction == "in":
-                startLocation, endLocation = endLocation, startLocation
-                departure = self.__return
-
-            flightDict["flightNumber"] = flightNumber
-            flightDict["departingFrom"] = startLocation
-            flightDict["arrivingAt"] = endLocation
-            flightDict["departure"] = departure
-            flightDict["arrival"] = self.calculateArrival(departure,duration)   #departure + flightTime
-            flightDict["aircraftID"] = self.__aircraftID
-            flightDict["captain"] = self.__captain
-            flightDict["copilot"] = self.__copilot
-            flightDict["fsm"] = self.__fsm
-            flightDict["fa1"] = self.__fa1
-            flightDict["fa2"] = self.__fa2
-
-            #update the latest flightnumber
-            self.latestFlight = flightNumber
-            IOAPI().appender(self.dataFiles["UPCOMING_FLIGHTS_FILE"],flightDict.copy())
-            return flightDict.copy()
 
         #create the flight out
         flightOut_dict = flightData("out")

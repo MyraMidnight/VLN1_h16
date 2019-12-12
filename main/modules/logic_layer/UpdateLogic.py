@@ -173,17 +173,18 @@ class UpdateLogic :
             """Finds the days that the voyage will cover"""
             departureDate = departureFlight["departure"]
             returnDate = arrivalFlight["arrival"]
-            dateObject = DateUtil(departureDate).createObject()
-            compiledDates_list = [departureDate]
+            departureDate_obj = DateUtil(departureDate).createObject()
+            returnDate_obj = departureDate_obj + datetime.timedelta(days =1)
+            compiledDates_list = [departureDate, returnDate_obj.isoformat()]
 
-            #while the date is not the same
-            #while dateObject.isoformat()[:10] != returnDate[:10]:
-            print("Departure: ", DateUtil(dateObject.isoformat()).date)
-            print("Return: ",DateUtil(returnDate).date)
-            while DateUtil(dateObject.isoformat()).date != DateUtil(returnDate).date:
-                dateObject =   dateObject + datetime.timedelta(days=1)
-                compiledDates_list.append(dateObject.isoformat())
-            # create a range of days
+            # #while the date is not the same
+            # #while dateObject.isoformat()[:10] != returnDate[:10]:
+            # print("Departure: ", DateUtil(dateObject.isoformat()).date)
+            # print("Return: ",DateUtil(returnDate).date)
+            # while DateUtil(dateObject.isoformat()).date != DateUtil(returnDate).date:
+            #     dateObject =   dateObject + datetime.timedelta(days=1)
+            #     compiledDates_list.append(dateObject.isoformat())
+            # # create a range of days
             return compiledDates_list
 
         daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
