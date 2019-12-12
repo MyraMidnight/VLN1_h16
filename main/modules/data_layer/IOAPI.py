@@ -54,8 +54,8 @@ class IOAPI:
         csv_columns = [key for key in filePackage[0]]
         #opens the file with filename in write mode
         filename = 'data/STUDENTDATA/' + fileName
-        for x in filePackage:
-            print(x)
+        # for x in filePackage:
+        #     print(x)
         with open(filename,'w+',newline='',encoding='utf-8-sig') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row

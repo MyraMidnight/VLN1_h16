@@ -243,15 +243,17 @@ class UpdateLogic :
         updatedVoyage = Voyage(voyageFlightPair)
         updatedVoyage.addCrew(newCrew)
         newFlights = updatedVoyage.getFlights()
-
+        print(updatedVoyage)
         # then find the flights that were updated and replace them
         def updateFlights(allFlights, updatedFlights, voyageData):
             """Sends the updated list to the updater"""
             departingIndex = voyageData["departing"]["index"]
             returningIndex = voyageData["returning"]["index"]
+
             #update departing
             allFlights[departingIndex] = updatedFlights[0]
-            allFlights[departingIndex] = updatedFlights[1]
+            allFlights[returningIndex] = updatedFlights[1]
+
             #update returning
             IOAPI().updater(self.dataFiles["UPCOMING_FLIGHTS_FILE"], allFlights)
 

@@ -89,7 +89,21 @@ class Voyage:
             roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
             for role in roles:
                 crew[role] = str(self.__attributes[role])
+            #update flightData
+            flightsToUpdate = [self.__flightOut[1], self.__flightIn[1]]
 
+            print("Before update: \n", flightsToUpdate)
+
+            updatedFlights = []
+            for flight in flightsToUpdate:
+                newFlight = flight.copy()
+                for key in roles:
+                    newFlight[key] = crew[key]
+                updatedFlights.append(newFlight)
+
+            print("After update: \n",updatedFlights)
+            self.__flightOut[1] = updatedFlights[0]
+            self.__flightIn[1] = updatedFlights[1]
         return crew #returns the updated crew
 
     #===================================================================================
@@ -98,6 +112,7 @@ class Voyage:
 
     def processFlight(self, flight:dict):
         """Returns a list with two values: flightnumber and data dictionary"""
+        # ["NA1234", {flightData}]
         flightData = [flight["flightNumber"], flight]
         return flightData
 
@@ -116,22 +131,4 @@ class Voyage:
     def getFlights(self):
         """returns list of flights related to this voyage, will create the flights if missing"""
 
-        #if voyage already has created flights with fightNumbers, then it returns those flights
-        flightData = self.__flightOut[0] 
-        
-        if len(flightData) != 0:
-            #gets the flight objects and returns them in a list
-            return [self.__flightOut[1], self.__flightIn[1]]
-
-        #else it creates new flightNumbers
-
-        #create the flight out
-        flightOut_dict = flightData("out")
-        self.__flightOut = [flightOut_dict["flightNumber"], flightOut_dict]
-
-        #create the flight in
-        flightIn_dict = flightData("in")
-        self.__flightIn = [flightIn_dict["flightNumber"], flightIn_dict]
-
-        #give the IOAPI the flight data to save
-        return [flightOut_dict, flightIn_dict]
+        return [self.__flightOut[1], self.__flightIn[1]]
