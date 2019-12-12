@@ -20,7 +20,7 @@ class PrintHandler:
                     'licence': {"colWidth": 15, "title": "Licence"},
                     'address': {"colWidth": 20, "title": "Address"},
                     'phonenumber': {"colWidth": 7, "title": "Phone"},
-                    'email': {"colWidth": 12, "title": "email"}
+                    'email': {"colWidth": 12, "title": "Email"}
                 },                
                 "templates": { #contain lists of keys of columns to ignore for each template
                     "crew": [], "pilots": [], "cabincrew": []
