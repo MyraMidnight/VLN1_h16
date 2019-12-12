@@ -5,6 +5,7 @@ from modules.ui_layer.InputHandler import InputHandler
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
     def __init__(self, menu:str = "main"):
+        self.minScreenWidth = 100
         self.currentLocation_str = menu.lower()
         self.breadcrumbs = []
         self.currentMenu_list = {}
@@ -115,7 +116,7 @@ class MenuHandler:
             },
             "3.2" : {
                 "title": "Voyages",
-                "function": "main"
+                "function": LLAPI().updateVoyage
             },
             "3.3" : {
                 "title": "Destinations",
@@ -135,17 +136,37 @@ class MenuHandler:
     def printHeader(self,menuHeader):
         """Prints the header"""
         #print("\n")
-        print("\n", " / ".join(self.breadcrumbs))
 
     def printMenu(self,menuOptions,currentMenu):
         """Takes in current menu as"""
+        
+        #format the options into strings for print
+        breadCrumbs =  " / ".join(self.breadcrumbs)
+        formattedMenu = [breadCrumbs, ""]
+
         for count, item in enumerate(currentMenu,1):
             menuTitle = menuOptions[item]["title"]
-            print("{}) {}".format(count, menuTitle))
-        print("(Press (q) to quit)")
+            formattedMenu.append("{}) {}".format(count, menuTitle))
+        formattedMenu.append("")
+        formattedMenu.append("Press (q) to quit")
+        lineWidth_int = self.minScreenWidth
+
+        frameTop_str = "╔{}╗"
+        frameBody_str = "║    {}    ║"
+        frameBottom_str = "╚{}╝"
+        horizontalBar = "═" * (lineWidth_int +len(frameBody_str) - len(frameBottom_str))
+        
+        print(frameTop_str.format(horizontalBar))
+        for line in formattedMenu:
+            line = line.ljust(lineWidth_int)
+            line = frameBody_str.format(line)
+            print(line)
+
+        print(frameBottom_str.format(horizontalBar))
 
     def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
+        
         #if the menu
         if self.currentLocation_str in self.menuLayout:
             self.currentMenu_list = self.menuLayout[self.currentLocation_str]
@@ -164,7 +185,6 @@ class MenuHandler:
 
 
             #print the header and menu
-            self.printHeader(menuTitle)
             self.printMenu(self.menuOptions,self.currentMenu_list)
 
             #prompt user to input the number of chosen option

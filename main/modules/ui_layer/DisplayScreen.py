@@ -6,6 +6,7 @@ class DisplayScreen:
     def __init__(self):
         self.__terminalSize = self.__getTerminalSize()
         self.__compiledSections = []
+        self.minScreenWidth = 100
     
     def __getTerminalSize(self):
         width ,height= os.get_terminal_size()
@@ -16,7 +17,7 @@ class DisplayScreen:
     #===================================================================================
     def __printScreen(self, frame:bool = False):
         terminalWidth = self.__terminalSize["width"]
-        lineWidth_int = 0
+        lineWidth_int = self.minScreenWidth
 
         #------------ Print with frame------------------
         if frame:

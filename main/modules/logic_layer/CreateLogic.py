@@ -8,10 +8,6 @@ RANK_COPILOT = "Co-Pilot"
 RANK_FSM = "Flight Service Manager"
 RANK_FA = "Flight Attendant"
 
-AIRCRAFT_FILE = "Aircraft.csv"
-AIRCRAFT_TYPE_FILE = "AircraftType.csv"
-CREW_FILE = "Crew.csv"
-DESTINATIONS_FILE = "NewDestinations.csv"
 
 from modules.ui_layer.InputHandler import InputHandler
 from modules.data_layer.IOAPI import IOAPI
@@ -19,8 +15,10 @@ from modules.ui_layer.DisplayScreen import DisplayScreen
 
 class CreateLogic :
     """Create methods for logic layer"""
+    def __init__(self, dataFiles):
+        self.dataFiles = dataFiles
 
-    def createDestination(self, ):
+    def createDestination(self):
         """Create destination. Get destinationLand, destinationAirport, destinationFlightTime, 
          destinationDistance, destinationContactPerson and destinationEmergencyPhone."""
 
@@ -31,7 +29,7 @@ class CreateLogic :
          
         # Airports
         # Get a list of dictionaties containing airports and destiations we currently fly to
-        airport_data_list = IOAPI().opener(DESTINATIONS_FILE)
+        airport_data_list = IOAPI().opener(self.dataFiles["DESTINATIONS_FILE"])
         #Creates a list of airports NaN Air flyes to 
         airport_list = []
         for a_line_dict in airport_data_list:
@@ -55,7 +53,7 @@ class CreateLogic :
         DisplayScreen().printList([destination_dict], header = "Creating new destination, check if info correct", frame = True)
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct (y/n)? ")
         if confirmation_bool:
-            IOAPI().appender(DESTINATIONS_FILE, destination_dict)
+            IOAPI().appender(self.dataFiles["DESTINATIONS_FILE"], destination_dict)
     
     
     def createEmployee(self):
@@ -82,7 +80,7 @@ class CreateLogic :
 
         #License
         #Gets a list of dictionaries containing aircraft type specifications
-        airplane_data_list = IOAPI().opener(AIRCRAFT_TYPE_FILE)
+        airplane_data_list = IOAPI().opener(self.dataFiles["AIRCRAFT_TYPE_FILE"])
         #Creates a list of airplane types in the list
         airplaneType_list = []
         for a_line_dict in airplane_data_list:
@@ -108,7 +106,7 @@ class CreateLogic :
         DisplayScreen().printList([employee_dict])
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
-            IOAPI().appender(CREW_FILE, employee_dict)
+            IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
         #BEWARE.... C - krafa below
             # DisplayScreen().printList([employee_dict], colWidth = 15)
             # choiceNum_str = InputHandler().edit("Choose the column number to edit data \n Name: 1, SSN: 2, Address: 3, Phone number: 4, E-mail: 5, Role: 6, Rank: 7, License: 8")
@@ -151,10 +149,10 @@ class CreateLogic :
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
         #Appending the input info to aircraft file
-            IOAPI().appender(AIRCRAFT_FILE, plane_dict)
+            IOAPI().appender(self.dataFiles["AIRCRAFT_FILE"], plane_dict)
         
 
 
     def createVoyage(self):
-        return VoyageHandler().createVoyage()
+        return VoyageHandler(dataFiles=self.dataFiles).createVoyage()
         

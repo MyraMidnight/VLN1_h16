@@ -49,6 +49,10 @@ class InputHandler:
                 print("Input needs to be a number in range 1-{}".format(numOfChoices))
                 pass
 
+    def confirmation(self, inputQuestion:str = "Press enter to continue", acceptedInput:list = ["yes"]):
+        """Just a confirmation"""
+        return input(inputQuestion)
+
     #===================================================================================
     # Dates and Times!
     #===================================================================================
