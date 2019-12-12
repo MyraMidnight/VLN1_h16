@@ -148,7 +148,7 @@ class UpdateLogic :
             {"sortBy": "arrivingAt"}, 
             {"sortBy": "flightNumber"}
         ]
-        DisplayScreen().printOptions(sortOptions, header="Voyages can be sorted in the following ways")
+        DisplayScreen().printOptions(sortOptions, header="Search for voyages from list")
         sortedChoice_int = int(InputHandler().numChoices(len(sortOptions), "How would you like the voyages to be sorted? :"))
         sortedBy_str = sortOptions[sortedChoice_int-1]["sortBy"]
 
@@ -173,15 +173,17 @@ class UpdateLogic :
         def findDaysDuration(departureFlight, arrivalFlight):
             """Finds the days that the voyage will cover"""
             departureDate = departureFlight["departure"]
-            dateObject = DateUtil(departureDate).createObject()
             returnDate = arrivalFlight["arrival"]
-            compiledDates_list = [dateObject.isoformat()]
+            dateObject = DateUtil(departureDate).createObject()
+            compiledDates_list = [departureDate]
 
             #while the date is not the same
-            while dateObject.isoformat()[:10] != returnDate[:10]:
+            #while dateObject.isoformat()[:10] != returnDate[:10]:
+            print("Departure: ", DateUtil(dateObject.isoformat()).date)
+            print("Return: ",DateUtil(returnDate).date)
+            while DateUtil(dateObject.isoformat()).date != DateUtil(returnDate).date:
                 dateObject =   dateObject + datetime.timedelta(days=1)
                 compiledDates_list.append(dateObject.isoformat())
-            compiledDates_list.append(returnDate)
             # create a range of days
             return compiledDates_list
 

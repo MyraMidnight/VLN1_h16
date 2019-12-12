@@ -229,7 +229,7 @@ class VoyageHandler:
                         #if everything is alright, then return the dateTime
                         return timeCheckDate
             else:
-                DateUtil().updateTime(selectedDate, selectedDepartureTime_str)
+                return DateUtil().updateTime(selectedDate, selectedDepartureTime_str)
         
         
             #repeat the loop until proper time has been selected
