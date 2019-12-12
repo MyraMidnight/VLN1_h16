@@ -159,10 +159,10 @@ class UpdateLogic :
 
         #Changes the requested data
         if choice_str == "Contact Person":
-            airport_info_dict["contactPerson"] = InputHandler.fullName("Enter the name of the new contact person: ")
+            airport_info_dict["contactPerson"] = InputHandler().fullName("Enter the name of the new contact person: ")
         
         elif choice_str == "Emergency number":
-            airport_info_dict["emergencyPhone"] = InputHandler.phoneNumber("Input a 7 digit phone number for the new emergency phone number: ")
+            airport_info_dict["emergencyPhone"] = InputHandler().phoneNumber("Input a 7 digit phone number for the new emergency phone number: ")
         
 
         #Prints the data and asks for confirmation
@@ -180,7 +180,7 @@ class UpdateLogic :
                 airport_info_dict["contactPerson"] = InputHandler.fullName("Enter the name of the new contact person: ")
         
             elif choice_str == "Emergency number":
-                airport_info_dict["emergencyPhone"] = InputHandler.phoneNumber(7, "Input a 7 digit phone number for the new emergency phone number: ")
+                airport_info_dict["emergencyPhone"] = InputHandler.phoneNumber("Input a 7 digit phone number for the new emergency phone number: ")
         
             #Prints the results of editing and asks for confirmation
             DisplayScreen().printList([airport_info_dict], header = "")
