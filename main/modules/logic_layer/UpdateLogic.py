@@ -168,7 +168,7 @@ class UpdateLogic :
         #get the flight data
         voyageFlightPair = [voyageData["out"][1], voyageData["in"][1]]
         # create instance of VoyageHandler using the two connected flights
-        currentVoyage_obj = Voyage(voyageFlightPair)
+        currentCrew_dict = Voyage(voyageFlightPair).addCrew()
         
         #========================
         #find the days that the crew would be occupied during voyage
@@ -195,15 +195,15 @@ class UpdateLogic :
         availableCrew_list = findAvailableCrew(daysOfVoyage, allEmployees_data)
 
         # Find the currently listed crew and roles (for printOptions)
-        def currentCrew(employeeList, voyage):
+        def currentCrew(employeeList, crew):
             rolesForUpdate_list = []
-            for role, employee in voyage.addCrew().items():
+            for role, employee in crew.items():
                 #find the employee info, should find name
                 crewInRole = {"role": role, "employee": employee} 
                 rolesForUpdate_list.append(crewInRole.copy())
             return rolesForUpdate_list
 
-        rolesForUpdate_list = currentCrew(allEmployees_data, currentVoyage_obj)
+        rolesForUpdate_list = currentCrew(allEmployees_data, currentCrew_dict)
         # loop through selecting a role to change
         
         # print list of employees available for this voyage for this role
@@ -241,9 +241,9 @@ class UpdateLogic :
             currentCrew[selectedRole_str] = selectedEmployee["ssn"]
             return currentCrew
 
-        newCrew = assignCrew(availableCrew_list, currentVoyage_obj.addCrew({}))
+        currentCrew_dict = assignCrew(availableCrew_list, currentCrew_dict)
         updatedVoyage = Voyage(voyageFlightPair)
-        updatedVoyage.addCrew(newCrew)
+        updatedVoyage.addCrew(currentCrew_dict)
         newFlights = updatedVoyage.getFlights()
         print(updatedVoyage)
         # then find the flights that were updated and replace them
