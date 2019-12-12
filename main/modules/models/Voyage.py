@@ -89,6 +89,7 @@ class Voyage:
             roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
             for role in roles:
                 crew[role] = str(self.__attributes[role])
+
         return crew #returns the updated crew
 
     #===================================================================================

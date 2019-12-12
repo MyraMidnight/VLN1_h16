@@ -16,5 +16,11 @@ newVoyage = Voyage(flightData[:2])
 for flight in flightData[:2]:
   print(flight)
 
-print(newVoyage)
+newCrew = {'captain': '3009907461', 'copilot': '3009907461', 'fsm': '3009907461', 'fa1': '3009907461', 'fa2': '3009907461'}
+
 print(newVoyage.getFlights())
+print(newVoyage.addCrew())
+print(newVoyage)
+print("_-------_ added new crew")
+print(newVoyage.addCrew(newCrew))
+print(newVoyage)
