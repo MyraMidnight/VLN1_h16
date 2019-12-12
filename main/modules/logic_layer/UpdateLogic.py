@@ -9,6 +9,7 @@ class UpdateLogic :
     """Update methods for logic layer"""
     def __init__(self, dataFiles):
         self.dataFiles = dataFiles #gets the file list from LLAPI
+        self.getLogic = GetLogic(self.dataFiles)
 
     def updateEmployee(self):
         """choose a employee (get a list and choose from the list). Get the info about the chosen 
@@ -129,6 +130,7 @@ class UpdateLogic :
         """ Updates the crew on a voyage """
 
         departingFlights_data = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        allEmployees_data = IOAPI().opener(self.dataFiles["CREW_FILE"])
 
         #get the list 
         departingFlights_list = []
@@ -162,19 +164,47 @@ class UpdateLogic :
         # create instance of VoyageHandler using the two connected flights
         currentVoyage_obj = Voyage(voyageFlightPair)
 
-        # Print the crew in selected flight
-        rolesToFill = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
         
-        allStaff_data = IOAPI().opener(self.dataFiles["CREW_FILE"])
-        crewOnVoyage = []
-        for role in rolesToFill:
-            #find the employee info, should find name
-            crewInRole = {"role": role, "employee": selectedFlight_dict[role]} 
-            crewOnVoyage.append(crewInRole.copy())
+        #find the days that the crew would be occupied during voyage
+        def findDaysDuration(departureFlight, arrivalFlight):
+            """Finds the days that the voyage will cover"""
+            daysOfVoyage = []
+            # create a range of days
+            return daysOfVoyage
 
-        # let user pick what role to update
-        DisplayScreen().printOptions(crewOnVoyage, "Crew assigned to this voyage" )
-        updateRole = InputHandler().numChoices(len(crewOnVoyage), "Select ")
+        daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
+
+        # Find available employees
+        
+
+        def findAvailableCrew(daysOfWoyage, employeeList):
+            """Just loops through the given days to return available staff"""
+            availableCrew = []
+            # find all the people not working those days
+            # check if they are free for the duration
+            return availableCrew
+
+        availableCrew = findAvailableCrew(daysOfVoyage, allEmployees_data)
+
+        def currentCrew(employeeList):
+            rolesToFill = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
+
+            crewOnVoyage = []
+            for role in rolesToFill:
+                #find the employee info, should find name
+                crewInRole = {"role": role, "employee": selectedFlight_dict[role], "name": ""} 
+                crewOnVoyage.append(crewInRole.copy())
+            return crewOnVoyage
+
+        crewOnVoyage = currentCrew(allEmployees_data)
+
+        def manVoyage(currentVoyage:object, crewOnVoyage:list, availableCrew:list):
+            """creates a dictionary of currently selected crew"""
+            # let user pick what role to update
+            DisplayScreen().printOptions(crewOnVoyage, "Crew assigned to this voyage" )
+            updateRole = InputHandler().numChoices(len(crewOnVoyage), "Select ")
+
+
         # print list of employees available for this voyage for this role
         # loop through asking if they want to update staff
         # pressing q will ask for confirmation of saving the data

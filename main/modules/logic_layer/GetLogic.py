@@ -95,13 +95,19 @@ class GetLogic :
         filePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
         return self.printData(filePackage,header="Voyages:")
     
-    def getAway(self):
+    def getAway(self, date:str = ""):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
         #fetch Voyage info
         voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
-        #ask for datetime from user
-        user_input = InputHandler().dateOnly()
+        
+        #if no date is given in arguments, then ask for input
+        if date == "":
+            #ask for datetime from user
+            user_input = InputHandler().dateOnly()
+        else:
+            user_input = date
+
         user_date = DateUtil(user_input).date
         ssn_list = []
         #goes through all flights, finds flights at the chosen date and compiles a unique list of SSN
@@ -124,7 +130,8 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
-        return self.printData(away_list,header="Employees not working:")
+        self.printData(away_list,header="Employees not working:")
+        return away_list
     
     def getWorking(self):
         #fetch employee info

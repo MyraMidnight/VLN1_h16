@@ -102,6 +102,11 @@ class Voyage:
         return "NA{}".format(str(flightNum))                
             
 
+    def addCrew(self, crew:dict):
+        """Takes a dictionary with crew roles as keys and updates the crew of instance"""
+
+        return crew #returns the updated crew
+        
     #===================================================================================
     # Exporting data
     #===================================================================================
@@ -168,7 +173,3 @@ class Voyage:
 
         #give the IOAPI the flight data to save
         return [flightOut_dict, flightIn_dict]
-
-    def addCrew(self, crew:dict):
-        """Takes a dictionary with crew roles as keys and updates the crew of instance"""
-        
