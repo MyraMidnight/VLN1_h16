@@ -17,6 +17,10 @@ class GetLogic :
             DisplayScreen().printText([""],header)
         return InputHandler().confirmation("Press enter to continue (back to menu)...")
 
+    #===================================================================================
+    # Get single employee
+    #===================================================================================
+
     def getSingleEmployee(self):
         #fetches employee info
         filePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
@@ -91,13 +95,19 @@ class GetLogic :
         filePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
         return self.printData(filePackage,header="Voyages:")
     
-    def getAway(self):
+    def getAway(self, date:str = ""):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
         #fetch Voyage info
         voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
-        #ask for datetime from user
-        user_input = InputHandler().dateOnly()
+        
+        #if no date is given in arguments, then ask for input
+        if date == "":
+            #ask for datetime from user
+            user_input = InputHandler().dateOnly()
+        else:
+            user_input = date
+
         user_date = DateUtil(user_input).date
         ssn_list = []
         #goes through all flights, finds flights at the chosen date and compiles a unique list of SSN
@@ -120,7 +130,8 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
-        return self.printData(away_list,header="Employees not working:")
+        self.printData(away_list,header="Employees not working:")
+        return away_list
     
     def getWorking(self):
         #fetch employee info
@@ -201,6 +212,10 @@ class GetLogic :
         
         return self.printData(schedule_list,header="Chosen employee work schedule:")
 
+    #===================================================================================
+    # Get pilots by licence
+    #===================================================================================
+
     def getPilotsByLicence(self):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
@@ -216,7 +231,7 @@ class GetLogic :
         for plane in planePackage:
             if plane["planeTypeId"] not in planeList:
                 planeList.append(plane["planeTypeId"])
-        print(planeList)
+        #print(planeList)
         #ask user for a plane type
         user_input = InputHandler().planetype()
         #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
@@ -232,7 +247,7 @@ class GetLogic :
             return self.printData(licence_pilots,header="Pilots with chosen licence:")
         #else it alerts the user and returns false
         else:
-            print("No pilots were found with that licence")
+            self.printData([],header="No pilots were found with that licence")
             return False
 
     def printPilotsByLicence(self):

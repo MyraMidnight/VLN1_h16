@@ -17,6 +17,10 @@ class CreateLogic :
     def __init__(self, dataFiles):
         self.dataFiles = dataFiles
 
+    #===================================================================================
+    # Create destination
+    #===================================================================================
+
     def createDestination(self):
         """Create destination. Get destinationLand, destinationAirport, destinationFlightTime, 
          destinationDistance, destinationContactPerson and destinationEmergencyPhone."""
@@ -54,6 +58,9 @@ class CreateLogic :
         if confirmation_bool:
             IOAPI().appender(self.dataFiles["DESTINATIONS_FILE"], destination_dict)
     
+    #===================================================================================
+    # Create Employee
+    #===================================================================================
     
     def createEmployee(self):
         """Assigns and holds onto the values given by input handler until all 
@@ -138,14 +145,12 @@ class CreateLogic :
                 edit_bool = False
 
         #Adds the employee to the crew file
-        IOAPI().appender(CREW_FILE, employee_dict)
+        IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
 
 
-
-
-
-
-        
+    #===================================================================================
+    # Create plane
+    #===================================================================================
 
     def createPlane(self):
         """Method that creates new plane, requests input for planeName, and planeType. 
@@ -168,6 +173,9 @@ class CreateLogic :
             IOAPI().appender(self.dataFiles["AIRCRAFT_FILE"], plane_dict)
         
 
+    #===================================================================================
+    # Create Voyage
+    #===================================================================================
 
     def createVoyage(self):
         return VoyageHandler(dataFiles=self.dataFiles).createVoyage()
