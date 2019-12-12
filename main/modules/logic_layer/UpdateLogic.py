@@ -177,14 +177,6 @@ class UpdateLogic :
             returnDate_obj = departureDate_obj + datetime.timedelta(days =1)
             compiledDates_list = [departureDate, returnDate_obj.isoformat()]
 
-            # #while the date is not the same
-            # #while dateObject.isoformat()[:10] != returnDate[:10]:
-            # print("Departure: ", DateUtil(dateObject.isoformat()).date)
-            # print("Return: ",DateUtil(returnDate).date)
-            # while DateUtil(dateObject.isoformat()).date != DateUtil(returnDate).date:
-            #     dateObject =   dateObject + datetime.timedelta(days=1)
-            #     compiledDates_list.append(dateObject.isoformat())
-            # # create a range of days
             return compiledDates_list
 
         daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
@@ -222,15 +214,14 @@ class UpdateLogic :
             return options[int(selectedRole)-1]["role"]
 
         #========================
-        def assignCrew(availableCrew_list, currentVoyage):
+        def assignCrew(availableCrew_list, currentCrew:dict):
             """Finds the crew to """
-            currentCrew = currentVoyage.addCrew()
             selectedRole_str = selectCrewRole(rolesForUpdate_list)
 
             roleList = {
                 "captain": self.getLogic.getPilots,
                 "copilot": self.getLogic.getPilots,
-                "fms": self.getLogic.getFlightAttendants,
+                "fsm": self.getLogic.getFlightAttendants,
                 "fa1": self.getLogic.getFlightAttendants,
                 "fa2": self.getLogic.getFlightAttendants,
             }
@@ -242,12 +233,14 @@ class UpdateLogic :
             inputChoice = InputHandler().numChoices(len(filteredCrew), "Select an employee: ")
             selectedEmployee = filteredCrew[int(inputChoice)-1]
             currentCrew[selectedRole_str] = selectedEmployee["ssn"]
-            currentVoyage.addCrew(currentCrew)
             return currentCrew
-        assignCrew(availableCrew_list, currentVoyage_obj)
-        currentVoyage_obj.addCrew()
-        updatedFlights = currentVoyage_obj.getFlights()
-        print(updatedFlights)
-        # pressing q will ask for confirmation of saving the data
+
+        newCrew = assignCrew(availableCrew_list, currentVoyage_obj.addCrew({}))
+        updatedVoyage = Voyage(voyageFlightPair)
+        updatedVoyage.addCrew(newCrew)
+        print(newCrew)
+        print(updatedVoyage)
+        updatedFlights = updatedVoyage.getFlights()
+
         # then find the flights that were updated and replace them
         # send the changed list of flights to updater
