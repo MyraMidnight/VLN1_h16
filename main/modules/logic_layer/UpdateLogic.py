@@ -221,19 +221,23 @@ class UpdateLogic :
             selectedRole_str = selectCrewRole(rolesForUpdate_list)
 
             roleList = {
-                "captain": self.getLogic.getPilots,
-                "copilot": self.getLogic.getPilots,
-                "fsm": self.getLogic.getFlightAttendants,
-                "fa1": self.getLogic.getFlightAttendants,
-                "fa2": self.getLogic.getFlightAttendants,
+                "captain": {"rank": "Captain", "list":self.getLogic.getPilots } ,
+                "copilot":{ "rank":"Copilot",  "list":self.getLogic.getPilots},
+                "fsm": {"rank":"Flight Service Manager",  "list":self.getLogic.getFlightAttendants},
+                "fa1": {"rank":"Flight Attendant",  "list":self.getLogic.getFlightAttendants},
+                "fa2": {"rank":"Flight Attendant",  "list":self.getLogic.getFlightAttendants},
             }
-
-            filteredCrew = roleList[selectedRole_str](availableCrew_list)
+            
+            filteredCrew = roleList[selectedRole_str]["list"](availableCrew_list)
             # filter out only of right rank
+            rankOnlyList = []
+            for employee in filteredCrew:
+                if employee["rank"] == roleList[selectedRole_str]["rank"]:
+                    rankOnlyList.append(employee)
 
-            DisplayScreen().printOptions(filteredCrew)
-            inputChoice = InputHandler().numChoices(len(filteredCrew), "Select an employee: ")
-            selectedEmployee = filteredCrew[int(inputChoice)-1]
+            DisplayScreen().printOptions(rankOnlyList)
+            inputChoice = InputHandler().numChoices(len(rankOnlyList), "Select an employee: ")
+            selectedEmployee = rankOnlyList[int(inputChoice)-1]
             currentCrew[selectedRole_str] = selectedEmployee["ssn"]
             return currentCrew
 
