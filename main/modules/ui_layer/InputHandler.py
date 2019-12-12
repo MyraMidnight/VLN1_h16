@@ -446,31 +446,11 @@ class InputHandler:
             #once the input meets requirements
             return num_string
 
-    #===================================================================================
-    # Specific input (names, ssn, ID... )
-    #===================================================================================
- 
-    # Name string, only allows alpha and spaces 
-    def name(self, inputQuestion:str = "Input a name: "):
-        """Input for names"""
-        name = input(inputQuestion)
-        name = "Jóhann Arnars"
-        return name
-        # while all(letter.isalpha() or letter.isspace() for letter in name):
-        #     print("not valid name (needs to be alphabet letter or space)")
-        #     name = input(inputQuestion)
-        # else:
-        #     return name
 
-    def planetype(self, inputQuestion:str = "Input a type of plane: "):
+    def planetype(self, inputQuestion:str = "Input a type of plane (e.g. NAFokkerF100): "):
         planetype_str = input(inputQuestion)
         while len(planetype_str) > 2 or planetype_str[:2] != "NA":
             print("Please input a valid planetype")
             planetype_str = input(inputQuestion)
         return planetype_str
-    
-    # flightNumber format
-    def flightId(self):
-        """Input for flight ID, just checks if it's a valid format"""
-        input("test input: ")
-        return "NA1234"
+

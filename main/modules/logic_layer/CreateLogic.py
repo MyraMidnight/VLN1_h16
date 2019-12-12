@@ -138,7 +138,7 @@ class CreateLogic :
                 edit_bool = False
 
         #Adds the employee to the crew file
-        IOAPI().appender(CREW_FILE, employee_dict)
+        IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
 
 
 
@@ -154,7 +154,7 @@ class CreateLogic :
         plane_dict = {}
 
         #Takes in input for plane insignia and puts it under "planeInsignia" key in plane_dict
-        plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia: ")
+        plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia (e.g. TF-XXX): ")
 
         #Input for plane Type ID
         plane_dict["planeTypeId"] = InputHandler().planetype()
