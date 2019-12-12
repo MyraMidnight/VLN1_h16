@@ -1,7 +1,3 @@
-class Voyage:
-    def __init__(self):
-        
-
 from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.data_layer.IOAPI import IOAPI
@@ -9,7 +5,7 @@ from modules.ui_layer.DateUtil import DateUtil
 import datetime
 
 
-class VoyageHandler:
+class Voyage:
     def __init__(self, flights:list = [], dataFiles:dict = {}):
         self.dataFiles = dataFiles
 

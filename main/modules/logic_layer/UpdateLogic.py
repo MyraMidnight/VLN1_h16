@@ -2,7 +2,7 @@ from modules.logic_layer.GetLogic import GetLogic
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.ui_layer.InputHandler import InputHandler
-#from modules.models.Voyage import Voyage #model class
+from modules.models.Voyage import Voyage #model class
 
 from operator import itemgetter #for sorting list of dictionaries by key
 class UpdateLogic :
@@ -160,11 +160,21 @@ class UpdateLogic :
         voyageFlightPair = [departingFlights_data[flightIndex], departingFlights_data[flightIndex+1]]
 
         # create instance of VoyageHandler using the two connected flights
-        #currentVoyage_obj = Voyage(voyageFlightPair)
+        currentVoyage_obj = Voyage(voyageFlightPair)
 
         # Print the crew in selected flight
-        #currentVoyage_obj.getFlights
+        rolesToFill = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
+        
+        allStaff_data = IOAPI().opener(self.dataFiles["CREW_FILE"])
+        crewOnVoyage = []
+        for role in rolesToFill:
+            #find the employee info, should find name
+            crewInRole = {"role": role, "employee": selectedFlight_dict[role]} 
+            crewOnVoyage.append(crewInRole.copy())
+
         # let user pick what role to update
+        DisplayScreen().printOptions(crewOnVoyage, "Crew assigned to this voyage" )
+        updateRole = InputHandler().numChoices(len(crewOnVoyage), "Select ")
         # print list of employees available for this voyage for this role
         # loop through asking if they want to update staff
         # pressing q will ask for confirmation of saving the data

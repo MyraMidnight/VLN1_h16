@@ -17,6 +17,10 @@ class GetLogic :
             DisplayScreen().printText([""],header)
         return InputHandler().confirmation("Press enter to continue (back to menu)...")
 
+    #===================================================================================
+    # Get single employee
+    #===================================================================================
+
     def getSingleEmployee(self):
         #fetches employee info
         filePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
@@ -201,6 +205,10 @@ class GetLogic :
         
         return self.printData(schedule_list,header="Chosen employee work schedule:")
 
+    #===================================================================================
+    # Get pilots by licence
+    #===================================================================================
+
     def getPilotsByLicence(self):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
@@ -216,7 +224,7 @@ class GetLogic :
         for plane in planePackage:
             if plane["planeTypeId"] not in planeList:
                 planeList.append(plane["planeTypeId"])
-        print(planeList)
+        #print(planeList)
         #ask user for a plane type
         user_input = InputHandler().planetype()
         #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
@@ -232,7 +240,7 @@ class GetLogic :
             return self.printData(licence_pilots,header="Pilots with chosen licence:")
         #else it alerts the user and returns false
         else:
-            print("No pilots were found with that licence")
+            self.printData([],header="No pilots were found with that licence")
             return False
 
     def printPilotsByLicence(self):
