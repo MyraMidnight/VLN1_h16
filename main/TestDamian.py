@@ -1,17 +1,17 @@
 # Here we will create the main program
 # ------------------------  Import classes  ------------------ 
 from modules.ui_layer.MenuHandler import MenuHandler
-
-import os
-# print(os.name)
-try:
-  os.system('mode con: cols=200 lines=45')  # works on M$ Windows
-except:
-  os.system("printf '\e[8;45;200t'")        # works on MacOS
-# pause = input("Press any key to continue...")
-
+# ------------------------  Global variables  ---------------- 
+ROLE_PILOT = "pilot"
+ROLE_CAPTAIN = "captain"
+ROLE_COPILOT = "coPilot"
+ROLE_ATTENDANT = "flightAttendant"
+ROLE_LEAD_ATTENDANT = "headFlightAttendant"
+MODEL_PLANE = "" #instance of plane
+MODEL_EMPLOYEE = "" #instance of employee
 
 # ------------------------  Main program  -------------------- 
+
 def main():
   """The core program"""
   #print the main menu

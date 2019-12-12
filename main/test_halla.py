@@ -1,0 +1,44 @@
+# Here we will create the main program
+# ------------------------  Import classes  ------------------ 
+from modules.ui_layer.MenuHandler import MenuHandler
+
+from modules.ui_layer.InputHandler import InputHandler
+
+
+from modules.ui_layer.DisplayScreen import DisplayScreen
+from modules.data_layer.IOAPI import IOAPI
+
+import os
+
+print(os.name)
+os.system('mode con: cols=100 lines=40')  # works on M$ Windows
+os.system("printf '\e[8;50;300t'")        # works on MacOS
+pause = input("Press any key to continue...")
+
+# ------------------------  Global variables  ---------------- 
+ROLE_PILOT = "pilot"
+ROLE_CAPTAIN = "captain"
+ROLE_COPILOT = "coPilot"
+ROLE_ATTENDANT = "flightAttendant"
+ROLE_LEAD_ATTENDANT = "headFlightAttendant"
+MODEL_PLANE = "" #instance of plane
+MODEL_EMPLOYEE = "" #instance of employee
+
+# ------------------------  Main program  -------------------- 
+
+def main():
+  """The core program"""
+  #print the main menu
+  MenuHandler().displayMenu()
+
+# ------------------------  Run program  --------------------- 
+main()
+
+#data = IOAPI().opener("NewUpcomingFlights.csv")
+#print("Þetta er datað", data)
+
+#DisplayScreen().printListFormat(data, "flights")
+#DisplayScreen().printList(data, 6, 16)
+
+#date = InputHandler().dateTime()
+#print(date)
