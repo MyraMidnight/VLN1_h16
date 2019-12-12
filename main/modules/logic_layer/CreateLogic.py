@@ -17,14 +17,18 @@ class CreateLogic :
     def __init__(self, dataFiles):
         self.dataFiles = dataFiles
 
+    #===================================================================================
+    # Create destination
+    #===================================================================================
+
     def createDestination(self):
         """Create destination. Get destinationLand, destinationAirport, destinationFlightTime, 
          destinationDistance, destinationContactPerson and destinationEmergencyPhone."""
 
-        print("\n  Creating new destination")
+        print("\nCreating new destination")
         destination_dict = {}
 
-        self.destination = InputHandler.country("Input the city where the new destination is located: ")
+        self.destination = InputHandler().country("Input the city where the new destination is located: ")
          
         # Airports
         # Get a list of dictionaties containing airports and destiations we currently fly to
@@ -54,6 +58,9 @@ class CreateLogic :
         if confirmation_bool:
             IOAPI().appender(self.dataFiles["DESTINATIONS_FILE"], destination_dict)
     
+    #===================================================================================
+    # Create Employee
+    #===================================================================================
     
     def createEmployee(self):
         """Assigns and holds onto the values given by input handler until all 
@@ -141,11 +148,9 @@ class CreateLogic :
         IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
 
 
-
-
-
-
-        
+    #===================================================================================
+    # Create plane
+    #===================================================================================
 
     def createPlane(self):
         """Method that creates new plane, requests input for planeName, and planeType. 
@@ -168,6 +173,9 @@ class CreateLogic :
             IOAPI().appender(self.dataFiles["AIRCRAFT_FILE"], plane_dict)
         
 
+    #===================================================================================
+    # Create Voyage
+    #===================================================================================
 
     def createVoyage(self):
         return VoyageHandler(dataFiles=self.dataFiles).createVoyage()

@@ -43,7 +43,7 @@ class IOAPI:
         csv_columns = [key for key in filePackage]
         #opens the file with filename in write mode
         filename = 'data/STUDENTDATA/' + fileName 
-        with open(filename,'a',newline='',encoding='utf-8') as file:
+        with open(filename,'a',newline='',encoding='utf-8-sig') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row
             #into the file where it takes a dictionary and breaks it down to write to a line
@@ -53,25 +53,26 @@ class IOAPI:
     def updater(self,fileName,filePackage):
         csv_columns = [key for key in filePackage[0]]
         #opens the file with filename in write mode
-        filename = 'data/STUDENTDATA/' + fileName 
-        with open(filename,'w',newline='',encoding='utf-8') as file:
+        filename = 'data/STUDENTDATA/' + fileName
+        for x in filePackage:
+            print(x)
+        with open(filename,'w+',newline='',encoding='utf-8-sig') as file:
             #DictWriter is an inbuilt csv function that takes a filestream and fieldnames as mandatory parameters
             #from there you can make it write a header based on the fieldnames and makte it write a row
             #into the file where it takes a dictionary and breaks it down to write to a line
             writer = csv.DictWriter(file, fieldnames=csv_columns)
-            #writes the header with the keys
             writer.writeheader()
             for line in filePackage:
                 writer.writerow(line)
 
-    
+"""new_lines = ['Some\n', 'New data\n']
+with open('file.txt', 'a') as f:
+    # Get the previous contents
+    lines = f.readlines()
 
-
-#code example on how to use overWriter
-#package = IOAPI().opener('Crew.csv')
-#for x in package:
-#    print(x)
-#package[5] = {'ssn': 'test', 'name': 'test test', 'role': 'test', 'rank': 'test test', 'licence': 'test/test', 'address': 'test 25', 'phonenumber': 'test'}
-#test_dict = {'ssn': 'test', 'name': 'test test', 'role': 'test', 'rank': 'test test', 'licence': 'test/test', 'address': 'test 25', 'phonenumber': 'test'}
-#IOAPI().updater('Crew.csv',package)
-#IOAPI().appender('Crew.csv',test_dict)
+    # Overwrite
+    for i in range(len(new_lines)):
+        f.write(new_lines[i])
+    if len(lines) > len(new_lines):
+        for i in range(len(new_lines), len(lines)):
+            f.write(lines[i])"""

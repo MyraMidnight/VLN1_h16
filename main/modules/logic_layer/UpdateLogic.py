@@ -2,13 +2,17 @@ from modules.logic_layer.GetLogic import GetLogic
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.ui_layer.InputHandler import InputHandler
-#from modules.models.Voyage import Voyage #model class
+from modules.models.Voyage import Voyage #model class
+
+from modules.ui_layer.DateUtil import DateUtil
+import datetime
 
 from operator import itemgetter #for sorting list of dictionaries by key
 class UpdateLogic :
     """Update methods for logic layer"""
     def __init__(self, dataFiles):
         self.dataFiles = dataFiles #gets the file list from LLAPI
+        self.getLogic = GetLogic(self.dataFiles)
 
     def updateEmployee(self):
         """choose a employee (get a list and choose from the list). Get the info about the chosen 
@@ -33,8 +37,8 @@ class UpdateLogic :
         while employee_in_file_bool:
             for x in filePackage:
                 #checks the SSN of the employee
-                employee_index = filePackage.index(x)
                 if x['ssn'] == ssn_of_employee_str:
+                    employee_index = filePackage.index(x)
                     employee_info_dict = x
                     employee_info_list = [x]
             if employee_info_list != []:
@@ -197,6 +201,8 @@ class UpdateLogic :
         """ Updates the crew on a voyage """
 
         departingFlights_data = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        allEmployees_data = IOAPI().opener(self.dataFiles["CREW_FILE"])
+        currentCrew_dict = {}
 
         #get the list 
         departingFlights_list = []
@@ -210,7 +216,7 @@ class UpdateLogic :
             {"sortBy": "arrivingAt"}, 
             {"sortBy": "flightNumber"}
         ]
-        DisplayScreen().printOptions(sortOptions, header="Voyages can be sorted in the following ways")
+        DisplayScreen().printOptions(sortOptions, header="Search for voyages from list")
         sortedChoice_int = int(InputHandler().numChoices(len(sortOptions), "How would you like the voyages to be sorted? :"))
         sortedBy_str = sortOptions[sortedChoice_int-1]["sortBy"]
 
@@ -228,13 +234,58 @@ class UpdateLogic :
         voyageFlightPair = [departingFlights_data[flightIndex], departingFlights_data[flightIndex+1]]
 
         # create instance of VoyageHandler using the two connected flights
-        #currentVoyage_obj = Voyage(voyageFlightPair)
+        currentVoyage_obj = Voyage(voyageFlightPair)
+        currentCrew_dict = currentVoyage_obj.addCrew({})
+        
+        #find the days that the crew would be occupied during voyage
+        def findDaysDuration(departureFlight, arrivalFlight):
+            """Finds the days that the voyage will cover"""
+            departureDate = departureFlight["departure"]
+            returnDate = arrivalFlight["arrival"]
+            dateObject = DateUtil(departureDate).createObject()
+            compiledDates_list = [departureDate]
 
-        # Print the crew in selected flight
-        #currentVoyage_obj.getFlights
-        # let user pick what role to update
-        # print list of employees available for this voyage for this role
-        # loop through asking if they want to update staff
+            #while the date is not the same
+            #while dateObject.isoformat()[:10] != returnDate[:10]:
+            print("Departure: ", DateUtil(dateObject.isoformat()).date)
+            print("Return: ",DateUtil(returnDate).date)
+            while DateUtil(dateObject.isoformat()).date != DateUtil(returnDate).date:
+                dateObject =   dateObject + datetime.timedelta(days=1)
+                compiledDates_list.append(dateObject.isoformat())
+            # create a range of days
+            return compiledDates_list
+
+        daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
+        print(daysOfVoyage)
+
+        # Find available employees
+        def findAvailableCrew(daysOfWoyage, employeeList):
+            """Just loops through the given days to return available staff"""
+            availableCrew = []
+            # find all the people not working those days
+            # check if they are free for the duration
+            return availableCrew
+
+        availableCrew = findAvailableCrew(daysOfVoyage, allEmployees_data)
+
+        # Find the currently listed crew and roles (for printOptions)
+        def currentCrew(employeeList):
+            rolesForUpdate_list = []
+            for role, employee in currentCrew_dict.items():
+                #find the employee info, should find name
+                crewInRole = {"role": role, "employee": employee} 
+                rolesForUpdate_list.append(crewInRole.copy())
+            return rolesForUpdate_list
+
+        rolesForUpdate_list = currentCrew(allEmployees_data)
+        # loop through selecting a role to change
+        def assignCrew(options):
+            DisplayScreen().printOptions(options, "Crew assigned to this voyage" )
+            updateRole = InputHandler().numChoices(len(options), "Select a role to update: ")
+
+        assignCrew(rolesForUpdate_list)
+            # print list of employees available for this voyage for this role
+            # loop through asking if they want to update staff
         # pressing q will ask for confirmation of saving the data
         # then find the flights that were updated and replace them
         # send the changed list of flights to updater

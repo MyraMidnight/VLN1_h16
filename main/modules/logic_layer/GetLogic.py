@@ -17,6 +17,10 @@ class GetLogic :
             DisplayScreen().printText([""],header)
         return InputHandler().confirmation("Press enter to continue (back to menu)...")
 
+    #===================================================================================
+    # Get single employee
+    #===================================================================================
+
     def getSingleEmployee(self):
         #fetches employee info
         filePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
@@ -91,13 +95,19 @@ class GetLogic :
         filePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
         return self.printData(filePackage,header="Voyages:")
     
-    def getAway(self):
+    def getAway(self, date:str = ""):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
         #fetch Voyage info
         voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
-        #ask for datetime from user
-        user_input = InputHandler().dateOnly()
+        
+        #if no date is given in arguments, then ask for input
+        if date == "":
+            #ask for datetime from user
+            user_input = InputHandler().dateOnly()
+        else:
+            user_input = date
+
         user_date = DateUtil(user_input).date
         ssn_list = []
         #goes through all flights, finds flights at the chosen date and compiles a unique list of SSN
@@ -120,7 +130,8 @@ class GetLogic :
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
 
-        return self.printData(away_list,header="Employees not working:")
+        self.printData(away_list,header="Employees not working:")
+        return away_list
     
     def getWorking(self):
         #fetch employee info
@@ -181,7 +192,7 @@ class GetLogic :
             return False
         
         #ask for datetime from user
-        refDate_str = InputHandler().dateOnly()
+        refDate_str = InputHandler().dateOnly("Input starting date of week: ")
         refDate_obj = DateUtil(refDate_str).createObject()
         #collect the days of a week
         checkWeek_list = []
@@ -201,24 +212,28 @@ class GetLogic :
         
         return self.printData(schedule_list,header="Chosen employee work schedule:")
 
+    #===================================================================================
+    # Get pilots by licence
+    #===================================================================================
+
     def getPilotsByLicence(self):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
-        #fetch plane info
-        planePackage = IOAPI().opener(self.dataFiles['AIRCRAFT_FILE'])
         #get all the pilots in one list
         pilotPackage = []
         for employee in employeePackage:
             if employee['role'] == "Pilot":
                 pilotPackage.append(employee)
         #show the planes to user
-        planeList = []
-        for plane in planePackage:
-            if plane["planeTypeId"] not in planeList:
-                planeList.append(plane["planeTypeId"])
-        print(planeList)
-        #ask user for a plane type
-        user_input = InputHandler().planetype()
+        #License
+        #Gets a list of dictionaries containing aircraft type specifications
+        airplane_data_list = IOAPI().opener(self.dataFiles["AIRCRAFT_TYPE_FILE"])
+        #Creates a list of airplane types in the list
+        airplaneType_list = []
+        for a_line_dict in airplane_data_list:
+            airplaneType_list.append(a_line_dict["planeTypeId"])
+
+        user_input = InputHandler().license("Pilot", airplaneType_list,"Choose license: ")
         #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
         #if no such pilots are found then the flag is never set to true
         anyone_found_flag = False
@@ -232,7 +247,7 @@ class GetLogic :
             return self.printData(licence_pilots,header="Pilots with chosen licence:")
         #else it alerts the user and returns false
         else:
-            print("No pilots were found with that licence")
+            self.printData([],header="No pilots were found with that licence")
             return False
 
     def printPilotsByLicence(self):
@@ -289,3 +304,41 @@ class GetLogic :
             combo['count'] = str(combo['count'])
 
         return self.printData(licenceCountList,header="Licences by count:")
+
+    def getWeekVoyages(self):
+        #fetch Voyage info
+        voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        #ask for datetime from user
+        refDate_str = InputHandler().dateOnly("Input starting date of week: ")
+        refDate_obj = DateUtil(refDate_str).createObject()
+        #collect the days of a week
+        checkWeek_list = []
+        checkWeek_list.append(refDate_str)
+        #@ts-ignore
+        for day in range(7):
+            refDate_obj = refDate_obj + datetime.timedelta(days=1)
+            checkWeek_list.append(refDate_obj.isoformat())
+        schedule_list = []
+        #find all the flights that are in the range of the week
+        for flight in voyagePackage:
+            departure = DateUtil(flight['departure']).date
+            for date in checkWeek_list:
+                if date[:10] == departure:
+                    schedule_list.append(flight)
+        
+        return self.printData(schedule_list,header="Voyages of chosen week:")
+    
+    def getDayVoyages(self):
+        #fetch Voyage info
+        voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        #ask for datetime from user
+        user_input = InputHandler().dateOnly()
+        user_date = DateUtil(user_input).date
+        schedule_list = []
+        #goes through all flights, finds flights of the chosen date and compiles a list of tuples with the SSN and 3 letter arrival
+        for line in voyagePackage:
+            departure = DateUtil(line['departure']).date
+            if user_date == departure:
+                schedule_list.append(line)
+        
+        return self.printData(schedule_list,header="Voyages of chosen day:")

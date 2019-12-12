@@ -83,6 +83,11 @@ class LLAPI :
     def licenceByCount(self):
         return self.getLogic.licenceByCount()
 
+    def getWeekVoyages(self):
+        return self.getLogic.getWeekVoyages()
+    
+    def getDayVoyages(self):
+        return self.getLogic.getDayVoyages()
     #------- UPDATE
     def updateVoyage(self):
         """see the info about the voyage (see the staff that are working on that voyage). Then you can add or update the role you want to change """

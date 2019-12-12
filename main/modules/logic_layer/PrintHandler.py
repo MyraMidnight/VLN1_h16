@@ -124,7 +124,7 @@ class PrintHandler:
 
         return allTemplates_list
 
-    def detectDataType(self, data:dict, colWidth:int = 15):
+    def detectDataType(self, data:dict, colWidth:int = 25):
         """Figures out what type of data is being provided"""
 
         #Create list of keys for each dataType from self.__dataTypes
