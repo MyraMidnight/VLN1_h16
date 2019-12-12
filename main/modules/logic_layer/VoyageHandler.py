@@ -205,24 +205,31 @@ class VoyageHandler:
                     departingOnDate_list.append(flight)
         
         # print the list of flights departing on that day
-        DisplayScreen().printList(departingOnDate_list,"List of other flights departing on same day")
+        headerDepartingOnDate_str = "List of other flights departing on same day"
+        if len(departingOnDate_list) == 0:
+            DisplayScreen().printText(["No departing flights"], headerDepartingOnDate_str) 
+        else:
+            DisplayScreen().printList(departingOnDate_list,headerDepartingOnDate_str)
 
         #ask the user for a time before entering the loop
         selectedDepartureTime_str = InputHandler().timeOnly(questionTime)
         while True:
             #check through list of flights and check their departure time
-            for flight in departingOnDate_list:
-                flightDeparture = flight['departure']
-                timeCheckDate = DateUtil().updateTime(selectedDate, selectedDepartureTime_str)
+            if len(departingOnDate_list) != 0:
+                for flight in departingOnDate_list:
+                    flightDeparture = flight['departure']
+                    timeCheckDate = DateUtil().updateTime(selectedDate, selectedDepartureTime_str)
 
-                #if airport was occupied, then print the list again and ask for time input
-                if flightDeparture == timeCheckDate:
-                    DisplayScreen().printList(departingOnDate_list,"Departure time not available, please try again")
-                    selectedDepartureTime_str = InputHandler().timeOnly("Please select a different time, "+questionTime)
-                    continue
-                else:
-                    #if everything is alright, then return the dateTime
-                    return timeCheckDate
+                    #if airport was occupied, then print the list again and ask for time input
+                    if flightDeparture == timeCheckDate:
+                        DisplayScreen().printList(departingOnDate_list,"Departure time not available, please try again")
+                        selectedDepartureTime_str = InputHandler().timeOnly("Please select a different time, "+questionTime)
+                        continue
+                    else:
+                        #if everything is alright, then return the dateTime
+                        return timeCheckDate
+            else:
+                DateUtil().updateTime(selectedDate, selectedDepartureTime_str)
         
         
             #repeat the loop until proper time has been selected
