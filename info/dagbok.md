@@ -221,14 +221,31 @@ Get komið og eitt create eftir
 * Stefanía er að gera og græja create voyage og ætlar að gera update voyage
 * Damian ætlar að gera update Employee
 * Halla ætlar að gera update destination
+* Stefanía breytti nöfnunum á dateaskránnum
 
-Kláruðum allar get methods og create methods erum að vinna í update, ætlum að klára update destination
+Kláruðum allar get methods og create methods erum að vinna í update, ætlum að vera komin langt með update föllin
 
 
 
 
 
 ## Fimmtudagurinn 12. desember 2019
+> Halla mætti 9:10, Stefanía mætti 9:30
+>
+> Fannar mætti ca 10 og Damian mætti ca 10:15
+
+* Klára öll update og debuga
+* Damian lagaði updateEmployee og það virkar alveg núna
+* Halla kláraði updateDestination
+* Halla ætlar að hugsa gagnrýnið um útlit forritsins
+* Stefanía ætlar að klára update voyage
+* Stefanía ætlar að laga timeOnly og dateOnly
+* Stefanía lagaði create voyage
+* Fannar og Damian ætla að testa debuga forritið\
+\
+Markmið að klára allt forritið, þannig á morgun er bara skýrsla, klasarit og video (og skila í zip)
+----------------
+> 
 
 * Fínpússa og yfirferð.
 * Passa að allur kóði sé auðskilin og vel kommentaður.
