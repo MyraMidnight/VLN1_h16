@@ -80,19 +80,14 @@ class Voyage:
 
     def addCrew(self, crew:dict = {}):
         """Takes a dictionary with crew roles as keys and updates the crew of instance"""
+        roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
         if len(crew.keys()) != 0:
             #go through the given crew and assign to the Voyage
             for role, employee in crew.items():
                 self.__attributes[role] = employee
-        else:
-            #compile the current crew and return it
-            roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
-            for role in roles:
-                crew[role] = str(self.__attributes[role])
+
             #update flightData
             flightsToUpdate = [self.__flightOut[1], self.__flightIn[1]]
-
-            print("Before update: \n", flightsToUpdate)
 
             updatedFlights = []
             for flight in flightsToUpdate:
@@ -101,9 +96,12 @@ class Voyage:
                     newFlight[key] = crew[key]
                 updatedFlights.append(newFlight)
 
-            print("After update: \n",updatedFlights)
             self.__flightOut[1] = updatedFlights[0]
             self.__flightIn[1] = updatedFlights[1]
+        else:
+            #compile the current crew and return it
+            for role in roles:
+                crew[role] = str(self.__attributes[role])
         return crew #returns the updated crew
 
     #===================================================================================

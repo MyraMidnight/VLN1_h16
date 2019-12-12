@@ -161,14 +161,12 @@ class UpdateLogic :
         
             # find the two connecting flights, by finding the index of selected flight
             flightIndex = departingFlights_list.index(selectedFlight_dict)
-            return {
-                "departing": {"index": flightIndex, "flightData": departingFlights_data[flightIndex]},
-                "returning": {"index": flightIndex+1, "flightData": departingFlights_data[flightIndex+1]}
-            }
+            return {"out":[flightIndex, departingFlights_data[flightIndex]], "in": [flightIndex+1, departingFlights_data[flightIndex+1]]}
+
         #voyage data, keeping index for later references
         voyageData = findVoyage(departingFlights_data)
         #get the flight data
-        voyageFlightPair = [voyageData["departing"]["flightData"], voyageData["returning"]["flightData"]]
+        voyageFlightPair = [voyageData["out"][1], voyageData["in"][1]]
         # create instance of VoyageHandler using the two connected flights
         currentVoyage_obj = Voyage(voyageFlightPair)
         
@@ -246,9 +244,10 @@ class UpdateLogic :
         print(updatedVoyage)
         # then find the flights that were updated and replace them
         def updateFlights(allFlights, updatedFlights, voyageData):
+            
             """Sends the updated list to the updater"""
-            departingIndex = voyageData["departing"]["index"]
-            returningIndex = voyageData["returning"]["index"]
+            departingIndex = voyageData["out"][0]
+            returningIndex = voyageData["in"][0]
 
             #update departing
             allFlights[departingIndex] = updatedFlights[0]
