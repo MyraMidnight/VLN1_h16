@@ -11,7 +11,10 @@ class GetLogic :
         self.dataFiles = dataFiles #gets the file list from LLAPI
 
     def printData(self, data:list, header:str):
-        DisplayScreen().printList(data, header)
+        if len(data) != 0 :
+            DisplayScreen().printList(data, header)
+        else:
+            DisplayScreen().printText([""],header)
         return InputHandler().confirmation("Press enter to continue (back to menu)...")
 
     def getSingleEmployee(self):
@@ -19,15 +22,29 @@ class GetLogic :
         filePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
         #asks for the SSN of the employee
         ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
-        if ssn_of_employee_str == False:
-            return False
-        
-        #goes through all the lines in the employee info
-        for x in filePackage:
-            #checks the SSN of the employee
-            if x['ssn'] == ssn_of_employee_str:
-                list_to_print = [x]
-                return self.printData(list_to_print,"Chosen employee:")
+        #Validity check for SSN
+        while ssn_of_employee_str == False:
+            print("Invalid input")
+            ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
+
+        #Check for if the SSN is in crew file
+        ssn_in_file_bool = True
+        list_to_print = []
+        while ssn_in_file_bool:
+            #goes through all the lines in the employee info
+            for x in filePackage:
+                #checks the SSN of the employee
+                if x['ssn'] == ssn_of_employee_str:
+                    list_to_print = [x]
+            if list_to_print != []:
+                ssn_in_file_bool = False
+            else:
+                print("No employee found with this SSN")
+                ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
+
+
+
+        return DisplayScreen().printList(list_to_print,"Chosen employee:")
                 
     
     def getPilots(self):
@@ -131,7 +148,7 @@ class GetLogic :
                 if line['fa2'] != "" and line['fa2'] not in combo_list:
                     combo_list.append((line['fa2'],line["arrivingAt"]))
         if len(combo_list) == 0:
-            print("No employee is working on the specified day")
+            self.printData([], "No employee is working on the specified day")
             return False
         working_list = []
         #finds the employees who were on the flights and finds the destination name based on the 3 letter arrival

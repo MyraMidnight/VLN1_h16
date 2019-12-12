@@ -8,6 +8,7 @@ ROLE_CC = "Cabin Crew"
 import datetime
 import re
 from modules.ui_layer.DateUtil import DateUtil
+from modules.ui_layer.DisplayScreen import DisplayScreen
 
 class InputHandler:
     def __init__(self):
@@ -146,6 +147,8 @@ class InputHandler:
     #----------------------  
     def role(self, inputQuestion: str = ""):
         """Input for employee role"""
+        role_list = [{"Roles": ROLE_PILOT},{"Roles": ROLE_CC}]
+        DisplayScreen().printOptions(role_list, header = "")
         #Asks for a single digit input to choose between roles
         role_str = self.numSetLength(1, inputQuestion)
         valid_options_list = ["1","2"] #These are valid inputs
@@ -161,51 +164,53 @@ class InputHandler:
             role_str = ROLE_CC
 
         return role_str
+    
+
+    def roleUpdate(self, airplaneType_list):
+        """Input for role and corresponding rank. Returns new_role, rank and license"""
+        new_role_str = InputHandler().role("Choose role: ")
+        rank_str = InputHandler().rank(new_role_str, "Choose rank: ")
+        license_str = InputHandler().license(new_role_str, airplaneType_list, "Choose license: ")
+
+        return new_role_str, rank_str, license_str
 
 
     #---------------------- 
     # Input rank (createEmployee)
     #----------------------  
-    def rank(self, role, inputQuestion: str = ""):
+    def rank(self, role: str, inputQuestion: str = ""):
         """Input for employee rank"""
-        #Calls for a single digit input
-        rank_str = self.numSetLength(1, inputQuestion)
-        valid_options_list = ["1","2"] #These are valid inputs
-        #Validity checks the input
-        while rank_str not in valid_options_list:
-            print("Please choose a valid input")
-            rank_str = self.numSetLength(1, inputQuestion)
-        
-        #Turns the input number into a string with rank name according to the role
+
+        pilotRanks_list = [{"Pilot ranks": RANK_CAPTAIN}, {"Pilot ranks": RANK_COPILOT}]
+        cabinRanks_list = [{"Cabin crew ranks": RANK_FSM}, {"Cabin crew ranks": RANK_FA}]
+
         if role == ROLE_PILOT:  #Ranks for the Pilots
-            if rank_str == "1":
-                rank_str = RANK_CAPTAIN
-            else:
-                rank_str = RANK_COPILOT
-            return rank_str
+            DisplayScreen().printOptions(pilotRanks_list, header = "")
+            return InputHandler().multipleNumChoices(pilotRanks_list,inputQuestion)
         else:   #Ranks for the Cabin Crew
-            if rank_str == "1":
-                rank_str = RANK_FSM
-            else:
-                rank_str = RANK_FA
-        
-        return rank_str
+            DisplayScreen().printOptions(cabinRanks_list, header = "")
+            return InputHandler().multipleNumChoices(cabinRanks_list,inputQuestion)
 
 
     #---------------------- 
     # Input license (createEmployee)
     #----------------------  
-    def license(self, aircraftType_list: list, inputQustion: str = ""):
-        """Input for pilots license. Returns a validated license"""
-        print("Possible Plane types: \n", aircraftType_list)
-        license_str = input(inputQustion)
-        #Validity check, checks if there are plane types in pur system corresponding to the input license
-        while license_str not in aircraftType_list:
-            print("Invalid input")
-            print("Possible Plane types: \n", aircraftType_list)
-            license_str = input(inputQustion)
+    def license(self,role: str, aircraftType_list: list, inputQustion: str = ""):
+        """Input for pilots licence. Returns a validated licence"""
+        if role == ROLE_PILOT:
+            plane_list = []
+            for x in aircraftType_list:
+                plane_dict = {}
+                plane_dict["Licences"] = x
+                plane_list.append(plane_dict)
+                
+            DisplayScreen().printOptions(plane_list, header = "")
 
-        return license_str
+            text_str = inputQustion
+            return InputHandler().multipleNumChoices(plane_list, text_str)
+        else:
+            return "N/A"
+
 
 
     #---------------------- 
@@ -228,19 +233,6 @@ class InputHandler:
             return True
         elif confirmation_str in negative_list:
             return False
-
-
-    #---------------------- 
-    # Choose input to edit (createEmployee) (C-krafa)
-    #----------------------   
-    # def edit(self, inputQuestion: str = ""):
-    #     choice_str = self.numSetLength(1, inputQuestion)
-    #     while int(choice_str) not in range(1,9):
-    #         print("Invalid input")
-    #         choice_str = self.numSetLength(1, inputQuestion)
-        
-    #     return choice_str
-
 
 
     #---------------------- 
@@ -309,7 +301,7 @@ class InputHandler:
         """Input and validity check for plane insignia"""
         insignia_str = input(inputQuestion)
         #Validity checks the input
-        while insignia_str[2] != "-" or insignia_str[:2] != "TF" or len(insignia_str) != 6:
+        while len(insignia_str) != 6 or insignia_str[2] != "-" or insignia_str[:2] != "TF":
             print("Invalid input")
             insignia_str = input(inputQuestion)
         
@@ -332,10 +324,16 @@ class InputHandler:
     #---------------------- 
     # Multiple Num Choice 
     #---------------------- 
-        # def multipleNumChoices(self, choiceAmount : int, data: list, inputText : str = ""):
-
-
-
+    def multipleNumChoices(self, data_list:list, inputQuestion : str = ""):
+        """Takes in """
+        choiceAmount = len(data_list)
+        chosenNum_str = input(inputQuestion)
+        while len(chosenNum_str) != 1 or not chosenNum_str.isdigit():
+            print("Invalid input")
+            chosenNum_str = input(inputQuestion)
+        for key,val in data_list[int(chosenNum_str)-1].items():
+            resultValue = val
+        return resultValue
 
     #---------------------- 
     # Input date and time
@@ -447,11 +445,11 @@ class InputHandler:
         #     return name
 
     def planetype(self, inputQuestion:str = "Input a type of plane: "):
-        planetype = input(inputQuestion)
-        while planetype[:2] != "NA":
+        planetype_str = input(inputQuestion)
+        while len(planetype_str) > 2 or planetype_str[:2] != "NA":
             print("Please input a valid planetype")
-            planetype = input(inputQuestion)
-        return planetype
+            planetype_str = input(inputQuestion)
+        return planetype_str
     
     # flightNumber format
     def flightId(self):

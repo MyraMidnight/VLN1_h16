@@ -70,13 +70,13 @@ class CreateLogic :
         self.phonenumber = InputHandler().phoneNumber("Input a 7-digit phone number:")
         self.email = InputHandler().email("Input e-mail address: ")
         #Role
-        self.role = InputHandler().role("Possible roles: \n 1) "+ ROLE_PILOT +" \n 2) "+ ROLE_CC +" \n" + "Choose role: ")
+
+        self.role = InputHandler().role("Choose role: ")
 
         #Rank
-        if self.role == ROLE_PILOT:
-            self.rank = InputHandler().rank(self.role, "Possible ranks: \n 1) "+ RANK_CAPTAIN +" \n 2) "+ RANK_COPILOT +" \n" + "Choose rank: ")
-        else:
-            self.rank = InputHandler().rank(self.role, "Possible ranks: \n 1) " + RANK_FSM + " \n 2) "+ RANK_FA + " \n" + "Choose rank: ")
+
+        self.rank = InputHandler().rank(self.role)
+
 
         #License
         #Gets a list of dictionaries containing aircraft type specifications
@@ -87,10 +87,7 @@ class CreateLogic :
             airplaneType_list.append(a_line_dict["planeTypeId"])
 
         #Gets input for license if relevant, sets to "N/A" if role = Cabin Crew
-        if self.role == ROLE_PILOT:
-            self.license = InputHandler().license(airplaneType_list,"Input license: ")
-        else:
-            self.license = "N/A"
+        self.license = InputHandler().license(self.role, airplaneType_list,"Choose license: ")
 
         #Turns the inputs into a dict
         employee_dict["ssn"] = self.ssn
@@ -104,31 +101,47 @@ class CreateLogic :
 
         #Displays the input information
         DisplayScreen().printList([employee_dict])
-        confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
-        if confirmation_bool:
-            IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
-        #BEWARE.... C - krafa below
-            # DisplayScreen().printList([employee_dict], colWidth = 15)
-            # choiceNum_str = InputHandler().edit("Choose the column number to edit data \n Name: 1, SSN: 2, Address: 3, Phone number: 4, E-mail: 5, Role: 6, Rank: 7, License: 8")
-            # editFunctionDict_list = {
-            #     "1": {
-            #         InputHandler().fullName("Input full name: "), employee_dict["Name"] 
-            #     },
-            #     "2":{ InputHandler().ssn("Input SSN: "), employee_dict["SSN"]
-            #     },
-            #     "3":{ InputHandler().address("Input address: ")
-            #     },
-            #     "4":{ InputHandler().phoneNumber("Input a 7-digit phone number:")
-            #     },
-            #     "5":{ InputHandler().email("Input e-mail address: ")
-            #     },
-            #     "6":{ InputHandler().role("Choose role: \n 1) "+ ROLE_PILOT +" \n 2) "+ ROLE_CC +" \n")
-            #     },
-            #     "7":{
-            #     },
-            #     "8":{ InputHandler().license(airplaneType_list,"Input license: ")
-            #     }}
-            # editFunctionDict_list[choiceNum_str][0]
+        #Asks for confirmation. If negative starts the editing process
+        if InputHandler().yesOrNoConfirmation("Is this information correct? (y/n): "):
+            edit_bool = False
+        else: 
+            edit_bool = True
+
+        #Runs editing as long as the user confirmation is negative
+        while edit_bool:
+            #Creates a list of editing options
+            options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone number"}, {"Edit choices:": "Email"}]
+            #Prints the beforementioned list of options
+            DisplayScreen().printOptions(options_list, header = "")
+            #Asks user to choose what he wants to edit
+            choice_str = InputHandler().multipleNumChoices(options_list, "Choose data to edit: ")
+
+            if choice_str == "Address":
+                employee_dict[choice_str.lower()] = InputHandler().address("Input address: ")
+            elif choice_str == "Phone number":
+                employee_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number:")
+            elif choice_str == "Email":
+                employee_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
+            elif choice_str == "Role":
+                employee_dict["role"], employee_dict["rank"], employee_dict["licence"] = InputHandler().roleUpdate(airplaneType_list)
+            elif choice_str == "Rank":
+                employee_dict[choice_str.lower()] = InputHandler().rank(employee_dict["role"],"Choose rank: ")
+            elif choice_str == "Licence":
+                employee_dict[choice_str.lower()] = InputHandler().license(employee_dict["role"], airplaneType_list,"Input licence: ")
+
+            #Prints the results of editing and asks for confirmation
+            DisplayScreen().printList([employee_dict], header = "")
+            if InputHandler().yesOrNoConfirmation("Is this information correct? (y/n): "):
+                edit_bool = False
+
+        #Adds the employee to the crew file
+        IOAPI().appender(CREW_FILE, employee_dict)
+
+
+
+
+
+
         
 
     def createPlane(self):
