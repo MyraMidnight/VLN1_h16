@@ -8,7 +8,6 @@ RANK_COPILOT = "Co-Pilot"
 RANK_FSM = "Flight Service Manager"
 RANK_FA = "Flight Attendant"
 
-
 from modules.ui_layer.InputHandler import InputHandler
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
@@ -94,13 +93,13 @@ class CreateLogic :
         employee_dict["name"] = self.name
         employee_dict["role"] = self.role
         employee_dict["rank"] = self.rank
-        employee_dict["license"] = self.license
+        employee_dict["licence"] = self.license
         employee_dict["address"] = self.address
         employee_dict["phonenumber"] = self.phonenumber
         employee_dict["email"] = self.email
 
         #Displays the input information
-        DisplayScreen().printList([employee_dict])
+        DisplayScreen().printList([employee_dict],header = "Employee info: ")
         #Asks for confirmation. If negative starts the editing process
         if InputHandler().yesOrNoConfirmation("Is this information correct? (y/n): "):
             edit_bool = False
@@ -110,16 +109,20 @@ class CreateLogic :
         #Runs editing as long as the user confirmation is negative
         while edit_bool:
             #Creates a list of editing options
-            options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone number"}, {"Edit choices:": "Email"}]
+            options_list = [{"Edit choices:": "SSN"},{"Edit choices:": "Name"},{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone"}, {"Edit choices:": "Email"}]
             #Prints the beforementioned list of options
             DisplayScreen().printOptions(options_list, header = "")
             #Asks user to choose what he wants to edit
             choice_str = InputHandler().multipleNumChoices(options_list, "Choose data to edit: ")
 
-            if choice_str == "Address":
+            if choice_str == "SSN":
+                employee_dict[choice_str.lower()] = InputHandler().ssn("Input SSN: ")
+            elif choice_str == "Name":
+                employee_dict[choice_str.lower()] = InputHandler().fullName("Input full name: ")
+            elif choice_str == "Address":
                 employee_dict[choice_str.lower()] = InputHandler().address("Input address: ")
-            elif choice_str == "Phone number":
-                employee_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number:")
+            elif choice_str == "Phone":
+                employee_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number: ")
             elif choice_str == "Email":
                 employee_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
             elif choice_str == "Role":
@@ -130,7 +133,7 @@ class CreateLogic :
                 employee_dict[choice_str.lower()] = InputHandler().license(employee_dict["role"], airplaneType_list,"Input licence: ")
 
             #Prints the results of editing and asks for confirmation
-            DisplayScreen().printList([employee_dict], header = "")
+            DisplayScreen().printList([employee_dict], header = "Employee info: ", frame = True)
             if InputHandler().yesOrNoConfirmation("Is this information correct? (y/n): "):
                 edit_bool = False
 
