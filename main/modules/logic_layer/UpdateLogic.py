@@ -168,6 +168,7 @@ class UpdateLogic :
         currentVoyage_obj = Voyage(voyageFlightPair)
         currentCrew_dict = currentVoyage_obj.addCrew({})
         
+        #========================
         #find the days that the crew would be occupied during voyage
         def findDaysDuration(departureFlight, arrivalFlight):
             """Finds the days that the voyage will cover"""
@@ -198,7 +199,7 @@ class UpdateLogic :
             # check if they are free for the duration
             return availableCrew
 
-        availableCrew = findAvailableCrew(daysOfVoyage, allEmployees_data)
+        availableCrew_list = findAvailableCrew(daysOfVoyage, allEmployees_data)
 
         # Find the currently listed crew and roles (for printOptions)
         def currentCrew(employeeList):
@@ -211,13 +212,44 @@ class UpdateLogic :
 
         rolesForUpdate_list = currentCrew(allEmployees_data)
         # loop through selecting a role to change
-        def assignCrew(options):
-            DisplayScreen().printOptions(options, "Crew assigned to this voyage" )
-            updateRole = InputHandler().numChoices(len(options), "Select a role to update: ")
+        
+        # print list of employees available for this voyage for this role
+        # loop through asking if they want to update staff
 
-        assignCrew(rolesForUpdate_list)
-            # print list of employees available for this voyage for this role
-            # loop through asking if they want to update staff
+        #========================
+        def selectCrewRole(options):
+            DisplayScreen().printOptions(options, "Crew assigned to this voyage" )
+            selectedRole = InputHandler().numChoices(len(options), "Select a role to update: ")
+            return options[int(selectedRole)-1]["role"]
+
+        #========================
+        def assignCrew(availableCrew_list):
+            """Finds the crew to """
+            
+            while True:
+                try: 
+                    selectedRole_str = selectCrewRole(rolesForUpdate_list)
+
+                    roleList = {
+                        "captain": self.getLogic.getPilots,
+                        "copilot": self.getLogic.getPilots,
+                        "fms": self.getLogic.getFlightAttendants,
+                        "fa1": self.getLogic.getFlightAttendants,
+                        "fa2": self.getLogic.getFlightAttendants,
+                    }
+
+                    filteredCrew = roleList[selectedRole_str](availableCrew_list)
+                    # filter out only of right rank
+                    
+                    DisplayScreen().printOptions(filteredCrew)
+                    InputHandler().numChoices(len(filteredCrew), "Select an employee")
+                except Exception:
+                    continue
+                #end the loop
+                break
+
+        assignCrew(availableCrew_list)
+        
         # pressing q will ask for confirmation of saving the data
         # then find the flights that were updated and replace them
         # send the changed list of flights to updater
