@@ -187,7 +187,8 @@ class VoyageHandler:
 
         # Select a aircraft from list
         inputAircraft_str = "Enter the number of the plane you want to use in this voyage from the plane list: "
-        self.__aircraftID = InputHandler().numChoices(len(available_planes), inputAircraft_str)
+        selectedAircraft = InputHandler().numChoices(len(available_planes), inputAircraft_str)
+        self.__aircraftID = available_planes[int(selectedAircraft)-1]["planeInsignia"]
 
     # --------- Departure Time ---------------------------------------------------------------
     def selectDepartureTime(self,questionDate:str, questionTime:str, errorMessage:str):
