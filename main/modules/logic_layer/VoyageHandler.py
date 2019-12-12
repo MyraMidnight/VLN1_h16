@@ -111,8 +111,23 @@ class VoyageHandler:
 
         # Find a date and time for arrival
 
-        inputArrivalDate_str = "Enter return date to Iceland from {}: ".format(self.__destination["destination"])
-        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
+        departingDate_obj = DateUtil(self.__departure).createObject()
+        minReturnDate_obj = departingDate_obj + datetime.timedelta(days=1)
+        inputArrivalDate_str = "Enter date of return date, (past {} atleast): ".format(minReturnDate_obj.strftime("%d/%m/%Y"))
+        while True:
+            try: 
+                returnDate_str = InputHandler().dateOnly(inputArrivalDate_str)
+                returnDate_obj = DateUtil(returnDate_str).createObject()
+
+                if returnDate_obj > departingDate_obj:
+                    if returnDate_obj > minReturnDate_obj:
+                        self.__return = returnDate_str
+                        break
+            except Exception:
+                print("Date needs to be past the departure time")
+                pass
+
+
         # Find available aircraft
         self.selectAircraft()
 
@@ -127,36 +142,6 @@ class VoyageHandler:
 
         print("Do you want to replicate this voyage? (y/n): ")
 
-    #===================================================================================
-    # Update Crew
-    #===================================================================================
-
-    def updateCrew(self):
-        '''Update and/or put staff in roles in upcoming Voyages'''
-
-        #get list of voyages from data layer
-        # the user can choose the voyage he/she wants to update from the list of voyages, the user enters the number of the voyage (flight)
-
-        upcomingVoyage_list = []  #get list from data layer, this is just for now
-        numberOfVoyage_int = int(InputHandler().dateOnly("Enter the number of the voyage in the list you want to update/change: "))
-        theVoyage = upcomingVoyage_list[numberOfVoyage_int]
-
-        # print the info that are currently right for the voyage, if there are any staff members in some roles or if the roles are empty and there needs to fill all the roles
-        print(theVoyage)
-
-        # the user inputs the number of the role he/she wants to change/fill.
-        roleToChange_int = int(InputHandler().dateOnly("Enter the number of the role in the list you want to update/change: "))
-
-        # the user gets a list of all staff members who can play that role and who ara avilable during the voyage's time
-
-        # Get a list of staff members who can do this role from data layer
-        rolelist_list = []   #just for now need to get from data layer
-
-        # ask the user if he/she wants to save the changes or if he/she wants to change/fill some other roles
-        toChangeOrNotToChange_bool = InputHandler().dateOnly("Do you want to save the changes? (y/n) ")
-        
-        # when he wants to save then save this voyage info in the data layer.
-        # if the user wants to quit then no changes were made.
 
     #===================================================================================
     # methods for local use
@@ -239,8 +224,8 @@ class VoyageHandler:
 
     def calculateArrival(self, departure:str, flightTime:str):
         """Calculates arrival time, requires the datetime of departure and the flightTime"""
-
-        departureTime = DateUtil(departure).createObject()
+        
+        departureTime = DateUtil(self.__departure).createObject()
 
         #split the flighttime into parts
         hours,minutes,seconds = map(int,flightTime.split(':'))
