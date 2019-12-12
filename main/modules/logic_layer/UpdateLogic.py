@@ -48,7 +48,7 @@ class UpdateLogic :
             if employee_info_list != []:
                 employee_in_file_bool = False
             else:
-                print("Employee not found!")
+                DisplayScreen().printText(["Employee not found!"],"Updating employee")
                 ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
 
         
@@ -112,7 +112,7 @@ class UpdateLogic :
                 #Updates the Crew file with the edited employee info
                 filePackage[employee_index] = employee_info_dict
                 IOAPI().updater(self.dataFiles["CREW_FILE"], filePackage)
-                print("Data has been updated")
+                DisplayScreen().printText(["Data has been updated"], "Updating employee")
         
    
     def updateDestination(self):
@@ -161,9 +161,14 @@ class UpdateLogic :
         
             # find the two connecting flights, by finding the index of selected flight
             flightIndex = departingFlights_list.index(selectedFlight_dict)
-            return [departingFlights_data[flightIndex], departingFlights_data[flightIndex+1]]
-
-        voyageFlightPair = findVoyage(departingFlights_data)
+            return {
+                "departing": {"index": flightIndex, "flightData": departingFlights_data[flightIndex]},
+                "returning": {"index": flightIndex+1, "flightData": departingFlights_data[flightIndex+1]}
+            }
+        #voyage data, keeping index for later references
+        voyageData = findVoyage(departingFlights_data)
+        #get the flight data
+        voyageFlightPair = [voyageData["departing"]["flightData"], voyageData["returning"]["flightData"]]
         # create instance of VoyageHandler using the two connected flights
         currentVoyage_obj = Voyage(voyageFlightPair)
         
@@ -180,7 +185,6 @@ class UpdateLogic :
             return compiledDates_list
 
         daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
-        print(daysOfVoyage)
 
         # Find available employees
         def findAvailableCrew(daysOfWoyage, employeeList):
@@ -238,9 +242,20 @@ class UpdateLogic :
         newCrew = assignCrew(availableCrew_list, currentVoyage_obj.addCrew({}))
         updatedVoyage = Voyage(voyageFlightPair)
         updatedVoyage.addCrew(newCrew)
-        print(newCrew)
-        print(updatedVoyage)
-        updatedFlights = updatedVoyage.getFlights()
+        newFlights = updatedVoyage.getFlights()
 
         # then find the flights that were updated and replace them
+        def updateFlights(allFlights, updatedFlights, voyageData):
+            """Sends the updated list to the updater"""
+            departingIndex = voyageData["departing"]["index"]
+            returningIndex = voyageData["returning"]["index"]
+            #update departing
+            allFlights[departingIndex] = updatedFlights[0]
+            allFlights[departingIndex] = updatedFlights[1]
+            #update returning
+            IOAPI().updater(self.dataFiles["UPCOMING_FLIGHTS_FILE"], allFlights)
+
+        updateFlights(departingFlights_data, newFlights, voyageData)
+
+
         # send the changed list of flights to updater
