@@ -1,7 +1,3 @@
-class Voyage:
-    def __init__(self):
-        
-
 from modules.ui_layer.InputHandler import InputHandler
 from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.data_layer.IOAPI import IOAPI
@@ -9,7 +5,7 @@ from modules.ui_layer.DateUtil import DateUtil
 import datetime
 
 
-class VoyageHandler:
+class Voyage:
     def __init__(self, flights:list = [], dataFiles:dict = {}):
         self.dataFiles = dataFiles
 
@@ -29,33 +25,31 @@ class VoyageHandler:
         self.__fa1 = None
         self.__fa2 = None
 
+        self.__attributes = {
+            'destination': self.__destination,
+            'departingFrom': self.__departingFrom,
+            'departure': self.__departure,
+            'return': self.__return,
+            'aircraftID': self.__aircraftID,
+            'captain': self.__captain, 
+            'copilot': self.__copilot, 
+            'fsm': self.__fsm, 
+            'fa1': self.__fa1, 
+            'fa2': self.__fa2,
+        }
         #will run setVoyage if flight data is provided on init
         if len(flights) != 0:
             self.setVoyage(flights)
     
     def __str__(self):
         """Fancy print info"""
-        voyageInfo = [
-            self.__destination,
-            self.__departure,
-            self.__return,
-            self.__captain,
-            self.__copilot,
-            self.__fsm,
-            self.__fa1,
-            self.__fa2
-        ]
-        voyage_str = "Base info -----------------\n"
-        voyage_str += " Destination: {}\n"
-        voyage_str += " Departure: {}\n"
-        voyage_str += " Returning: {}\n"
-        voyage_str += "Crew ----------------------\n"
-        voyage_str += " Captain: {}\n"
-        voyage_str += " Copilot: {}\n"
-        voyage_str += " Flight Service Manager: {}\n"
-        voyage_str += " Flight attendant 1: {}\n"
-        voyage_str += " Flight attendant 2: {}\n"
-        return voyage_str.format(*voyageInfo)
+
+        listAttributes = ["Voyage information:\n"]
+        formatString = "{}: {}"
+        for attribute, value in self.__attributes.items():
+            listAttributes.append(formatString.format(attribute, value))
+        
+        return "\n".join(listAttributes)
 
     def __repr__(self):
         """String"""
@@ -106,6 +100,19 @@ class VoyageHandler:
         return "NA{}".format(str(flightNum))                
             
 
+    def addCrew(self, crew:dict = {}):
+        """Takes a dictionary with crew roles as keys and updates the crew of instance"""
+        if len(crew.keys()) != 0:
+            #go through the given crew and assign to the Voyage
+            for role, employee in crew.items():
+                self.__attributes[role] = employee
+        else:
+            #compile the current crew and return it
+            roles = ['captain', 'copilot', 'fsm', 'fa1', 'fa2']
+            for role in roles:
+                crew[role] = str(self.__attributes[role])
+        return crew #returns the updated crew
+        
     #===================================================================================
     # Exporting data
     #===================================================================================
@@ -172,7 +179,3 @@ class VoyageHandler:
 
         #give the IOAPI the flight data to save
         return [flightOut_dict, flightIn_dict]
-
-    def addCrew(self, crew:dict):
-        """Takes a dictionary with crew roles as keys and updates the crew of instance"""
-        
