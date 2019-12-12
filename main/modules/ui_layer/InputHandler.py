@@ -325,15 +325,9 @@ class InputHandler:
     # Multiple Num Choice 
     #---------------------- 
     def multipleNumChoices(self, data_list:list, inputQuestion : str = ""):
-        """Takes in """
-        choiceAmount = len(data_list)
-        chosenNum_str = input(inputQuestion)
-        while len(chosenNum_str) != 1 or not chosenNum_str.isdigit():
-            print("Invalid input")
-            chosenNum_str = input(inputQuestion)
-        for key,val in data_list[int(chosenNum_str)-1].items():
-            resultValue = val
-        return resultValue
+        """ Returns the chosen list item """
+        chosenNum_str = self.numChoices(len(data_list))
+        return data_list[int(chosenNum_str)-1]
 
     #---------------------- 
     # Input date and time
@@ -431,18 +425,6 @@ class InputHandler:
     #===================================================================================
     # Specific input (names, ssn, ID... )
     #===================================================================================
- 
-    # Name string, only allows alpha and spaces 
-    def name(self, inputQuestion:str = "Input a name: "):
-        """Input for names"""
-        name = input(inputQuestion)
-        name = "Jóhann Arnars"
-        return name
-        # while all(letter.isalpha() or letter.isspace() for letter in name):
-        #     print("not valid name (needs to be alphabet letter or space)")
-        #     name = input(inputQuestion)
-        # else:
-        #     return name
 
     def planetype(self, inputQuestion:str = "Input a type of plane: "):
         planetype_str = input(inputQuestion)
@@ -451,8 +433,3 @@ class InputHandler:
             planetype_str = input(inputQuestion)
         return planetype_str
     
-    # flightNumber format
-    def flightId(self):
-        """Input for flight ID, just checks if it's a valid format"""
-        input("test input: ")
-        return "NA1234"
