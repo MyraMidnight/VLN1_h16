@@ -257,7 +257,11 @@ class PrintHandler:
         """Prints the list section """
         compiledParagraphs = []
         for paragraph in data:
-            compiledParagraphs.append(paragraph)
+            if "\n" in paragraph:
+                for line in paragraph.split('\n'):
+                    compiledParagraphs.append(line)
+            else:   
+                compiledParagraphs.append(paragraph)
             compiledParagraphs.append("")
             
         self.__currentSections.append(compiledParagraphs)

@@ -38,18 +38,18 @@ class CreateLogic :
         for a_line_dict in airport_data_list:
             airport_list.append(a_line_dict["id"])
 
-        self.airport = InputHandler().airport(airport_list, "\nInput the ID (3 letters) of the new airport: ")
-        self.flightTime = InputHandler().timeOnly("\nInput the time it takes to fly to {} from Iceland (HH:MM): ".format(self.airport))
-        self.distanceFromIceland = InputHandler().distance("\nInput the distace from Iceland to {} (in km): ".format(self.airport))
-        self.contactPerson = InputHandler().fullName("\nInput the full name of the contact person for the new destination, {}: ".format(self.airport))
-        self.emergencyPhone = InputHandler().phoneNumber("\nInput the emergency phone number (7 digits) for the new destination, {}: ".format(self.airport))
+        self.destination_airport = InputHandler().airport(airport_list, "\nInput the ID (3 letters) of the new airport: ")
+        self.destination_flightTime = InputHandler().timeOnly("\nInput the time it takes to fly to {} from Iceland (HH:MM): ".format(self.airport))
+        self.destination_distanceFromIceland = InputHandler().distance("\nInput the distace from Iceland to {} (in km): ".format(self.airport))
+        self.destination_contactPerson = InputHandler().fullName("\nInput the full name of the contact person for the new destination, {}: ".format(self.airport))
+        self.destination_emergencyPhone = InputHandler().phoneNumber("\nInput the emergency phone number (7 digits) for the new destination, {}: ".format(self.airport))
 
-        destination_dict["id"] = self.airport
+        destination_dict["id"] = self.destination_airport
         destination_dict["destination"] = self.destination
-        destination_dict["flightDuration"] = self.flightTime
-        destination_dict["distance"] = self.distanceFromIceland
-        destination_dict["contactPerson"] = self.contactPerson
-        destination_dict["emergencyPhone"] = self.emergencyPhone
+        destination_dict["flightDuration"] = self.destination_flightTime
+        destination_dict["distance"] = self.destination_distanceFromIceland
+        destination_dict["contactPerson"] = self.destination_contactPerson
+        destination_dict["emergencyPhone"] = self.destination_emergencyPhone
     
 
         #Displays the input information and check if the user is happy with the info
@@ -67,21 +67,20 @@ class CreateLogic :
         information is fullfilled. Asks for confirmation. Turns the information
         into dict format and returns it #Should also write it into data"""
         
-        employee_dict = {}
 
         #Personal information
-        self.name = InputHandler().fullName("Input full name: ")
-        self.ssn =  InputHandler().ssn("Input SSN: ")
-        self.address = InputHandler().address("Input address: ")
-        self.phonenumber = InputHandler().phoneNumber("Input a 7-digit phone number:")
-        self.email = InputHandler().email("Input e-mail address: ")
+        self.employee_name = InputHandler().fullName("Input full name: ")
+        self.employee_ssn =  InputHandler().ssn("Input SSN: ")
+        self.employee_address = InputHandler().address("Input address: ")
+        self.employee_phonenumber = InputHandler().phoneNumber("Input a 7-digit phone number:")
+        self.employee_email = InputHandler().email("Input e-mail address: ")
         #Role
 
-        self.role = InputHandler().role("Choose role: ")
+        self.employee_role = InputHandler().role("Choose role: ")
 
         #Rank
 
-        self.rank = InputHandler().rank(self.role)
+        self.employee_rank = InputHandler().rank(self.employee_role)
 
 
         #License
@@ -93,20 +92,25 @@ class CreateLogic :
             airplaneType_list.append(a_line_dict["planeTypeId"])
 
         #Gets input for license if relevant, sets to "N/A" if role = Cabin Crew
-        self.license = InputHandler().license(self.role, airplaneType_list,"Choose license: ")
+        self.employee_license = InputHandler().license(self.employee_role, airplaneType_list,"Choose license: ")
 
         #Turns the inputs into a dict
-        employee_dict["ssn"] = self.ssn
-        employee_dict["name"] = self.name
-        employee_dict["role"] = self.role
-        employee_dict["rank"] = self.rank
-        employee_dict["licence"] = self.license
-        employee_dict["address"] = self.address
-        employee_dict["phonenumber"] = self.phonenumber
-        employee_dict["email"] = self.email
+        employee_dict = {}
+        employee_dict["ssn"] = self.employee_ssn
+        employee_dict["name"] = self.employee_name
+        employee_dict["role"] = self.employee_role
+        employee_dict["rank"] = self.employee_rank
+        employee_dict["licence"] = self.employee_license
+        employee_dict["address"] = self.employee_address
+        employee_dict["phonenumber"] = self.employee_phonenumber
+        employee_dict["email"] = self.employee_email
 
         #Displays the input information
-        DisplayScreen().printList([employee_dict],header = "Employee info: ")
+        
+        employeeInfo_str = "{}: {}"
+        employeeInfo_list = [employeeInfo_str.format(key,value) for key, value in employee_dict.items()]
+
+        DisplayScreen().printText(["\n".join(employeeInfo_list)],header = "Employee info: ")
         #Asks for confirmation. If negative starts the editing process
         if InputHandler().yesOrNoConfirmation("Is this information correct? (y/n): "):
             edit_bool = False
@@ -159,7 +163,7 @@ class CreateLogic :
         plane_dict = {}
 
         #Takes in input for plane insignia and puts it under "planeInsignia" key in plane_dict
-        plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia: ")
+        plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia (e.g. TF-XXX): ")
 
         #Input for plane Type ID
         plane_dict["planeTypeId"] = InputHandler().planetype()

@@ -104,5 +104,4 @@ class LLAPI :
         the changes. Save the new info about the destination to the list of destinations.
         The user can change the contact person and the emergency phone number """
         return self.updateLogic.updateDestination()
-    
-        # return self.updateLogic.updateDestination()
+
