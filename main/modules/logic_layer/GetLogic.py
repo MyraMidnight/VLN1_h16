@@ -181,7 +181,7 @@ class GetLogic :
             return False
         
         #ask for datetime from user
-        refDate_str = InputHandler().dateOnly()
+        refDate_str = InputHandler().dateOnly("Input starting date of week: ")
         refDate_obj = DateUtil(refDate_str).createObject()
         #collect the days of a week
         checkWeek_list = []
@@ -289,3 +289,41 @@ class GetLogic :
             combo['count'] = str(combo['count'])
 
         return self.printData(licenceCountList,header="Licences by count:")
+
+    def getWeekVoyages(self):
+        #fetch Voyage info
+        voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        #ask for datetime from user
+        refDate_str = InputHandler().dateOnly("Input starting date of week: ")
+        refDate_obj = DateUtil(refDate_str).createObject()
+        #collect the days of a week
+        checkWeek_list = []
+        checkWeek_list.append(refDate_str)
+        #@ts-ignore
+        for day in range(7):
+            refDate_obj = refDate_obj + datetime.timedelta(days=1)
+            checkWeek_list.append(refDate_obj.isoformat())
+        schedule_list = []
+        #find all the flights that are in the range of the week
+        for flight in voyagePackage:
+            departure = DateUtil(flight['departure']).date
+            for date in checkWeek_list:
+                if date[:10] == departure:
+                    schedule_list.append(flight)
+        
+        return self.printData(schedule_list,header="Voyages of chosen week:")
+    
+    def getDayVoyages(self):
+        #fetch Voyage info
+        voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        #ask for datetime from user
+        user_input = InputHandler().dateOnly()
+        user_date = DateUtil(user_input).date
+        schedule_list = []
+        #goes through all flights, finds flights of the chosen date and compiles a list of tuples with the SSN and 3 letter arrival
+        for line in voyagePackage:
+            departure = DateUtil(line['departure']).date
+            if user_date == departure:
+                schedule_list.append(line)
+        
+        return self.printData(schedule_list,header="Voyages of chosen day:")

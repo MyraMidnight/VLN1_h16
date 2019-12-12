@@ -46,7 +46,7 @@ class MenuHandler:
             },
             "2.2" : {
                 "title": "Voyages",
-                "function": LLAPI().getVoyages
+                "function": "voyages"
             },
             "2.3" : {
                 "title": "Destinations",
@@ -84,6 +84,18 @@ class MenuHandler:
             "2.1.6" : {
                 "title": "Sorted pilots by licence",
                 "function": LLAPI().printPilotsByLicence
+            },
+            "2.2.1" : {
+                "title": "All voyages",
+                "function": LLAPI().getVoyages
+            },
+            "2.2.2" : {
+                "title": "Voyages of a day",
+                "function": LLAPI().getDayVoyages
+            },
+            "2.2.3" : {
+                "title": "Voyages of week",
+                "function": LLAPI().getWeekVoyages
             },
             "2.5.1" : {
                 "title": "Employees not working",
@@ -127,6 +139,7 @@ class MenuHandler:
             "main": ["1", "2", "3"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
+            "voyages":["2.2.1","2.2.2","2.2.3"],
             "getcrew" : ["2.1.1", "2.1.2", "2.1.3", "2.1.4", "2.1.5", "2.1.6"],
             "aircraft": ["2.4.1","2.4.2"],
             "schedule" : ["2.5.1","2.5.2","2.5.3"],
