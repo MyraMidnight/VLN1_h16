@@ -19,7 +19,6 @@ class UpdateLogic :
         #Show list
         GetLogic(self.dataFiles).getAllCrew()
         #Choose Employee
-        GetLogic(self.dataFiles).getSingleEmployee()
         #Show employee info
         #Ask what the motherfucker wants to change for fucks sake
         #Change some shit or fuck off
@@ -38,8 +37,8 @@ class UpdateLogic :
         while employee_in_file_bool:
             for x in filePackage:
                 #checks the SSN of the employee
-                employee_index = filePackage.index(x)
                 if x['ssn'] == ssn_of_employee_str:
+                    employee_index = filePackage.index(x)
                     employee_info_dict = x
                     employee_info_list = [x]
             if employee_info_list != []:

@@ -22,10 +22,10 @@ class CreateLogic :
         """Create destination. Get destinationLand, destinationAirport, destinationFlightTime, 
          destinationDistance, destinationContactPerson and destinationEmergencyPhone."""
 
-        print("\n  Creating new destination")
+        print("\nCreating new destination")
         destination_dict = {}
 
-        self.destination = InputHandler.country("Input the city where the new destination is located: ")
+        self.destination = InputHandler().country("Input the city where the new destination is located: ")
          
         # Airports
         # Get a list of dictionaties containing airports and destiations we currently fly to
@@ -135,7 +135,7 @@ class CreateLogic :
                 edit_bool = False
 
         #Adds the employee to the crew file
-        IOAPI().appender(CREW_FILE, employee_dict)
+        IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
 
 
 

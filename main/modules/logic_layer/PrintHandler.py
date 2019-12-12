@@ -20,7 +20,7 @@ class PrintHandler:
                     'licence': {"colWidth": 15, "title": "Licence"},
                     'address': {"colWidth": 20, "title": "Address"},
                     'phonenumber': {"colWidth": 7, "title": "Phone"},
-                    'email': {"colWidth": 12, "title": "email"}
+                    'email': {"colWidth": 12, "title": "Email"}
                 },                
                 "templates": { #contain lists of keys of columns to ignore for each template
                     "crew": [], "pilots": [], "cabincrew": []
@@ -124,7 +124,7 @@ class PrintHandler:
 
         return allTemplates_list
 
-    def detectDataType(self, data:dict, colWidth:int = 15):
+    def detectDataType(self, data:dict, colWidth:int = 25):
         """Figures out what type of data is being provided"""
 
         #Create list of keys for each dataType from self.__dataTypes

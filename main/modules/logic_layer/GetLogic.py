@@ -204,21 +204,21 @@ class GetLogic :
     def getPilotsByLicence(self):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
-        #fetch plane info
-        planePackage = IOAPI().opener(self.dataFiles['AIRCRAFT_FILE'])
         #get all the pilots in one list
         pilotPackage = []
         for employee in employeePackage:
             if employee['role'] == "Pilot":
                 pilotPackage.append(employee)
         #show the planes to user
-        planeList = []
-        for plane in planePackage:
-            if plane["planeTypeId"] not in planeList:
-                planeList.append(plane["planeTypeId"])
-        print(planeList)
-        #ask user for a plane type
-        user_input = InputHandler().planetype()
+        #License
+        #Gets a list of dictionaries containing aircraft type specifications
+        airplane_data_list = IOAPI().opener(self.dataFiles["AIRCRAFT_TYPE_FILE"])
+        #Creates a list of airplane types in the list
+        airplaneType_list = []
+        for a_line_dict in airplane_data_list:
+            airplaneType_list.append(a_line_dict["planeTypeId"])
+
+        user_input = InputHandler().license("Pilot", airplaneType_list,"Choose license: ")
         #set a flag to false here and then go through and try to find all pilots with the licence the user asked for
         #if no such pilots are found then the flag is never set to true
         anyone_found_flag = False
