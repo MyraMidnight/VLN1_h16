@@ -19,7 +19,6 @@ class UpdateLogic :
         #Show list
         GetLogic(self.dataFiles).getAllCrew()
         #Choose Employee
-        GetLogic(self.dataFiles).getSingleEmployee()
         #Show employee info
         #Ask what the motherfucker wants to change for fucks sake
         #Change some shit or fuck off
@@ -53,7 +52,7 @@ class UpdateLogic :
         DisplayScreen().printList(employee_info_list,"Chosen employee:",frame=True)
 
         #Creates a list of editing options
-        options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone number"}, {"Edit choices:": "Email"}]
+        options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone"}, {"Edit choices:": "Email"}]
         #Prints the beforementioned list of options
         DisplayScreen().printOptions(options_list, header = "")
         #Asks user to choose what he wants to edit
@@ -68,7 +67,7 @@ class UpdateLogic :
         #Changes the requested data
         if choice_str == "Address":
             employee_info_dict[choice_str.lower()] = InputHandler().address("Input address: ")
-        elif choice_str == "Phone number":
+        elif choice_str == "Phone":
             employee_info_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number:")
         elif choice_str == "Email":
             employee_info_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
@@ -91,7 +90,7 @@ class UpdateLogic :
             #Changes the requested data
             if choice_str == "Address":
                 employee_info_dict[choice_str.lower()] = InputHandler().address("Input address: ")
-            elif choice_str == "Phone number":
+            elif choice_str == "Phone":
                 employee_info_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number:")
             elif choice_str == "Email":
                 employee_info_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
