@@ -4,6 +4,9 @@ from modules.ui_layer.DisplayScreen import DisplayScreen
 from modules.ui_layer.InputHandler import InputHandler
 from modules.models.Voyage import Voyage #model class
 
+from modules.ui_layer.DateUtil import DateUtil
+import datetime
+
 from operator import itemgetter #for sorting list of dictionaries by key
 class UpdateLogic :
     """Update methods for logic layer"""
@@ -169,11 +172,21 @@ class UpdateLogic :
         #find the days that the crew would be occupied during voyage
         def findDaysDuration(departureFlight, arrivalFlight):
             """Finds the days that the voyage will cover"""
-            daysOfVoyage = []
+            departureDate = departureFlight["departure"]
+            dateObject = DateUtil(departureDate).createObject()
+            returnDate = arrivalFlight["arrival"]
+            compiledDates_list = [dateObject.isoformat()]
+
+            #while the date is not the same
+            while dateObject.isoformat()[:10] != returnDate[:10]:
+                dateObject =   dateObject + datetime.timedelta(days=1)
+                compiledDates_list.append(dateObject.isoformat())
+            compiledDates_list.append(returnDate)
             # create a range of days
-            return daysOfVoyage
+            return compiledDates_list
 
         daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
+        print(daysOfVoyage)
 
         # Find available employees
         def findAvailableCrew(daysOfWoyage, employeeList):
