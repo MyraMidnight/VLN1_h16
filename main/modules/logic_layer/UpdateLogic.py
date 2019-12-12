@@ -44,11 +44,10 @@ class UpdateLogic :
                 ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
 
         
-
         DisplayScreen().printList(employee_info_list,"Chosen employee:",frame=True)
 
         #Creates a list of editing options
-        options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone number"}, {"Edit choices:": "Email"}]
+        options_list = [{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone"}, {"Edit choices:": "Email"}]
         #Prints the beforementioned list of options
         DisplayScreen().printOptions(options_list, header = "")
         #Asks user to choose what he wants to edit
@@ -63,8 +62,8 @@ class UpdateLogic :
         #Changes the requested data
         if choice_str == "Address":
             employee_info_dict[choice_str.lower()] = InputHandler().address("Input address: ")
-        elif choice_str == "Phone number":
-            employee_info_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7 digit phone number:")
+        elif choice_str == "Phone":
+            employee_info_dict["phonenumber"] = InputHandler().phoneNumber("Input a 7-digit phone number: ")
         elif choice_str == "Email":
             employee_info_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
         elif choice_str == "Role":
@@ -86,8 +85,8 @@ class UpdateLogic :
             #Changes the requested data
             if choice_str == "Address":
                 employee_info_dict[choice_str.lower()] = InputHandler().address("Input address: ")
-            elif choice_str == "Phone number":
-                employee_info_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number:")
+            elif choice_str == "Phone":
+                employee_info_dict["phonenumber"] = InputHandler().phoneNumber("Input a 7-digit phone number: ")
             elif choice_str == "Email":
                 employee_info_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
             elif choice_str == "Role":
@@ -101,10 +100,11 @@ class UpdateLogic :
             DisplayScreen().printList([employee_info_dict], header = "")
             continue_bool = InputHandler().yesOrNoConfirmation("Do you want to change anything else? (y/n): ")
         else:
-            #Updates the Crew file with the edited employee info
-            filePackage[employee_index] = employee_info_dict
-            IOAPI().updater(self.dataFiles["CREW_FILE"], filePackage)
-            print("Data has been updated")
+            if InputHandler().yesOrNoConfirmation("Do you want to save the changes? (y/n): "):
+                #Updates the Crew file with the edited employee info
+                filePackage[employee_index] = employee_info_dict
+                IOAPI().updater(self.dataFiles["CREW_FILE"], filePackage)
+                print("Data has been updated")
         
    
     def updateDestination(self):
