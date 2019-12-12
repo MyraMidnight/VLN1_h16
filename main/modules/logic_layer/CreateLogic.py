@@ -8,7 +8,6 @@ RANK_COPILOT = "Co-Pilot"
 RANK_FSM = "Flight Service Manager"
 RANK_FA = "Flight Attendant"
 
-
 from modules.ui_layer.InputHandler import InputHandler
 from modules.data_layer.IOAPI import IOAPI
 from modules.ui_layer.DisplayScreen import DisplayScreen
