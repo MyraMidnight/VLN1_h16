@@ -365,7 +365,7 @@ class InputHandler:
             print("Invalid input!")
             text_str = inputQuestion
             time_str = InputHandler().timeOnly(text_str)
-
+        time_str = datetime.time(hour = int(time_str[0:2]), minute=int(time_str[3:5]))
         return time_str
 
 
@@ -380,9 +380,8 @@ class InputHandler:
             print("Invalid input")
             text_str = inputQuestion
             date_str = InputHandler().dateOnly(text_str)
-        
+        date_str = datetime.datetime(day = int(date_str[0:2]), month = int(date_str[3:5]), year = int(date_str[6:10])).isoformat()
         return date_str
-
             
     #===================================================================================
     # Get strings of specific length and format

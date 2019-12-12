@@ -3,10 +3,10 @@
 from modules.ui_layer.MenuHandler import MenuHandler
 
 import os
-# print(os.name)
-try:
+import platform
+if platform.system() == "Windows":
   os.system('mode con: cols=200 lines=45')  # works on M$ Windows
-except:
+elif platform.system() == "Darwin":
   os.system("printf '\e[8;45;200t'")        # works on MacOS
 # pause = input("Press any key to continue...")
 
