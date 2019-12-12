@@ -63,7 +63,7 @@ class InputHandler:
     #---------------------- 
     # Input full name (createEmployee)
     #---------------------- 
-    def fullName(self, inputQuestion : str = ""):
+    def fullName(self, inputQuestion : str = "Enter the full name of the person: "):
         """Input has to only be alphabetical characters and has to have at least one space in str"""
         
         name_str = input(inputQuestion)
@@ -255,28 +255,32 @@ class InputHandler:
     #----------------------   
 
 
-    def airport(self, airport_list: list, inputQustion: str = ""):
+    def airport(self, airport_list: list, inputQuestion: str = ""):
         """Input for new destination airport. Returns a validated airport"""
-        #print("\nNaN Air already flyes to these airports: \n", airport_list)
         print("\nNaN Air already flies to these airports: ")
         for airport in airport_list:
             if airport != airport_list[-1]:
                 print(airport, end = ", ")
             elif airport == airport_list[-1]:
                 print(airport, end = "\n")
-        airport_str = input(inputQustion)
+        airport_str = input(inputQuestion)
 
         # Checks whether or not the airport consists of only alphabetical characters
         while not airport_str.isalpha() or len(airport_str) != 3:
             print("Please input 3 alphabetical characters only.")
-            airport_str = input(inputQustion)
+            airport_str = input(inputQuestion)
 
 
-        #Validity check, checks if there are plane types in pur system corresponding to the input license
+        #Validity check, checks if there is a airport in ur system corresponding to the input airport id
         while airport_str in airport_list:
             print("This is not a new destination. \n")
-            print("NaN Air already flyes to these airports: \n", airport_list)
-            airport_str = input(inputQustion)
+            print("NaN Air already flyes to these airports: \n")
+            for airport in airport_list:
+                if airport != airport_list[-1]:
+                    print(airport, end = ", ")
+                elif airport == airport_list[-1]:
+                    print(airport, end = "\n")
+            airport_str = input(inputQuestion)
 
         return airport_str.upper()
 
@@ -290,11 +294,25 @@ class InputHandler:
             print("Invalid input, try again. The input must be digits, the length of the distance in km.")
             distance_str = input(inputQuestion)
         
-        #while km_str.lower() != "km" or km_str.lower() != "":
-        #    print("Invalid input, try again. The input must be digits, the length of the distance in km.")
-        #    distance_str = input(inputQuestion)
-        
         return distance_str
+    
+    def destinationID(self, airport_list: list, inputQuestion: str = ""):
+        """Input for already excisting destination ID."""
+
+        airportID_str = input(inputQuestion)
+
+        # Checks whether or not the airport consists of only alphabetical characters
+        while not airportID_str.isalpha() or len(airportID_str) != 3:
+            print("Please input 3 alphabetical characters only.")
+            airportID_str = input(inputQuestion)
+
+        #Validity check, checks if there are airport id in our system corresponding to the input id
+        while airportID_str.upper() not in airport_list:
+            print("This airport is not in the airport list. \n")
+            airportID_str = input(inputQuestion)
+
+        return airportID_str.upper()
+
 
 
     def planeInsignia(self, inputQuestion: str = ""):

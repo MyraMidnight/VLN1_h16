@@ -20,11 +20,6 @@ class UpdateLogic :
         GetLogic(self.dataFiles).getAllCrew()
         #Choose Employee
         GetLogic(self.dataFiles).getSingleEmployee()
-        #Show employee info
-        #Ask what the motherfucker wants to change for fucks sake
-        #Change some shit or fuck off
-        #Confirm whether the fucker is co ntent with the fucking changes
-        #fuck the fuck off
  
         #Show employee info
         filePackage = IOAPI().opener(self.dataFiles["CREW_FILE"])
@@ -69,7 +64,7 @@ class UpdateLogic :
         if choice_str == "Address":
             employee_info_dict[choice_str.lower()] = InputHandler().address("Input address: ")
         elif choice_str == "Phone number":
-            employee_info_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number:")
+            employee_info_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7 digit phone number:")
         elif choice_str == "Email":
             employee_info_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
         elif choice_str == "Role":
@@ -121,8 +116,81 @@ class UpdateLogic :
 
         #get and show the user the list of all destinations
         GetLogic(self.dataFiles).getDestinations()
+        #choose a destination the user wants to change
+        #GetLogic(self.dataFiles).getOneDestination()
 
-        #GetLogic().
+        #fetches destinations info
+        filePackage = IOAPI().opener(self.dataFiles['DESTINATIONS_FILE'])
+
+        #Creates a list of airports NaN Air flyes to 
+        airport_list = []
+        for a_line_dict in filePackage:
+            airport_list.append(a_line_dict["id"])
+
+        #asks for the ID of the destination
+        id_of_destination_str = InputHandler().destinationID(airport_list, "Enter the ID of the airport you want to change: ")
+        
+        #Set id_in_file_bool to True so that the while runs at least once
+        id_in_file_bool = True
+        airport_info_list = []
+        #goes through all the lines in the destination info
+        while id_in_file_bool:
+            for x in filePackage:
+                #checks the ID of the destinations
+                airport_index = filePackage.index(x)
+                if x["id"] ==id_of_destination_str:
+                    airport_info_dict = x
+                    airport_info_list = [x]
+            if airport_info_list != []:
+                id_in_file_bool = False
+            else:
+                print("Airport not found!")
+                id_of_destination_str = InputHandler().destinationID(airport_list, "Enter the ID of the airport you want to change: ")
+
+
+        DisplayScreen().printList(airport_info_list, "Chosen airport: ", frame = True)
+
+        #creates a list of editing optins
+        options_list = [{"Edit choices:":"Contact Person"}, {"Edit choices:":"Emergency number"}]
+        #Prints the before mentioned list of options
+        DisplayScreen().printOptions(options_list, header = "")
+        #Asks the user to choose what he/she wants to edit
+        choice_str = InputHandler().multipleNumChoices(options_list, "Choose data you want to update: ")
+
+        #Changes the requested data
+        if choice_str == "Contact Person":
+            airport_info_dict["contactPerson"] = InputHandler.fullName("Enter the name of the new contact person: ")
+        
+        elif choice_str == "Emergency number":
+            airport_info_dict["emergencyPhone"] = InputHandler.phoneNumber("Input a 7 digit phone number for the new emergency phone number: ")
+        
+
+        #Prints the data and asks for confirmation
+        DisplayScreen().printList([airport_info_dict], header = "")
+        continue_bool = InputHandler().yesOrNoConfirmation("Do you want to change anything else? (y/n): ")
+        
+        while continue_bool:
+            #Prints out editing options again
+            DisplayScreen().printOptions(options_list, header = "")
+            #Asks the user to choose what he/she wants to edit
+            choice_str = InputHandler().multipleNumChoices(options_list, "Choose data you want to update: ")
+
+            #Changes the requested data
+            if choice_str == "Contact Person":
+                airport_info_dict["contactPerson"] = InputHandler.fullName("Enter the name of the new contact person: ")
+        
+            elif choice_str == "Emergency number":
+                airport_info_dict["emergencyPhone"] = InputHandler.phoneNumber(7, "Input a 7 digit phone number for the new emergency phone number: ")
+        
+            #Prints the results of editing and asks for confirmation
+            DisplayScreen().printList([airport_info_dict], header = "")
+            continue_bool = InputHandler().yesOrNoConfirmation("Do you want to change anything else? (y/n): ")
+
+        else:
+            #Updates the Destination file with the edited destion info
+            filePackage[airport_index] = airport_info_dict
+            IOAPI().updater(self.dataFiles["DESTINATIONS_FILE"], filePackage)
+            print("Data has been updated")
 
         
     def updateVoyage(self):
