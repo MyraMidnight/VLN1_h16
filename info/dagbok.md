@@ -196,18 +196,56 @@ Náðum að fatta hvernig import virkar
 Heilt yfir eru markmið dagsins að klára alveg Get og Create! Woohoo
 
 
+Get komið og eitt create eftir
 
 
 
 ## Þriðjudagurinn 10. desember 2019
+> Crazy veður svo allir voru heima að gera í sínu
 
+* Stefanía breytti displayScreen og printlist og fullt
+* Halla kláraði create Destination og gerði útlit
+* Damian gerði create Plane og held hann hafi gert eitt update fall
+* Fannar kláraði öll get og gerði nokkrar B-kröfur og eina C-kröfu
 
 
 ## Miðvikudagurinn 11. desember 2019
+> Stefanía verður heima hjá sér og vinnur þaðan, er heima með veikt barn. 
+>
+> Damian svaf yfir sig, kemur líklega um 12:30.
+>
+> Halla kom 9:55 og Fannar kom 10:50
+
+* Klára allar A-kröfur og B-kröfur
+* Stefanía gerði printcostum og fullt af UI föllum
+* Stefanía er að gera og græja create voyage og ætlar að gera update voyage
+* Damian ætlar að gera update Employee
+* Halla ætlar að gera update destination
+* Stefanía breytti nöfnunum á dateaskránnum
+
+Kláruðum allar get methods og create methods erum að vinna í update, ætlum að vera komin langt með update föllin
+
+
 
 
 
 ## Fimmtudagurinn 12. desember 2019
+> Halla mætti 9:10, Stefanía mætti 9:30
+>
+> Fannar mætti ca 10 og Damian mætti ca 10:15
+
+* Klára öll update og debuga
+* Damian lagaði updateEmployee og það virkar alveg núna
+* Halla kláraði updateDestination
+* Halla ætlar að hugsa gagnrýnið um útlit forritsins
+* Stefanía ætlar að klára update voyage
+* Stefanía ætlar að laga timeOnly og dateOnly
+* Stefanía lagaði create voyage
+* Fannar og Damian ætla að testa debuga forritið\
+\
+Markmið að klára allt forritið, þannig á morgun er bara skýrsla, klasarit og video (og skila í zip)
+----------------
+> 
 
 * Fínpússa og yfirferð.
 * Passa að allur kóði sé auðskilin og vel kommentaður.
