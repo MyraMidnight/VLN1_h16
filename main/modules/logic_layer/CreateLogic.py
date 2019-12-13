@@ -81,7 +81,7 @@ class CreateLogic :
 
         #Rank
 
-        self.rank = InputHandler().rank(self.role)
+        self.rank = InputHandler().rank(self.role,"Choose rank: ")
 
 
         #License
