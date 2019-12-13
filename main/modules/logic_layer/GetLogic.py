@@ -64,8 +64,8 @@ class GetLogic :
             if x['role'] == "Pilot":
                 list_to_print.append(x)
         if len(data) != 0:
-            self.printData(list_to_print,header="All pilots:")
-        return self.printData(list_to_print,header="All Flight Attendants:")
+            return self.printData(list_to_print,header="All pilots:")
+        return list_to_print
                 
     
     def getFlightAttendants(self, data:list = []):
@@ -81,8 +81,8 @@ class GetLogic :
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
         if len(data) != 0:
-            self.printData(list_to_print,header="All Flight Attendants:")
-        return self.printData(list_to_print,header="All Flight Attendants:")   
+            return self.printData(list_to_print,header="All Flight Attendants:")
+        return list_to_print   
     
     def getAllCrew(self):
         #fetches employee info
