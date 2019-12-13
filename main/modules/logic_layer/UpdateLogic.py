@@ -253,30 +253,36 @@ class UpdateLogic :
             return rolesForUpdate_list[int(selectedRole)-1]["role"]
 
         #========================
-        def assignCrew(availableCrew_list:list, selectedRole_str:str, flightPair:list ):
+        def assignCrew(employee_list:list, selectedRole_str:str, flightPair:list ):
             """Finds the crew to """
             currentVoyage = Voyage(flightPair)
             currentCrew = currentVoyage.addCrew()
+            #get the available employees for current voyage
+            availableCrew_list = self.getLogic.getAway(employee_list, noPrint=True)
+
             roleList = {
-                "captain": {"rank": "Captain", "list":self.getLogic.getPilots } ,
-                "copilot":{ "rank":"Copilot",  "list":self.getLogic.getPilots},
-                "fsm": {"rank":"Flight Service Manager",  "list":self.getLogic.getFlightAttendants},
-                "fa1": {"rank":"Flight Attendant",  "list":self.getLogic.getFlightAttendants},
-                "fa2": {"rank":"Flight Attendant",  "list":self.getLogic.getFlightAttendants},
+                "captain": {"rank": "Captain"} ,
+                "copilot":{ "rank":"Copilot"},
+                "fsm": {"rank":"Flight Service Manager"},
+                "fa1": {"rank":"Flight Attendant"},
+                "fa2": {"rank":"Flight Attendant"},
             }
             
-            filteredCrew = roleList[selectedRole_str]["list"](availableCrew_list)
             # filter out only of right rank
             rankOnlyList = []
-            for employee in filteredCrew:
+            for employee in availableCrew_list:
                 if employee["rank"] == roleList[selectedRole_str]["rank"]:
                     rankOnlyList.append(employee)
 
             #ask what employee they wish to assign to role
-            DisplayScreen().printOptions(rankOnlyList)
-            inputChoice = InputHandler().numChoices(len(rankOnlyList), "Select an employee: ")
-            selectedEmployee = rankOnlyList[int(inputChoice)-1]
-            currentCrew[selectedRole_str] = selectedEmployee["ssn"]
+            if len(availableCrew_list) != 0:
+                DisplayScreen().printOptions(rankOnlyList)
+                inputChoice = InputHandler().numChoices(len(rankOnlyList), "Select an employee: ")
+                selectedEmployee = rankOnlyList[int(inputChoice)-1]
+                currentCrew[selectedRole_str] = selectedEmployee["ssn"]
+            else:
+                DisplayScreen().printText(["No available crew for this role during this voyage"], "Finding {} for voyage".format(roleList[selectedRole_str]["rank"]))
+                return flightPair
             #update the voyage info
             currentVoyage.addCrew(currentCrew)
             #get the flights with updated info
@@ -332,7 +338,7 @@ class UpdateLogic :
         selectedRole = selectRoleForUpdate(voyageFlightPair)
 
         #get the updated flights after assigning a role
-        newFlights = assignCrew(availableCrew_list, selectedRole, voyageFlightPair)
+        newFlights = assignCrew(allEmployees_data, selectedRole, voyageFlightPair)
 
         # then find the flights that were updated and replace them
         updateFlights(departingFlights_data, newFlights, voyageData)
