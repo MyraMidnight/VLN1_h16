@@ -80,7 +80,7 @@ class CreateLogic :
         role_str = InputHandler().role("Choose role: ")
 
         #Rank
-        self.rank = InputHandler().rank(self.role,"Choose rank: ")
+        rank_str = InputHandler().rank(role_str,"Choose rank: ")
 
         #License
         #Gets a list of dictionaries containing aircraft type specifications
