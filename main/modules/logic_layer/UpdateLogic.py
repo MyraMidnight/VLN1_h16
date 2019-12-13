@@ -23,7 +23,11 @@ class UpdateLogic :
         #Show list
         GetLogic(self.dataFiles).getAllCrew()
         #Choose Employee
-        GetLogic(self.dataFiles).getSingleEmployee()
+        #Show employee info
+        #Ask what the motherfucker wants to change for fucks sake
+        #Change some shit or fuck off
+        #Confirm whether the fucker is co ntent with the fucking changes
+        #fuck the fuck off
  
         #Show employee info
         filePackage = IOAPI().opener(self.dataFiles["CREW_FILE"])
@@ -44,7 +48,7 @@ class UpdateLogic :
             if employee_info_list != []:
                 employee_in_file_bool = False
             else:
-                DisplayScreen().printText(["Employee not found!"],"Updating employee")
+                print("Employee not found!")
                 ssn_of_employee_str = InputHandler().ssn("Enter the SSN of the employee you\'re looking for: ")
 
         
@@ -108,7 +112,7 @@ class UpdateLogic :
                 #Updates the Crew file with the edited employee info
                 filePackage[employee_index] = employee_info_dict
                 IOAPI().updater(self.dataFiles["CREW_FILE"], filePackage)
-                DisplayScreen().printText(["Data has been updated"], "Updating employee")
+                print("Data has been updated")
         
    
     def updateDestination(self):
