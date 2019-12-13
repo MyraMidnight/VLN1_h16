@@ -125,8 +125,6 @@ class VoyageHandler:
 
         # check if the user wants to use this template of voyage at other days
 
-        print("Do you want to replicate this voyage? (y/n): ")
-
     #===================================================================================
     # Update Crew
     #===================================================================================
