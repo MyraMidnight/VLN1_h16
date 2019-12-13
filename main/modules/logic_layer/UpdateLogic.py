@@ -220,16 +220,16 @@ class UpdateLogic :
             sortedBy_str = sortOptions[sortedChoice_int-1]["sortBy"]
 
             #sort the list by departure time
-            sortedDepartures_list = sorted(departingFlights_list, key=itemgetter(sortedBy_str), reverse=True)
+            sortedDepartures_list = sorted(departingFlights_list, key = lambda i: i[sortedBy_str])
 
             #print the upcoming voyages
             DisplayScreen().printOptions(sortedDepartures_list)
             # ask user to select a flight from the list representing the voyage
-            selectedFlight_int = int(InputHandler().numChoices(len(departingFlights_list), "Select a voyage from the list: "))
+            selectedFlight_int = int(InputHandler().numChoices(len(sortedDepartures_list), "Select a voyage from the list: "))
             selectedFlight_dict = sortedDepartures_list[selectedFlight_int-1]
         
             # find the two connecting flights, by finding the index of selected flight
-            flightIndex = departingFlights_list.index(selectedFlight_dict)
+            flightIndex = departingFlights_data.index(selectedFlight_dict)
             return {"out":[flightIndex, departingFlights_data[flightIndex]], "in": [flightIndex+1, departingFlights_data[flightIndex+1]]}
 
         #voyage data, keeping index for later references
@@ -314,7 +314,6 @@ class UpdateLogic :
         updatedVoyage = Voyage(voyageFlightPair)
         updatedVoyage.addCrew(newCrew)
         newFlights = updatedVoyage.getFlights()
-        print(updatedVoyage)
         # then find the flights that were updated and replace them
         def updateFlights(allFlights, updatedFlights, voyageData):
             
