@@ -17,7 +17,7 @@ else:
 # ------------------------  Main program  -------------------- 
 def main():
   """The core program"""
-  #print the main menu
+  #print the main menus
   MenuHandler().displayLogo()
   MenuHandler().displayMenu()
 

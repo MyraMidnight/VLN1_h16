@@ -155,8 +155,6 @@ class VoyageHandler:
 
         # check if the user wants to use this template of voyage at other days
 
-<<<<<<< HEAD
-=======
     #===================================================================================
     # Update Crew
     #===================================================================================
@@ -187,7 +185,6 @@ class VoyageHandler:
         
         # when he wants to save then save this voyage info in the data layer.
         # if the user wants to quit then no changes were made.
->>>>>>> fa6819ade95b8af5e8fefe31f51a7bf4d9d20cf0
 
     #===================================================================================
     # methods for local use
