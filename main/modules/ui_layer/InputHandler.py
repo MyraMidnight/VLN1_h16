@@ -86,7 +86,21 @@ class InputHandler:
     #----------------------     
     def ssn(self, inputQuestion:str = ""):
         """Input for social security number (kennitala)"""  
-        return self.numSetLength(10, inputQuestion)
+        ssn_str = self.numSetLength(10, inputQuestion)
+
+        #Validity check to ensure that ssn is digit only
+        while not ssn_str:
+            print("Invalid input")
+            ssn_str = self.numSetLength(10, inputQuestion)
+
+        try:
+            datetime.date(year =int(ssn_str[4:6]), month = int(ssn_str[2:4]), day = int(ssn_str[0:2]))
+        except ValueError: 
+            print("Invalid input!")
+            text_str = inputQuestion
+            ssn_str = InputHandler().ssn(text_str)
+
+        return ssn_str
 
 
     #---------------------- 
