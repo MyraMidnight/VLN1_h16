@@ -205,6 +205,7 @@ class UpdateLogic :
         """ Updates the crew on a voyage """
         departingFlights_data = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
         allEmployees_data = IOAPI().opener(self.dataFiles["CREW_FILE"])
+
         def findVoyage(flightData:list):
             """Find the voyage"""
             #get the list 
@@ -236,63 +237,26 @@ class UpdateLogic :
             flightIndex = departingFlights_data.index(selectedFlight_dict)
             return {"out":[flightIndex, departingFlights_data[flightIndex]], "in": [flightIndex+1, departingFlights_data[flightIndex+1]]}
 
-        #voyage data, keeping index for later references
-        voyageData = findVoyage(departingFlights_data)
-        #get the flight data
-        voyageFlightPair = [voyageData["out"][1], voyageData["in"][1]]
-        # create instance of VoyageHandler using the two connected flights
-        currentVoyage_obj = Voyage(voyageFlightPair)
-        
-        #========================
-        #find the days that the crew would be occupied during voyage
-        def findDaysDuration(departureFlight, arrivalFlight):
-            """Finds the days that the voyage will cover"""
-            departureDate = departureFlight["departure"]
-            returnDate = arrivalFlight["arrival"]
-            departureDate_obj = DateUtil(departureDate).createObject()
-            returnDate_obj = departureDate_obj + datetime.timedelta(days =1)
-            compiledDates_list = [departureDate, returnDate_obj.isoformat()]
-
-            return compiledDates_list
-
-        daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
-
-        # Find available employees
-        def findAvailableCrew(daysOfWoyage, employeeList):
-            """Just loops through the given days to return available staff"""
-            availableCrew = []
-            # find all the people not working those days
-            # check if they are free for the duration
-            return availableCrew
-
-        availableCrew_list = findAvailableCrew(daysOfVoyage, allEmployees_data)
-
+ 
         # Find the currently listed crew and roles (for printOptions)
-        def currentCrew(employeeList, voyage):
+        def selectRoleForUpdate(flightPair:list):
+            currentVoyage = Voyage(flightPair)
             rolesForUpdate_list = []
-            for role, employee in voyage.addCrew().items():
+            for role, employee in currentVoyage.addCrew().items():
                 #find the employee info, should find name
                 crewInRole = {"role": role, "employee": employee} 
                 rolesForUpdate_list.append(crewInRole.copy())
-            return rolesForUpdate_list
 
-        rolesForUpdate_list = currentCrew(allEmployees_data, currentVoyage_obj)
-        # loop through selecting a role to change
-        
-        # print list of employees available for this voyage for this role
-        # loop through asking if they want to update staff
+                
+            DisplayScreen().printOptions(rolesForUpdate_list, "Crew assigned to this voyage" )
+            selectedRole = InputHandler().numChoices(len(rolesForUpdate_list), "Select a role to update: ")
+            return rolesForUpdate_list[int(selectedRole)-1]["role"]
 
         #========================
-        def selectCrewRole(options):
-            DisplayScreen().printOptions(options, "Crew assigned to this voyage" )
-            selectedRole = InputHandler().numChoices(len(options), "Select a role to update: ")
-            return options[int(selectedRole)-1]["role"]
-
-        #========================
-        def assignCrew(availableCrew_list, currentCrew:dict):
+        def assignCrew(availableCrew_list:list, selectedRole_str:str, flightPair:list ):
             """Finds the crew to """
-            selectedRole_str = selectCrewRole(rolesForUpdate_list)
-
+            currentVoyage = Voyage(flightPair)
+            currentCrew = currentVoyage.addCrew()
             roleList = {
                 "captain": {"rank": "Captain", "list":self.getLogic.getPilots } ,
                 "copilot":{ "rank":"Copilot",  "list":self.getLogic.getPilots},
@@ -308,20 +272,41 @@ class UpdateLogic :
                 if employee["rank"] == roleList[selectedRole_str]["rank"]:
                     rankOnlyList.append(employee)
 
+            #ask what employee they wish to assign to role
             DisplayScreen().printOptions(rankOnlyList)
             inputChoice = InputHandler().numChoices(len(rankOnlyList), "Select an employee: ")
             selectedEmployee = rankOnlyList[int(inputChoice)-1]
             currentCrew[selectedRole_str] = selectedEmployee["ssn"]
-            return currentCrew
+            #update the voyage info
+            currentVoyage.addCrew(currentCrew)
+            #get the flights with updated info
+            newFlights = currentVoyage.getFlights()
+            return newFlights
 
-        newCrew = assignCrew(availableCrew_list, currentVoyage_obj.addCrew({}))
-        updatedVoyage = Voyage(voyageFlightPair)
-        updatedVoyage.addCrew(newCrew)
-        newFlights = updatedVoyage.getFlights()
-        # then find the flights that were updated and replace them
-        def updateFlights(allFlights, updatedFlights, voyageData):
+        #========================
+        #find the days that the crew would be occupied during voyage
+        def findDaysDuration(departureFlight, arrivalFlight):
+            """Finds the days that the voyage will cover"""
+            departureDate = departureFlight["departure"]
+            returnDate = arrivalFlight["arrival"]
+            departureDate_obj = DateUtil(departureDate).createObject()
+            returnDate_obj = departureDate_obj + datetime.timedelta(days =1)
+            compiledDates_list = [departureDate, returnDate_obj.isoformat()]
+
+            return compiledDates_list
+
+        # Find available employees
+        def findAvailableCrew(daysOfWoyage, employeeList):
+            """Just loops through the given days to return available staff"""
+            availableCrew = []
+            # find all the people not working those days
+            # check if they are free for the duration
+            return availableCrew
             
+
+        def updateFlights(allFlights, updatedFlights, voyageData):
             """Sends the updated list to the updater"""
+
             departingIndex = voyageData["out"][0]
             returningIndex = voyageData["in"][0]
 
@@ -331,8 +316,24 @@ class UpdateLogic :
 
             #update returning
             IOAPI().updater(self.dataFiles["UPCOMING_FLIGHTS_FILE"], allFlights)
+        #voyage data, keeping index for later references
+        voyageData = findVoyage(departingFlights_data)
 
+        #get the flight data
+        voyageFlightPair = [voyageData["out"][1], voyageData["in"][1]]
+
+        # create instance of VoyageHandler using the two connected flights        
+        daysOfVoyage = findDaysDuration(voyageFlightPair[0], voyageFlightPair[1])
+
+        #find list of employees available for work
+        availableCrew_list = findAvailableCrew(daysOfVoyage, allEmployees_data)
+
+        #get the role to update
+        selectedRole = selectRoleForUpdate(voyageFlightPair)
+
+        #get the updated flights after assigning a role
+        newFlights = assignCrew(availableCrew_list, selectedRole, voyageFlightPair)
+
+        # then find the flights that were updated and replace them
         updateFlights(departingFlights_data, newFlights, voyageData)
 
-
-        # send the changed list of flights to updater
