@@ -80,9 +80,7 @@ class CreateLogic :
         role_str = InputHandler().role("Choose role: ")
 
         #Rank
-
-        rank_str = InputHandler().rank(role_str)
-
+        self.rank = InputHandler().rank(self.role,"Choose rank: ")
 
         #License
         #Gets a list of dictionaries containing aircraft type specifications
@@ -152,13 +150,6 @@ class CreateLogic :
         IOAPI().updater(self.dataFiles["CREW_FILE"], crewPackage)
 
 
-
-
-
-
-        
-
-        
 
     #===================================================================================
     # Create plane

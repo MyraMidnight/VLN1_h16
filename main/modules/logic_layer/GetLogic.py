@@ -15,7 +15,7 @@ class GetLogic :
             DisplayScreen().printList(data, header)
         else:
             DisplayScreen().printText([""],header)
-        return InputHandler().confirmation("Press enter to continue (back to menu)...")
+        return InputHandler().confirmation("Press enter to continue...")
 
     #===================================================================================
     # Get single employee
@@ -64,7 +64,7 @@ class GetLogic :
             if x['role'] == "Pilot":
                 list_to_print.append(x)
         if len(data) != 0:
-            self.printData(list_to_print,header="All pilots:")
+            return self.printData(list_to_print,header="All pilots:")
         return list_to_print
                 
     
@@ -81,7 +81,7 @@ class GetLogic :
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
         if len(data) != 0:
-            self.printData(list_to_print,header="All Flight Attendants:")
+            return self.printData(list_to_print,header="All Flight Attendants:")
         return list_to_print   
     
     def getAllCrew(self):

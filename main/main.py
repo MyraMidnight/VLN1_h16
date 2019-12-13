@@ -3,7 +3,6 @@
 from modules.ui_layer.MenuHandler import MenuHandler
 
 import platform 
-print(platform.system())
 
 import os
 if platform.system() == "Windows":
