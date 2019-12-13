@@ -100,9 +100,20 @@ class GetLogic :
         return self.printData(filePackage,header="Destinations:")
     
     def getVoyages(self):
-        #fetch voyage info
-        filePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
-        return self.printData(filePackage,header="Voyages:")
+        #fetch voyage info	        #fetch voyage info
+        voyagePackage = IOAPI().opener(self.dataFiles["UPCOMING_FLIGHTS_FILE"])
+        #fetch plane info
+        planePackage = IOAPI().opener(self.dataFiles["AIRCRAFT_FILE"])
+        list_to_print = []
+        for voyage in voyagePackage:
+            planeId = voyage["aircraftID"]
+            temp_dict = voyage
+            for plane in planePackage:
+                if plane["planeInsignia"] == planeId:
+                    temp_dict["capacity"] = plane["capacity"]
+            list_to_print.append(temp_dict)
+
+        return self.printData(list_to_print,header="Voyages:")
     
     def getAway(self, date:str = ""):
         #fetch employee info
