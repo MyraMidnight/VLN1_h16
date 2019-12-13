@@ -96,20 +96,33 @@ class VoyageHandler:
         # Get and print list of available destinations
         destination_list = IOAPI().opener(self.dataFiles["DESTINATIONS_FILE"]) 
         DisplayScreen().printOptions(destination_list, "destinations")
-
         # Seect a destination
         self.__destination =  InputHandler().multipleNumChoices(destination_list,"Select index of destination for this voyage: ")
 
 
-        # Departure messages for inputHandler
-        inputDepartureDate_str = "Enter departure date from Iceland to {} (DD/MM/YYYY): ".format(self.__destination["destination"])
-        inputDepartureTime_str = "Enter departure time (HH:MM): "
-        ErrorDepartureTime_str = "ERROR: Airport is occupied at selected time \nplease input a new departure time: "
+        while True:
+            # Departure messages for inputHandler
+            inputDepartureDate_str = "Enter departure date from Iceland to {} (DD/MM/YYYY): ".format(self.__destination["destination"])
+            inputDepartureTime_str = "Enter departure time (HH:MM): "
+            ErrorDepartureTime_str = "ERROR: Airport is occupied at selected time \nplease input a new departure time: "
 
-        # get the departure time from inputHandler
-        self.__departure = self.selectDepartureTime(inputDepartureDate_str, inputDepartureTime_str, ErrorDepartureTime_str)
+            # get the departure time from inputHandler
+            self.__departure = self.selectDepartureTime(inputDepartureDate_str, inputDepartureTime_str, ErrorDepartureTime_str)
 
-        # Find a date and time for arrival
+            # Find a date and time for arrival
+
+            inputArrivalDate_str = "Enter return date to Iceland from {}: ".format(self.__destination["destination"])
+            self.__return = InputHandler().dateOnly(inputArrivalDate_str)
+            departureDate = self.__departure.split("/")
+            arrivalDate = self.__return.split("/")
+            departureDateime_obj = datetime.datetime(int(departureDate[2][:4]),int(departureDate[1]),int(departureDate[0]))
+            arrivalDateime_obj = datetime.datetime(int(arrivalDate[2]),int(arrivalDate[1]),int(arrivalDate[0]))
+            if arrivalDateime_obj > departureDateime_obj:
+                break
+            else:
+                print("Your arrival date is before the departure date please input valid dates:")
+
+
 
         departingDate_obj = DateUtil(self.__departure).createObject()
         minReturnDate_obj = departingDate_obj + datetime.timedelta(days=1)

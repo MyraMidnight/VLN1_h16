@@ -6,11 +6,11 @@ import platform
 print(platform.system())
 
 import os
-# print(os.name)
-try:
+import platform
+if platform.system() == "Windows":
   os.system('mode con: cols=200 lines=45')  # works on M$ Windows
-except:
-  os.system("printf '\e[8;50;250t'")        # works on MacOS
+elif platform.system() == "Darwin":
+  os.system("printf '\e[8;45;200t'")        # works on MacOS
 # pause = input("Press any key to continue...")
 
 
@@ -31,7 +31,7 @@ logo_str = """
 """
 
 def main():
-  """The core program"""
+  """The core program""" 
   #print the main menu
   MenuHandler(logo=logo_str).displayMenu()
 
