@@ -13,7 +13,7 @@ elif platform.system() == "Darwin":
 
 # ------------------------  Main program  -------------------- 
 def main():
-  """The core program"""
+  """The core program""" 
   #print the main menu
   MenuHandler().displayMenu()
 
