@@ -65,7 +65,7 @@ class GetLogic :
                 list_to_print.append(x)
         if len(data) != 0:
             self.printData(list_to_print,header="All pilots:")
-        return list_to_print
+        return self.printData(list_to_print,header="All Flight Attendants:")
                 
     
     def getFlightAttendants(self, data:list = []):
@@ -82,7 +82,7 @@ class GetLogic :
                 list_to_print.append(x)
         if len(data) != 0:
             self.printData(list_to_print,header="All Flight Attendants:")
-        return list_to_print   
+        return self.printData(list_to_print,header="All Flight Attendants:")   
     
     def getAllCrew(self):
         #fetches employee info
