@@ -1,7 +1,7 @@
 # Vika 1
 ## Mánudagurinn 25. nóvember 2019 
 >Fyrsti dagur 3 vikna námskeiðs.
->9:00 - 14:00
+>9:00 - 14:00 og svo heima
 
 * Gerðum vinnusamning
 * Stofnuðum github repository, discord server og google drive möppu fyrir verkefnið
@@ -54,9 +54,12 @@ Halla gerði spurningar fyrir notendaprófanir
 ## Fimmtudagurinn 28. nóvember 2019
 
 > Vorum öll mætt kl. 10:00
-> Stefanía fór 15:20 og gerði state diagram svo heima og próf
-> Strákarnir fóru 18 
-> Halla fór 19
+>
+> Stefanía fór 15:20 og gerði state diagram svo heima og prófaði á manninum sínum
+>
+> Strákarnir fóru kl 18 
+>
+> Halla fór kl 19
 
 * Notendaprófanir á menu-um
 * ATH state diagrams hvort fleiri eða hvort stærri
@@ -75,7 +78,10 @@ Byrjuðum á happy path en ætlum að klára það á morgun föstudag.
 Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal). 
 
 
-> Stefanía og Halla mættu kl. 9, > Fannar og Damian kl. 10 
+> Stefanía og Halla mættu kl. 9, 
+>
+> Fannar og Damian kl. 10 
+>
 > munum vinna þar til við erum búin með skýrsluna og undirbúa allt :) 
 
 * Damian ætlar að fínpússa og gera a.m.k. 3 happy path 
@@ -87,14 +93,14 @@ Skiladagur 1: Hönnunarskýrslu skilað á Canvas (pdf skjal).
 
 * Klára og fínpússa skýrslu
 
-
+Kláruðum og skiluðum hönnunarskýrslu
 
 
 # Vika 2
 ## Mánudagurinn 2. desember 2019
 Hefja má útfærslu hönnunar í kóða.
 
->  Stefanía mætti 9:20, Fannar mætti 10:00, rest mættu eftir fyrirlestur
+>  Stefanía og Halla mætt 9:20, Fannar mætti 10:00, Fannar mætti eftir fyrirlestur
 >
 > Fyrirlestur var kl. 12:00 
 
@@ -114,7 +120,9 @@ Vel sett fyrir morgundaginn :)
 ## Þriðjudagurinn 3. desember 2019
 Endurgjöf frá leiðb. varðandi hönnun.
 
-> Halla og Damian voru mætt fyrir 10. Höldum að Fannar hafi sofið aðeins lengur en hann kemur vonandi bráðum.
+> Halla og Damian voru mætt fyrir 10. 
+>
+>Höldum að Fannar hafi sofið aðeins lengur en hann kemur vonandi bráðum. Fannar svaf yfir sig og vann heima
 > 
 > Stefanía er heima með veikt barn.
 
@@ -146,7 +154,9 @@ fórum í stofu V309 og fengum góða hjálp með hvernig við ætlum að skipta
 * Stefanía er að sameina skrárnar okkar svo það samræmist við LLAPI útgáfuna sem við ætlum að útfæra eftir fundinn með dæmatímakennaranum (taka til í logic layer möppunni)
 * byrjum svo að forrita meira
 * Fannar sér um IO layer
-* Hver þar að forrita a.m.k. 2 method á dag
+* Hver þarf að forrita a.m.k. 2 method á dag
+
+Við náðum að forrita mörg method og vera á sömu blaðsíðunni
 
 
 ## Fimmtudagurinn 5. desember 2019
@@ -161,9 +171,11 @@ Vorum að fá endurgjöf fyrir hönnunarskýrsluna. Þurfum að hugsa klasariti�
 * þurfum að skipta þessu meira niður og segja hvaða method/klasa sem við ætlum/erum að gera
 
 
-> ákváðum að fá frekar hjálp með klasaritið þegar Fannar er þar sem hann var lang mest í klasaritinu. 
+> ákváðum að fá frekar hjálp með klasaritið þegar Fannar er þar sem hann var lang mest í klasaritinu.
+> 
 > Damian náði að redda þannig að menuinn virkaði og náum að prenta hann út
-> gerðum allskonar method 
+>
+> Gerðum allskonar method 
 
 
 
@@ -251,6 +263,10 @@ Markmið að klára allt forritið, þannig á morgun er bara skýrsla, klasarit
 * Passa að allur kóði sé auðskilin og vel kommentaður.
 * Fara vel yfir skýrsluna og passa að hún sé í samræmi við forritið okkar.
 
+Við kláruðum allan kóðan áður en við fórum og Stefanía náði að klára create og update voyage.
+
+Um kvöldið bættist eitthvað við og Stefanía breytti einhverju í því sem að Damian gerði í UpdateEmployee 
+
 
 
 ## Föstudagurinn 13. desember 2019
@@ -259,6 +275,13 @@ Afurðum verkefnis skilað:
 – Kóða og öðrum viðeigandi gögnum verkefnis skilað sem skjalasafni (zip skrá).
 – Kennslumyndband (.avi eða .mov) sem sýnir A-kröfur og aðra helstu fídusa í kerfinu.
 
+
+* Taka út kóða sem á ekki að vera inní kóðanum
+* hreinsa kóðann
+* klára hönnunarskýrslu
+* Klasarit
+* Fannar ætlar að gera kennslumyndbandið
+* skila sem zip skrá
 
 
 * Fínpússa og yfirferð.
