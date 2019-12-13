@@ -24,11 +24,6 @@ class CreateLogic :
     def createDestination(self):
         """Create destination. Get destinationLand, destinationAirport, destinationFlightTime, 
          destinationDistance, destinationContactPerson and destinationEmergencyPhone."""
-
-        print("\nCreating new destination")
-        destination_dict = {}
-
-        self.destination = InputHandler().country("Input the city where the new destination is located: ")
          
         # Airports
         # Get a list of dictionaties containing airports and destiations we currently fly to
@@ -37,7 +32,17 @@ class CreateLogic :
         airport_list = []
         for a_line_dict in airport_data_list:
             airport_list.append(a_line_dict["id"])
+        #print existing destinations
+        destinationSections = [
+            {"header": ["Creating new destination", "List of existing destinations "]},
+            {"list": airport_data_list},
+            {"text": ["Please input the required below for creating new destination"]}
+        ]
+        DisplayScreen().printCustom(destinationSections)
+        destination_dict = {}
 
+        # imput the data
+        self.destination = InputHandler().country("Input the city where the new destination is located: ")
         self.destination_airport = InputHandler().airport(airport_list, "\nInput the ID (3 letters) of the new airport: ")
         self.destination_flightTime = InputHandler().timeOnly("\nInput the time it takes to fly to {} from Iceland (HH:MM): ".format(self.airport))
         self.destination_distanceFromIceland = InputHandler().distance("\nInput the distace from Iceland to {} (in km): ".format(self.airport))

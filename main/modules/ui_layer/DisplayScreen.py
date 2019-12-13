@@ -1,4 +1,4 @@
-from modules.logic_layer.PrintHandler import PrintHandler
+from modules.ui_layer.PrintHandler import PrintHandler
 
 import os
 

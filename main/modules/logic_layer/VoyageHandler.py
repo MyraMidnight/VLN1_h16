@@ -98,8 +98,8 @@ class VoyageHandler:
         DisplayScreen().printOptions(destination_list, "destinations")
 
         # Seect a destination
-        destination_str =  InputHandler().numChoices(len(destination_list),"Select index of destination for this voyage: ")
-        self.__destination = destination_list[int(destination_str)-1]
+        self.__destination =  InputHandler().multipleNumChoices(destination_list,"Select index of destination for this voyage: ")
+
 
         # Departure messages for inputHandler
         inputDepartureDate_str = "Enter departure date from Iceland to {} (DD/MM/YYYY): ".format(self.__destination["destination"])

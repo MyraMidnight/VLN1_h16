@@ -300,16 +300,13 @@ class PrintHandler:
         }
 
 
-
-        #print the body of frame
         #Each section will return a list of strings, each being a line for print
         for section in sectionData_list:
-            for sectionKey, sectionData_list in section.items():
+            for sectionKey, sectionData in section.items():
                 #the parameters that will go into the screenSelections_dict methods 
-                sectionParameters = [sectionData_list]
+                sectionParameters = [sectionData]
                 #run the method with parameters
-                listForPrint = screenSections_dict[sectionKey.lower()](*sectionParameters)
-            
-
-        #print the bottom
+                screenSections_dict[sectionKey.lower()](*sectionParameters)
+        
         return self.__currentSections
+
