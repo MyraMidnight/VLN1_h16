@@ -389,43 +389,31 @@ class InputHandler:
 
     # Get only the time (timeOnly)
     def timeOnly(self, inputQuestion:str = "Input time (HH:MM): "):
-        """Checks input for HH:MM time, returns string HH:MM:SS """
+        """Checks input for HH:MM time, returns string HH:MM """
+        time_str = input(inputQuestion)
         try:
-            time_str = input(inputQuestion)
-            pattern ='\d{2}:\d{2}'
-            #loop while the pattern is not a match
-            while re.match(pattern, time_str) is None:
-                print("Invalid input, try again")
-                time_str = input(inputQuestion).strip()
-            else:
-                hour,minute = map(int,time_str.split(':'))
-                #check if valid time
-                time = datetime.time(hour=hour,minute=minute)
-                return str(time)
-        except ValueError:
-            #if datetime.date() was not valid
-            print("Not a valid time, try again")
-            self.timeOnly()
+            datetime.time(minute = int(time_str[3:5]), hour = int(time_str[0:2]))
+        except ValueError: 
+            print("Invalid input!")
+            text_str = inputQuestion
+            time_str = InputHandler().timeOnly(text_str)
+        time_str = datetime.time(hour = int(time_str[0:2]), minute=int(time_str[3:5]))
+        return time_str
+
 
     # Get only the date
     def dateOnly(self, inputQuestion:str = "Input a date (DD/MM/YYYY): "):
         """Checks input for date, DD/MM/YYYY, returns datetime object"""
+
+        date_str = input(inputQuestion)
         try:
-            date_str = input(inputQuestion).strip()
-            pattern = '\d{2}/\d{2}/\d{4}'
-            #loop while the pattern is not a match
-            while re.match(pattern, date_str) is None:
-                print("Invalid input, try again")
-                date_str = input(inputQuestion).strip()
-            else:
-                day,month,year = map(int,date_str.split('/'))
-                #check if valid date
-                date = datetime.datetime(day= day, month= month, year= year).isoformat()
-                return str(date)
+            datetime.date(day = int(date_str[0:2]), month = int(date_str[3:5]), year = int(date_str[6:10]))
         except ValueError:
-            #if datetime.date() was not valid
-            print("Not a valid date, try again")
-            self.dateOnly()
+            print("Invalid input")
+            text_str = inputQuestion
+            date_str = InputHandler().dateOnly(text_str)
+        date_str = datetime.datetime(day = int(date_str[0:2]), month = int(date_str[3:5]), year = int(date_str[6:10])).isoformat()
+        return date_str
             
     #===================================================================================
     # Get strings of specific length and format
