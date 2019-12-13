@@ -70,18 +70,18 @@ class CreateLogic :
         employee_dict = {}
 
         #Personal information
-        self.name = InputHandler().fullName("Input full name: ")
-        self.ssn =  InputHandler().ssn("Input SSN: ")
-        self.address = InputHandler().address("Input address: ")
-        self.phonenumber = InputHandler().phoneNumber("Input a 7-digit phone number:")
-        self.email = InputHandler().email("Input e-mail address: ")
+        name_str = InputHandler().fullName("Input full name: ")
+        ssn_str =  InputHandler().ssn("Input SSN: ")
+        address_str = InputHandler().address("Input address: ")
+        phonenumber_str = InputHandler().phoneNumber("Input a 7-digit phone number:")
+        email_str = InputHandler().email("Input e-mail address: ")
         #Role
 
-        self.role = InputHandler().role("Choose role: ")
+        role_str = InputHandler().role("Choose role: ")
 
         #Rank
 
-        self.rank = InputHandler().rank(self.role)
+        rank_str = InputHandler().rank(role_str)
 
 
         #License
@@ -93,17 +93,17 @@ class CreateLogic :
             airplaneType_list.append(a_line_dict["planeTypeId"])
 
         #Gets input for license if relevant, sets to "N/A" if role = Cabin Crew
-        self.license = InputHandler().license(self.role, airplaneType_list,"Choose license: ")
+        license_str = InputHandler().license(role_str, airplaneType_list,"Choose license: ")
 
         #Turns the inputs into a dict
-        employee_dict["ssn"] = self.ssn
-        employee_dict["name"] = self.name
-        employee_dict["role"] = self.role
-        employee_dict["rank"] = self.rank
-        employee_dict["licence"] = self.license
-        employee_dict["address"] = self.address
-        employee_dict["phonenumber"] = self.phonenumber
-        employee_dict["email"] = self.email
+        employee_dict["ssn"] = ssn_str
+        employee_dict["name"] = name_str
+        employee_dict["role"] = role_str
+        employee_dict["rank"] = rank_str
+        employee_dict["licence"] = license_str
+        employee_dict["address"] = address_str
+        employee_dict["phonenumber"] = phonenumber_str
+        employee_dict["email"] = email_str
 
         #Displays the input information
         DisplayScreen().printList([employee_dict],header = "Employee info: ")
@@ -116,7 +116,7 @@ class CreateLogic :
         #Runs editing as long as the user confirmation is negative
         while edit_bool:
             #Creates a list of editing options
-            options_list = [{"Edit choices:": "SSN"},{"Edit choices:": "Name"},{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "License"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone"}, {"Edit choices:": "Email"}]
+            options_list = [{"Edit choices:": "SSN"},{"Edit choices:": "Name"},{"Edit choices:":"Role"}, {"Edit choices:":"Rank"},{"Edit choices:": "Licence"},{"Edit choices:": "Address"}, {"Edit choices:":"Phone"}, {"Edit choices:": "Email"}]
             #Prints the beforementioned list of options
             DisplayScreen().printOptions(options_list, header = "")
             #Asks user to choose what he wants to edit
@@ -129,7 +129,7 @@ class CreateLogic :
             elif choice_str == "Address":
                 employee_dict[choice_str.lower()] = InputHandler().address("Input address: ")
             elif choice_str == "Phone":
-                employee_dict[choice_str.lower()] = InputHandler().phoneNumber("Input a 7-digit phone number: ")
+                employee_dict["phonenumber"] = InputHandler().phoneNumber("Input a 7-digit phone number: ")
             elif choice_str == "Email":
                 employee_dict[choice_str.lower()] = InputHandler().email("Input e-mail address: ")
             elif choice_str == "Role":
@@ -146,7 +146,19 @@ class CreateLogic :
 
         #Adds the employee to the crew file
         IOAPI().appender(self.dataFiles["CREW_FILE"], employee_dict)
+        #Sorts the crew file alphabetically by name
+        crewPackage = IOAPI().opener(self.dataFiles["CREW_FILE"])
+        crewPackage = sorted(crewPackage,key = lambda i: i["name"])
+        IOAPI().updater(self.dataFiles["CREW_FILE"], crewPackage)
 
+
+
+
+
+
+        
+
+        
 
     #===================================================================================
     # Create plane
@@ -161,17 +173,28 @@ class CreateLogic :
         #Takes in input for plane insignia and puts it under "planeInsignia" key in plane_dict
         plane_dict["planeInsignia"] = InputHandler().planeInsignia("Input plane insignia (e.g. TF-XXX): ")
 
+        #Creates a list of airplane types in the list
+        airplane_data_list = IOAPI().opener(self.dataFiles["AIRCRAFT_TYPE_FILE"])
+        airplaneType_list = []
+        for a_line_dict in airplane_data_list:
+            airplaneType_list.append(a_line_dict["planeTypeId"])
+        #Turns the list into a list of dictionaries
+        plane_list = []
+        for x in airplaneType_list:
+            planeType_dict = {}
+            planeType_dict["Plane Type IDs: "] = x
+            plane_list.append(planeType_dict)
+        DisplayScreen().printOptions(plane_list, header = "")
         #Input for plane Type ID
-        plane_dict["planeTypeId"] = InputHandler().planetype()
+        plane_dict["planeTypeId"] = InputHandler().multipleNumChoices(plane_list, "Choose Plane Type ID: ")
         plane_dict["manufacturer"] = InputHandler().strNoCheck("Input plane manufacturer: ")
         plane_dict["capacity"] = InputHandler().digit("Input plane seating capacity: ")
         #Input confirmation
-        DisplayScreen().printList([plane_dict])
+        DisplayScreen().printList([plane_dict], header = "")
         confirmation_bool = InputHandler().yesOrNoConfirmation("Is this information correct? (y/n)")
         if confirmation_bool:
         #Appending the input info to aircraft file
             IOAPI().appender(self.dataFiles["AIRCRAFT_FILE"], plane_dict)
-        
 
     #===================================================================================
     # Create Voyage
