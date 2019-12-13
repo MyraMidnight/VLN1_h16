@@ -177,6 +177,23 @@ class MenuHandler:
 
         print(frameBottom_str.format(horizontalBar))
 
+    def displayLogo(self):
+        """Prints the NanAir logo"""
+        logo_str = """
+                 |     |
+                 | ___ |
+              ----/___\----
+  x--------------(  .  )--------------x
+     x|x   |   |  \___/  |   |   x|x
+      x    x   |___| |___|   x    x  
+    _   __        _   __   ___     _      
+   / | / /____ _ / | / /  /   |   (_)_____
+  /  |/ // __ `//  |/ /  / /| |  / // ___/
+ / /|  // /_/ // /|  /  / ___ | / // /    
+/_/ |_/ \__,_//_/ |_/  /_/  |_|/_//_/  
+"""
+        print(logo_str)
+
     def displayMenu(self):
         """printMenu(menu), menus are: main, create, get, update"""
         
