@@ -1,10 +1,12 @@
 
 from modules.logic_layer.LLAPI import LLAPI
 from modules.ui_layer.InputHandler import InputHandler
+from modules.ui_layer.HelpSection import HelpSection
 
 class MenuHandler:
     """Handles the menu (input and printing right menus)"""
-    def __init__(self, menu:str = "main"):
+    def __init__(self, menu:str = "main", logo:str = ""):
+        self.__logo = logo
         self.minScreenWidth = 100
         self.currentLocation_str = menu.lower()
         self.breadcrumbs = []
@@ -133,10 +135,14 @@ class MenuHandler:
             "3.3" : {
                 "title": "Destinations",
                 "function": LLAPI().updateDestination
+            }, 
+            "4": {
+                "title": "Help",
+                "function": HelpSection().getHelp
             }
         }
         self.menuLayout = {
-            "main": ["1", "2", "3"],
+            "main": ["1", "2", "3", "4"],
             "create": ["1.1", "1.2", "1.3", "1.4"],
             "get": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "voyages":["2.2.1","2.2.2","2.2.3"],
@@ -145,6 +151,7 @@ class MenuHandler:
             "schedule" : ["2.5.1","2.5.2","2.5.3"],
             "update": ["3.1", "3.2", "3.3"],
         }
+        print(logo) #print logo on init :V
 
     def printHeader(self,menuHeader):
         """Prints the header"""

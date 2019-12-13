@@ -160,7 +160,7 @@ class UpdateLogic :
         DisplayScreen().printOptions(options_list, header = "")
         #Asks the user to choose what he/she wants to edit
         choice_str = InputHandler().multipleNumChoices(options_list, "Choose data you want to update: ")
-
+        print("Choice: ", choice_str)
         #Changes the requested data
         if choice_str == "Contact Person":
             airport_info_dict["contactPerson"] = InputHandler().fullName("Enter the name of the new contact person: ")

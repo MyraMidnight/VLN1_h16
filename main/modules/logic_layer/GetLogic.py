@@ -15,7 +15,7 @@ class GetLogic :
             DisplayScreen().printList(data, header)
         else:
             DisplayScreen().printText([""],header)
-        return InputHandler().confirmation("Press enter to continue (back to menu)...")
+        return InputHandler().confirmation("Press enter to continue ...")
 
     #===================================================================================
     # Get single employee
@@ -167,7 +167,7 @@ class GetLogic :
                     combo_list.append((line['fa1'],line["arrivingAt"]))
                 if line['fa2'] != "" and line['fa2'] not in combo_list:
                     combo_list.append((line['fa2'],line["arrivingAt"]))
-                    
+
         if len(combo_list) == 0:
             self.printData([], "No employee is working on the specified day")
             return False
