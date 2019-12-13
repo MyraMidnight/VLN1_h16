@@ -111,8 +111,38 @@ class VoyageHandler:
 
         # Find a date and time for arrival
 
-        inputArrivalDate_str = "Enter return date to Iceland from {}: ".format(self.__destination["destination"])
-        self.__return = InputHandler().dateOnly(inputArrivalDate_str)
+        departingDate_obj = DateUtil(self.__departure).createObject()
+        flightDuration = self.__destination["flightDuration"].split(":")
+        durationHours = flightDuration[0]
+        durationMinutes = flightDuration[1]
+        minReturnDate_obj = departingDate_obj + datetime.timedelta(hours=int(durationHours), minutes=int(durationMinutes))
+        minReturnDate_util = DateUtil(minReturnDate_obj.isoformat())
+        inputArrivalDate_str = "Enter return date to Iceland from {} (DD/MM/YYYY): ".format(self.__destination["destination"])
+        inputArrivalTime_str = "Enter time for return (HH:MM): "
+
+        while True:
+            try: 
+                returnDate_str = InputHandler().dateTime(inputArrivalDate_str, inputArrivalTime_str)
+                returnDate_obj = DateUtil(returnDate_str).createObject()
+                
+                #return date/time needs to be greater than departure date/time
+                if returnDate_obj > departingDate_obj:
+                    #return needs to be at least departure + flightduration
+                    if returnDate_obj >= minReturnDate_obj:
+                        self.__return = returnDate_str
+                        break
+                    raise Exception      
+                else:
+                    raise Exception
+            except Exception:
+                returnDate_str = "{}/{}/{}".format(minReturnDate_util.day, minReturnDate_util.month, minReturnDate_util.year)
+                errorMessage_list = [
+                    "Return needs to be at least {}h and {}m after departure".format(durationHours, durationMinutes),
+                    "That would be at least {} and {}".format(returnDate_str, minReturnDate_util.time )
+                ]
+                DisplayScreen().printText(errorMessage_list, "Choose a date and time for return flight from {}".format(self.__destination["destination"]))
+
+
         # Find available aircraft
         self.selectAircraft()
 
@@ -125,38 +155,6 @@ class VoyageHandler:
 
         # check if the user wants to use this template of voyage at other days
 
-        print("Do you want to replicate this voyage? (y/n): ")
-
-    #===================================================================================
-    # Update Crew
-    #===================================================================================
-
-    def updateCrew(self):
-        '''Update and/or put staff in roles in upcoming Voyages'''
-
-        #get list of voyages from data layer
-        # the user can choose the voyage he/she wants to update from the list of voyages, the user enters the number of the voyage (flight)
-
-        upcomingVoyage_list = []  #get list from data layer, this is just for now
-        numberOfVoyage_int = int(InputHandler().dateOnly("Enter the number of the voyage in the list you want to update/change: "))
-        theVoyage = upcomingVoyage_list[numberOfVoyage_int]
-
-        # print the info that are currently right for the voyage, if there are any staff members in some roles or if the roles are empty and there needs to fill all the roles
-        print(theVoyage)
-
-        # the user inputs the number of the role he/she wants to change/fill.
-        roleToChange_int = int(InputHandler().dateOnly("Enter the number of the role in the list you want to update/change: "))
-
-        # the user gets a list of all staff members who can play that role and who ara avilable during the voyage's time
-
-        # Get a list of staff members who can do this role from data layer
-        rolelist_list = []   #just for now need to get from data layer
-
-        # ask the user if he/she wants to save the changes or if he/she wants to change/fill some other roles
-        toChangeOrNotToChange_bool = InputHandler().dateOnly("Do you want to save the changes? (y/n) ")
-        
-        # when he wants to save then save this voyage info in the data layer.
-        # if the user wants to quit then no changes were made.
 
     #===================================================================================
     # methods for local use
