@@ -15,7 +15,7 @@ class GetLogic :
             DisplayScreen().printList(data, header)
         else:
             DisplayScreen().printText([""],header)
-        return InputHandler().confirmation("Press enter to continue (back to menu)...")
+        return InputHandler().confirmation("Press enter to continue...")
 
     #===================================================================================
     # Get single employee
