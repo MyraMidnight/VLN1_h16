@@ -63,28 +63,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Pilot":
                 list_to_print.append(x)
-        if len(data) == 0:
-            self.printData(list_to_print,header="All pilots:")
-        return list_to_print
-    
-    def getDataFA(self,data):
-        filePackage = data
-        #goes through all the lines in the employee info
-        list_to_print = []
-        for x in filePackage:
-            #checks the SSN of the employee
-            if x['role'] == "Cabincrew":
-                list_to_print.append(x)
-        return list_to_print
-    
-    def getDataP(self,data):
-        filePackage = data
-        #goes through all the lines in the employee info
-        list_to_print = []
-        for x in filePackage:
-            #checks the SSN of the employee
-            if x['role'] == "Pilot":
-                list_to_print.append(x)
+        self.printData(list_to_print,header="All pilots:")
         return list_to_print
     
     def getFlightAttendants(self, data:list = []):
@@ -99,8 +78,7 @@ class GetLogic :
             #checks the SSN of the employee
             if x['role'] == "Cabincrew":
                 list_to_print.append(x)
-        if len(data) == 0:
-            self.printData(list_to_print,header="All Flight Attendants:")
+        self.printData(list_to_print,header="All Flight Attendants:")
         return list_to_print   
     
     def getAllCrew(self):
@@ -134,7 +112,7 @@ class GetLogic :
 
         return self.printData(list_to_print,header="Voyages:")
     
-    def getAway(self, date:str = ""):
+    def getAway(self, date:str = "", noPrint:bool = False):
         #fetch employee info
         employeePackage = IOAPI().opener(self.dataFiles['CREW_FILE'])
         #fetch Voyage info
@@ -168,8 +146,9 @@ class GetLogic :
         for employee in employeePackage:
             if employee['ssn'] not in ssn_list:
                 away_list.append(employee)
-
-        self.printData(away_list,header="Employees not working:")
+        
+        if noPrint != True:
+            self.printData(away_list,header="Employees not working:")
         return away_list
     
     def getWorking(self):
@@ -207,9 +186,12 @@ class GetLogic :
                 if x[0] == employee['ssn']:
                     #puts all the info together in one dict and adds to the list
                     temp_dict = employee
-                    dest_dict = next(item for item in destinationPackage if item["id"] == x[1])
-                    temp_dict["destination"] = dest_dict["destination"]
-                    working_list.append(temp_dict)
+                    dest_dict = next((item for item in destinationPackage if item["id"] == x[1]),None)
+                    if dest_dict:
+                        temp_dict["destination"] = dest_dict["destination"]
+                        working_list.append(temp_dict)
+                    else:
+                        break
         
         return self.printData(working_list,header="employees working and their destination:")
     
