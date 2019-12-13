@@ -398,7 +398,7 @@ class InputHandler:
             text_str = inputQuestion
             time_str = InputHandler().timeOnly(text_str)
         time_str = datetime.time(hour = int(time_str[0:2]), minute=int(time_str[3:5]))
-        return time_str
+        return str(time_str)
 
 
     # Get only the date

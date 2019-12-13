@@ -253,12 +253,11 @@ class UpdateLogic :
             return rolesForUpdate_list[int(selectedRole)-1]["role"]
 
         #========================
-        def assignCrew(employee_list:list, selectedRole_str:str, flightPair:list ):
+        def assignCrew(availableCrew_list:list, selectedRole_str:str, flightPair:list ):
             """Finds the crew to """
             currentVoyage = Voyage(flightPair)
             currentCrew = currentVoyage.addCrew()
             #get the available employees for current voyage
-            availableCrew_list = self.getLogic.getAway(employee_list, noPrint=True)
 
             roleList = {
                 "captain": {"rank": "Captain"} ,
@@ -305,7 +304,30 @@ class UpdateLogic :
         def findAvailableCrew(daysOfWoyage, employeeList):
             """Just loops through the given days to return available staff"""
             availableCrew = []
-            # find all the people not working those days
+            availablePerDay = []
+            availableForVoyage = []
+            #make list of all employees availeble on these days
+            for date in daysOfVoyage: 
+                availablePerDay.append(self.getLogic.getAway(date, noPrint=True)) 
+
+
+            #make a list of all employees that appear on these lists
+            for day in availablePerDay:
+                for employee in day:
+                    if employee not in availableCrew:
+                        availableCrew.append(employee)
+
+            # #check if employee is available all days of voyage
+            # for employee in availableCrew:
+            #     freeForAll = []
+            #     for day in availablePerDay:
+            #         if employee in day:
+            #             freeForAll.append(True)
+            #         else: 
+            #             freeForAll.append(False)
+            #     if all(freeForAll) = True:
+            #         availableForVoyage.append(employee)
+                
             # check if they are free for the duration
             return availableCrew
             
@@ -338,7 +360,7 @@ class UpdateLogic :
         selectedRole = selectRoleForUpdate(voyageFlightPair)
 
         #get the updated flights after assigning a role
-        newFlights = assignCrew(allEmployees_data, selectedRole, voyageFlightPair)
+        newFlights = assignCrew(availableCrew_list, selectedRole, voyageFlightPair)
 
         # then find the flights that were updated and replace them
         updateFlights(departingFlights_data, newFlights, voyageData)
