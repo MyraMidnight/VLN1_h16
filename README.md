@@ -2,6 +2,8 @@
 
 Meðlimir í hóp 16 eru Damian Motybel, Fannar Hrafn Haraldsson, Halla Margrét Jónsdóttir og Stefanía Reynisdóttir 
 
+* [Stable Final (with added diary)](https://github.com/MyraMidnight/VLN1_h16/tree/stable_final_dagbok) 
+
 ## Lýsing
 Markmiðin með þessu námskeiði eru margþætt en fyrst og fremst er verið að þjálfa nemendur í hugbúnaðargerð með því að tengja saman þá þekkingu og færni sem þeir eiga að hafa aflað sér í þeim kúrsum sem eru undanfarar.
 
