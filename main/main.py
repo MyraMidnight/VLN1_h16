@@ -1,21 +1,25 @@
 # Here we will create the main program
-# and import classes from the 'modules' subfolder
-
 # ------------------------  Import classes  ------------------ 
+from modules.ui_layer.MenuHandler import MenuHandler
 
-# ------------------------  Global variables  ---------------- 
-ROLE_PILOT = "pilot"
-ROLE_CAPTAIN = "captain"
-ROLE_COPILOT = "coPilot"
-ROLE_ATTENDANT = "flightAttendant"
-ROLE_LEAD_ATTENDANT = "headFlightAttendant"
-MODEL_PLANE = "" #instance of plane
-MODEL_EMPLOYEE = "" #instance of employee
+import platform 
+
+import os
+if platform.system() == "Windows":
+    os.system('mode con: cols=200 lines=45')  # works on M$ Windows
+elif platform.system() == "Darwin":
+    os.system("printf '\e[8;50;250t'")        # works on MacOS
+else:
+    print("Could resize screen, assumed reason: you are not using a mac or windows")
+# pause = input("Press any key to continue...")
+
 
 # ------------------------  Main program  -------------------- 
-
 def main():
   """The core program"""
+  #print the main menus
+  MenuHandler().displayLogo()
+  MenuHandler().displayMenu()
 
 # ------------------------  Run program  --------------------- 
 main()
