@@ -1,0 +1,379 @@
+@startuml
+left to right direction
+' class diagram for the final handin
+package ui_layer <<Rectangle>> {
+
+  class PrintHandler  #LightPink {
+    - DisplayScreen
+    -----
+    - __dataTypes: dictionary
+    ---methods---
+   - __getTerminalSize()
+   - __listAllTemplates()
+   - detectDataType()
+   - __sectionHeader()
+   - __sectionList()
+   - __sectionText()
+   - __sectionShortCuts()
+   - __sectionOptions()
+    + sectionHandler()
+   + cutString()
+  } 
+  note right of PrintHandler
+    This is basically the other half of DisplayScreen,
+    it was split into two classes to keep the code organized.
+
+    It takes a list of dictionaries, each being a section 
+    ( list, options, text, header ), and processes the given data
+    into single strings per line that would print on the screen.
+
+    When processing a list of data ('list' or 'options'), then it 
+    detects the keys and checks if it matches existing templates, 
+    which contain custom column widths and titles to properly adjust
+    the table according to the data type. 
+
+    If it doesn't find a match, then it just creates a custom template
+    with preset colWidths and keys as titles. This allows the handler 
+    to be flexible and process any list of dictionaries into tables
+
+  end note
+  class DateUtil  #LightPink{
+    -GetLogic
+    -UpdateLogic
+    -VoyageHandler
+    -InputHandler
+    ----
+    + date: str
+    + time: str
+    + day: str
+    + month: str
+    + year: str
+    + hour: str
+    + minute: str
+    + second: str
+    --methods--
+    - parse(datetime:str)
+    - date_parse(datetime:str)
+    - day_parse(datetime:str)
+    - month_parse(datetime:str, name:str = "")
+    - year_parse(datetime:str)
+    - time_parse(datetime:str)
+    - hour_parse(datetime:str)
+    - minute_parse(datetime:str)
+    - second_parse(datetime:str)
+    + updateTime(date:str, time:str)
+    + createObject
+  } 
+  note right of DateUtil
+    This is just a tool that takes a datetime
+    string (isoformat) and parces it into parts 
+    that can be accessed through the the attributes,
+    
+    also can convert the given datetime string
+    into a datetime object
+  end note
+  class DisplayScreen  #LightPink{
+    - PrintHandler
+    -----
+    - __terminalSize: dict
+    - __compiledSections: list
+    - minScreenWidth: int
+    --methods--
+    - __getTerminalSize()
+    - __printScreen(frame:bool = False)
+    --public--
+    + printList(data:list, header:str = "Table of data",numList:bool = False, frame:bool = True)
+    + printOptions(data:list, header:str = "List of choices", frame:bool = True)
+    + printText(data:list, header:str = "Information", frame:bool = True)
+    + printCustom(sectionData:list, frame:bool = True)
+  }
+  note right of DisplayScreen
+    Takes a list of data (containing either 
+    dictionaries or strings depending 
+    on section type) and optional header string. 
+
+    printList() creates a table with columns and rows
+    printOptions() is basically enumerated printList
+    printText() creates paragraphs of each string
+
+    printCustom() takes in a list of sections, 
+    each section being a dictionary with sectionType string and list, 
+    (it is the same format that each of the print methods would pass unseen 
+    to the PrintHandler to process the data as a list of strings, each
+    being a single line printed on the screen.)
+
+    When all the data has been processed into a list of strings,
+    then it prints the list, or adds a frame around the content before
+    printing it, detecting the widest string and sets the box width accordingly
+  end note
+  class InputHandler  #LightPink{
+    - CreateLogic
+    - GetLogic
+    - UpdateLogic
+    - VoyageHandler
+    - MenuHandler
+    ----
+    + numChoices(numOfChoices: int, inputQuestion : str = "Pick a number: " ):
+    + confirmation(inputQuestion:str = "Press enter to continue", acceptedInput:list = ["yes"])
+    + license(self,role: str, aircraftType_list: list, inputQustion: str = "")
+    + yesOrNoConfirmation(inputQuestion: str = "")
+    + strNoCheck(inputQuestion: str = "")
+    + multipleNumChoices(data_list:list, inputQuestion : str = "")
+    ..specific format..
+    + digit(inputQuestion:str = "")
+    + textSetLength(numLength:int, inputQuestion:str = ""
+    + numSetLength(self,numLength:int, inputQuestion: str = "")
+    ..date and time..
+    + dateTime(questionDate:str = "")
+    + timeOnly(inputQuestion:str = "")
+    + dateOnly(inputQuestion:str = "")
+    ..form input ..
+    + fullName(inputQuestion : str = "Enter the full name of the person: ")
+    + ssn(inputQuestion:str = "")
+    + address(inputQuestion: str = "")
+    + phoneNumber(inputQuestion: str = "")
+    + email(inputQuestion: str = "")
+    + role(inputQuestion: str = "")
+    + roleUpdate(airplaneType_list)
+    + rank(role: str, inputQuestion: str = "")
+    + planetype(inputQuestion:str = "")
+    + country(inputQuestion : str = "")
+    + airport(airport_list: list, inputQuestion: str = "")
+    + distance(inputQuestion : str = "")
+    + destinationID(airport_list: list, inputQuestion: str = "")
+    + planeInsignia(inputQuestion: str = "")
+
+  }
+  note right of InputHandler
+    InputHandler promts the user for any input,
+    processes it to check if it fits expected format
+    and then returns the value back to caller or
+    returns False if user pressed the 'exitKey' (q).
+  end note
+  class MenuHandler  #LightPink{
+    -LLAPI
+    ----
+    - minScreenWidth: int
+    - currentLocation_str: str
+    - breadcrumbs: list
+    - currentMenu_list: dict
+    - menuOptions: dict
+    - menuLayout: dict
+    --methods--
+    - printHeader()
+    - printMenu(menuOptions:dict,currentMenu:str)
+    - displayLogo()
+    + displayMenu()
+  }
+  note right of MenuHandler
+    MenuHandler is the body of the program, 
+    it directs the user to everything they might
+    want to do. Either it prints a submenu or runs
+    the associated method through the LLAPI
+    and once those methods are done running, it returns
+    the user back to the menu.
+  end note
+  ' DisplayScreen --* PrintHandler
+}
+
+package logic_layer <<Rectangle>> {
+  
+  class LLAPI #LightGreen{
+    - CreateLogic
+    - GetLogic
+    - UpdateLogic
+    ----
+    createLogic: class(DATA_FILES) 
+    getLogic: class(DATA_FILES)
+    updateLogic: class(DATA_FILES)
+    --- create---
+    + createEmployee()
+    + createPlane()
+    + createVoyage()
+    + createDestination()
+    ---get---
+    + getSingleEmployee()
+    + getPilots()
+    + getFlightAttendants()
+    + getAllCrew()
+    + getPlanes()
+    + getDestinations()
+    + getVoyages()
+    + getAway()
+    + getWorking()
+    + getWeekWork()
+    + getPilotsByLicence()
+    + printPilotsByLicence()
+    + licenceByCount()
+    + getWeekVoyages()
+    + getDayVoyages()
+    ---update---
+    + updateVoyage()
+    + updateEmployee()
+    + updateDestination()
+  }
+  class CreateLogic #LightGreen{
+    - IOAPI
+    - DisplayScreen
+    - InputHandler
+    - VoyageHandler
+    ----
+    - dataFiles: list
+    ---methods--
+    + createDestination()
+    + createEmployee()
+    + createPlane()
+  }
+  class GetLogic #LightGreen{
+    -IOAPI
+    -InputHandler
+    -DisplayScreen
+    -DateUtil
+    ----
+    - dataFiles: list
+    --- methods--
+    - printData(data:list, header:str)
+   + getSingleEmployee() 
+   + getPilots()
+   + getFlightAttendants()
+   + getAllCrew()
+   + getPlanes()
+   + getDestinations()
+   + getVoyages()
+   + getAway()
+   + getWorking()
+   + getWeekWork()
+   + getPilotsByLicence()
+   + printPilotsByLicence()
+   + licenceByCount()
+   + getWeekVoyages()
+   + getDayVoyages()
+  } 
+  note right of GetLogic
+    This class contains all the methods designed to 
+    get and display specific data in certain ways or
+    at given input.
+  end note
+  class UpdateLogic #LightGreen{
+    -IOAPI
+    -Voyage
+    -DateUtil
+    -DisplayScreen
+    -InputHandler
+    --- attributes--
+    -dataFiles: dict
+    -getLogic: class
+    ---methods--
+    +updateEmployee()
+    +updateDestination()
+    +updateVoyage()
+  }
+  class VoyageHandler #LightGreen{
+    -CreateLogic
+    -IOAPI
+    -DisplayScreen
+    -InputHandler
+    --atributes--
+    - dataFiles: list
+   - _flightOut  [ "flightNumber", {flight info}]
+   - _flightIn: [ "flightNumber", {flight info}]
+   - _destination: dictionary
+   - _departingFrom:string
+   - _departure:string  = datetime.isoformat
+   - _return :string = datetime.isoformat
+   - _aircraftID :string
+   - _captain :string = ""
+   - _copilot:string = ""
+   - _fsm :string = ""
+   - _fa1 :string = ""
+   - _fa2 :string = ""
+    --methods--
+    # setVoyage(data:list)
+    - createVoyage()
+    - processFlight(flight:dict)
+    - createFlightNumber(latestFlightNumber: str)
+    - selectAircraft()
+    - selectDepartureTime(questionDate:str, questionTime:str, errorMessage:str)
+    - calculateArrival(departure:str, flightTime:str)
+    + getFlights()
+    - createFlights()
+  }
+  note right of VoyageHandler
+    This class originally served as a model class, 
+    the createVoyage() method lives in this class and would
+    have been extracted and moved to CreateLogic if given time.
+
+    The createVoyage() creates a pair of flights after
+    it has collected the required information from the user,
+    which includes the departure date/time and return flight.
+
+    It makes sure that the returning flight is not within the
+    flightduration (so the plane has at least arrived at destination first).
+  end note
+}
+
+package data_layer <<Rectangle>> {
+    
+  class IOAPI #LightBlue {
+   - CreateLogic
+   - GetLogic
+   - UpdateLogic
+   - VoyageHandler
+    ----
+    - dataFiles: list
+    ---methods --
+   + opener(askedFile)
+   + appender(fileName,filePackage)
+   + updater(fileName,filePackage)
+  }
+  note right of IOAPI
+    IOAPI simply lets the logic_layer interact with the data,
+    the caller simply provides it with the filename, which
+    are kept in a dictionary in LLAPI and passed down to the
+    logic classes when called, which keeps the filenames consistent.
+
+    get the desired data from CSV files processes them 
+    into lists of dictionaries for each row.
+
+    It can take single dictionary and append it to the given file
+
+    And then it can do reverse of get, by overwriting the given
+    file with provided data, expecting it to conform to correct keys.
+  end note
+}
+class Voyage #LightGray {
+  --atributes--
+ - _flightOut  [ "flightNumber", {flight info}]
+ - _flightIn: [ "flightNumber", {flight info}]
+ - _destination: dictionary
+ - _departingFrom:string
+ - _departure:string  = datetime.isoformat
+ - _return :string = datetime.isoformat
+ - _aircraftID :string
+ - _captain :string = ""
+ - _copilot:string = ""
+ - _fsm :string = ""
+ - _fa1 :string = ""
+ - _fa2 :string = ""
+  ---methods--
+  #setVoyage(self, data:list)
+  +addCrew(self, crew:dict = {})
+  -processFlight(self, flight:dict)
+  -createFlightNumber(self,latestFlightNumber: str)
+  + getFlights(self)
+  }
+  note right of Voyage
+    This is a model class that processes two flights and creates a 
+    single voyage from them and makes easy work of getting the 
+    flight data back in the form of two separate flights again.
+
+    it can take a list of employees with assigned roles for the
+    voyage to pudate the crew, and also return the list of crew. 
+    
+    When getting the flights, it makes sure that their shared info
+    is applied to the flights correctly, such as crew and destination.
+  end note
+' class Destination
+' class Flight
+' class Employee
+@enduml
